@@ -12,10 +12,14 @@ Make.log
 *.slo
 *.lo
 *.o
-# # Compiled Dynamic libraries
+# Compiled Dynamic libraries
 *.so
 # Compiled Static libraries
 *.lai
 *.la
 *.a
+# compiled stuff
+third-party/bin/
+third-party/include/
+third-party/lib/
 
