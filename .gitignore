@@ -8,4 +8,14 @@ Make.log
 # generated C++ files
 *.C
 *.H
+# Compiled Object files
+*.slo
+*.lo
+*.o
+# # Compiled Dynamic libraries
+*.so
+# Compiled Static libraries
+*.lai
+*.la
+*.a
 
