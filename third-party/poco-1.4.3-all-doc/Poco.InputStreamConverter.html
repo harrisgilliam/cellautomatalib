@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::InputStreamConverter</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="symbol">class InputStreamConverter</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> Text<br />
+<b>Header:</b> Poco/StreamConverter.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>This stream converts all characters read from the underlying istream from one character encoding into another. If a character cannot be represented in outEncoding, defaultChar is used instead. If a byte sequence read from the underlying stream is not valid in inEncoding,  defaultChar is used instead and the encoding error count is incremented. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.StreamConverterIOS.html" title="class Poco::StreamConverterIOS">StreamConverterIOS</a>, std::istream</p>
+<p><b>All Base Classes: </b><a href="Poco.StreamConverterIOS.html" title="class Poco::StreamConverterIOS">StreamConverterIOS</a>, std::ios, std::istream</p>
+<h2>Member Summary</h2>
+<p><b>Inherited Functions: </b><a href="Poco.StreamConverterIOS.html#10456" title="Poco::StreamConverterIOS::errors()">errors</a>, <a href="Poco.StreamConverterIOS.html#10455" title="Poco::StreamConverterIOS::rdbuf()">rdbuf</a></p>
+<h2>Constructors</h2>
+<h3><a name="10459">InputStreamConverter</a></h3>
+<p class="decl"><a href="Poco.InputStreamConverter.html" title="class Poco::InputStreamConverter">InputStreamConverter</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::istream &amp; istr,<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.TextEncoding.html" title="class Poco::TextEncoding">TextEncoding</a> &amp; inEncoding,<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.TextEncoding.html" title="class Poco::TextEncoding">TextEncoding</a> &amp; outEncoding,<br />&nbsp;&nbsp;&nbsp;&nbsp;int defaultChar = '?'<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.InputStreamConverter.html" title="class Poco::InputStreamConverter">InputStreamConverter</a> and connects it to the given input stream. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="10464">~InputStreamConverter</a></h3>
+<p class="decl">~<a href="Poco.InputStreamConverter.html" title="class Poco::InputStreamConverter">InputStreamConverter</a>();</p>
+<div class="description">
+<p>Destroys the stream. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Util::LoggingSubsystem</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Util.html" class="namespace">Poco::Util</a></h1>
+<h1 class="symbol">class LoggingSubsystem</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Util<br />
+<b>Package:</b> Application<br />
+<b>Header:</b> Poco/Util/LoggingSubsystem.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>The <a href="Poco.Util.LoggingSubsystem.html" title="class Poco::Util::LoggingSubsystem">LoggingSubsystem</a> class initializes the logging framework using the <a href="Poco.Util.LoggingConfigurator.html" title="class Poco::Util::LoggingConfigurator">LoggingConfigurator</a>. </p>
+<p>It also sets the <a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a>'s logger to the logger specified by the &quot;application.logger&quot; property, or to &quot;<a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a>&quot; if the property is not specified. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.Util.Subsystem.html" title="class Poco::Util::Subsystem">Subsystem</a></p>
+<p><b>All Base Classes: </b><a href="Poco.RefCountedObject.html" title="class Poco::RefCountedObject">Poco::RefCountedObject</a>, <a href="Poco.Util.Subsystem.html" title="class Poco::Util::Subsystem">Subsystem</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Util.LoggingSubsystem.html#17698" title="Poco::Util::LoggingSubsystem::initialize()">initialize</a>, <a href="Poco.Util.LoggingSubsystem.html#17697" title="Poco::Util::LoggingSubsystem::name()">name</a>, <a href="Poco.Util.LoggingSubsystem.html#17700" title="Poco::Util::LoggingSubsystem::uninitialize()">uninitialize</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.Util.Subsystem.html#18175" title="Poco::Util::Subsystem::defineOptions()">defineOptions</a>, <a href="Poco.RefCountedObject.html#9831" title="Poco::RefCountedObject::duplicate()">duplicate</a>, <a href="Poco.Util.Subsystem.html#18170" title="Poco::Util::Subsystem::initialize()">initialize</a>, <a href="Poco.Util.Subsystem.html#18169" title="Poco::Util::Subsystem::name()">name</a>, <a href="Poco.RefCountedObject.html#9833" title="Poco::RefCountedObject::referenceCount()">referenceCount</a>, <a href="Poco.Util.Subsystem.html#18173" title="Poco::Util::Subsystem::reinitialize()">reinitialize</a>, <a href="Poco.RefCountedObject.html#9832" title="Poco::RefCountedObject::release()">release</a>, <a href="Poco.Util.Subsystem.html#18172" title="Poco::Util::Subsystem::uninitialize()">uninitialize</a></p>
+<h2>Constructors</h2>
+<h3><a name="17696">LoggingSubsystem</a></h3>
+<p class="decl"><a href="Poco.Util.LoggingSubsystem.html" title="class Poco::Util::LoggingSubsystem">LoggingSubsystem</a>();</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="17701">~LoggingSubsystem</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">~<a href="Poco.Util.LoggingSubsystem.html" title="class Poco::Util::LoggingSubsystem">LoggingSubsystem</a>();</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="17697">name</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const char * name() const;</p>
+<div class="description">
+<p></p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Util.Subsystem.html#18169" title="Poco::Util::Subsystem::name()">Poco::Util::Subsystem::name()</a></p></div>
+<h3><a name="17698">initialize</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void initialize(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a> &amp; self<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Util.Subsystem.html#18170" title="Poco::Util::Subsystem::initialize()">Poco::Util::Subsystem::initialize()</a></p></div>
+<h3><a name="17700">uninitialize</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void uninitialize();</p>
+<div class="description">
+<p></p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Util.Subsystem.html#18172" title="Poco::Util::Subsystem::uninitialize()">Poco::Util::Subsystem::uninitialize()</a></p></div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

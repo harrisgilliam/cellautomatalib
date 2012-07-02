@@ -1,0 +1,110 @@
+#ifndef _CAM_H_
+#define _CAM_H_
+
+#include <cstdio>
+#include <cstdlib>
+#include <cstdarg>
+#include <cstring>
+#include <cerrno>
+
+#include <netdb.h>
+#include <unistd.h>
+#include <fcntl.h>
+/* #include <stropts.h> */
+#include <setjmp.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/time.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <sys/socket.h>
+#include <sys/wait.h>
+#include <sys/ioctl.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <netinet/in.h>
+
+#include <camio.h>
+
+
+/*****************************************************************************/
+/****************************** DEFINES **************************************/
+/*****************************************************************************/
+#define MASK unsigned int
+#ifndef TRUE
+#define TRUE -1
+#endif
+#ifndef FALSE
+#define FALSE 0
+#endif
+#undef MIN
+#define MIN(x,y)	((x) < (y) ? (x) : (y))
+#define SAFEMIN(x,y)	(_a_ = (x), _b_ = (y), _a_ < _b_ ? _a_ : _b_)
+#undef MAX
+#define MAX(x,y)	((x) > (y) ? (x) : (y))
+#define SAFEMAX(x,y)	(_a_ = (x), _b_ = (y), _a_ > _b_ ? _a_ : _b_)
+#undef ABS
+#define ABS(x)		((x) < 0 ? -(x) : (x))
+#define SAFEABS(x)	(_c_ = (x), (_c_ < 0 ? -_c_ : _c_))
+#define Register_Specs	CAM_Global_Register_Specs
+#define SYM(num)	Register_Specs[RFINDEX(num)].sym
+#define BITLEN(num)	Register_Specs[RFINDEX(num)].bitlen
+#define BITOFF(num)	Register_Specs[RFINDEX(num)].bitoff
+#define OPC(num)	Register_Specs[RFINDEX(num)].opcode
+#define FLAGS(num)	Register_Specs[RFINDEX(num)].flags
+#define FLDCNT(num)	Register_Specs[RFINDEX(num)].fldcnt
+#define PG(e)		((PAGE)lldata(e))
+#define INIT_PRECAM	0x0000FFFF
+#define INIT_ALL	0xFFFFFFFF
+#define MAX_REGS	29
+#define SCTBL_SZ	1024
+#define MAX_NUM_DIMS	24
+#define RESERVED	(8*sizeof(long))
+#define MAXVARGS 512
+
+
+/*****************************************************************************/
+/***************************** TYPEDEFS **************************************/
+/*****************************************************************************/
+typedef struct sl_element *SLE;
+
+/** a SPEC is a description of the CAM8 instruction set **/
+typedef struct reg_fld_spec {
+  const char *sym;
+  short bitlen, bitoff;
+  long opcode, flags;
+  short fldcnt;
+} Spec, *SPEC;
+
+typedef struct cam_stream_struct {
+  FILE *file;
+  char *appname;
+  char (*hook)();
+  int lerr;
+  MASK ops;
+  char enable;
+  char deadly;
+  char verbose;
+  char traceback;
+  jmp_buf env;
+} CamStream, *CAMSTREAM;
+
+
+/*****************************************************************************/
+/**************************** PROTOTYPES *************************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/***************************** GLOBALS ***************************************/
+/*****************************************************************************/
+extern long int _a_, _b_, _c_;
+
+/*
+extern "C" {
+  int ffs(int);
+  int getpagesize(void);
+}
+*/
+
+#endif

@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::AbstractMetaObject</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="template">template &lt; class B &gt;</h1>
+<h1 class="symbol">class AbstractMetaObject</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> SharedLibrary<br />
+<b>Header:</b> Poco/MetaObject.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>A <a href="Poco.MetaObject.html" title="class Poco::MetaObject">MetaObject</a> stores some information about a C++ class. The <a href="Poco.MetaObject.html" title="class Poco::MetaObject">MetaObject</a> class is used by the <a href="Poco.Manifest.html" title="class Poco::Manifest">Manifest</a> class. <a href="Poco.AbstractMetaObject.html" title="class Poco::AbstractMetaObject">AbstractMetaObject</a> is a common base class for all <a href="Poco.MetaObject.html" title="class Poco::MetaObject">MetaObject</a> in a rooted class hierarchy. A <a href="Poco.MetaObject.html" title="class Poco::MetaObject">MetaObject</a> can also be used as an object factory for its class. </p>
+</div>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.AbstractMetaObject.html#8671" title="Poco::AbstractMetaObject::autoDelete()">autoDelete</a>, <a href="Poco.AbstractMetaObject.html#8668" title="Poco::AbstractMetaObject::canCreate()">canCreate</a>, <a href="Poco.AbstractMetaObject.html#8666" title="Poco::AbstractMetaObject::create()">create</a>, <a href="Poco.AbstractMetaObject.html#8669" title="Poco::AbstractMetaObject::destroy()">destroy</a>, <a href="Poco.AbstractMetaObject.html#8667" title="Poco::AbstractMetaObject::instance()">instance</a>, <a href="Poco.AbstractMetaObject.html#8673" title="Poco::AbstractMetaObject::isAutoDelete()">isAutoDelete</a>, <a href="Poco.AbstractMetaObject.html#8665" title="Poco::AbstractMetaObject::name()">name</a></p>
+<h2>Constructors</h2>
+<h3><a name="8662">AbstractMetaObject</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.AbstractMetaObject.html" title="class Poco::AbstractMetaObject">AbstractMetaObject</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const char * name<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="8664">~AbstractMetaObject</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual ~<a href="Poco.AbstractMetaObject.html" title="class Poco::AbstractMetaObject">AbstractMetaObject</a>();</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="8671">autoDelete</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">B * autoDelete(<br />&nbsp;&nbsp;&nbsp;&nbsp;B * pObject<br />) const;</p>
+<div class="description">
+<p>Give ownership of pObject to the meta object. The meta object will delete all objects it owns when it is destroyed. </p>
+<p>Returns pObject. </p>
+</div>
+<h3><a name="8668">canCreate</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual bool canCreate() const = 0;</p>
+<div class="description">
+<p>Returns true if and only if the create method can be used to create instances of the class. Returns false if the class is a singleton. </p>
+</div>
+<h3><a name="8666">create</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual B * create() const = 0;</p>
+<div class="description">
+<p>Create a new instance of a class. Cannot be used for singletons. </p>
+</div>
+<h3><a name="8669">destroy</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual void destroy(<br />&nbsp;&nbsp;&nbsp;&nbsp;B * pObject<br />) const;</p>
+<div class="description">
+<p>If pObject was owned by meta object, the ownership of the deleted object is removed and the object is deleted. </p>
+</div>
+<h3><a name="8667">instance</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual B &amp; instance() const = 0;</p>
+<div class="description">
+<p>Returns a reference to the only instance of the class. Used for singletons only. </p>
+</div>
+<h3><a name="8673">isAutoDelete</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual bool isAutoDelete(<br />&nbsp;&nbsp;&nbsp;&nbsp;B * pObject<br />) const;</p>
+<div class="description">
+<p>Returns true if the object is owned by meta object. </p>
+<p>Overloaded in <a href="Poco.MetaSingleton.html" title="class Poco::MetaSingleton">MetaSingleton</a> - returns true if the class is a singleton. </p>
+</div>
+<h3><a name="8665">name</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const char * name() const;</p>
+<div class="description">
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

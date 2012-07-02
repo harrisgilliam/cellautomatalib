@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>POCO Data Release Notes</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="category">POCO Data Library</h1>
+<h1 class="title">POCO Data Release Notes</h1>
+</div>
+<div class="body">
+<h2>Contents</h2>
+<div class="toc"><ul>
+<li class="level1"><a href="#0">Release 1.3.6</a></li>
+<li class="level2"><a href="#1">Summary of Changes</a></li>
+<li class="level1"><a href="#2">Release 1.3.5</a></li>
+<li class="level2"><a href="#3">Summary of Changes</a></li>
+<li class="level1"><a href="#4">Release 1.3.4</a></li>
+<li class="level2"><a href="#5">Summary of Changes</a></li>
+<li class="level1"><a href="#6">Release 1.3.3</a></li>
+<li class="level2"><a href="#7">Summary of Changes</a></li>
+<li class="level1"><a href="#8">Release 1.3.2</a></li>
+<li class="level2"><a href="#9">Summary of Changes</a></li>
+<li class="level1"><a href="#10">Release 1.3.1</a></li>
+<li class="level2"><a href="#11">Summary of Changes</a></li>
+<li class="level1"><a href="#12">Release 1.3.0</a></li>
+<li class="level2"><a href="#13">Summary of Changes</a></li>
+<li class="level2"><a href="#14">Incompatible Changes and Possible Transition Issues</a></li>
+</ul></div>
+<div class="description">
+<p></p><h2><a name="0">Release 1.3.6</a></h2><p>
+</p>
+<p></p><h3><a name="1">Summary of Changes</a></h3><p>
+</p>
+<p></p>
+<ul>
+<li>fixed SF# 2186643: Data::Statement::reset() not implemented in 1.3.3 </li>
+<li>better error reporting in Data MySQL connector (patch #2881270 by Jan &quot;HanzZ&quot; Kaluza) </li>
+<li>fixed SF# 2876179: MySQL Signed/Unsigned value bug </li>
+<li>upgraded to SQLite 3.6.20 </li>
+</ul>
+<p></p>
+<p></p><h2><a name="2">Release 1.3.5</a></h2><p>
+</p>
+<p></p><h3><a name="3">Summary of Changes</a></h3><p>
+</p>
+<p></p>
+<ul>
+<li>fixed SF# 2779410: <a href="Poco.Data.ODBC.HandleException.html" title="class Poco::Data::ODBC::HandleException">Poco::Data::ODBC::HandleException</a> impovement </li>
+</ul>
+<p></p>
+<p></p><h2><a name="4">Release 1.3.4</a></h2><p>
+</p>
+<p></p><h3><a name="5">Summary of Changes</a></h3><p>
+</p>
+<ul>
+<li>Upgraded to SQLite 3.6.13 </li>
+<li>improved SQLite error reporting </li>
+<li><a href="Poco.Data.SessionPool.html" title="class Poco::Data::SessionPool">Poco::Data::SessionPool</a>: the janitor can be disabled by specifying a zero idle time. </li>
+<li>added <a href="Poco.Data.SessionPool.html#3056" title="Poco::Data::SessionPool::customizeSession()">Poco::Data::SessionPool::customizeSession</a>() </li>
+<li>added support for different SQLite transaction modes (DEFERRED, IMMEDIATE, EXCLUSIVE) The transaction mode can be set with <tt>setProperty(&quot;transactionMode&quot;, mode);</tt> where mode is one of &quot;DEFERRED&quot;, &quot;IMMEDIATE&quot; or &quot;EXCLUSIVE&quot;. Note that mode must be passed as a <tt>std::string</tt>. </li>
+<li>Data::SQLite: added support for automatic retries if the database is locked. Automatic retires can be enabled with <tt>setProperty(&quot;maxRetryAttempts&quot;, nAttempts);</tt> where the number of attempts must be an <tt>int</tt>. Retry behavior can be further  customized using the <tt>minRetrySleep</tt> and <tt>maxRetrySleep</tt> properties. See <a href="Poco.Data.SQLite.SessionImpl.html" title="class Poco::Data::SQLite::SessionImpl">Poco::Data::SQLite::SessionImpl</a> for more information. </li>
+<li>improved SQLite data type mapping </li>
+</ul>
+<p></p>
+<p></p><h2><a name="6">Release 1.3.3</a></h2><p>
+</p>
+<p></p><h3><a name="7">Summary of Changes</a></h3><p>
+</p>
+<p></p>
+<ul>
+<li>Upgraded to SQLite 3.6.2 </li>
+<li>fixed SF# 1871946: no exception thrown on error </li>
+<li>fixed SF# 2007486: Please clarify license for Data/samples/* </li>
+<li>fixed SF# 2019857: Memory leak in Data::ODBC Extractor </li>
+<li>fixed SF# 2118943: out_of_bound access in <a href="Poco.Data.BLOB.html" title="class Poco::Data::BLOB">Poco::Data::BLOB</a>:rawContent </li>
+<li>fixed SF# 1891132: <a href="Poco.Data.StatementImpl.html#3176" title="Poco::Data::StatementImpl::executeWithLimit()">Poco::Data::StatementImpl::executeWithLimit</a> is not correct </li>
+</ul>
+<p></p>
+<p></p><h2><a name="8">Release 1.3.2</a></h2><p>
+</p>
+<p></p><h3><a name="9">Summary of Changes</a></h3><p>
+</p>
+<p></p>
+<ul>
+<li>fixed SF# 1724388: ODBC Diagnostics </li>
+<li>fixed SF# 1804797: ODBC Statement multiple execution fails </li>
+<li>fixed SF# 1803435: SessionPool onJanitorTimer called too often? </li>
+<li>fixed SF# 1851997: Undefined Behavior in ODBC::Preparation </li>
+<li>updated SQlite to 3.5.5 </li>
+</ul>
+<p></p>
+<p></p><h2><a name="10">Release 1.3.1</a></h2><p>
+</p>
+<p></p><h3><a name="11">Summary of Changes</a></h3><p>
+</p>
+<p></p>
+<ul>
+<li>fixed SF# 1739989: Data::RecordSet::operator = ()  </li>
+<li>fixed SF# 1747525: SQLite, Transactions and Session Pooling </li>
+<li>upgraded to SQLite 3.4.1 </li>
+</ul>
+<p></p>
+<p></p><h2><a name="12">Release 1.3.0</a></h2><p>
+</p>
+<p></p><h3><a name="13">Summary of Changes</a></h3><p>
+</p>
+<p></p>
+<ul>
+<li>Class <a href="Poco.Data.RecordSet.html" title="class Poco::Data::RecordSet">Poco::Data::RecordSet</a> has been added providing generic access to arbitrary tables. </li>
+<li>SessionInstantiator has been renamed <a href="Poco.Data.Connector.html" title="class Poco::Data::Connector">Poco::Data::Connector</a>. </li>
+<li><a href="Poco.Data.BLOBInputStream.html" title="class Poco::Data::BLOBInputStream">Poco::Data::BLOBInputStream</a> and <a href="Poco.Data.BLOBOutputStream.html" title="class Poco::Data::BLOBOutputStream">Poco::Data::BLOBOutputStream</a> allow convenient access to <a href="Poco.Data.BLOB.html" title="class Poco::Data::BLOB">Poco::Data::BLOB</a> data. </li>
+<li><a href="Poco.Data.Session.html" title="class Poco::Data::Session">Poco::Data::Session</a> and <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Poco::Data::Statement</a> can be used in simpler ways. </li>
+<li>The DataConnectors project directory has been merged into the Data project directory. </li>
+</ul>
+<p></p><h3><a name="14">Incompatible Changes and Possible Transition Issues</a></h3><p>
+</p>
+<p>Release 1.3 of the POCO C++ Libraries is the first official release containing the Data library. The Data library has been available in a development state for the 1.2 release. For the 1.3 release, a few things have been changed in an incompatible way that requires changes to existing code. </p>
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::LogStreamBuf</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="symbol">class LogStreamBuf</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> Logging<br />
+<b>Header:</b> Poco/LogStream.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>This class implements a streambuf interface to a <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>. </p>
+<p>The streambuf appends all characters written to it to a string. As soon as a CR or LF (std::endl) is written, the string is sent to the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>, with the set priority. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b>UnbufferedStreamBuf</p>
+<p><b>All Base Classes: </b><a href="Poco.html#12036" title="Poco::UnbufferedStreamBuf">UnbufferedStreamBuf</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.LogStreamBuf.html#8149" title="Poco::LogStreamBuf::getPriority()">getPriority</a>, <a href="Poco.LogStreamBuf.html#8150" title="Poco::LogStreamBuf::logger()">logger</a>, <a href="Poco.LogStreamBuf.html#8147" title="Poco::LogStreamBuf::setPriority()">setPriority</a></p>
+<h2>Constructors</h2>
+<h3><a name="8143">LogStreamBuf</a></h3>
+<p class="decl"><a href="Poco.LogStreamBuf.html" title="class Poco::LogStreamBuf">LogStreamBuf</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> &amp; logger,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Message.html#8585" title="enum  Poco::Message::Priority">Message::Priority</a> priority<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.LogStream.html" title="class Poco::LogStream">LogStream</a>. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="8146">~LogStreamBuf</a></h3>
+<p class="decl">~<a href="Poco.LogStreamBuf.html" title="class Poco::LogStreamBuf">LogStreamBuf</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.LogStream.html" title="class Poco::LogStream">LogStream</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="8149">getPriority</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Message.html#8585" title="enum  Poco::Message::Priority">Message::Priority</a> getPriority() const;</p>
+<div class="description">
+<p>Returns the priority for log messages. </p>
+</div>
+<h3><a name="8150">logger</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> &amp; logger() const;</p>
+<div class="description">
+<p>Returns a reference to the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>. </p>
+</div>
+<h3><a name="8147">setPriority</a></h3>
+<p class="decl">void setPriority(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Message.html#8585" title="enum  Poco::Message::Priority">Message::Priority</a> priority<br />);</p>
+<div class="description">
+<p>Sets the priority for log messages. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

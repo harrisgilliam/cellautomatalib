@@ -1,0 +1,1002 @@
+#ifndef _CAM8LIB_H_
+#define _CAM8LIB_H_
+
+#include <CaLib++.H>
+#include <CaLibStream++.H>
+#include <CaLibError++.H>
+#include <CaLibTrace++.H>
+
+#include <map>
+
+using namespace std;
+
+
+extern "C" {
+
+#include <sys/types.h>
+
+}
+
+
+/*****************************************************************************/
+/********************************* DEFINES ***********************************/
+/*****************************************************************************/
+#define BIT8		1
+#define BIT16		2
+#define BIT32		4
+
+#define HEADER_LENGTH	(16 * sizeof(u_int32_t))
+#define ADJp(x)			(((caddr_t) (x)) + HEADER_LENGTH)
+#define ADJm(x)			(((caddr_t) (x)) - HEADER_LENGTH)
+
+#define PRINT_STEPLIST	0x1
+#define DRYRUN			0x2
+
+//
+// Microcode instructions (or operands) are encoded in a 32 bit
+// unsigned integer.  We identify an operand by the presence of the
+// operand prefix bits.  This is currently defined as '1' in bits 25
+// through 31.  Operands come in two flavors: "register/field" and
+// "special".  Which flavor is determined by the special operand code
+// which is encoded in bits 19 through 24.
+//
+// When all of the special operand code bits are zero then the operand
+// represents either a CAM8 register or a field within a register.
+// The register number is encoded in bits 1 through 5 and the field
+// number is encoded in bits 6 through 10.  When the operand
+// represents an entire register then the field code is "0".  The
+// fields of a register are enumerated in order.  Consult the CAM8
+// technical manual for a complete explaination or registers and their
+// fields.
+//
+// If the special operand code (SOC) is non-zero then it identifies
+// one of 63 groups of special operands.  In these cases bits 1
+// through 18 are available for encoding the purpose of the special
+// operand.  Currently only three groups of special operands are used.
+// A SOC of "1" identifies the low-level group.  These operands are
+// defined below.  A SOC of "2" identifies operands that map to the
+// CAM8 assembly instructions defined in the Forth STEP control
+// program.  Those are defined in the Cam8++.H header file.  A SOC of
+// "63" is used for END_ARGS.
+//
+#define OP_PREFIX			(0x7E000000L)
+
+#define REG_PREFIX			(0x0000001FL)
+
+#define FIELD_SHIFT			5
+#define FIELD_PREFIX		(0x1FL << FIELD_SHIFT)
+
+#define SOC_SHIFT			18
+#define SOC_PREFIX			(0x3FL << SOC_SHIFT)
+#define SOC_MASK			(0xFFFFFFFF >> (32 - SOC_SHIFT))
+
+#define RF_PREFIX			(REG_PREFIX | FIELD_PREFIX)
+
+#define DO_PREFIX(v)		(OP_PREFIX | ((v) & 0x01FFFFFFL))
+
+#define RFINDEX(n)			((n) & RF_PREFIX)
+
+#define SOCINDEX(n)			( ((n) & SOC_PREFIX) >> SOC_SHIFT )
+
+#define REG_MSR				DO_PREFIX(0L)
+#define REG_RMR				DO_PREFIX(1L)
+#define REG_KR				DO_PREFIX(2L)
+#define REG_SABSR			DO_PREFIX(3L)
+#define REG_LASR			DO_PREFIX(4L)
+#define REG_FOSR			DO_PREFIX(5L)
+#define REG_SDSR			DO_PREFIX(6L)
+#define REG_ECSR			DO_PREFIX(7L)
+#define REG_DSR				DO_PREFIX(8L)
+#define REG_SSR				DO_PREFIX(9L)
+#define REG_ECR				DO_PREFIX(10L)
+#define REG_LIR				DO_PREFIX(11L)
+#define REG_LIPR			DO_PREFIX(12L)
+#define REG_LIOR			DO_PREFIX(13L)
+#define REG_SIR				DO_PREFIX(14L)
+#define REG_SIPR			DO_PREFIX(15L)
+#define REG_SIOR			DO_PREFIX(16L)
+#define REG_SFR				DO_PREFIX(17L)
+#define REG_OSR				DO_PREFIX(18L)
+#define REG_DR				DO_PREFIX(19L)
+#define REG_HER				DO_PREFIX(20L)
+#define REG_MPCR			DO_PREFIX(21L)
+#define REG_GPCR			DO_PREFIX(22L)
+#define REG_MIDR			DO_PREFIX(23L)
+#define REG_GIDR			DO_PREFIX(24L)
+#define REG_IER				DO_PREFIX(25L)
+#define REG_IFR				DO_PREFIX(26L)
+#define REG_VWR				DO_PREFIX(27L)
+#define REG_DOCR			DO_PREFIX(28L)
+
+#define FLD_GMS				(REG_MSR | (1L << FIELD_SHIFT))
+#define FLD_TA				(REG_MSR | (2L << FIELD_SHIFT))
+#define FLD_SSM				(REG_RMR | (1L << FIELD_SHIFT))
+#define FLD_RT				(REG_RMR | (2L << FIELD_SHIFT))
+#define FLD_ECT				(REG_RMR | (3L << FIELD_SHIFT))
+#define FLD_RPK				(REG_RMR | (4L << FIELD_SHIFT))
+#define FLD_ALT				(REG_RMR | (5L << FIELD_SHIFT))
+#define FLD_KA				(REG_KR | (1L << FIELD_SHIFT))
+#define FLD_XKS				(REG_KR | (2L << FIELD_SHIFT))
+#define FLD_YKS				(REG_KR | (3L << FIELD_SHIFT))
+#define FLD_ZKS				(REG_KR | (4L << FIELD_SHIFT))
+#define FLD_XKMF			(REG_KR | (5L << FIELD_SHIFT))
+#define FLD_YKMF			(REG_KR | (6L << FIELD_SHIFT))
+#define FLD_ZKMF			(REG_KR | (7L << FIELD_SHIFT))
+#define FLD_LAS				(REG_LASR | (1L << FIELD_SHIFT))
+#define FLD_LAM				(REG_LASR | (2L << FIELD_SHIFT))
+#define FLD_FOS				(REG_FOSR | (1L << FIELD_SHIFT))
+#define FLD_FOM				(REG_FOSR | (2L << FIELD_SHIFT))
+#define FLD_SDS				(REG_SDSR | (1L << FIELD_SHIFT))
+#define FLD_SDM				(REG_SDSR | (2L << FIELD_SHIFT))
+#define FLD_ECS				(REG_ECSR | (1L << FIELD_SHIFT))
+#define FLD_ECM				(REG_ECSR | (2L << FIELD_SHIFT))
+#define FLD_DDS				(REG_DSR | (1L << FIELD_SHIFT))
+#define FLD_DDM				(REG_DSR | (2L << FIELD_SHIFT))
+#define FLD_SSA(i)			(REG_SIPR | (((int32_t) (i + 1L)) << FIELD_SHIFT))
+#define FLD_SSA0			(REG_SIPR | (1L << FIELD_SHIFT))
+#define FLD_SSA1			(REG_SIPR | (2L << FIELD_SHIFT))
+#define FLD_SSA2			(REG_SIPR | (3L << FIELD_SHIFT))
+#define FLD_SSA3			(REG_SIPR | (4L << FIELD_SHIFT))
+#define FLD_SSA4			(REG_SIPR | (5L << FIELD_SHIFT))
+#define FLD_SSA5			(REG_SIPR | (6L << FIELD_SHIFT))
+#define FLD_SSA6			(REG_SIPR | (7L << FIELD_SHIFT))
+#define FLD_SSA7			(REG_SIPR | (8L << FIELD_SHIFT))
+#define FLD_SSA8			(REG_SIPR | (9L << FIELD_SHIFT))
+#define FLD_SSA9			(REG_SIPR | (10L << FIELD_SHIFT))
+#define FLD_SSA10			(REG_SIPR | (11L << FIELD_SHIFT))
+#define FLD_SSA11			(REG_SIPR | (12L << FIELD_SHIFT))
+#define FLD_SSA12			(REG_SIPR | (13L << FIELD_SHIFT))
+#define FLD_SSA13			(REG_SIPR | (14L << FIELD_SHIFT))
+#define FLD_SSA14			(REG_SIPR | (15L << FIELD_SHIFT))
+#define FLD_SSA15			(REG_SIPR | (16L << FIELD_SHIFT))
+#define FLD_SSA16			(REG_SIPR | (17L << FIELD_SHIFT))
+#define FLD_SSA17			(REG_SIPR | (18L << FIELD_SHIFT))
+#define FLD_SSA18			(REG_SIPR | (19L << FIELD_SHIFT))
+#define FLD_SSA19			(REG_SIPR | (20L << FIELD_SHIFT))
+#define FLD_SSA20			(REG_SIPR | (21L << FIELD_SHIFT))
+#define FLD_SSA21			(REG_SIPR | (22L << FIELD_SHIFT))
+#define FLD_SSA22			(REG_SIPR | (23L << FIELD_SHIFT))
+#define FLD_SSA23			(REG_SIPR | (24L << FIELD_SHIFT))
+#define FLD_SM				(REG_SFR | (1L << FIELD_SHIFT))
+#define FLD_ESC				(REG_SFR | (2L << FIELD_SHIFT))
+#define FLD_ESW				(REG_SFR | (3L << FIELD_SHIFT))
+#define FLD_EST				(REG_SFR | (4L << FIELD_SHIFT))
+#define FLD_SBRC			(REG_SFR | (5L << FIELD_SHIFT))
+#define FLD_RCL				(REG_SFR | (6L << FIELD_SHIFT))
+#define FLD_ECL				(REG_SFR | (7L << FIELD_SHIFT))
+#define FLD_STM				(REG_SFR | (8L << FIELD_SHIFT))
+#define FLD_DCM				(REG_DR | (1L << FIELD_SHIFT))
+#define FLD_XDCP			(REG_DR | (2L << FIELD_SHIFT))
+#define FLD_YDCP			(REG_DR | (3L << FIELD_SHIFT))
+#define FLD_ZDCP			(REG_DR | (4L << FIELD_SHIFT))
+#define FLD_LPL				(REG_HER | (1L << FIELD_SHIFT))
+#define FLD_FPL				(REG_HER | (2L << FIELD_SHIFT))
+#define FLD_DCS				(REG_HER | (3L << FIELD_SHIFT))
+#define FLD_TBD				(REG_HER | (4L << FIELD_SHIFT))
+#define FLD_TMS				(REG_HER | (5L << FIELD_SHIFT))
+#define FLD_NBF				(REG_HER | (6L << FIELD_SHIFT))
+#define FLD_SRE				(REG_HER | (7L << FIELD_SHIFT))
+#define FLD_ALS				(REG_HER | (8L << FIELD_SHIFT))
+#define FLD_MAFS			(REG_MPCR | (1L << FIELD_SHIFT))
+#define FLD_MBFS			(REG_MPCR | (2L << FIELD_SHIFT))
+#define FLD_XMPC			(REG_GPCR | (1L << FIELD_SHIFT))
+#define FLD_XPPC			(REG_GPCR | (2L << FIELD_SHIFT))
+#define FLD_YMPC			(REG_GPCR | (3L << FIELD_SHIFT))
+#define FLD_YPPC			(REG_GPCR | (4L << FIELD_SHIFT))
+#define FLD_ZMPC			(REG_GPCR | (5L << FIELD_SHIFT))
+#define FLD_ZPPC			(REG_GPCR | (6L << FIELD_SHIFT))
+#define FLD_BPIE			(REG_IER | (1L << FIELD_SHIFT))
+#define FLD_BCIE			(REG_IER | (2L << FIELD_SHIFT))
+#define FLD_GCIE			(REG_IER | (3L << FIELD_SHIFT))
+#define FLD_MAIE			(REG_IER | (4L << FIELD_SHIFT))
+#define FLD_MBIE			(REG_IER | (5L << FIELD_SHIFT))
+#define FLD_SSIE			(REG_IER | (6L << FIELD_SHIFT))
+#define FLD_XHIE			(REG_IER | (7L << FIELD_SHIFT))
+#define FLD_RLIE			(REG_IER | (8L << FIELD_SHIFT))
+#define FLD_URIE			(REG_IER | (9L << FIELD_SHIFT))
+#define FLD_ISIE			(REG_IER | (10L << FIELD_SHIFT))
+#define FLD_BPIF			(REG_IFR | (1L << FIELD_SHIFT))
+#define FLD_BCIF			(REG_IFR | (2L << FIELD_SHIFT))
+#define FLD_GCIF			(REG_IFR | (3L << FIELD_SHIFT))
+#define FLD_MAIF			(REG_IFR | (4L << FIELD_SHIFT))
+#define FLD_MBIF			(REG_IFR | (5L << FIELD_SHIFT))
+#define FLD_SSIF			(REG_IFR | (6L << FIELD_SHIFT))
+#define FLD_XHIF			(REG_IFR | (7L << FIELD_SHIFT))
+#define FLD_RLIF			(REG_IFR | (8L << FIELD_SHIFT))
+#define FLD_URIF			(REG_IFR | (9L << FIELD_SHIFT))
+#define FLD_ISIF			(REG_IFR | (10L << FIELD_SHIFT))
+#define FLD_VWE				(REG_VWR | (1L << FIELD_SHIFT))
+#define FLD_VWIE			(REG_VWR | (2L << FIELD_SHIFT))
+#define FLD_VWIF			(REG_VWR | (3L << FIELD_SHIFT))
+#define FLD_LDOC			(REG_DOCR | (1L << FIELD_SHIFT))
+#define FLD_HDOC			(REG_DOCR | (2L << FIELD_SHIFT))
+
+#define SOC01(n)			( OP_PREFIX | (1L << SOC_SHIFT) | ((n) & SOC_MASK) )
+
+#define SINGLE_ARG			SOC01(0x101L)
+#define N_SINGLE_ARG		SOC01(~0x101L)
+
+#define LAYER_MASK			SOC01(0x111L)
+#define ALL_LAYERS			SOC01(0x112L)
+#define SIXTEEN_LAYERS		N_SINGLE_ARG
+
+#define REG_STORE			SOC01(0x121L)
+#define REG_LENGTH			SOC01(0x122L)
+#define REG_BUFFER			SOC01(0x123L)
+#define INLINE_BUFFER		SOC01(0x124L)
+
+#define READ_MODE			SOC01(0x141L)
+#define N_READ_MODE			SOC01(~0x141L)
+#define BYTE_MODE			SOC01(0x142L)
+#define N_BYTE_MODE			SOC01(~0x142L)
+#define IMMED_MODE			SOC01(0x143L)
+#define N_IMMED_MODE		SOC01(~0x143L)
+
+#define BIT_MASK			SOC01(0x181L)
+#define WR_ARRAY			SOC01(0x182L)
+#define RD_ARRAY			SOC01(0x183L)
+
+#define KICK_X				SOC01(0x1A1L)
+#define KICK_Y				SOC01(0x1A2L)
+#define KICK_Z				SOC01(0x1A3L)
+#define KICK_N				SOC01(0x1A4L)
+
+#define SOCBITS(n)			( (n) & SOC_MASK )
+#define SOC02(r, n)			( OP_PREFIX | (2L << SOC_SHIFT) | SOCBITS((r) << 8 | (n)) )
+
+#define M_DONT_CARE						SOC02(REG_MSR, 0x1L)
+#define M_SEQUENTIAL					SOC02(REG_MSR, 0x2L)
+#define M_GROUP							SOC02(REG_MSR, 0x3L)
+#define M_MODULE						SOC02(REG_MSR, 0x4L)
+#define M_SEQUENTIAL_BY_MODULE_ID		SOC02(REG_MSR, 0x5L)
+#define M_SEQUENTIAL_BY_GROUP_ID		SOC02(REG_MSR, 0x6L)
+#define M_GLUE							SOC02(REG_MSR, 0x7L)
+#define M_ALL							SOC02(REG_MSR, 0x8L)
+#define M_STAR_MODULE					SOC02(REG_MSR, 0x9L)
+
+
+#define M_NO_SCAN						SOC02(REG_RMR, 0x1L)
+#define M_FRAME							SOC02(REG_RMR, 0x2L)
+#define M_LINE							SOC02(REG_RMR, 0x3L)
+#define M_FREE							SOC02(REG_RMR, 0x4L)
+#define M_CONTINUE_COUNT				SOC02(REG_RMR, 0x5L)
+#define M_NEW_COUNT						SOC02(REG_RMR, 0x6L)
+#define M_NO_KICK						SOC02(REG_RMR, 0x7L)
+#define M_REPEAT_KICK					SOC02(REG_RMR, 0x8L)
+#define M_SAME_TABLE					SOC02(REG_RMR, 0x9L)
+#define M_NEW_TABLE						SOC02(REG_RMR, 0xAL)
+
+
+#define M_X								SOC02(REG_KR, 0x1L)
+#define M_Y								SOC02(REG_KR, 0x2L)
+#define M_Z								SOC02(REG_KR, 0x3L)
+#define M_XN							SOC02(REG_KR, 0x4L)
+
+
+// source registers
+#define M_SEL_STORE						SOC02(0x1E, 0x1L)
+#define M_MAP_STORE						SOC02(0x1E, 0x2L)
+#define M_SITE							SOC02(0x1E, 0x3L)
+#define M_UNGLUED						SOC02(0x1E, 0x4L)
+#define M_HOST							SOC02(0x1E, 0x5L)
+#define M_FLY							SOC02(0x1E, 0x6L)
+#define M_ADDRESS						SOC02(0x1E, 0x7L)
+#define M_LUT							SOC02(0x1E, 0x8L)
+#define M_ONES							SOC02(0x1E, 0x9L)
+#define M_ZEROES						SOC02(0x1E, 0xAL)
+#define M_READS							SOC02(0x1E, 0xBL)
+#define M_BYTE_READS					SOC02(0x1E, 0xCL)
+#define M_IMMEDIATE_WORD				SOC02(0x1E, 0xDL)
+#define M_IMMEDIATE_LONG				SOC02(0x1E, 0xEL)
+
+
+#define M_ENABLE						SOC02(REG_SSR, 0x1L)
+
+
+#define M_SA_STORE						SOC02(REG_SIPR, 0x1L)
+
+
+#define M_ESCP_STORE					SOC02(REG_SFR, 0x1L)
+#define M_ESWP_STORE					SOC02(REG_SFR, 0x2L)
+#define M_ESTP_STORE					SOC02(REG_SFR, 0x3L)
+
+
+#define M_DCP_STORE						SOC02(REG_DR, 0x1L)
+
+
+#define M_A_SCAN_INPUT					SOC02(REG_MPCR, 0x1L)
+#define M_A_STATUS						SOC02(REG_MPCR, 0x2L)
+#define M_A_BOX_ENABLE					SOC02(REG_MPCR, 0x3L)
+#define M_A_SCAN_IN_PROGRESS			SOC02(REG_MPCR, 0x4L)
+#define M_A_DISPLAY_OUTPUT_VALID		SOC02(REG_MPCR, 0x5L)
+#define M_A_SITE_ADDRESS				SOC02(REG_MPCR, 0x6L)
+#define M_A_UNGLUED_DATA				SOC02(REG_MPCR, 0x7L)
+#define M_A_HOST_DATA					SOC02(REG_MPCR, 0x8L)
+#define M_A_LUT_ADDRESS_SOURCE			SOC02(REG_MPCR, 0x9L)
+#define M_A_NODE_ENABLE					SOC02(REG_MPCR, 0xAL)
+#define M_A_TEST_OUTPUT					SOC02(REG_MPCR, 0xBL)
+#define M_A_REGSEL_29					SOC02(REG_MPCR, 0xCL)
+#define M_A_REGSEL_30					SOC02(REG_MPCR, 0xDL)
+#define M_A_ZERO						SOC02(REG_MPCR, 0xEL)
+#define M_A_ONE							SOC02(REG_MPCR, 0xFL)
+#define M_A_LUT0_CHIP_SELECT			SOC02(REG_MPCR, 0x10L)
+#define M_A_LUT1_CHIP_SELECT			SOC02(REG_MPCR, 0x11L)
+#define M_B_STATUS_INPUT				SOC02(REG_MPCR, 0x12L)
+#define M_B_INTERRUPT_INPUT				SOC02(REG_MPCR, 0x13L)
+#define M_B_SCAN_ACTIVE					SOC02(REG_MPCR, 0x14L)
+#define M_B_NODE_DIRECTION				SOC02(REG_MPCR, 0x15L)
+#define M_B_RUN_TYPE					SOC02(REG_MPCR, 0x16L)
+#define M_B_LUT_INPUT_VALID				SOC02(REG_MPCR, 0x17L)
+#define M_B_EVENT_COUNT_SOURCE			SOC02(REG_MPCR, 0x18L)
+#define M_B_SITE_DATA_SOURCE			SOC02(REG_MPCR, 0x19L)
+#define M_B_ACTIVE_LUT_OUTPUT			SOC02(REG_MPCR, 0x1AL)
+#define M_B_ACTIVE_LUT_SELECT			SOC02(REG_MPCR, 0x1BL)
+#define M_B_MODULE_ID					SOC02(REG_MPCR, 0x1CL)
+#define M_B_INTERRUPT_OUTPUT			SOC02(REG_MPCR, 0x1DL)
+#define M_B_MODSEL						SOC02(REG_MPCR, 0x1EL)
+#define M_B_LATCH_GLUE_DIRECTION		SOC02(REG_MPCR, 0x1FL)
+#define M_B_ZERO						SOC02(REG_MPCR, 0x20L)
+#define M_B_ONE							SOC02(REG_MPCR, 0x21L)
+#define M_B_LUT0_WRITE_ENABLE			SOC02(REG_MPCR, 0x22L)
+#define M_B_LUT1_WRITE_ENABLE			SOC02(REG_MPCR, 0x23L)
+
+
+#define M_PLUS_XN_STORE					SOC02(REG_GPCR, 0x1L)
+#define M_MINUS_XN_STORE				SOC02(REG_GPCR, 0x2L)
+#define M_X_MINUS						SOC02(REG_GPCR, 0x3L)
+#define M_X_PLUS						SOC02(REG_GPCR, 0x4L)
+#define M_Y_MINUS						SOC02(REG_GPCR, 0x5L)
+#define M_Y_PLUS						SOC02(REG_GPCR, 0x6L)
+#define M_Z_MINUS						SOC02(REG_GPCR, 0x7L)
+#define M_Z_PLUS						SOC02(REG_GPCR, 0x8L)
+
+
+// module and group ID
+#define M_ID							SOC02(0x1F, 0x1L)
+
+
+#define M_BEGIN							SOC02(REG_VWR, 0x1L)
+#define M_END							SOC02(REG_VWR, 0x2L)
+
+
+// psuedo instruction (delay)
+#define M_CLOCKS						SOC02(0x30, 0x1L)
+
+
+#define END_ARGS			DO_PREFIX(0x00FFFFFFL)
+
+
+
+#define MAP_ZERO			0L
+#define MAP_NOTG_AND_NOTS	1L
+#define MAP_G_AND_NOTS		2L
+#define MAP_NOTS			3L
+#define MAP_NOTG_AND_S		4L
+#define MAP_NOTG			5L
+#define MAP_G_XOR_S			6L
+#define MAP_NOTG_OR_NOTS	7L
+#define MAP_G_AND_S			8L
+#define MAP_G_EQUALS_S		9L
+#define MAP_G				10L
+#define MAP_G_OR_NOTS		11L
+#define MAP_S				12L
+#define MAP_NOTG_OR_S		13L
+#define MAP_G_OR_S			14L
+#define MAP_ONE				15L
+
+#define SEL_SITE			0L
+#define SEL_HOST			1L
+#define SEL_FLY				2L
+#define SEL_LUT				3L
+#define SEL_ADDRESS			3L
+
+
+#define OPCODE_MASK 		0x1F             	 	/* Opcode[0-5] mask    */
+
+#define CW_FLAG        		(1 << 12)         		/* Cam wait flag       */
+#define IN_FLAG        		(1 << 13)         		/* Soft interrupt flag */
+#define HW_FLAG        		(1 << 14)         		/* Host wait flag      */
+#define HJ_FLAG        		(1 << 15)        		/* Host jump flag      */
+#define FLG8_FLAG      		(1 << 28)         		/* 8-bit mode flag     */
+#define IMM_FLAG       		(1 << 29)         		/* Immediate flag      */
+#define RD_FLAG       		(1 << 30)         		/* Rd/Wr flag          */
+#define RS_FLAG				(1 << 31)				/* Cam Reset flag      */
+#define FLAGS_MASK			(CW_FLAG|IN_FLAG|HW_FLAG|HJ_FLAG|FLG8_FLAG|IMM_FLAG|RD_FLAG|RS_FLAG)
+
+#define SL_NOOP     		 RD_FLAG | IMM_FLAG		/* Noop (RD_FLAG & IMM_FLAG */
+
+
+/*****************************************************************************/
+/******************************** TEMPLATES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/*************************** CLASSES & TYPEDEFS ******************************/
+/*****************************************************************************/
+// CAM8 instructions are really just values to be written to registers
+// inside the machine.  We construct the register value piecemeal
+// since there are actually 16 copies of every register (one for each
+// bitslice).  The codes passed to the assemble method are like
+// microcode in a processor core.  This structure is used to keep
+// track of those codes as they are "executed".
+
+struct microcode {
+	int32_t argv[MAXVARGS];
+	u_int32_t argc;
+	u_int32_t idx;
+
+
+	inline void unpack(int32_t v, ...)
+	{
+		va_list args;
+
+		va_start(args, v);
+
+		argv[0] = v;
+		argc = 1;
+
+		/* Extract arguements from stack frame */
+		while ( (argc != MAXVARGS) &&
+				((argv[argc++] = va_arg(args, int32_t)) != END_ARGS));
+
+		reset();
+
+		va_end(args);
+	}
+
+
+	inline void unpack(va_list va)
+	{
+		argc = 0L;
+
+		/* Extract arguements from stack frame */
+		while ( (argc != MAXVARGS) &&
+				((argv[argc++] = va_arg(va, int32_t)) != END_ARGS) );
+
+		reset();
+	}
+
+
+	inline void unpack(int32_t v, va_list va)
+	{
+		argv[0] = v;
+		argc = 1;
+
+		/* Extract arguements from stack frame */
+		while ( (argc != MAXVARGS) &&
+				((argv[argc++] = va_arg(va, int32_t)) != END_ARGS));
+
+		reset();
+	}
+
+
+	inline void unpack(u_int32_t ac, int32_t av[])
+	{
+		memcpy(argv, av, ac * sizeof(int32_t));
+		argc = ac;
+
+		reset();
+	}
+
+
+	inline void unpack(int32_t v, u_int32_t ac, int32_t av[])
+	{
+		argv[0] = v;
+
+		memcpy(argv + 1, av, ac * sizeof(int32_t));
+		argc = ac + 1;
+
+		reset();
+	}
+
+
+	inline void reset(void)
+	{
+		idx = 0;
+	}
+
+
+	inline void set(int32_t i)
+	{
+		idx = i;
+	}
+
+
+	inline void advance(int step)
+	{
+		idx += step;
+	}
+
+
+	inline u_int32_t index(void)
+	{
+		return idx;
+	}
+
+
+	inline int32_t current()
+	{
+		if ((idx >= 0) && (idx < argc))
+			return(argv[idx]);
+		else
+			return(END_ARGS);
+	}
+
+
+	inline int32_t next()
+	{
+		if ((idx > 0) && (idx < argc))
+			return(argv[++idx]);
+		else
+			return(END_ARGS);
+	}
+
+
+	inline int32_t prev()
+	{
+		if ((idx > 0) && (idx < argc))
+			return(argv[--idx]);
+		else
+			return(END_ARGS);
+	}
+
+
+	inline void assign(int32_t nv)
+	{
+		argv[idx] = nv;
+	}
+
+
+	inline int32_t operator[](int offset)
+	{
+		int newidx = idx + offset;
+
+		if ( (newidx >= 0) && (newidx < argc) )
+			return argv[newidx];
+		else
+			return(END_ARGS);
+	}
+
+
+	inline int & operator++(int step)
+	{
+		idx++;
+	}
+
+
+	inline int & operator--(int step)
+	{
+		idx--;
+	}
+};
+
+
+
+/*
+ * Definition of the registers and their fields.
+ * Format is : 
+ * { Name, #bits, StartBitOffset, Reg#, Flags, #Fields }
+ * 
+ * Registers are at [regnum]              (regs start at 0)
+ * Fields are at [regnum + fieldnum*32] (fields start at 1)
+ *
+ */
+struct reg_fld_spec {
+	const char *sym;
+	u_int32_t bitlen, bitoff;
+	u_int32_t opcode, flags;
+	u_int32_t fldcnt;
+};
+typedef struct reg_fld_spec Spec, *SPEC;
+
+class Cam8_Reg_Fld_Specs {
+public:
+	Cam8_Reg_Fld_Specs(void);
+	~Cam8_Reg_Fld_Specs(void);
+
+	const Spec & lookup(u_int32_t n) const;
+	inline const char * SYM(u_int32_t num) const;
+	inline u_int32_t BITLEN(u_int32_t num) const;
+	inline u_int32_t BITOFF(u_int32_t num) const;
+	inline u_int32_t OPC(u_int32_t num) const;
+	inline u_int32_t FLAGS(u_int32_t) const;
+	inline u_int32_t FLDCNT(u_int32_t num) const;
+
+	void add(u_int32_t n, const char * sym, u_int32_t bitlen, u_int32_t bitoff,
+			u_int32_t opcode, u_int32_t flags, u_int32_t fldcnt);
+
+
+protected:
+	map<u_int32_t,Spec> rfs;
+
+	void add(u_int32_t key, Spec ispec);
+};
+
+
+
+// This class represents the values of the sixteen planes of a CAM8 register.  It is a utility
+// class used to make getting and providing values for registers and fields of registers easier.
+class regfldvals {
+public:
+	u_int32_t v[16];
+
+	template <class T> inline regfldvals operator+(T p);
+	template <class T> inline regfldvals operator-(T p);
+	template <class T> inline regfldvals operator*(T p);
+	template <class T> inline regfldvals operator/(T p);
+	template <class T> inline regfldvals operator|(T p);
+	template <class T> inline regfldvals operator^(T p);
+	template <class T> inline regfldvals operator&(T p);
+
+//	template <class T> inline T operator+(T p);
+//	template <class T> inline T operator-(T p);
+//	template <class T> inline T operator*(T p);
+//	template <class T> inline T operator/(T p);
+//	template <class T> inline T operator|(T p);
+//	template <class T> inline T operator^(T p);
+//	template <class T> inline T operator&(T p);
+
+	template <class T> inline bool operator==(T p);
+
+	template <class T> inline operator T();
+
+	template <class T> inline regfldvals & operator=(T p);
+
+	inline u_int32_t & operator[](u_int32_t i);
+};
+
+
+
+
+/*****************************************************************************/
+/********************************* INLINES ***********************************/
+/*****************************************************************************/
+inline const char * Cam8_Reg_Fld_Specs::SYM(u_int32_t num) const
+{
+	return(lookup(RFINDEX(num)).sym);
+}
+
+inline u_int32_t Cam8_Reg_Fld_Specs::BITLEN(u_int32_t num) const
+{
+	return(lookup(RFINDEX(num)).bitlen);
+}
+
+inline u_int32_t Cam8_Reg_Fld_Specs::BITOFF(u_int32_t num) const
+{
+	return(lookup(RFINDEX(num)).bitoff);
+}
+
+inline u_int32_t Cam8_Reg_Fld_Specs::OPC(u_int32_t num) const
+{
+	return(lookup(RFINDEX(num)).opcode);
+}
+
+inline u_int32_t Cam8_Reg_Fld_Specs::FLAGS(u_int32_t num) const
+{
+	return(lookup(RFINDEX(num)).flags);
+}
+
+inline u_int32_t Cam8_Reg_Fld_Specs::FLDCNT(u_int32_t num) const
+{
+	return(lookup(RFINDEX(num)).fldcnt);
+}
+
+
+
+
+
+template <class T> inline regfldvals regfldvals::operator+(T p)
+{
+	register unsigned int i;
+	regfldvals n;
+
+	for (i = 0; i < 16; i++)
+		n.v[i] = v[i] + (u_int32_t) p;
+
+	return n;
+}
+
+template <class T> inline regfldvals regfldvals::operator-(T p)
+{
+	register unsigned int i;
+	regfldvals n;
+
+	for (i = 0; i < 16; i++)
+		n.v[i] = v[i] - (u_int32_t) p;
+
+	return n;
+}
+
+template <class T> inline regfldvals regfldvals::operator*(T p)
+{
+	register unsigned int i;
+	regfldvals n;
+
+	for (i = 0; i < 16; i++)
+		n.v[i] = v[i] * (u_int32_t) p;
+
+	return n;
+}
+
+template <class T> inline regfldvals regfldvals::operator/(T p)
+{
+	register unsigned int i;
+	regfldvals n;
+
+	for (i = 0; i < 16; i++)
+		n.v[i] = v[i] / (u_int32_t) p;
+
+	return n;
+}
+
+template <class T> inline regfldvals regfldvals::operator|(T p)
+{
+	register unsigned int i;
+	regfldvals n;
+
+	for (i = 0; i < 16; i++)
+		n.v[i] = v[i] | (u_int32_t) p;
+
+	return n;
+}
+
+template <class T> inline regfldvals regfldvals::operator^(T p)
+{
+	register unsigned int i;
+	regfldvals n;
+
+	for (i = 0; i < 16; i++)
+		n.v[i] = v[i] ^ (u_int32_t) p;
+
+	return n;
+}
+
+template <class T> inline regfldvals regfldvals::operator&(T p)
+{
+	register unsigned int i;
+	regfldvals n;
+
+	for (i = 0; i < 16; i++)
+		n.v[i] = v[i] & (u_int32_t) p;
+
+	return n;
+}
+
+template <class T> inline bool regfldvals::operator==(T p)
+{
+	register unsigned int i;
+	bool eq = true;
+
+	for (i = 0; i < 16; i++)
+		eq = eq && ( ((u_int32_t) p) == v[i] );
+
+	return eq;
+}
+
+
+template <class T> inline regfldvals & regfldvals::operator=(T p)
+{
+	register unsigned int i;
+
+	for (i = 0; i < 16; i++)
+		v[i] = (u_int32_t) p;
+
+	return *this;
+}
+
+
+template <class T> inline regfldvals::operator T()
+{
+	return (T) v[0];
+}
+
+
+inline u_int32_t & regfldvals::operator[](u_int32_t i)
+{
+	return v[i];
+}
+
+
+//template <class T> T inline regfldvals::operator+(T p)
+//{
+//	return (T) (v[0] + (u_int32_t) p);
+//}
+//
+//template <class T> T inline regfldvals::operator-(T p)
+//{
+//	return (T) (v[0] - (u_int32_t) p);
+//}
+//
+//template <class T> T inline regfldvals::operator*(T p)
+//{
+//	return (T) (v[0] * (u_int32_t) p);
+//}
+//
+//template <class T> T inline regfldvals::operator/(T p)
+//{
+//	return (T) (v[0] / (u_int32_t) p);
+//}
+//
+//template <class T> T inline regfldvals::operator|(T p)
+//{
+//	return (T) (v[0] | (u_int32_t) p);
+//}
+//
+//template <class T> T inline regfldvals::operator^(T p)
+//{
+//	return (T) (v[0] ^ (u_int32_t) p);
+//}
+//
+//template <class T> T inline regfldvals::operator&(T p)
+//{
+//	return (T) (v[0] & (u_int32_t) p);
+//}
+
+
+template <class T> inline regfldvals operator+(T p, const regfldvals &o)
+{
+	register unsigned int i;
+	regfldvals n;
+
+	for (i = 0; i < 16; i++)
+		n.v[i] = (((u_int32_t) p) + o.v[i]);
+
+	return n;
+}
+
+template <class T> inline regfldvals operator-(T p, const regfldvals &o)
+{
+	register unsigned int i;
+	regfldvals n;
+
+	for (i = 0; i < 16; i++)
+		n.v[i] = (((u_int32_t) p) - o.v[i]);
+
+	return n;
+}
+
+template <class T> inline regfldvals operator*(T p, const regfldvals &o)
+{
+	register unsigned int i;
+	regfldvals n;
+
+	for (i = 0; i < 16; i++)
+		n.v[i] = (((u_int32_t) p) * o.v[i]);
+
+	return n;
+}
+
+template <class T> inline regfldvals operator/(T p, const regfldvals &o)
+{
+	register unsigned int i;
+	regfldvals n;
+
+	for (i = 0; i < 16; i++)
+		n.v[i] = (((u_int32_t) p) / o.v[i]);
+
+	return n;
+}
+
+template <class T> inline regfldvals operator|(T p, const regfldvals &o)
+{
+	register unsigned int i;
+	regfldvals n;
+
+	for (i = 0; i < 16; i++)
+		n.v[i] = (((u_int32_t) p) | o.v[i]);
+
+	return n;
+}
+
+template <class T> inline regfldvals operator^(T p, const regfldvals &o)
+{
+	register unsigned int i;
+	regfldvals n;
+
+	for (i = 0; i < 16; i++)
+		n.v[i] = (((u_int32_t) p) ^ o.v[i]);
+
+	return n;
+}
+
+template <class T> inline regfldvals operator&(T p, const regfldvals &o)
+{
+	register unsigned int i;
+	regfldvals n;
+
+	for (i = 0; i < 16; i++)
+		n.v[i] = (((u_int32_t) p) & o.v[i]);
+
+	return n;
+}
+
+
+template <class T> inline bool operator==(const regfldvals &o, T p)
+{
+	register unsigned int i;
+	bool eq = true;
+
+	for (i = 0; i < 16; i++)
+		eq = eq && ( ((u_int32_t) p) == o.v[i] );
+
+	return eq;
+}
+
+
+//template <class T> inline T operator+(T p, const regfldvals &o)
+//{
+//	return (T) (((u_int32_t) p) + o.v[0]);
+//}
+//
+//template <class T> inline T operator-(T p, const regfldvals &o)
+//{
+//	return (T) (((u_int32_t) p) - o.v[0]);
+//}
+//
+//template <class T> inline T operator*(T p, const regfldvals &o)
+//{
+//	return (T) (((u_int32_t) p) * o.v[0]);
+//}
+//
+//template <class T> inline T operator/(T p, const regfldvals &o)
+//{
+//	return (T) (((u_int32_t) p) / o.v[0]);
+//}
+//
+//template <class T> inline T operator|(T p, const regfldvals &o)
+//{
+//	return (T) (((u_int32_t) p) | o.v[0]);
+//}
+//
+//template <class T> inline T operator^(T p, const regfldvals &o)
+//{
+//	return (T) (((u_int32_t) p) ^ o.v[0]);
+//}
+//
+//template <class T> inline T operator&(T p, const regfldvals &o)
+//{
+//	return (T) (((u_int32_t) p) & o.v[0]);
+//}
+
+
+
+
+
+
+/*****************************************************************************/
+/******************************* PROTOTYPES **********************************/
+/*****************************************************************************/
+int sixteen_round(int);
+int page_round(int);
+
+int count_ones(int32_t);
+int count_ones(regfldvals &);
+
+u_int32_t choose_dcp(u_int32_t v);
+u_int32_t choose_ppc(u_int32_t v);
+u_int32_t choose_mpc(u_int32_t v);
+
+void UnpackBits(u_int16_t *, u_int32_t, u_int32_t, bool, caddr_t, int);
+void UnpackBits(u_int16_t *, u_int32_t, u_int32_t, bool, regfldvals &);
+
+void UnpackAllPlanes(u_int16_t *, u_int32_t, bool, u_int32_t []);
+void UnpackAllPlanes(u_int16_t *, u_int32_t, bool, regfldvals &);
+
+void PackBits(u_int16_t *, u_int32_t, u_int32_t, caddr_t, int);
+void PackBits(u_int16_t *, u_int32_t, u_int32_t, regfldvals &, int);
+
+void PackConstantAllPlanes(u_int16_t *, u_int32_t, u_int32_t);
+void PackConstantPlanes(u_int16_t *, u_int32_t, u_int32_t, u_int32_t);
+
+void PackAllPlanes(u_int16_t *, u_int32_t, u_int32_t *);
+void PackAllPlanes(u_int16_t *, u_int32_t, regfldvals &);
+
+
+/*****************************************************************************/
+/********************************* GLOBALS ***********************************/
+/*****************************************************************************/
+extern const int MAX_REGS;
+extern Cam8_Reg_Fld_Specs Register_Specs;
+
+#endif

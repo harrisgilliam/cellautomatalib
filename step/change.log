@@ -1,0 +1,15 @@
+5/18/97:  all "step" files are now un-tabified
+        
+          save-active-subcell and restore-active-subcell should completely
+          ignore the higher-level information about which subcell bits are
+          active that are maintained by the higher-level software.  To do
+          this, they should be sure not to touch this higher-level info.
+          In particular, any "step" or "*step*" that they do should let
+          fields persist.
+        
+          Check other uses of "step" and "*step*" for this bug.
+          Convention: I/O words act on active subcell, unless an I/O
+          subcell was specified.  At the end of each I/O operation, the
+          active subcell is changed back to zero.  The I/O subcell
+          persists.         
+        

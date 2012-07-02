@@ -1,0 +1,78 @@
+This is the first release of the STEP control software.  The other
+major components of the software are the device driver, the XCAM
+interface (X-window acting as a CAM monitor), and the CAM8 simulator.
+The XCAM program in particular provides a rich set of graphical
+services (eg, saving images to postscript files, saving movies, etc),
+and it uses TCL, XV, and other programs.  Both the XCAM program and
+the cam8 simulator are documented elsewhere -- they won't be discussed
+further here, except at the level of how to turn them on and off.
+
+The STEP system is built on top of Mitch Bradley's "Sun Forth".  The
+STEP-specific extensions are essentially all contained in this
+directory.  There is a Makefile setup to "make" the STEP program.
+Type: make step
+
+The STEP program also uses a number of C procedures for access to the
+operating system.  They are linked into the Forth system using clink.
+These are split by category in the files:
+
+link-Cdefines.c		# Routines to return the value of C #defines
+link-driver.c		# Interface to the CAM8 device driver
+link-file.c		# UNIX file system calls
+link-fork.c		# UNIX process creation system calls
+link-math.c		# UNIX math library using integers
+link-mem.c		# UNIX memory mapping system calls
+link-shm.c		# UNIX shared memory system calls
+link-pipe.c		# UNIX pipe creation/usage system calls
+link-misc.c		# Misc UNIX system calls
+
+Here is a list of what "loadstep.fth" loads, with some comments.
+These files will be updated and reorganized in the next release of the
+software.
+
+explore.fth             # Non-CAM extensions to Sun Forth                   
+trace.fth	        # Routines for machine-language tracing of Forth    
+step-glob.fth	        # A few global CAM variables                        
+step-code.fth		# Machine code
+step-list.fth	        # Definitions of step lists                         
+step-bufs.fth	        # Definitions of data buffer routines               
+step-regs.fth	        # CAM machine language register definitions         
+step-hood.fth	        # CA neighborhood defining words                    
+step-cell.fth	        # Definition for "assemble-cell"                    
+step-lang.fth	        # Higher level CAM machine-language definitions     
+step-space.fth	        # Space and subspace defining words                 
+step-bugs.fth	        # Interrupt debugging words                         
+step-cmap.fth	        # Color map defining stuff                          
+step-count.fth		# Generic event-counting routines
+step-init.fth	        # Routines to initialize CAM                        
+step-xlat.fth	        # Interface between Forth and the hardware          
+step-pipe.fth		# Pipes and processes
+step-sckt.fth		# Sockets
+step-sim2.fth	        # Current simulator interface
+step-xmon.fth		# Interface to XCAM monitor program
+step-keys.fth		# Single Key Interpreter program
+step-xvds.fth		# X or Video Display Step (generic display)
+step-line.fth		# Line I/O
+step-test.fth		# test
+step-last.fth		# Some redefinitions at end of compilation
+
+
+In addition, this directory contains the following other files:
+
+README			# This file
+f.base			# Used by clink
+f.out			# Used by clink
+forth*			# Forth executable
+forth.exe		# Forth dictionary
+step*			# script to start the STEP program
+todo.list		# revisions that are planned soon
+
+
+For further information, look at the comments in the source files in
+this directory, and the glossary which contains many of the functions
+used in them.  You can also look at the README file in the
+".../cam8/demos" directory, and at the documentation for XCAM and for
+the CAM-8 simulator.  A technical reference manual describing CAM-8 at
+the hardware level may also be helpful; an overview of the CAM-8
+functionality and operation is contained in the paper, "CAM-8: a
+computer architecture based on cellular automata."

@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>POCO C++ Libraries Windows CE Platform Notes</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="category">Introduction</h1>
+<h1 class="title">POCO C++ Libraries Windows CE Platform Notes</h1>
+</div>
+<div class="body">
+<h2>Contents</h2>
+<div class="toc"><ul>
+<li class="level1"><a href="#0">Introduction</a></li>
+<li class="level1"><a href="#1">Changing The Target In The Project Files</a></li>
+<li class="level1"><a href="#2">Restrictions</a></li>
+<li class="level2"><a href="#3">Poco::Environment</a></li>
+<li class="level2"><a href="#4">Date/Time Support</a></li>
+<li class="level2"><a href="#5">Poco::Path</a></li>
+<li class="level2"><a href="#6">Poco::RWLock</a></li>
+<li class="level2"><a href="#7">Poco::Process</a></li>
+<li class="level2"><a href="#8">Poco::Util::ServerApplication</a></li>
+<li class="level2"><a href="#9">Crypto and NetSSL</a></li>
+<li class="level2"><a href="#10">Data</a></li>
+<li class="level2"><a href="#11">Raw Sockets in Net</a></li>
+<li class="level1"><a href="#12">Build Notes</a></li>
+</ul></div>
+<div class="description">
+<p></p><h2><a name="0">Introduction</a></h2><p>
+</p>
+<p>Starting with release 1.4.0 the POCO C++ Libraries can be used on  Windows CE 6. Project files for Visual Studio 2008 are provided that support static and shared debug and release builds. </p>
+<p>The port should work for Windows CE 5 as well, however, this has not been tested. </p>
+<p></p>
+<p></p><h2><a name="1">Changing The Target In The Project Files</a></h2><p>
+</p>
+<p>The project files contain build configurations for the &quot;Digi JumpStart (ARMV4I)&quot; target. To use another target, the Visual Studio project and solution files must be changed accordingly. Note that the project files cannot be opened  by Visual Studio unless the target referenced in the project and solution files is available. To change the project and solution files for your platform, replace all occurrences of the string &quot;Digi JumpStart (ARMV4I)&quot; with the name of your platform (e.g. &quot;Windows Mobile 6 Professional SDK (ARMV4I)&quot;). This is best done with a text editor that supports global search/replace across an entire directory tree (solution and project files are plain text/xml files, so there's no risk breaking something). </p>
+<p></p>
+<p></p><h2><a name="2">Restrictions</a></h2><p>
+</p>
+<p></p><h3><a name="3">Poco::Environment</a></h3><p>
+</p>
+<p>Windows CE does not support environment variables.  Therefore, <a href="Poco.Environment.html#5712" title="Poco::Environment::get()">Poco::Environment::get</a>() and <a href="Poco.Environment.html#5717" title="Poco::Environment::has()">Poco::Environment::has</a>() only support the following hardcoded &quot;pseudo&quot; environment variables: </p>
+<ul>
+<li>TEMP </li>
+<li>TMP </li>
+<li>HOMEPATH </li>
+<li>COMPUTERNAME </li>
+<li>OS </li>
+<li>NUMBER_OF_PROCESSORS </li>
+<li>PROCESSOR_ARCHITECTURE </li>
+</ul>
+<p><a href="Poco.Environment.html#5719" title="Poco::Environment::set()">Poco::Environment::set</a>() always throws a <a href="Poco.NotImplementedException.html" title="class Poco::NotImplementedException">Poco::NotImplementedException</a>. </p>
+<p></p>
+<p></p><h3><a name="4">Date/Time Support</a></h3><p>
+</p>
+<p>Some date/time features are implemented with the help of <a href="http://wcelibcex.sourceforge.net/" target="_blank">WCELIBCEX</a>. The library is statically included in the Foundation library to simplify the build process.  However, it is also possible to use WCELIBCEX as a separate library if the Foundation project file is modified accordingly (by removing or excluding from build the WCELIBCEX folder and modifying the header file search path accordingly). The following functions from WCELIBCEX are used: </p>
+<ul>
+<li>wceex_time() </li>
+<li>wceex_localtime() </li>
+<li>wceex_mktime() </li>
+</ul>
+<p>It should also be possible to use wcecompat instead of WCELIBCEX, as this library provides  similar features. In this case, the calls to the wceex_* functions need to be replaced with the wcecompat counterparts. The affected files are Random.cpp, LocalDateTime.cpp, Timezone_WINCE.cpp and ThreadPool.cpp. </p>
+<p>To obtain the current date and time with millisecond resolution, the hack described in &lt;<a href="http://community.opennetcf.com/articles/cf/archive/2007/11/20/getting-a-millisecond-resolution-datetime-under-windows-ce.aspx" target="_blank">http://community.opennetcf.com/articles/cf/archive/2007/11/20/getting-a-millisecond-resolution-datetime-under-windows-ce.aspx</a>&gt; is used. This means there will be a one second delay when starting up the application. </p>
+<p></p>
+<p></p><h3><a name="5">Poco::Path</a></h3><p>
+</p>
+<p><a href="Poco.Path.html#9437" title="Poco::Path::listRoots()">Poco::Path::listRoots</a>() returns the root directory (&quot;\&quot;), as well as all mounted storage devices  (e.g., &quot;\Hard Disk&quot;), even if they are also present in the root directory. </p>
+<p><a href="Poco.Path.html#9431" title="Poco::Path::current()">Poco::Path::current</a>() and <a href="Poco.Path.html#9432" title="Poco::Path::home()">Poco::Path::home</a>() always return the root directory. </p>
+<p></p>
+<p></p><h3><a name="6">Poco::RWLock</a></h3><p>
+</p>
+<p>In the reader/writer lock implementation for Windows CE, writers always take precedence over readers. </p>
+<p></p>
+<p></p><h3><a name="7">Poco::Process</a></h3><p>
+</p>
+<p>Launching a process with pipes for redirecting input/output is not supported. </p>
+<p></p>
+<p></p><h3><a name="8">Poco::Util::ServerApplication</a></h3><p>
+</p>
+<p><a href="Poco.Util.ServerApplication.html#18154" title="Poco::Util::ServerApplication::waitForTerminationRequest()">Poco::Util::ServerApplication::waitForTerminationRequest</a>(): CTRL-C does not work to shut down the application as it's not supported by the Windows CE console. The pkill utility supplied as part of the Util library samples can be used to terminate a process from the command line. </p>
+<p></p>
+<p></p><h3><a name="9">Crypto and NetSSL</a></h3><p>
+</p>
+<p>Crypto and NetSSL_OpenSSL have not been tested yet. Project files are there, but they might need some adaptions depending on  how OpenSSL has been built for the Windows CE target. </p>
+<p></p>
+<p></p><h3><a name="10">Data</a></h3><p>
+</p>
+<p>Only the SQLite backend is currently supported. </p>
+<p>The SQLite engine in Data/SQLite is built without localtime support (SQLITE_OMIT_LOCALTIME) due to localtime_s() not being available on Windows CE. </p>
+<p></p>
+<p></p><h3><a name="11">Raw Sockets in Net</a></h3><p>
+</p>
+<p>The test cases involving raw sockets will fail unless the testsuite is ran as a privileged (signed) application. These are RawSocketTest::testEchoIPv4(), RawSocketTest::testSendToReceiveFromIPv4() and ICMPClientTest::testPing(). </p>
+<p></p>
+<p></p><h2><a name="12">Build Notes</a></h2><p>
+</p>
+<p>Optimization settings should be set as follows for release builds  (<i>Properties &gt; Configuration Properties &gt; C/C++ &gt; Optimization</i>): </p>
+<ul>
+<li>Optimization: Custom </li>
+<li>Inline Function Expansion: Default </li>
+<li>Enable Intrinsic Functions: Yes (/Oi) </li>
+<li>Floating-Point Consistency: Default Consistency </li>
+<li>Favor Size or Speed: Favor Fast Code (/Ot) </li>
+<li>Whole Program Optimization: No </li>
+</ul>
+<p>Other settings may or may not produce working programs.  Specifically, setting <i>Optimization</i> to <i>Maximize Speed (/O2)</i> will result in failures in the  test suite for Foundation Events due to a compiler optimizer bug. </p>
+<p>For shared/DLL builds, the /FORCE:MULTIPLE option is passed to the linker. This is to avoid a problem with iostream classes and their methods (template instantiations),  which for some unknown reason (possibly bug) will be exported by the Foundation library  (and others) and thus cause multiply defined symbol errors. </p>
+<p>The reference system used for testing is a Digi ConnectCore 9P 9360 running Windows CE 6.0. </p>
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+</body>
+</html>

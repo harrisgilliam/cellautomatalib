@@ -1,0 +1,104 @@
+#ifndef _CAM8SIMCORE_H_
+#define _CAM8SIMCORE_H_
+
+#include <Cam8Lib++.H>
+#include <Cam8Instr++.H>
+#include <Cam8Steplist++.H>
+#include <Cam8SimInstrQueue++.H>
+#include <Cam8Box++.H>
+#include <Cam8Interface++.H>
+
+#include <ctime>
+
+extern "C" {
+#include <sys/types.h>
+#include <sys/time.h>
+}
+
+using namespace std;
+
+
+/*****************************************************************************/
+/********************************* DEFINES ***********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/******************************** TEMPLATES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/*************************** CLASSES & TYPEDEFS ******************************/
+/*****************************************************************************/
+
+class Cam8SimInterface : public Cam8Interface {
+public:
+	Cam8SimInterface(CAM8SIMINSTRQUEUE iq, CAM8BOX box);
+	virtual ~Cam8SimInterface(void);
+
+	DECL_BZERO(Cam8SimInterface);
+
+
+	// These are virtual from Cam8Interface
+	void ResetInterface(void);
+	void InitInterface(void);
+	void HaltInterface(void);
+	void ClearException(void);
+	void ClearFault(void);
+	void EnableInterfaceExceptions(void);
+	void EnableTimeoutException(void);
+	void EnableCamException(void);
+	void DisableInterfaceExceptions(void);
+	void DisableTimeoutException(void);
+	void DisableCamException(void);
+	void EnableInterfaceInterrupts(void);
+	void EnableNewlistInterrupt(void);
+	void EnableTimeoutInterrupt(void);
+	void EnableSBusInterrupt(void);
+	void EnableCamInterrupt(void);
+	void EnableSoftInterrupt(void);
+	void DisableInterfaceInterrupts(void);
+	void DisableNewlistInterrupt(void);
+	void DisableTimeoutInterrupt(void);
+	void DisableSBusInterrupt(void);
+	void DisableCamInterrupt(void);
+	void DisableSoftInterrupt(void);
+	void ClearInterfaceInterrupts(void);
+	void SetScanLength(u_int32_t h, u_int32_t n);
+	void SetBlankLength(u_int32_t h, u_int32_t n);
+
+	void ExecuteSteplist(Cam8Steplist &);
+
+	bool Read_NLP(u_int32_t *);
+	bool Read_ISR(u_int32_t *);
+	bool Read_CIP(u_int32_t *);
+	bool Read_PIP(u_int32_t *);
+	bool Write_NLP(const u_int32_t *);
+	bool Write_RER(const u_int32_t *);
+	bool Write_DSL(const u_int32_t *);
+	bool Write_DBL(const u_int32_t *);
+
+	caddr_t Alloc_Instr(u_int32_t);
+	void Free_Instr(caddr_t);
+
+protected:
+
+	CAM8SIMINSTRQUEUE iq;
+	CAM8BOX box;
+};
+
+/*****************************************************************************/
+/********************************* INLINES ***********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/******************************* PROTOTYPES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/********************************* GLOBALS ***********************************/
+/*****************************************************************************/
+#endif

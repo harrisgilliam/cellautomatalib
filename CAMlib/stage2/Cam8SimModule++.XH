@@ -1,0 +1,121 @@
+#ifndef _CAM8SIM_H
+#define _CAM8SIM_H
+
+#include <CaLib++.H>
+
+#include <Cam8Instr++.H>
+#include <Cam8SimInstrQueue++.H>
+
+#include <Poco/Runnable.h>
+
+#include <cstdlib>
+
+extern "C" {
+#include <sys/types.h>
+#include <malloc.h>
+#include <sys/mman.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+}
+
+
+/*****************************************************************************/
+/********************************* DEFINES ***********************************/
+/*****************************************************************************/
+#define CHIPS_PER_MOD           16
+
+#define NUM_DEST				4
+#define NUM_SRC					6
+
+#define SCAN_INDEX_LENGTH       24
+#define PERM_CONST_1            31
+#define PERM_CONST_0            30
+
+#define LONG32_SIZE				(sizeof(int32_t))
+#define INT16_SIZE				(sizeof(int16_t))
+#define FLD_SELECT(i)			((i) + 32)
+#define FLD_MAP(i)				((i) + 64)
+
+#define SRC_SITE_DATA			0
+#define SRC_TBUS				1
+#define SRC_FLYWHEEL			2
+#define SRC_LUT					3
+#define SRC_SITE_ADDRESS		3
+#define SRC_GLUED_DATA			4
+#define SRC_CONST_DATA			5
+
+#define DEST_SITE_DATA			0
+#define DEST_EVENT_CT			1
+#define DEST_LUT				2
+#define DEST_DISPLAY			3
+
+#define HIGHB(x)				(((x) & 0x80000000) ? 0x1 : 0x0)
+
+
+#define SOFT_INT_MASK		0x00002000
+#define WAIT_EOS_MASK		0x00001000
+
+
+#define ACTIVE_LUT_SELECT	0x8000						 /* bit in Hardware Env Reg (HER)    */
+
+
+#define SITE_ADDR_MASK	0xFFFFF
+
+
+#define LUT0			LUTb[0]
+#define LUT1			LUTb[1]
+
+
+
+/*****************************************************************************/
+/******************************** TEMPLATES **********************************/
+/*****************************************************************************/
+
+
+
+/*****************************************************************************/
+/*************************** CLASSES & TYPEDEFS ******************************/
+/*****************************************************************************/
+typedef enum { INTERP_OK = 0 } InterpStatus;
+
+
+class Cam8SimModule: public Poco::Runnable {
+public:
+
+	virtual void run(void) = 0;
+	virtual void halt(void) = 0;
+
+
+protected:
+	CAM8SIMINSTRQUEUE iq;
+
+	virtual	void * mmpMemAlign(unsigned int, unsigned int);
+	virtual	void * mmpValloc(unsigned int);
+	virtual	void * mmpMalloc(unsigned int);
+	virtual	void * mmpRealloc(void *, unsigned int);
+	virtual	int mmpFree(void *);
+	virtual	int mmpCreateShared(unsigned int);
+	virtual	void * mmpAllocShared(int, unsigned int);
+	virtual	void mmpFreeShared(void *);
+	virtual	void mmpDestroyShared(int);
+};
+typedef Cam8SimModule * CAM8SIMMODULE;
+
+
+/*****************************************************************************/
+/********************************* INLINES ***********************************/
+/*****************************************************************************/
+
+
+
+/*****************************************************************************/
+/******************************* PROTOTYPES **********************************/
+/*****************************************************************************/
+
+
+
+/*****************************************************************************/
+/********************************* GLOBALS ***********************************/
+/*****************************************************************************/
+
+#endif

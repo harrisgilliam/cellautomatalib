@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::EventLogChannel</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="symbol">class EventLogChannel</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> Logging<br />
+<b>Header:</b> Poco/EventLogChannel.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>This Windows-only channel works with the Windows NT <a href="Poco.Event.html" title="class Poco::Event">Event</a> Log service. </p>
+<p>To work properly, the <a href="Poco.EventLogChannel.html" title="class Poco::EventLogChannel">EventLogChannel</a> class requires that either the PocoFoundation.dll or the PocoMsg.dll Dynamic Link Library containing the message definition resources can be found in $PATH. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.Channel.html" title="class Poco::Channel">Channel</a></p>
+<p><b>All Base Classes: </b><a href="Poco.Channel.html" title="class Poco::Channel">Channel</a>, <a href="Poco.Configurable.html" title="class Poco::Configurable">Configurable</a>, <a href="Poco.RefCountedObject.html" title="class Poco::RefCountedObject">RefCountedObject</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.EventLogChannel.html#5777" title="Poco::EventLogChannel::close()">close</a>, <a href="Poco.EventLogChannel.html#5795" title="Poco::EventLogChannel::findLibrary()">findLibrary</a>, <a href="Poco.EventLogChannel.html#5792" title="Poco::EventLogChannel::getCategory()">getCategory</a>, <a href="Poco.EventLogChannel.html#5783" title="Poco::EventLogChannel::getProperty()">getProperty</a>, <a href="Poco.EventLogChannel.html#5790" title="Poco::EventLogChannel::getType()">getType</a>, <a href="Poco.EventLogChannel.html#5778" title="Poco::EventLogChannel::log()">log</a>, <a href="Poco.EventLogChannel.html#5776" title="Poco::EventLogChannel::open()">open</a>, <a href="Poco.EventLogChannel.html#5780" title="Poco::EventLogChannel::setProperty()">setProperty</a>, <a href="Poco.EventLogChannel.html#5794" title="Poco::EventLogChannel::setUpRegistry()">setUpRegistry</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.Channel.html#4268" title="Poco::Channel::close()">close</a>, <a href="Poco.RefCountedObject.html#9831" title="Poco::RefCountedObject::duplicate()">duplicate</a>, <a href="Poco.Channel.html#4274" title="Poco::Channel::getProperty()">getProperty</a>, <a href="Poco.Channel.html#4269" title="Poco::Channel::log()">log</a>, <a href="Poco.Channel.html#4267" title="Poco::Channel::open()">open</a>, <a href="Poco.RefCountedObject.html#9833" title="Poco::RefCountedObject::referenceCount()">referenceCount</a>, <a href="Poco.RefCountedObject.html#9832" title="Poco::RefCountedObject::release()">release</a>, <a href="Poco.Channel.html#4271" title="Poco::Channel::setProperty()">setProperty</a></p>
+<h2>Constructors</h2>
+<h3><a name="5770">EventLogChannel</a></h3>
+<p class="decl"><a href="Poco.EventLogChannel.html" title="class Poco::EventLogChannel">EventLogChannel</a>();</p>
+<div class="description">
+<p>Creates the <a href="Poco.EventLogChannel.html" title="class Poco::EventLogChannel">EventLogChannel</a>. The name of the current application (or more correctly, the name of its executable) is taken as event source name. </p>
+</div>
+<h3><a name="5771">EventLogChannel</a></h3>
+<p class="decl"><a href="Poco.EventLogChannel.html" title="class Poco::EventLogChannel">EventLogChannel</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.EventLogChannel.html" title="class Poco::EventLogChannel">EventLogChannel</a> with the given event source name. </p>
+</div>
+<h3><a name="5773">EventLogChannel</a></h3>
+<p class="decl"><a href="Poco.EventLogChannel.html" title="class Poco::EventLogChannel">EventLogChannel</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; host<br />);</p>
+<div class="description">
+<p>Creates an <a href="Poco.EventLogChannel.html" title="class Poco::EventLogChannel">EventLogChannel</a> with the given event source name that routes messages to the given host. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="5789">~EventLogChannel</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">~<a href="Poco.EventLogChannel.html" title="class Poco::EventLogChannel">EventLogChannel</a>();</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="5777">close</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void close();</p>
+<div class="description">
+<p>Closes the <a href="Poco.EventLogChannel.html" title="class Poco::EventLogChannel">EventLogChannel</a>. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Channel.html#4268" title="Poco::Channel::close()">Poco::Channel::close()</a></p></div>
+<h3><a name="5783">getProperty</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">std::string getProperty(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name<br />) const;</p>
+<div class="description">
+<p>Returns the value of the given property. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Channel.html#4274" title="Poco::Channel::getProperty()">Poco::Channel::getProperty()</a></p></div>
+<h3><a name="5778">log</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void log(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Message.html" title="class Poco::Message">Message</a> &amp; msg<br />);</p>
+<div class="description">
+<p>Logs the given message to the Windows <a href="Poco.Event.html" title="class Poco::Event">Event</a> Log. </p>
+<p>The message type and priority are mapped to appropriate values for <a href="Poco.Event.html" title="class Poco::Event">Event</a> Log type and category. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Channel.html#4269" title="Poco::Channel::log()">Poco::Channel::log()</a></p></div>
+<h3><a name="5776">open</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void open();</p>
+<div class="description">
+<p>Opens the <a href="Poco.EventLogChannel.html" title="class Poco::EventLogChannel">EventLogChannel</a>. If necessary, the required registry entries to register a message resource DLL are made. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Channel.html#4267" title="Poco::Channel::open()">Poco::Channel::open()</a></p></div>
+<h3><a name="5780">setProperty</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void setProperty(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; value<br />);</p>
+<div class="description">
+<p>Sets or changes a configuration property.  </p>
+<p>The following properties are supported: </p>
+<p></p>
+<ul>
+<li>name:    The name of the event source. </li>
+<li>loghost: The name of the host where the <a href="Poco.Event.html" title="class Poco::Event">Event</a> Log service is running. The default is &quot;localhost&quot;. </li>
+<li>host:    same as host. </li>
+<li>logfile: The name of the log file. The default is &quot;Application&quot;. </li>
+</ul>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Channel.html#4271" title="Poco::Channel::setProperty()">Poco::Channel::setProperty()</a></p></div>
+<h3><a name="5795">findLibrary</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static std::wstring findLibrary(<br />&nbsp;&nbsp;&nbsp;&nbsp;const wchar_t * name<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="5792">getCategory</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static int getCategory(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Message.html" title="class Poco::Message">Message</a> &amp; msg<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="5790">getType</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static int getType(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Message.html" title="class Poco::Message">Message</a> &amp; msg<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="5794">setUpRegistry</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void setUpRegistry() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Variables</h2>
+<h3><a name="5786">PROP_HOST</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const std::string <a href="Poco.EventLogChannel.html#5786" title="Poco::EventLogChannel::PROP_HOST">PROP_HOST</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="5788">PROP_LOGFILE</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const std::string <a href="Poco.EventLogChannel.html#5788" title="Poco::EventLogChannel::PROP_LOGFILE">PROP_LOGFILE</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="5787">PROP_LOGHOST</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const std::string <a href="Poco.EventLogChannel.html#5787" title="Poco::EventLogChannel::PROP_LOGHOST">PROP_LOGHOST</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="5785">PROP_NAME</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const std::string <a href="Poco.EventLogChannel.html#5785" title="Poco::EventLogChannel::PROP_NAME">PROP_NAME</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

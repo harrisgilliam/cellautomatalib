@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>POCO Zip User Guide</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="category">POCO Zip Library</h1>
+<h1 class="title">POCO Zip User Guide</h1>
+</div>
+<div class="body">
+<h2>Contents</h2>
+<div class="toc"><ul>
+<li class="level1"><a href="#0">Introduction</a></li>
+<li class="level2"><a href="#1">Restrictions</a></li>
+<li class="level1"><a href="#2">Main Classes</a></li>
+<li class="level2"><a href="#3">Compress</a></li>
+<li class="level2"><a href="#4">Decompress</a></li>
+<li class="level3"><a href="#5">Decompress All</a></li>
+<li class="level3"><a href="#6">Decompress Single Files</a></li>
+</ul></div>
+<div class="description">
+<p></p><h2><a name="0">Introduction</a></h2><p>
+POCO Zip adds support for parsing and creating Zip files. It offers the following features: </p>
+<ul>
+<li>decompress from local files </li>
+<li>decompress from network files while they are downloaded </li>
+<li>compress to local files </li>
+<li>compress directly to a network destination </li>
+</ul>
+<p></p><h3><a name="1">Restrictions</a></h3><p>
+</p>
+<ul>
+<li>POCO Zip does not support the DEFLATE64 algorithm. </li>
+<li>encrypted files are not supported </li>
+</ul>
+<p></p><h2><a name="2">Main Classes</a></h2><p>
+Most users will work with two common classes: <i>Compress</i> and <i>Decompress</i> </p>
+<p></p><h3><a name="3">Compress</a></h3><p>
+Compress is a helper class that simplifies creation of Zip files. Creating a Zip file is a basically a three-step process: </p>
+<ul>
+<li>Create the Compress object: Specify the output stream and define if it is seekable (set to true for local files, to false for network files) </li>
+</ul>
+<p></p>
+<pre>Compress(std::ostream&amp; out, bool seekableOut);
+</pre>
+<p> </p>
+<ul>
+<li>Add entries: either add single files or directory entries </li>
+</ul>
+<p></p>
+<pre>void addFile(std::istream&amp; input, 
+             const Poco::DateTime&amp; lastModifiedAt, 
+             const Poco::Path&amp; fileName, 
+             ZipCommon::CompressionMethod cm = ZipCommon::CM_DEFLATE, 
+             ZipCommon::CompressionLevel cl = ZipCommon::CL_MAXIMUM);
+    /// Adds a single file to the Zip File. fileName must not be a directory name.
+
+void addFile(const Poco::Path&amp; file, 
+             const Poco::Path&amp; fileName, 
+             ZipCommon::CompressionMethod cm = ZipCommon::CM_DEFLATE, 
+             ZipCommon::CompressionLevel cl = ZipCommon::CL_MAXIMUM);
+    /// Adds a single file to the Zip File. fileName must not be a directory name. The file must exist physically!
+
+void addDirectory(const Poco::Path&amp; entryName, const Poco::DateTime&amp; lastModifiedAt);
+    /// Adds a directory entry excluding all children to the Zip file, entryName must not be empty.
+
+void addRecursive(const Poco::Path&amp; entry, 
+                  ZipCommon::CompressionLevel cl = ZipCommon::CL_MAXIMUM, 
+                  bool excludeRoot = true, 
+                  const Poco::Path&amp; name = Poco::Path());
+    /// Adds a directory entry recursively to the zip file, set excludeRoot to false to exclude the parent directory.
+    /// The name specifies under which path the entries are added in the Zip file.
+</pre>
+<p> Note that one must always define a name when adding a file entry, otherwise the compresser can not decide if the file should be added with an absolute or a relative path.  Assume you are adding the file <i>c:\\data\\hello.txt</i> twice to a Zip: </p>
+<p></p>
+<pre>// MUST use binary!
+std::ofstream out(&quot;test.zip&quot;, std::ios::binary);
+Compress c(out, true);
+Poco::Path aFile(&quot;c:\\data\\hello.txt&quot;);
+c.addFile(theFile, &quot;hello.txt&quot;);
+c.addFile(theFile, theFile);
+c.close(); // MUST be done to finalize the Zip file
+</pre>
+<p> A Zip file stores entries internally in UNIX path style. The Zip file created above will contain the following entries: </p>
+<p></p>
+<pre>hello.txt
+data/
+data/hello.txt
+</pre>
+<p> The directory entry <i>data/</i> was automatically added. </p>
+<p>When adding directories recursively, the same principle applies. You specify the root directory that should be added and an optional path name where entries are added in the Zip file. Assume you have the following directory structure: </p>
+<p></p>
+<pre>data/
+   run1/
+       result1.txt
+   run2/
+       result2.txt
+</pre>
+<p> The following call will add all subdirectories and all files of data to the Zip but not the root entry <i>data</i>: </p>
+<p></p>
+<pre>Poco::Path data(&quot;data&quot;);
+data.makeDirectory();
+c.addRecursive(data);
+</pre>
+<p> Or if you want the files to be added under the directory name <i>20070401</i> (you basically <i>rename</i> data to 20070401): </p>
+<p></p>
+<pre>Poco::Path data(&quot;data&quot;);
+Poco::Path name(&quot;20070401);
+data.makeDirectory();
+name.makeDirectory();
+c.addRecursive(data, ZipCommon::CL_NORMAL, false, name);
+</pre>
+<p> Note that <i>makeDirectory</i> does not create a directory, it simply assures that the Path is treated as a directory not as a file. Also using NORMAL compression instead of MAXIMUM (which is the default) has the benefit of improved performance. To get notified about the entries that are added during <i>addRecursive</i> register to the <b>EDone</b> event of the Compress object: </p>
+<p></p>
+<pre>Poco::FIFOEvent&lt;const ZipLocalFileHeader&gt; EDone;
+</pre>
+<p> </p>
+<ul>
+<li>Closing the Zip file: It is mandatory to manually close Compress objects. This guarantees that the Zip directory is written, thus creating a valid Zip file. It is safe to call <i>close</i> multiple times, only the first call takes effect. </li>
+</ul>
+<p></p>
+<pre>ZipArchive close();
+</pre>
+<p> <i>close</i> returns a ZipArchive which describes all entries inside a Zip file. </p>
+<p></p><h3><a name="4">Decompress</a></h3><p>
+Decompress can be used to decompress all files from a Zip file or to decompress single files only. </p>
+<p></p><h4><a name="5">Decompress All</a></h4><p>
+The following sample code shows how all entries can be extracted from a Zip file: </p>
+<p></p>
+<pre>std::ifstream inp(&quot;test.zip&quot;, std::ios::binary);
+poco_assert (inp);
+// decompress to current working dir
+Decompress dec(inp, Poco::Path()); 
+// if an error happens invoke the ZipTest::onDecompressError method
+dec.EError += Poco::Delegate&lt;ZipTest, std::pair&lt;const Poco::Zip::ZipLocalFileHeader, const std::string&gt; &gt;(this, &amp;ZipTest::onDecompressError);
+dec.decompressAllFiles();
+dec.EError -= Poco::Delegate&lt;ZipTest, std::pair&lt;const Poco::Zip::ZipLocalFileHeader, const std::string&gt; &gt;(this, &amp;ZipTest::onDecompressError);
+</pre>
+<p> The onDecompressError method: </p>
+<p></p>
+<pre>void ZipTest::onDecompressError(const void* pSender, std::pair&lt;const Poco::Zip::ZipLocalFileHeader, const std::string&gt;&amp; info)
+{
+    // inform user about error
+    [...]
+}
+</pre>
+<p> Decompressing directly from the net works similar: </p>
+<p></p>
+<pre>Poco::URI uri(&quot;http://www.appinf.com/test.zip&quot;);
+HTTPClientSession session(uri.getHost(), uri.getPort());
+HTTPRequest req(HTTPRequest::HTTP_GET, path, HTTPMessage::HTTP_1_1);
+session.sendRequest(req);
+HTTPResponse res;
+std::istream&amp; rs = session.receiveResponse(res);
+Decompress dec(rs, Poco::Path());
+// if an error happens invoke the ZipTest::onDecompressError method
+dec.EError += Poco::Delegate&lt;ZipTest, std::pair&lt;const Poco::Zip::ZipLocalFileHeader, const std::string&gt; &gt;(this, &amp;ZipTest::onDecompressError);
+dec.decompressAllFiles();
+dec.EError -= Poco::Delegate&lt;ZipTest, std::pair&lt;const Poco::Zip::ZipLocalFileHeader, const std::string&gt; &gt;(this, &amp;ZipTest::onDecompressError);
+</pre>
+<p> Furthermore, Decompress supports additional parameters: </p>
+<p></p>
+<pre>Decompress(std::istream&amp; in, const Poco::Path&amp; outputDir, bool flattenDirs = false, bool keepIncompleteFiles = false);
+</pre>
+<p> If <i>flattenDirs</i> is set to true no subdirs are extracted, if <i>keepIncompleteFiles</i> is set to true, corrupt files (i.e. wrong CRC, wrong size on disk) will not be deleted. </p>
+<p></p><h4><a name="6">Decompress Single Files</a></h4><p>
+To decompress single files you must first parse a Zip file, and then decompress the file which happens transparently inside the <i>ZipInputStream</i>: </p>
+<p></p>
+<pre>std::ifstream inp(&quot;test.zip&quot;, std::ios::binary);
+poco_assert (inp);
+ZipArchive arch(inp);
+ZipArchive::FileHeaders::const_iterator it = arch.findHeader(&quot;data/hello.txt&quot;);
+poco_assert (it != arch.headerEnd());
+ZipInputStream zipin (inp, it-&gt;second);
+std::ostringstream out(std::ios::binary);
+Poco::StreamCopier::copyStream(zipin, out);
+</pre>
+<p> Note that this will only work with local files which allow us to seek inside the file. Directly extracting single entries from a network file is currently not possible via the Decompress class. </p>
+<p></p>
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+</body>
+</html>

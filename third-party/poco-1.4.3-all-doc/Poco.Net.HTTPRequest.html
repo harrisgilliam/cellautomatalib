@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Net::HTTPRequest</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Net.html" class="namespace">Poco::Net</a></h1>
+<h1 class="symbol">class HTTPRequest</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Net<br />
+<b>Package:</b> HTTP<br />
+<b>Header:</b> Poco/Net/HTTPRequest.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>This class encapsulates an HTTP request message. </p>
+<p>In addition to the properties common to all HTTP messages, a HTTP request has a method (e.g. GET, HEAD, POST, etc.) and a request <a href="Poco.URI.html" title="class Poco::URI">URI</a>. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.Net.HTTPMessage.html" title="class Poco::Net::HTTPMessage">HTTPMessage</a></p>
+<p><b>All Base Classes: </b><a href="Poco.Net.HTTPMessage.html" title="class Poco::Net::HTTPMessage">HTTPMessage</a>, <a href="Poco.Net.MessageHeader.html" title="class Poco::Net::MessageHeader">MessageHeader</a>, <a href="Poco.Net.NameValueCollection.html" title="class Poco::Net::NameValueCollection">NameValueCollection</a></p>
+<p><b>Known Derived Classes: </b><a href="Poco.Net.HTTPServerRequest.html" title="class Poco::Net::HTTPServerRequest">HTTPServerRequest</a>, <a href="Poco.Net.HTTPServerRequestImpl.html" title="class Poco::Net::HTTPServerRequestImpl">HTTPServerRequestImpl</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Net.HTTPRequest.html#13251" title="Poco::Net::HTTPRequest::getCookies()">getCookies</a>, <a href="Poco.Net.HTTPRequest.html#13254" title="Poco::Net::HTTPRequest::getCredentials()">getCredentials</a>, <a href="Poco.Net.HTTPRequest.html#13248" title="Poco::Net::HTTPRequest::getHost()">getHost</a>, <a href="Poco.Net.HTTPRequest.html#13239" title="Poco::Net::HTTPRequest::getMethod()">getMethod</a>, <a href="Poco.Net.HTTPRequest.html#13242" title="Poco::Net::HTTPRequest::getURI()">getURI</a>, <a href="Poco.Net.HTTPRequest.html#13253" title="Poco::Net::HTTPRequest::hasCredentials()">hasCredentials</a>, <a href="Poco.Net.HTTPRequest.html#13262" title="Poco::Net::HTTPRequest::read()">read</a>, <a href="Poco.Net.HTTPRequest.html#13249" title="Poco::Net::HTTPRequest::setCookies()">setCookies</a>, <a href="Poco.Net.HTTPRequest.html#13257" title="Poco::Net::HTTPRequest::setCredentials()">setCredentials</a>, <a href="Poco.Net.HTTPRequest.html#13243" title="Poco::Net::HTTPRequest::setHost()">setHost</a>, <a href="Poco.Net.HTTPRequest.html#13237" title="Poco::Net::HTTPRequest::setMethod()">setMethod</a>, <a href="Poco.Net.HTTPRequest.html#13240" title="Poco::Net::HTTPRequest::setURI()">setURI</a>, <a href="Poco.Net.HTTPRequest.html#13260" title="Poco::Net::HTTPRequest::write()">write</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.Net.NameValueCollection.html#14533" title="Poco::Net::NameValueCollection::add()">add</a>, <a href="Poco.Net.NameValueCollection.html#14545" title="Poco::Net::NameValueCollection::begin()">begin</a>, <a href="Poco.Net.NameValueCollection.html#14551" title="Poco::Net::NameValueCollection::clear()">clear</a>, <a href="Poco.Net.NameValueCollection.html#14547" title="Poco::Net::NameValueCollection::empty()">empty</a>, <a href="Poco.Net.NameValueCollection.html#14546" title="Poco::Net::NameValueCollection::end()">end</a>, <a href="Poco.Net.NameValueCollection.html#14549" title="Poco::Net::NameValueCollection::erase()">erase</a>, <a href="Poco.Net.NameValueCollection.html#14543" title="Poco::Net::NameValueCollection::find()">find</a>, <a href="Poco.Net.NameValueCollection.html#14536" title="Poco::Net::NameValueCollection::get()">get</a>, <a href="Poco.Net.HTTPMessage.html#13194" title="Poco::Net::HTTPMessage::getChunkedTransferEncoding()">getChunkedTransferEncoding</a>, <a href="Poco.Net.HTTPMessage.html#13185" title="Poco::Net::HTTPMessage::getContentLength()">getContentLength</a>, <a href="Poco.Net.HTTPMessage.html#13188" title="Poco::Net::HTTPMessage::getContentLength64()">getContentLength64</a>, <a href="Poco.Net.HTTPMessage.html#13199" title="Poco::Net::HTTPMessage::getContentType()">getContentType</a>, <a href="Poco.Net.MessageHeader.html#14382" title="Poco::Net::MessageHeader::getFieldLimit()">getFieldLimit</a>, <a href="Poco.Net.HTTPMessage.html#13202" title="Poco::Net::HTTPMessage::getKeepAlive()">getKeepAlive</a>, <a href="Poco.Net.HTTPMessage.html#13191" title="Poco::Net::HTTPMessage::getTransferEncoding()">getTransferEncoding</a>, <a href="Poco.Net.HTTPMessage.html#13182" title="Poco::Net::HTTPMessage::getVersion()">getVersion</a>, <a href="Poco.Net.NameValueCollection.html#14541" title="Poco::Net::NameValueCollection::has()">has</a>, <a href="Poco.Net.MessageHeader.html#14376" title="Poco::Net::MessageHeader::operator =()">operator&nbsp;=</a>, <a href="Poco.Net.NameValueCollection.html#14528" title="Poco::Net::NameValueCollection::operator []()">operator&nbsp;[]</a>, <a href="Poco.Net.MessageHeader.html#14397" title="Poco::Net::MessageHeader::quote()">quote</a>, <a href="Poco.Net.MessageHeader.html#14380" title="Poco::Net::MessageHeader::read()">read</a>, <a href="Poco.Net.NameValueCollection.html#14530" title="Poco::Net::NameValueCollection::set()">set</a>, <a href="Poco.Net.HTTPMessage.html#13192" title="Poco::Net::HTTPMessage::setChunkedTransferEncoding()">setChunkedTransferEncoding</a>, <a href="Poco.Net.HTTPMessage.html#13183" title="Poco::Net::HTTPMessage::setContentLength()">setContentLength</a>, <a href="Poco.Net.HTTPMessage.html#13186" title="Poco::Net::HTTPMessage::setContentLength64()">setContentLength64</a>, <a href="Poco.Net.HTTPMessage.html#13195" title="Poco::Net::HTTPMessage::setContentType()">setContentType</a>, <a href="Poco.Net.MessageHeader.html#14383" title="Poco::Net::MessageHeader::setFieldLimit()">setFieldLimit</a>, <a href="Poco.Net.HTTPMessage.html#13200" title="Poco::Net::HTTPMessage::setKeepAlive()">setKeepAlive</a>, <a href="Poco.Net.HTTPMessage.html#13189" title="Poco::Net::HTTPMessage::setTransferEncoding()">setTransferEncoding</a>, <a href="Poco.Net.HTTPMessage.html#13180" title="Poco::Net::HTTPMessage::setVersion()">setVersion</a>, <a href="Poco.Net.NameValueCollection.html#14548" title="Poco::Net::NameValueCollection::size()">size</a>, <a href="Poco.Net.MessageHeader.html#14385" title="Poco::Net::MessageHeader::splitElements()">splitElements</a>, <a href="Poco.Net.MessageHeader.html#14389" title="Poco::Net::MessageHeader::splitParameters()">splitParameters</a>, <a href="Poco.Net.NameValueCollection.html#14526" title="Poco::Net::NameValueCollection::swap()">swap</a>, <a href="Poco.Net.MessageHeader.html#14378" title="Poco::Net::MessageHeader::write()">write</a></p>
+<h2>Constructors</h2>
+<h3><a name="13226">HTTPRequest</a></h3>
+<p class="decl"><a href="Poco.Net.HTTPRequest.html" title="class Poco::Net::HTTPRequest">HTTPRequest</a>();</p>
+<div class="description">
+<p>Creates a GET / HTTP/1.0 HTTP request. </p>
+</div>
+<h3><a name="13227">HTTPRequest</a></h3>
+<p class="decl"><a href="Poco.Net.HTTPRequest.html" title="class Poco::Net::HTTPRequest">HTTPRequest</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; version<br />);</p>
+<div class="description">
+<p>Creates a GET / HTTP/1.x request with the given version (HTTP/1.0 or HTTP/1.1). </p>
+</div>
+<h3><a name="13229">HTTPRequest</a></h3>
+<p class="decl"><a href="Poco.Net.HTTPRequest.html" title="class Poco::Net::HTTPRequest">HTTPRequest</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; method,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; uri<br />);</p>
+<div class="description">
+<p>Creates a HTTP/1.0 request with the given method and <a href="Poco.URI.html" title="class Poco::URI">URI</a>. </p>
+</div>
+<h3><a name="13232">HTTPRequest</a></h3>
+<p class="decl"><a href="Poco.Net.HTTPRequest.html" title="class Poco::Net::HTTPRequest">HTTPRequest</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; method,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; uri,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; version<br />);</p>
+<div class="description">
+<p>Creates a HTTP request with the given method, <a href="Poco.URI.html" title="class Poco::URI">URI</a> and version. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="13236">~HTTPRequest</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual ~<a href="Poco.Net.HTTPRequest.html" title="class Poco::Net::HTTPRequest">HTTPRequest</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Net.HTTPRequest.html" title="class Poco::Net::HTTPRequest">HTTPRequest</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="13251">getCookies</a></h3>
+<p class="decl">void getCookies(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.NameValueCollection.html" title="class Poco::Net::NameValueCollection">NameValueCollection</a> &amp; cookies<br />) const;</p>
+<div class="description">
+<p>Fills cookies with the cookies extracted from the Cookie headers in the request. </p>
+</div>
+<h3><a name="13254">getCredentials</a></h3>
+<p class="decl">void getCredentials(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::string &amp; scheme,<br />&nbsp;&nbsp;&nbsp;&nbsp;std::string &amp; authInfo<br />) const;</p>
+<div class="description">
+<p>Returns the authentication scheme and additional authentication information contained in this request. </p>
+<p>Throws a <a href="Poco.Net.NotAuthenticatedException.html" title="class Poco::Net::NotAuthenticatedException">NotAuthenticatedException</a> if no authentication information is contained in the request. </p>
+</div>
+<h3><a name="13248">getHost</a></h3>
+<p class="decl">const std::string &amp; getHost() const;</p>
+<div class="description">
+<p>Returns the value of the Host header field. </p>
+<p>Throws a <a href="Poco.NotFoundException.html" title="class Poco::NotFoundException">NotFoundException</a> if the request does not have a Host header field. </p>
+</div>
+<h3><a name="13239">getMethod</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const std::string &amp; getMethod() const;</p>
+<div class="description">
+<p>Returns the method. </p>
+</div>
+<h3><a name="13242">getURI</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const std::string &amp; getURI() const;</p>
+<div class="description">
+<p>Returns the request <a href="Poco.URI.html" title="class Poco::URI">URI</a>. </p>
+</div>
+<h3><a name="13253">hasCredentials</a></h3>
+<p class="decl">bool hasCredentials() const;</p>
+<div class="description">
+<p>Returns true if and only if the request contains authentication information in the form of an Authorization header. </p>
+</div>
+<h3><a name="13262">read</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void read(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::istream &amp; istr<br />);</p>
+<div class="description">
+<p>Reads the HTTP request from the given input stream. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Net.MessageHeader.html#14380" title="Poco::Net::MessageHeader::read()">Poco::Net::MessageHeader::read()</a></p></div>
+<h3><a name="13249">setCookies</a></h3>
+<p class="decl">void setCookies(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.NameValueCollection.html" title="class Poco::Net::NameValueCollection">NameValueCollection</a> &amp; cookies<br />);</p>
+<div class="description">
+<p>Adds a Cookie header with the names and values from cookies. </p>
+</div>
+<h3><a name="13257">setCredentials</a></h3>
+<p class="decl">void setCredentials(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; scheme,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; authInfo<br />);</p>
+<div class="description">
+<p>Sets the authentication scheme and information for this request. </p>
+</div>
+<h3><a name="13243">setHost</a></h3>
+<p class="decl">void setHost(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; host<br />);</p>
+<div class="description">
+<p>Sets the value of the Host header field. </p>
+</div>
+<h3><a name="13245">setHost</a></h3>
+<p class="decl">void setHost(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; host,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.html#11581" title="Poco::UInt16">Poco::UInt16</a> port<br />);</p>
+<div class="description">
+<p>Sets the value of the Host header field. </p>
+<p>If the given port number is a non-standard port number (other than 80 or 443), it is included in the Host header field. </p>
+</div>
+<h3><a name="13237">setMethod</a></h3>
+<p class="decl">void setMethod(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; method<br />);</p>
+<div class="description">
+<p>Sets the method. </p>
+</div>
+<h3><a name="13240">setURI</a></h3>
+<p class="decl">void setURI(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; uri<br />);</p>
+<div class="description">
+<p>Sets the request <a href="Poco.URI.html" title="class Poco::URI">URI</a>. </p>
+</div>
+<h3><a name="13260">write</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void write(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::ostream &amp; ostr<br />) const;</p>
+<div class="description">
+<p>Writes the HTTP request to the given output stream. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Net.MessageHeader.html#14378" title="Poco::Net::MessageHeader::write()">Poco::Net::MessageHeader::write()</a></p></div>
+<h2>Variables</h2>
+<h3><a name="13274">AUTHORIZATION</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const std::string <a href="Poco.Net.HTTPRequest.html#13274" title="Poco::Net::HTTPRequest::AUTHORIZATION">AUTHORIZATION</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="13273">COOKIE</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const std::string <a href="Poco.Net.HTTPRequest.html#13273" title="Poco::Net::HTTPRequest::COOKIE">COOKIE</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="13272">HOST</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const std::string <a href="Poco.Net.HTTPRequest.html#13272" title="Poco::Net::HTTPRequest::HOST">HOST</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="13271">HTTP_CONNECT</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const std::string <a href="Poco.Net.HTTPRequest.html#13271" title="Poco::Net::HTTPRequest::HTTP_CONNECT">HTTP_CONNECT</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="13269">HTTP_DELETE</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const std::string <a href="Poco.Net.HTTPRequest.html#13269" title="Poco::Net::HTTPRequest::HTTP_DELETE">HTTP_DELETE</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="13264">HTTP_GET</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const std::string <a href="Poco.Net.HTTPRequest.html#13264" title="Poco::Net::HTTPRequest::HTTP_GET">HTTP_GET</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="13265">HTTP_HEAD</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const std::string <a href="Poco.Net.HTTPRequest.html#13265" title="Poco::Net::HTTPRequest::HTTP_HEAD">HTTP_HEAD</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="13268">HTTP_OPTIONS</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const std::string <a href="Poco.Net.HTTPRequest.html#13268" title="Poco::Net::HTTPRequest::HTTP_OPTIONS">HTTP_OPTIONS</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="13267">HTTP_POST</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const std::string <a href="Poco.Net.HTTPRequest.html#13267" title="Poco::Net::HTTPRequest::HTTP_POST">HTTP_POST</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="13266">HTTP_PUT</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const std::string <a href="Poco.Net.HTTPRequest.html#13266" title="Poco::Net::HTTPRequest::HTTP_PUT">HTTP_PUT</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="13270">HTTP_TRACE</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const std::string <a href="Poco.Net.HTTPRequest.html#13270" title="Poco::Net::HTTPRequest::HTTP_TRACE">HTTP_TRACE</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

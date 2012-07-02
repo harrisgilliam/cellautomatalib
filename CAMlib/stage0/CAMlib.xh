@@ -1,0 +1,22 @@
+#ifndef _CAMlib_H_
+#define _CAMlib_H_
+
+#include <CAM/CAM.h>
+#include <CAM/CAM_err.h>
+#include <CAM/CAM_X.h>
+#include <CAM/CAM_pipecomm.h>
+#include <CAM/CAM_io.h>
+#include <CAM/CAM_mem.h>
+#include <CAM/CAM_proc.h>
+#include <CAM/CAM_TclTk.h>
+#include <CAM/CAM_tube.h>
+#include <CAM/CAM_objects.h>
+#include <CAM/CAM_instr.h>
+#include <CAM/CAM_buffers.h>
+#include <CAM/CAM_step.h>
+#include <CAM/CAM_dev.h>
+#include <CAM/CAM_space.h>
+#include <CAM/CAM_util.h>
+#include <CAM/CAM_init.h>
+
+#endif

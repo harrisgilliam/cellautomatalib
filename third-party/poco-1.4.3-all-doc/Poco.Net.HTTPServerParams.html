@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Net::HTTPServerParams</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Net.html" class="namespace">Poco::Net</a></h1>
+<h1 class="symbol">class HTTPServerParams</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Net<br />
+<b>Package:</b> HTTPServer<br />
+<b>Header:</b> Poco/Net/HTTPServerParams.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>This class is used to specify parameters to both the <a href="Poco.Net.HTTPServer.html" title="class Poco::Net::HTTPServer">HTTPServer</a>, as well as to <a href="Poco.Net.HTTPRequestHandler.html" title="class Poco::Net::HTTPRequestHandler">HTTPRequestHandler</a> objects. </p>
+<p>Subclasses may add new parameters to the class. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.Net.TCPServerParams.html" title="class Poco::Net::TCPServerParams">TCPServerParams</a></p>
+<p><b>All Base Classes: </b><a href="Poco.Net.TCPServerParams.html" title="class Poco::Net::TCPServerParams">TCPServerParams</a>, <a href="Poco.RefCountedObject.html" title="class Poco::RefCountedObject">Poco::RefCountedObject</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Net.HTTPServerParams.html#13486" title="Poco::Net::HTTPServerParams::getKeepAlive()">getKeepAlive</a>, <a href="Poco.Net.HTTPServerParams.html#13489" title="Poco::Net::HTTPServerParams::getKeepAliveTimeout()">getKeepAliveTimeout</a>, <a href="Poco.Net.HTTPServerParams.html#13492" title="Poco::Net::HTTPServerParams::getMaxKeepAliveRequests()">getMaxKeepAliveRequests</a>, <a href="Poco.Net.HTTPServerParams.html#13477" title="Poco::Net::HTTPServerParams::getServerName()">getServerName</a>, <a href="Poco.Net.HTTPServerParams.html#13480" title="Poco::Net::HTTPServerParams::getSoftwareVersion()">getSoftwareVersion</a>, <a href="Poco.Net.HTTPServerParams.html#13483" title="Poco::Net::HTTPServerParams::getTimeout()">getTimeout</a>, <a href="Poco.Net.HTTPServerParams.html#13484" title="Poco::Net::HTTPServerParams::setKeepAlive()">setKeepAlive</a>, <a href="Poco.Net.HTTPServerParams.html#13487" title="Poco::Net::HTTPServerParams::setKeepAliveTimeout()">setKeepAliveTimeout</a>, <a href="Poco.Net.HTTPServerParams.html#13490" title="Poco::Net::HTTPServerParams::setMaxKeepAliveRequests()">setMaxKeepAliveRequests</a>, <a href="Poco.Net.HTTPServerParams.html#13475" title="Poco::Net::HTTPServerParams::setServerName()">setServerName</a>, <a href="Poco.Net.HTTPServerParams.html#13478" title="Poco::Net::HTTPServerParams::setSoftwareVersion()">setSoftwareVersion</a>, <a href="Poco.Net.HTTPServerParams.html#13481" title="Poco::Net::HTTPServerParams::setTimeout()">setTimeout</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.RefCountedObject.html#9831" title="Poco::RefCountedObject::duplicate()">duplicate</a>, <a href="Poco.Net.TCPServerParams.html#16245" title="Poco::Net::TCPServerParams::getMaxQueued()">getMaxQueued</a>, <a href="Poco.Net.TCPServerParams.html#16248" title="Poco::Net::TCPServerParams::getMaxThreads()">getMaxThreads</a>, <a href="Poco.Net.TCPServerParams.html#16242" title="Poco::Net::TCPServerParams::getThreadIdleTime()">getThreadIdleTime</a>, <a href="Poco.Net.TCPServerParams.html#16251" title="Poco::Net::TCPServerParams::getThreadPriority()">getThreadPriority</a>, <a href="Poco.RefCountedObject.html#9833" title="Poco::RefCountedObject::referenceCount()">referenceCount</a>, <a href="Poco.RefCountedObject.html#9832" title="Poco::RefCountedObject::release()">release</a>, <a href="Poco.Net.TCPServerParams.html#16243" title="Poco::Net::TCPServerParams::setMaxQueued()">setMaxQueued</a>, <a href="Poco.Net.TCPServerParams.html#16246" title="Poco::Net::TCPServerParams::setMaxThreads()">setMaxThreads</a>, <a href="Poco.Net.TCPServerParams.html#16240" title="Poco::Net::TCPServerParams::setThreadIdleTime()">setThreadIdleTime</a>, <a href="Poco.Net.TCPServerParams.html#16249" title="Poco::Net::TCPServerParams::setThreadPriority()">setThreadPriority</a></p>
+<h2>Types</h2>
+<h3><a name="13473">Ptr</a></h3>
+<p class="decl">typedef <a href="Poco.AutoPtr.html" title="class Poco::AutoPtr">Poco::AutoPtr</a> &lt; <a href="Poco.Net.HTTPServerParams.html" title="class Poco::Net::HTTPServerParams">HTTPServerParams</a> &gt; <a href="Poco.Net.HTTPServerParams.html#13473" title="Poco::Net::HTTPServerParams::Ptr">Ptr</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Constructors</h2>
+<h3><a name="13474">HTTPServerParams</a></h3>
+<p class="decl"><a href="Poco.Net.HTTPServerParams.html" title="class Poco::Net::HTTPServerParams">HTTPServerParams</a>();</p>
+<div class="description">
+<p>Creates the <a href="Poco.Net.HTTPServerParams.html" title="class Poco::Net::HTTPServerParams">HTTPServerParams</a>. </p>
+<p>Sets the following default values: </p>
+<ul>
+<li>timeout:              60 seconds </li>
+<li>keepAlive:            true </li>
+<li>maxKeepAliveRequests: 0 </li>
+<li>keepAliveTimeout:     10 seconds </li>
+</ul>
+</div>
+<h2>Destructor</h2>
+<h3><a name="13493">~HTTPServerParams</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual ~<a href="Poco.Net.HTTPServerParams.html" title="class Poco::Net::HTTPServerParams">HTTPServerParams</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Net.HTTPServerParams.html" title="class Poco::Net::HTTPServerParams">HTTPServerParams</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="13486">getKeepAlive</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool getKeepAlive() const;</p>
+<div class="description">
+<p>Returns true if and only if persistent connections are enabled. </p>
+</div>
+<h3><a name="13489">getKeepAliveTimeout</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const <a href="Poco.Timespan.html" title="class Poco::Timespan">Poco::Timespan</a> &amp; getKeepAliveTimeout() const;</p>
+<div class="description">
+<p>Returns the connection timeout for HTTP connections. </p>
+</div>
+<h3><a name="13492">getMaxKeepAliveRequests</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">int getMaxKeepAliveRequests() const;</p>
+<div class="description">
+<p>Returns the maximum number of requests allowed during a persistent connection, or 0 if unlimited connections are allowed. </p>
+</div>
+<h3><a name="13477">getServerName</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const std::string &amp; getServerName() const;</p>
+<div class="description">
+<p>Returns the name and port (name:port) that the server uses to identify itself. </p>
+</div>
+<h3><a name="13480">getSoftwareVersion</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const std::string &amp; getSoftwareVersion() const;</p>
+<div class="description">
+<p>Returns the server software name and version that the server uses to identify itself. </p>
+</div>
+<h3><a name="13483">getTimeout</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const <a href="Poco.Timespan.html" title="class Poco::Timespan">Poco::Timespan</a> &amp; getTimeout() const;</p>
+<div class="description">
+<p>Returns the connection timeout for HTTP connections. </p>
+</div>
+<h3><a name="13484">setKeepAlive</a></h3>
+<p class="decl">void setKeepAlive(<br />&nbsp;&nbsp;&nbsp;&nbsp;bool keepAlive<br />);</p>
+<div class="description">
+<p>Enables (keepAlive == true) or disables (keepAlive == false) persistent connections. </p>
+</div>
+<h3><a name="13487">setKeepAliveTimeout</a></h3>
+<p class="decl">void setKeepAliveTimeout(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Timespan.html" title="class Poco::Timespan">Poco::Timespan</a> &amp; timeout<br />);</p>
+<div class="description">
+<p>Sets the connection timeout for HTTP connections. </p>
+</div>
+<h3><a name="13490">setMaxKeepAliveRequests</a></h3>
+<p class="decl">void setMaxKeepAliveRequests(<br />&nbsp;&nbsp;&nbsp;&nbsp;int maxKeepAliveRequests<br />);</p>
+<div class="description">
+<p>Specifies the maximun number of requests allowed during a persistent connection. 0 means unlimited connections. </p>
+</div>
+<h3><a name="13475">setServerName</a></h3>
+<p class="decl">void setServerName(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; serverName<br />);</p>
+<div class="description">
+<p>Sets the name and port (name:port) that the server uses to identify itself. </p>
+<p>If this is not set to valid <a href="Poco.Net.DNS.html" title="class Poco::Net::DNS">DNS</a> name for your host, server-generated redirections will not work. </p>
+</div>
+<h3><a name="13478">setSoftwareVersion</a></h3>
+<p class="decl">void setSoftwareVersion(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; softwareVersion<br />);</p>
+<div class="description">
+<p>Sets the server software name and version that the server uses to identify itself. If this is set to a non-empty string, the server will automatically include a Server header field with the value given here in every response it sends. </p>
+<p>The format of the softwareVersion string should be name/version (e.g. MyHTTPServer/1.0). </p>
+</div>
+<h3><a name="13481">setTimeout</a></h3>
+<p class="decl">void setTimeout(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Timespan.html" title="class Poco::Timespan">Poco::Timespan</a> &amp; timeout<br />);</p>
+<div class="description">
+<p>Sets the connection timeout for HTTP connections. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Data::Session</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Data.html" class="namespace">Poco::Data</a></h1>
+<h1 class="symbol">class Session</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Data<br />
+<b>Package:</b> DataCore<br />
+<b>Header:</b> Poco/Data/Session.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>A <a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a> holds a connection to a Database and creates <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> objects. </p>
+<p>Sessions are always created via the <a href="Poco.Data.SessionFactory.html" title="class Poco::Data::SessionFactory">SessionFactory</a>: </p>
+<p></p>
+<pre>Session ses(SessionFactory::instance().create(connectorKey, connectionString));
+</pre>
+<p>where the first param presents the type of session one wants to create (e.g., for <a href="Poco.Data.SQLite.html" title="namespace Poco::Data::SQLite">SQLite</a> one would choose &quot;<a href="Poco.Data.SQLite.html" title="namespace Poco::Data::SQLite">SQLite</a>&quot;, for <a href="Poco.Data.ODBC.html" title="namespace Poco::Data::ODBC">ODBC</a> the key is &quot;<a href="Poco.Data.ODBC.html" title="namespace Poco::Data::ODBC">ODBC</a>&quot;) and the second param is the connection string that the session implementation  requires to connect to the database. The format of the connection string is specific to the actual connector. </p>
+<p>A simpler form to create the session is to pass the connector key and connection string directly to the <a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a> constructor. </p>
+<p>A concrete example to open an <a href="Poco.Data.SQLite.html" title="namespace Poco::Data::SQLite">SQLite</a> database stored in the file &quot;dummy.db&quot; would be </p>
+<p></p>
+<pre>Session ses(&quot;SQLite&quot;, &quot;dummy.db&quot;);
+</pre>
+<p>Via a <a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a> one can create two different types of statements. First, statements that should only be executed once and immediately, and second, statements that should be executed multiple times, using a separate execute() call. The simple one is immediate execution: </p>
+<p></p>
+<pre>ses &lt;&lt; &quot;CREATE TABLE Dummy (data INTEGER(10))&quot;, now;
+</pre>
+<p>The now at the end of the statement is required, otherwise the statement would not be executed. </p>
+<p>If one wants to reuse a <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> (and avoid the overhead of repeatedly parsing an SQL statement) one uses an explicit <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> object and its execute() method: </p>
+<p></p>
+<pre>int i = 0;
+Statement stmt = (ses &lt;&lt; &quot;INSERT INTO Dummy VALUES(:data)&quot;, use(i));
+
+for (i = 0; i &lt; 100; ++i)
+{
+    stmt.execute();
+}
+</pre>
+<p>The above example assigns the variable i to the &quot;:data&quot; placeholder in the SQL query. The query is parsed and compiled exactly once, but executed 100 times. At the end the values 0 to 99 will be present in the Table &quot;DUMMY&quot;. </p>
+<p>A faster implementaton of the above code will simply create a vector of int and use the vector as parameter to the use clause (you could also use set or multiset instead): </p>
+<p></p>
+<pre>std::vector&lt;int&gt; data;
+for (int i = 0; i &lt; 100; ++i)
+{
+    data.push_back(i);
+}
+ses &lt;&lt; &quot;INSERT INTO Dummy VALUES(:data)&quot;, use(data);
+</pre>
+<p>NEVER try to bind to an empty collection. This will give a <a href="Poco.Data.BindingException.html" title="class Poco::Data::BindingException">BindingException</a> at run-time! </p>
+<p>Retrieving data from a database works similar, you could use simple data types, vectors, sets or multiset as your targets: </p>
+<p></p>
+<pre>std::set&lt;int&gt; retData;
+ses &lt;&lt; &quot;SELECT * FROM Dummy&quot;, into(retData));
+</pre>
+<p>Due to the blocking nature of the above call it is possible to partition the data retrieval into chunks by setting a limit to the maximum number of rows retrieved from the database: </p>
+<p></p>
+<pre>std::set&lt;int&gt; retData;
+Statement stmt = (ses &lt;&lt; &quot;SELECT * FROM Dummy&quot;, into(retData), limit(50));
+while (!stmt.done())
+{
+    stmt.execute();
+}
+</pre>
+<p>The &quot;into&quot; keyword is used to inform the statement where output results should be placed. The limit value ensures that during each run at most 50 rows are retrieved. Assuming Dummy contains 100 rows, retData will contain 50  elements after the first run and 100 after the second run, i.e. the collection is not cleared between consecutive runs. After the second execute stmt.done() will return true. </p>
+<p>A prepared <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> will behave exactly the same but a further call to execute() will simply reset the <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a>,  execute it again and append more data to the result set. </p>
+<p>Note that it is possible to append several &quot;bind&quot; or &quot;into&quot; clauses to the statement. Theoretically, one could also have several limit clauses but only the last one that was added will be effective.  Also several preconditions must be met concerning binds and intos. Take the following example: </p>
+<p></p>
+<pre>ses &lt;&lt; &quot;CREATE TABLE Person (LastName VARCHAR(30), FirstName VARCHAR, Age INTEGER(3))&quot;;
+std::vector&lt;std::string&gt; nameVec; // [...] add some elements
+std::vector&lt;int&gt; ageVec; // [...] add some elements
+ses &lt;&lt; &quot;INSERT INTO Person (LastName, Age) VALUES(:ln, :age)&quot;, use(nameVec), use(ageVec);
+</pre>
+<p>The size of all use parameters MUST be the same, otherwise an exception is thrown. Furthermore, the amount of use clauses must match the number of wildcards in the query (to be more precisely:  each binding has a numberOfColumnsHandled() value which is per default 1. The sum of all these values must match the wildcard count in the query. But this is only important if you have written your own <a href="Poco.Data.TypeHandler.html" title="class Poco::Data::TypeHandler">TypeHandler</a> specializations). If you plan to map complex object types to tables see the <a href="Poco.Data.TypeHandler.html" title="class Poco::Data::TypeHandler">TypeHandler</a> documentation. For now, we simply assume we have written one <a href="Poco.Data.TypeHandler.html" title="class Poco::Data::TypeHandler">TypeHandler</a> for Person objects. Instead of having n different vectors, we have one collection: </p>
+<p></p>
+<pre>std::vector&lt;Person&gt; people; // [...] add some elements
+ses &lt;&lt; &quot;INSERT INTO Person (LastName, FirstName, Age) VALUES(:ln, :fn, :age)&quot;, use(people);
+</pre>
+<p>which will insert all Person objects from the people vector to the database (and again, you can use set, multiset too, even map and multimap if Person provides an operator() which returns the key for the map). The same works for a SELECT statement with &quot;into&quot; clauses: </p>
+<p></p>
+<pre>std::vector&lt;Person&gt; people;
+ses &lt;&lt; &quot;SELECT * FROM PERSON&quot;, into(people);
+</pre>
+</div>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Data.Session.html#2973" title="Poco::Data::Session::begin()">begin</a>, <a href="Poco.Data.Session.html#2976" title="Poco::Data::Session::close()">close</a>, <a href="Poco.Data.Session.html#2974" title="Poco::Data::Session::commit()">commit</a>, <a href="Poco.Data.Session.html#2972" title="Poco::Data::Session::createStatementImpl()">createStatementImpl</a>, <a href="Poco.Data.Session.html#2982" title="Poco::Data::Session::getFeature()">getFeature</a>, <a href="Poco.Data.Session.html#2987" title="Poco::Data::Session::getProperty()">getProperty</a>, <a href="Poco.Data.Session.html#2989" title="Poco::Data::Session::impl()">impl</a>, <a href="Poco.Data.Session.html#2977" title="Poco::Data::Session::isConnected()">isConnected</a>, <a href="Poco.Data.Session.html#2978" title="Poco::Data::Session::isTransaction()">isTransaction</a>, <a href="Poco.Data.Session.html#2970" title="Poco::Data::Session::operator <<()">operator&nbsp;&lt;&lt;</a>, <a href="Poco.Data.Session.html#2965" title="Poco::Data::Session::operator =()">operator&nbsp;=</a>, <a href="Poco.Data.Session.html#2975" title="Poco::Data::Session::rollback()">rollback</a>, <a href="Poco.Data.Session.html#2979" title="Poco::Data::Session::setFeature()">setFeature</a>, <a href="Poco.Data.Session.html#2984" title="Poco::Data::Session::setProperty()">setProperty</a>, <a href="Poco.Data.Session.html#2968" title="Poco::Data::Session::swap()">swap</a></p>
+<h2>Constructors</h2>
+<h3><a name="2958">Session</a></h3>
+<p class="decl"><a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.AutoPtr.html" title="class Poco::AutoPtr">Poco::AutoPtr</a> &lt; <a href="Poco.Data.SessionImpl.html" title="class Poco::Data::SessionImpl">SessionImpl</a> &gt; ptrImpl<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a>. </p>
+</div>
+<h3><a name="2963">Session</a></h3>
+<p class="decl"><a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a> &amp; param33<br />);</p>
+<div class="description">
+<p>Creates a session by copying another one. </p>
+</div>
+<h3><a name="2960">Session</a></h3>
+<p class="decl"><a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; connector,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; connectionString<br />);</p>
+<div class="description">
+<p>Creates a new session, using the given connector (which must have been registered), and connectionString. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="2967">~Session</a></h3>
+<p class="decl">~<a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="2973">begin</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void begin();</p>
+<div class="description">
+<p>Starts a transaction. </p>
+</div>
+<h3><a name="2976">close</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void close();</p>
+<div class="description">
+<p>Closes the session. </p>
+</div>
+<h3><a name="2974">commit</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void commit();</p>
+<div class="description">
+<p>Commits and ends a transaction. </p>
+</div>
+<h3><a name="2972">createStatementImpl</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Data.StatementImpl.html" title="class Poco::Data::StatementImpl">StatementImpl</a> * createStatementImpl();</p>
+<div class="description">
+<p>Creates a <a href="Poco.Data.StatementImpl.html" title="class Poco::Data::StatementImpl">StatementImpl</a>. </p>
+</div>
+<h3><a name="2982">getFeature</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool getFeature(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name<br />) const;</p>
+<div class="description">
+<p>Look up the state of a feature. </p>
+<p>Features are a generic extension mechanism for session implementations. and are defined by the underlying <a href="Poco.Data.SessionImpl.html" title="class Poco::Data::SessionImpl">SessionImpl</a> instance. </p>
+<p>Throws a <a href="Poco.Data.NotSupportedException.html" title="class Poco::Data::NotSupportedException">NotSupportedException</a> if the requested feature is not supported by the underlying implementation. </p>
+</div>
+<h3><a name="2987">getProperty</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Any.html" title="class Poco::Any">Poco::Any</a> getProperty(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name<br />) const;</p>
+<div class="description">
+<p>Look up the value of a property. </p>
+<p>Properties are a generic extension mechanism for session implementations. and are defined by the underlying <a href="Poco.Data.SessionImpl.html" title="class Poco::Data::SessionImpl">SessionImpl</a> instance. </p>
+<p>Throws a <a href="Poco.Data.NotSupportedException.html" title="class Poco::Data::NotSupportedException">NotSupportedException</a> if the requested property is not supported by the underlying implementation. </p>
+</div>
+<h3><a name="2989">impl</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Data.SessionImpl.html" title="class Poco::Data::SessionImpl">SessionImpl</a> * impl();</p>
+<div class="description">
+<p>Returns a pointer to the underlying <a href="Poco.Data.SessionImpl.html" title="class Poco::Data::SessionImpl">SessionImpl</a>. </p>
+</div>
+<h3><a name="2977">isConnected</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool isConnected();</p>
+<div class="description">
+<p>Returns true if and only if session is connected, false otherwise. </p>
+</div>
+<h3><a name="2978">isTransaction</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool isTransaction();</p>
+<div class="description">
+<p>Returns true if and only if a transaction is in progress, false otherwise. </p>
+</div>
+<h3><a name="2970">operator &lt;&lt;</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">template &lt; typename T &gt; <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> operator &lt;&lt; (<br />&nbsp;&nbsp;&nbsp;&nbsp;const T &amp; t<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> with the given data as SQLContent </p>
+</div>
+<h3><a name="2965">operator =</a></h3>
+<p class="decl"><a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a> &amp; operator = (<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a> &amp; param34<br />);</p>
+<div class="description">
+<p>Assignement operator. </p>
+</div>
+<h3><a name="2975">rollback</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void rollback();</p>
+<div class="description">
+<p>Rolls back and ends a transaction. </p>
+</div>
+<h3><a name="2979">setFeature</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void setFeature(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name,<br />&nbsp;&nbsp;&nbsp;&nbsp;bool state<br />);</p>
+<div class="description">
+<p>Set the state of a feature. </p>
+<p>Features are a generic extension mechanism for session implementations. and are defined by the underlying <a href="Poco.Data.SessionImpl.html" title="class Poco::Data::SessionImpl">SessionImpl</a> instance. </p>
+<p>Throws a <a href="Poco.Data.NotSupportedException.html" title="class Poco::Data::NotSupportedException">NotSupportedException</a> if the requested feature is not supported by the underlying implementation. </p>
+</div>
+<h3><a name="2984">setProperty</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void setProperty(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name,<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Any.html" title="class Poco::Any">Poco::Any</a> &amp; value<br />);</p>
+<div class="description">
+<p>Set the value of a property. </p>
+<p>Properties are a generic extension mechanism for session implementations. and are defined by the underlying <a href="Poco.Data.SessionImpl.html" title="class Poco::Data::SessionImpl">SessionImpl</a> instance. </p>
+<p>Throws a <a href="Poco.Data.NotSupportedException.html" title="class Poco::Data::NotSupportedException">NotSupportedException</a> if the requested property is not supported by the underlying implementation. </p>
+</div>
+<h3><a name="2968">swap</a></h3>
+<p class="decl">void swap(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a> &amp; other<br />);</p>
+<div class="description">
+<p>Swaps the session with another one. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

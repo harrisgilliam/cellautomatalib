@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Data::StatementImpl</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Data.html" class="namespace">Poco::Data</a></h1>
+<h1 class="symbol">class StatementImpl</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Data<br />
+<b>Package:</b> DataCore<br />
+<b>Header:</b> Poco/Data/StatementImpl.h</p>
+<h2>Description</h2>
+<div class="description">
+<p><a href="Poco.Data.StatementImpl.html" title="class Poco::Data::StatementImpl">StatementImpl</a> interface that subclasses must implement to define database dependent query execution. </p>
+<p><a href="Poco.Data.StatementImpl.html" title="class Poco::Data::StatementImpl">StatementImpl</a>'s are noncopyable. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.RefCountedObject.html" title="class Poco::RefCountedObject">Poco::RefCountedObject</a></p>
+<p><b>All Base Classes: </b><a href="Poco.RefCountedObject.html" title="class Poco::RefCountedObject">Poco::RefCountedObject</a></p>
+<p><b>Known Derived Classes: </b><a href="Poco.Data.MySQL.MySQLStatementImpl.html" title="class Poco::Data::MySQL::MySQLStatementImpl">Poco::Data::MySQL::MySQLStatementImpl</a>, <a href="Poco.Data.ODBC.ODBCStatementImpl.html" title="class Poco::Data::ODBC::ODBCStatementImpl">Poco::Data::ODBC::ODBCStatementImpl</a>, <a href="Poco.Data.SQLite.SQLiteStatementImpl.html" title="class Poco::Data::SQLite::SQLiteStatementImpl">Poco::Data::SQLite::SQLiteStatementImpl</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Data.StatementImpl.html#3143" title="Poco::Data::StatementImpl::add()">add</a>, <a href="Poco.Data.StatementImpl.html#3145" title="Poco::Data::StatementImpl::addBinding()">addBinding</a>, <a href="Poco.Data.StatementImpl.html#3147" title="Poco::Data::StatementImpl::addExtract()">addExtract</a>, <a href="Poco.Data.StatementImpl.html#3164" title="Poco::Data::StatementImpl::bindImpl()">bindImpl</a>, <a href="Poco.Data.StatementImpl.html#3167" title="Poco::Data::StatementImpl::binder()">binder</a>, <a href="Poco.Data.StatementImpl.html#3169" title="Poco::Data::StatementImpl::bindings()">bindings</a>, <a href="Poco.Data.StatementImpl.html#3162" title="Poco::Data::StatementImpl::canBind()">canBind</a>, <a href="Poco.Data.StatementImpl.html#3168" title="Poco::Data::StatementImpl::columnsExtracted()">columnsExtracted</a>, <a href="Poco.Data.StatementImpl.html#3155" title="Poco::Data::StatementImpl::columnsReturned()">columnsReturned</a>, <a href="Poco.Data.StatementImpl.html#3163" title="Poco::Data::StatementImpl::compileImpl()">compileImpl</a>, <a href="Poco.Data.StatementImpl.html#3152" title="Poco::Data::StatementImpl::execute()">execute</a>, <a href="Poco.Data.StatementImpl.html#3166" title="Poco::Data::StatementImpl::extractions()">extractions</a>, <a href="Poco.Data.StatementImpl.html#3165" title="Poco::Data::StatementImpl::extractor()">extractor</a>, <a href="Poco.Data.StatementImpl.html#3154" title="Poco::Data::StatementImpl::getState()">getState</a>, <a href="Poco.Data.StatementImpl.html#3160" title="Poco::Data::StatementImpl::hasNext()">hasNext</a>, <a href="Poco.Data.StatementImpl.html#3172" title="Poco::Data::StatementImpl::makeExtractors()">makeExtractors</a>, <a href="Poco.Data.StatementImpl.html#3156" title="Poco::Data::StatementImpl::metaColumn()">metaColumn</a>, <a href="Poco.Data.StatementImpl.html#3161" title="Poco::Data::StatementImpl::next()">next</a>, <a href="Poco.Data.StatementImpl.html#3153" title="Poco::Data::StatementImpl::reset()">reset</a>, <a href="Poco.Data.StatementImpl.html#3149" title="Poco::Data::StatementImpl::setExtractionLimit()">setExtractionLimit</a>, <a href="Poco.Data.StatementImpl.html#3151" title="Poco::Data::StatementImpl::toString()">toString</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.RefCountedObject.html#9831" title="Poco::RefCountedObject::duplicate()">duplicate</a>, <a href="Poco.RefCountedObject.html#9833" title="Poco::RefCountedObject::referenceCount()">referenceCount</a>, <a href="Poco.RefCountedObject.html#9832" title="Poco::RefCountedObject::release()">release</a></p>
+<h2>Enumerations</h2>
+<h3><a name="3135">State</a></h3>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="3136">ST_INITIALIZED</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="3137">ST_COMPILED</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="3138">ST_BOUND</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="3139">ST_DONE</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="3140">ST_RESET</a></p>
+<div class="description">
+<p></p>
+</div>
+<h2>Constructors</h2>
+<h3><a name="3141">StatementImpl</a></h3>
+<p class="decl"><a href="Poco.Data.StatementImpl.html" title="class Poco::Data::StatementImpl">StatementImpl</a>();</p>
+<div class="description">
+<p>Creates the <a href="Poco.Data.StatementImpl.html" title="class Poco::Data::StatementImpl">StatementImpl</a>. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="3142">~StatementImpl</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual ~<a href="Poco.Data.StatementImpl.html" title="class Poco::Data::StatementImpl">StatementImpl</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Data.StatementImpl.html" title="class Poco::Data::StatementImpl">StatementImpl</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="3143">add</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">template &lt; typename T &gt; void add(<br />&nbsp;&nbsp;&nbsp;&nbsp;const T &amp; t<br />);</p>
+<div class="description">
+<p>Appends SQl statement (fragments). </p>
+</div>
+<h3><a name="3145">addBinding</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void addBinding(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Data.AbstractBinding.html" title="class Poco::Data::AbstractBinding">AbstractBinding</a> * info<br />);</p>
+<div class="description">
+<p>Registers the <a href="Poco.Data.Binding.html" title="class Poco::Data::Binding">Binding</a> at the <a href="Poco.Data.StatementImpl.html" title="class Poco::Data::StatementImpl">StatementImpl</a>. </p>
+</div>
+<h3><a name="3147">addExtract</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void addExtract(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Data.AbstractExtraction.html" title="class Poco::Data::AbstractExtraction">AbstractExtraction</a> * info<br />);</p>
+<div class="description">
+<p>Registers objects used for extracting data at the <a href="Poco.Data.StatementImpl.html" title="class Poco::Data::StatementImpl">StatementImpl</a>. </p>
+</div>
+<h3><a name="3152">execute</a></h3>
+<p class="decl"><a href="Poco.html#11583" title="Poco::UInt32">Poco::UInt32</a> execute();</p>
+<div class="description">
+<p>Executes a statement. Returns the number of rows extracted. </p>
+</div>
+<h3><a name="3154">getState</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Data.StatementImpl.html#3135" title="enum  Poco::Data::StatementImpl::State">State</a> getState() const;</p>
+<div class="description">
+<p>Returns the state of the <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a>. </p>
+</div>
+<h3><a name="3153">reset</a></h3>
+<p class="decl">void reset();</p>
+<div class="description">
+<p>Resets the statement, so that we can reuse all bindings and re-execute again. </p>
+</div>
+<h3><a name="3149">setExtractionLimit</a></h3>
+<p class="decl">void setExtractionLimit(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Data.Limit.html" title="class Poco::Data::Limit">Limit</a> &amp; extrLimit<br />);</p>
+<div class="description">
+<p>Changes the extractionLimit to extrLimit. Per default no limit (EXTRACT_UNLIMITED) is set. </p>
+</div>
+<h3><a name="3151">toString</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">std::string toString() const;</p>
+<div class="description">
+<p>Create a string version of the SQL statement. </p>
+</div>
+<h3><a name="3164">bindImpl</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual void bindImpl() = 0;</p>
+<div class="description">
+<p>Binds parameters. </p>
+</div>
+<h3><a name="3167">binder</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual <a href="Poco.Data.AbstractBinder.html" title="class Poco::Data::AbstractBinder">AbstractBinder</a> &amp; binder() = 0;</p>
+<div class="description">
+<p>Returns the concrete binder used by the statement. </p>
+</div>
+<h3><a name="3169">bindings</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const <a href="Poco.Data.html#2189" title="Poco::Data::AbstractBindingVec">AbstractBindingVec</a> &amp; bindings() const;</p>
+<div class="description">
+<p>Returns the bindings. </p>
+</div>
+<h3><a name="3170">bindings</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Data.html#2189" title="Poco::Data::AbstractBindingVec">AbstractBindingVec</a> &amp; bindings();</p>
+<div class="description">
+<p>Returns the bindings. </p>
+</div>
+<h3><a name="3162">canBind</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual bool canBind() const = 0;</p>
+<div class="description">
+<p>Returns if another bind is possible. </p>
+</div>
+<h3><a name="3168">columnsExtracted</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">int columnsExtracted() const;</p>
+<div class="description">
+<p>Returns the number of columns that the extractors handle. </p>
+</div>
+<h3><a name="3155">columnsReturned</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual <a href="Poco.html#11583" title="Poco::UInt32">Poco::UInt32</a> columnsReturned() const = 0;</p>
+<div class="description">
+<p>Returns number of columns returned by query.  </p>
+</div>
+<h3><a name="3163">compileImpl</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual void compileImpl() = 0;</p>
+<div class="description">
+<p>Compiles the statement, doesn't bind yet. </p>
+</div>
+<h3><a name="3166">extractions</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const <a href="Poco.Data.html#2212" title="Poco::Data::AbstractExtractionVec">AbstractExtractionVec</a> &amp; extractions() const;</p>
+<div class="description">
+<p>Returns the extractions vector. </p>
+</div>
+<h3><a name="3171">extractions</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Data.html#2212" title="Poco::Data::AbstractExtractionVec">AbstractExtractionVec</a> &amp; extractions();</p>
+<div class="description">
+<p>Returns the extractions vector. </p>
+</div>
+<h3><a name="3165">extractor</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual <a href="Poco.Data.AbstractExtractor.html" title="class Poco::Data::AbstractExtractor">AbstractExtractor</a> &amp; extractor() = 0;</p>
+<div class="description">
+<p>Returns the concrete extractor used by the statement. </p>
+</div>
+<h3><a name="3160">hasNext</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual bool hasNext() = 0;</p>
+<div class="description">
+<p>Returns true if a call to <a href="Poco.Data.StatementImpl.html#3161" title="Poco::Data::StatementImpl::next()">next</a>() will return data.  </p>
+<p>Note that the implementation must support several consecutive calls to hasNext without data getting lost,  ie. <a href="Poco.Data.StatementImpl.html#3160" title="Poco::Data::StatementImpl::hasNext()">hasNext</a>(); <a href="Poco.Data.StatementImpl.html#3160" title="Poco::Data::StatementImpl::hasNext()">hasNext</a>(); <a href="Poco.Data.StatementImpl.html#3161" title="Poco::Data::StatementImpl::next()">next</a>() must be equal to <a href="Poco.Data.StatementImpl.html#3160" title="Poco::Data::StatementImpl::hasNext()">hasNext</a>(); <a href="Poco.Data.StatementImpl.html#3161" title="Poco::Data::StatementImpl::next()">next</a>(); </p>
+</div>
+<h3><a name="3172">makeExtractors</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void makeExtractors(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.html#11583" title="Poco::UInt32">Poco::UInt32</a> count<br />);</p>
+<div class="description">
+<p>Creates extraction vector. Used in case when there is data returned, but no extraction supplied externally. </p>
+</div>
+<h3><a name="3156">metaColumn</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual const <a href="Poco.Data.MetaColumn.html" title="class Poco::Data::MetaColumn">MetaColumn</a> &amp; metaColumn(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.html#11583" title="Poco::UInt32">Poco::UInt32</a> pos<br />) const = 0;</p>
+<div class="description">
+<p>Returns column meta data. </p>
+</div>
+<h3><a name="3158">metaColumn</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const <a href="Poco.Data.MetaColumn.html" title="class Poco::Data::MetaColumn">MetaColumn</a> &amp; metaColumn(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name<br />) const;</p>
+<div class="description">
+<p>Returns column meta data. </p>
+</div>
+<h3><a name="3161">next</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual void next() = 0;</p>
+<div class="description">
+<p>Retrieves the next row from the resultset. </p>
+<p>Will throw, if the resultset is empty. Expects the statement to be compiled and bound </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

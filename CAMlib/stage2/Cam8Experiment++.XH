@@ -1,0 +1,177 @@
+#ifndef _CAM8EXPERIMENT_H
+#define _CAM8EXPERIMENT_H
+
+#include <CaLib++.H>
+
+#include <Cam8++.H>
+
+extern "C" {
+#include <sys/types.h>
+}
+
+
+/*****************************************************************************/
+/********************************* DEFINES ***********************************/
+/*****************************************************************************/
+
+
+
+/*****************************************************************************/
+/******************************** TEMPLATES **********************************/
+/*****************************************************************************/
+
+
+
+/*****************************************************************************/
+/*************************** CLASSES & TYPEDEFS ******************************/
+/*****************************************************************************/
+
+class Cam8Experiment {
+public:
+	Cam8Experiment(CAM8);
+	virtual ~Cam8Experiment(void);
+
+	DECL_BZERO(Cam8Experiment);
+
+	void new_experiment(void);
+	void step(void);
+	void step(Cam8Steplist &);
+	void stop(void);
+	void step_stop(void);
+	void step_stop(Cam8Steplist &);
+	void schedule_list(void);
+	void schedule_list(Cam8Steplist &);
+
+protected:
+	CAM8 c8;
+	Cam8Steplist sl;
+	u_int32_t last_ints;
+	u_int32_t SBus_clock;
+	u_int32_t h_total;
+	u_int32_t v_total;
+	const u_int8_t * bt858_data;
+	bool camint_was_seen;
+	bool timeout_was_seen;
+	bool timeout_is_allowed;
+	bool camint_is_allowed;
+
+	void newx(void);
+	void new_machine(void);
+	int32_t process_dimensions(int, u_int32_t [], int32_t [], u_int16_t [], u_int16_t [], int32_t *);
+	void init_topology(void);
+	void y_strip_topology(void);
+	void disjoint_topology(void);
+	void mesh_topology(void);
+	void init_speed(void);
+	void set_scan(u_int32_t h, u_int32_t v);
+	void reset_ifc(void);
+	void schedule_stop(void);
+	void clear_exception(void);
+	void wait_for_nlp(void);
+	int32_t handle_ints(void);
+	void handle_soft_int(void);
+	void print_ints(void);
+	void print_machine(void);
+
+	inline u_int32_t subsectors_per_sector(void);
+	inline u_int32_t cut_per_sector(u_int32_t d);
+	inline void zero_sector(void);
+	inline void zero_subsector(void);
+	inline void allow_timeout(void);
+	inline void allow_camint(void);
+	inline bool soft_int(void);
+	inline bool cam_int(void);
+	inline bool sbus_int(void);
+	inline bool timeout_int(void);
+	inline bool newlist_int(void);
+
+private:
+
+	static const u_int8_t bt858_data20[];
+	static const u_int8_t bt858_data21[];
+	static const u_int8_t bt858_data25[];
+};
+typedef Cam8Experiment *CAM8EXPERIMENT;
+
+
+/*****************************************************************************/
+/********************************* INLINES ***********************************/
+/*****************************************************************************/
+inline u_int32_t Cam8Experiment::subsectors_per_sector(void)
+{
+	return(c8->sector.num_cells / c8->subsector.num_cells);
+}
+
+inline u_int32_t Cam8Experiment::cut_per_sector(u_int32_t d)
+{
+	u_int32_t q;
+
+	q = c8->sector.len[d] != 0 ? c8->sector.pos[d] - 1 : 0;
+
+	return(31 & (c8->sector.len[d] + q));
+
+	//    q = 31 & (sector.len[d] + (LEN(c8, sector)[d]));
+	//    return(q != 0 ? POS(c8, sector)[d] - 1 : 0);
+	// CAMerr.Die("CUT__SECTOR not implemented yet\n");
+}
+
+inline void Cam8Experiment::zero_sector(void)
+{
+	memset((void *) &(c8->sector), (char) 0, sizeof(Spcst));
+}
+
+inline void Cam8Experiment::zero_subsector(void)
+{
+	memset((void *) &(c8->subsector), (char) 0, sizeof(Spcst));
+}
+
+inline void Cam8Experiment::allow_timeout(void)
+{
+	timeout_is_allowed = true;
+	timeout_was_seen = false;
+}
+
+inline void Cam8Experiment::allow_camint(void)
+{
+	camint_is_allowed = true;
+	camint_was_seen = false;
+}
+
+inline bool Cam8Experiment::soft_int(void)
+{
+	return (count_ones(0x101L & last_ints) == 2);
+}
+
+inline bool Cam8Experiment::cam_int(void)
+{
+	return (count_ones((0x101L << 1) & last_ints) == 2);
+}
+
+inline bool Cam8Experiment::sbus_int(void)
+{
+	return (count_ones((0x101L << 2) & last_ints) == 2);
+}
+
+inline bool Cam8Experiment::timeout_int(void)
+{
+	return (count_ones((0x101L << 3) & last_ints) == 2);
+}
+
+inline bool Cam8Experiment::newlist_int(void)
+{
+	return (count_ones((0x101L << 4) & last_ints) == 2);
+}
+
+
+
+/*****************************************************************************/
+/******************************* PROTOTYPES **********************************/
+/*****************************************************************************/
+
+
+
+/*****************************************************************************/
+/********************************* GLOBALS ***********************************/
+/*****************************************************************************/
+
+#endif

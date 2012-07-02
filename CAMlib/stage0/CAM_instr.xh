@@ -1,0 +1,247 @@
+#ifndef _CAM_instr_h_
+#define _CAM_instr_h_
+
+
+#include <CAM/CAM_mem.h>
+#include <CAM/CAM_objects.h>
+
+
+/*****************************************************************************/
+/****************************** DEFINES **************************************/
+/*****************************************************************************/
+#define INSTR_PREFIX	0x7E000000
+#define DO_PREFIX(v)	(INSTR_PREFIX|((v) & 0x01FFFFFF))
+#define RFINDEX(n)	((n) & ~(INSTR_PREFIX))
+#define REG_MSR		DO_PREFIX(0)
+#define REG_RMR		DO_PREFIX(1)
+#define REG_KR		DO_PREFIX(2)
+#define REG_SABSR	DO_PREFIX(3)
+#define REG_LASR	DO_PREFIX(4)
+#define REG_FOSR	DO_PREFIX(5)
+#define REG_SDSR	DO_PREFIX(6)
+#define REG_ECSR	DO_PREFIX(7)
+#define REG_DSR		DO_PREFIX(8)
+#define REG_SSR		DO_PREFIX(9)
+#define REG_ECR		DO_PREFIX(10)
+#define REG_LIR		DO_PREFIX(11)
+#define REG_LIPR	DO_PREFIX(12)
+#define REG_LIOR	DO_PREFIX(13)
+#define REG_SIR		DO_PREFIX(14)
+#define REG_SIPR	DO_PREFIX(15)
+#define REG_SIOR	DO_PREFIX(16)
+#define REG_SFR		DO_PREFIX(17)
+#define REG_OSR		DO_PREFIX(18)
+#define REG_DR		DO_PREFIX(19)
+#define REG_HER		DO_PREFIX(20)
+#define REG_MPCR	DO_PREFIX(21)
+#define REG_GPCR	DO_PREFIX(22)
+#define REG_MIDR	DO_PREFIX(23)
+#define REG_GIDR	DO_PREFIX(24)
+#define REG_IER		DO_PREFIX(25)
+#define REG_IFR		DO_PREFIX(26)
+#define REG_VWR		DO_PREFIX(27)
+#define REG_DOCR	DO_PREFIX(28)
+#define FLD_GMS		DO_PREFIX((REG_MSR+1*32))
+#define FLD_TA		DO_PREFIX((REG_MSR+2*32))
+#define FLD_SSM		DO_PREFIX((REG_RMR+1*32))
+#define FLD_RT		DO_PREFIX((REG_RMR+2*32))
+#define FLD_ECT		DO_PREFIX((REG_RMR+3*32))
+#define FLD_RPK		DO_PREFIX((REG_RMR+4*32))
+#define FLD_ALT		DO_PREFIX((REG_RMR+5*32))
+#define FLD_KA		DO_PREFIX((REG_KR+1*32))
+#define FLD_XKS		DO_PREFIX((REG_KR+2*32))
+#define FLD_YKS		DO_PREFIX((REG_KR+3*32))
+#define FLD_ZKS		DO_PREFIX((REG_KR+4*32))
+#define FLD_XKMF	DO_PREFIX((REG_KR+5*32))
+#define FLD_YKMF	DO_PREFIX((REG_KR+6*32))
+#define FLD_ZKMF	DO_PREFIX((REG_KR+7*32))
+#define FLD_LAS		DO_PREFIX((REG_LASR+1*32))
+#define FLD_LAM		DO_PREFIX((REG_LASR+2*32))
+#define FLD_FOS		DO_PREFIX((REG_FOSR+1*32))
+#define FLD_FOM		DO_PREFIX((REG_FOSR+2*32))
+#define FLD_SDS		DO_PREFIX((REG_SDSR+1*32))
+#define FLD_SDM		DO_PREFIX((REG_SDSR+2*32))
+#define FLD_ECS		DO_PREFIX((REG_ECSR+1*32))
+#define FLD_ECM		DO_PREFIX((REG_ECSR+2*32))
+#define FLD_DDS		DO_PREFIX((REG_DSR+1*32))
+#define FLD_DDM		DO_PREFIX((REG_DSR+2*32))
+#define FLD_SSA(i)	DO_PREFIX((REG_SIPR+(i+1)*32))
+#define FLD_SSA0	DO_PREFIX((REG_SIPR+1*32))
+#define FLD_SSA1	DO_PREFIX((REG_SIPR+2*32))
+#define FLD_SSA2	DO_PREFIX((REG_SIPR+3*32))
+#define FLD_SSA3	DO_PREFIX((REG_SIPR+4*32))
+#define FLD_SSA4	DO_PREFIX((REG_SIPR+5*32))
+#define FLD_SSA5	DO_PREFIX((REG_SIPR+6*32))
+#define FLD_SSA6	DO_PREFIX((REG_SIPR+7*32))
+#define FLD_SSA7	DO_PREFIX((REG_SIPR+8*32))
+#define FLD_SSA8	DO_PREFIX((REG_SIPR+9*32))
+#define FLD_SSA9	DO_PREFIX((REG_SIPR+10*32))
+#define FLD_SSA10	DO_PREFIX((REG_SIPR+11*32))
+#define FLD_SSA11	DO_PREFIX((REG_SIPR+12*32))
+#define FLD_SSA12	DO_PREFIX((REG_SIPR+13*32))
+#define FLD_SSA13	DO_PREFIX((REG_SIPR+14*32))
+#define FLD_SSA14	DO_PREFIX((REG_SIPR+15*32))
+#define FLD_SSA15	DO_PREFIX((REG_SIPR+16*32))
+#define FLD_SSA16	DO_PREFIX((REG_SIPR+17*32))
+#define FLD_SSA17	DO_PREFIX((REG_SIPR+18*32))
+#define FLD_SSA18	DO_PREFIX((REG_SIPR+19*32))
+#define FLD_SSA19	DO_PREFIX((REG_SIPR+20*32))
+#define FLD_SSA20	DO_PREFIX((REG_SIPR+21*32))
+#define FLD_SSA21	DO_PREFIX((REG_SIPR+22*32))
+#define FLD_SSA22	DO_PREFIX((REG_SIPR+23*32))
+#define FLD_SSA23	DO_PREFIX((REG_SIPR+24*32))
+#define FLD_SM		DO_PREFIX((REG_SFR+1*32))
+#define FLD_ESC		DO_PREFIX((REG_SFR+2*32))
+#define FLD_ESW		DO_PREFIX((REG_SFR+3*32))
+#define FLD_EST		DO_PREFIX((REG_SFR+4*32))
+#define FLD_SBRC	DO_PREFIX((REG_SFR+5*32))
+#define FLD_RCL		DO_PREFIX((REG_SFR+6*32))
+#define FLD_ECL		DO_PREFIX((REG_SFR+7*32))
+#define FLD_STM		DO_PREFIX((REG_SFR+8*32))
+#define FLD_DCM		DO_PREFIX((REG_DR+1*32))
+#define FLD_XDCP	DO_PREFIX((REG_DR+2*32))
+#define FLD_YDCP	DO_PREFIX((REG_DR+3*32))
+#define FLD_ZDCP	DO_PREFIX((REG_DR+4*32))
+#define FLD_LPL		DO_PREFIX((REG_HER+1*32))
+#define FLD_FPL		DO_PREFIX((REG_HER+2*32))
+#define FLD_DCS		DO_PREFIX((REG_HER+3*32))
+#define FLD_TBD		DO_PREFIX((REG_HER+4*32))
+#define FLD_TMS		DO_PREFIX((REG_HER+5*32))
+#define FLD_NBF		DO_PREFIX((REG_HER+6*32))
+#define FLD_SRE		DO_PREFIX((REG_HER+7*32))
+#define FLD_ALS		DO_PREFIX((REG_HER+8*32))
+#define FLD_MAFS	DO_PREFIX((REG_MPCR+1*32))
+#define FLD_MBFS	DO_PREFIX((REG_MPCR+2*32))
+#define FLD_XMPC	DO_PREFIX((REG_GPCR+1*32))
+#define FLD_XPPC	DO_PREFIX((REG_GPCR+2*32))
+#define FLD_YMPC	DO_PREFIX((REG_GPCR+3*32))
+#define FLD_YPPC	DO_PREFIX((REG_GPCR+4*32))
+#define FLD_ZMPC	DO_PREFIX((REG_GPCR+5*32))
+#define FLD_ZPPC	DO_PREFIX((REG_GPCR+6*32))
+#define FLD_BPIE	DO_PREFIX((REG_IER+1*32))
+#define FLD_BCIE	DO_PREFIX((REG_IER+2*32))
+#define FLD_GCIE	DO_PREFIX((REG_IER+3*32))
+#define FLD_MAIE	DO_PREFIX((REG_IER+4*32))
+#define FLD_MBIE	DO_PREFIX((REG_IER+5*32))
+#define FLD_SSIE	DO_PREFIX((REG_IER+6*32))
+#define FLD_XHIE	DO_PREFIX((REG_IER+7*32))
+#define FLD_RLIE	DO_PREFIX((REG_IER+8*32))
+#define FLD_URIE	DO_PREFIX((REG_IER+9*32))
+#define FLD_ISIE	DO_PREFIX((REG_IER+10*32))
+#define FLD_BPIF	DO_PREFIX((REG_IFR+1*32))
+#define FLD_BCIF	DO_PREFIX((REG_IFR+2*32))
+#define FLD_GCIF	DO_PREFIX((REG_IFR+3*32))
+#define FLD_MAIF	DO_PREFIX((REG_IFR+4*32))
+#define FLD_MBIF	DO_PREFIX((REG_IFR+5*32))
+#define FLD_SSIF	DO_PREFIX((REG_IFR+6*32))
+#define FLD_XHIF	DO_PREFIX((REG_IFR+7*32))
+#define FLD_RLIF	DO_PREFIX((REG_IFR+8*32))
+#define FLD_URIF	DO_PREFIX((REG_IFR+9*32))
+#define FLD_ISIF	DO_PREFIX((REG_IFR+10*32))
+#define FLD_VWE		DO_PREFIX((REG_VWR+1*32))
+#define FLD_VWIE	DO_PREFIX((REG_VWR+2*32))
+#define FLD_VWIF	DO_PREFIX((REG_VWR+3*32))
+#define FLD_LDOC	DO_PREFIX((REG_DOCR+1*32))
+#define FLD_HDOC	DO_PREFIX((REG_DOCR+2*32))
+#define SINGLE_ARG	DO_PREFIX(0x00000401)
+#define N_SINGLE_ARG	DO_PREFIX(~0x00000401)
+#define LAYER_MASK	DO_PREFIX(0x00000402)
+#define ALL_LAYERS	DO_PREFIX(0x00000403)
+#define REG_STORE	DO_PREFIX(0x00000404)
+#define REG_LENGTH	DO_PREFIX(0x00000405)
+#define REG_BUFFER	DO_PREFIX(0x00000406)
+#define INLINE_BUFFER	DO_PREFIX(0x00000407)
+#define READ_MODE	DO_PREFIX(0x00000408)
+#define N_READ_MODE	DO_PREFIX(~0x00000408)
+#define BYTE_MODE	DO_PREFIX(0x00000409)
+#define N_BYTE_MODE	DO_PREFIX(~0x00000409)
+#define IMMED_MODE	DO_PREFIX(0x0000040A)
+#define N_IMMED_MODE	DO_PREFIX(~0x0000040A)
+#define JUMP_POINT	DO_PREFIX(0x0000040B)
+#define BIT_MASK	DO_PREFIX(0x0000040C)
+#define WR_ARRAY	DO_PREFIX(0x0000040D)
+#define RD_ARRAY	DO_PREFIX(0x0000040E)
+#define DONT_LINK	DO_PREFIX(0x0000040F)
+#define USE_INSTR	DO_PREFIX(0x00000410)
+#define PERM_INSTR	DO_PREFIX(0x00000411)
+#define KICK_X		DO_PREFIX(0x00000412)
+#define KICK_Y		DO_PREFIX(0x00000413)
+#define KICK_Z		DO_PREFIX(0x00000414)
+#define KICK_N		DO_PREFIX(0x00000415)
+#define END_ARGS	DO_PREFIX(0x00FFFFFF)
+#define MAP_ZERO		0
+#define MAP_NOTG_AND_NOTS	1
+#define MAP_G_AND_NOTS		2
+#define MAP_NOTS		3
+#define MAP_NOTG_AND_S		4
+#define MAP_NOTG		5
+#define MAP_G_XOR_S		6
+#define MAP_NOTG_OR_NOTS	7
+#define MAP_G_AND_S		8
+#define MAP_G_EQUALS_S		9
+#define MAP_G			10
+#define MAP_G_OR_NOTS		11
+#define MAP_S			12
+#define MAP_NOTG_OR_S		13
+#define MAP_G_OR_S		14
+#define MAP_ONE			15
+#define SRC_SITE		0
+#define SRC_HOST		1
+#define SRC_FLY			2
+#define SRC_LUT			3
+#define SRC_ADDRESS		3
+#define SL(ir)		((SLE) USR((ir)->sle))
+#define OPCODE(ir)	SL(ir)->opcode
+#define BUFPTR(ir)	SL(ir)->adr_data
+#define REGLEN(ir)	SL(ir)->xfer_length
+#define NEXTI(ir)	SL(ir)->next_ptr
+#define SET_READ_MODE(ir)	(OPCODE(ir) |= RD_FLAG)
+#define CLR_READ_MODE(ir)	(OPCODE(ir) &= (~ RD_FLAG))
+#define QUES_READ_MODE(ir)	((OPCODE(ir) & RD_FLAG) == RD_FLAG)
+#define SET_IMMED_MODE(ir)	OPCODE(ir) |= IMM_FLAG; (ir)->usr_buf == NULL
+#define CLR_IMMED_MODE(ir)	(OPCODE(ir) &= ~IMM_FLAG)
+#define QUES_IMMED_MODE(ir)	((OPCODE(ir) & IMM_FLAG) == IMM_FLAG)
+#define SET_BYTE_MODE(ir)	(OPCODE(ir) |= FLG8_FLAG)
+#define CLR_BYTE_MODE(ir)	(OPCODE(ir) &= (~ FLG8_FLAG))
+#define QUES_BYTE_MODE(ir)	((OPCODE(ir) & FLG8_FLAG) == FLG8_FLAG)
+
+
+/*****************************************************************************/
+/***************************** TYPEDEFS **************************************/
+/*****************************************************************************/
+
+
+
+/*****************************************************************************/
+/**************************** PROTOTYPES *************************************/
+/*****************************************************************************/
+INSTR CAM_reg(CAM8, ...);
+INSTR CAM_reg_(CAM8, va_list);
+int CAM_ques_read_mode(CAM8);
+int CAM_ques_immed_mode(CAM8);
+int CAM_ques_byte_mode(CAM8);
+void CAM_set_read_mode(CAM8);
+void CAM_clr_read_mode(CAM8);
+void CAM_set_immed_mode(CAM8);
+void CAM_clr_immed_mode(CAM8);
+void CAM_set_byte_mode(CAM8);
+void CAM_clr_byte_mode(CAM8);
+void CAM_wr_reg(CAM8, long *);
+void CAM_wr_fld(CAM8, int, long *);
+void CAM_rd_reg(CAM8, long *);
+void CAM_rd_fld(CAM8, int, long *);
+void CAM_reg_store(CAM8, ...);
+void CAM_reg_store_(CAM8, va_list);
+void CAM_fld_store(CAM8, int, ...);
+void CAM_fld_store_(CAM8, int, va_list);
+void _wr_reg(INSTR, long *, int, int);
+void _wr_fld(INSTR, int, long *, int, int);
+void _rd_reg(INSTR, long *);
+void _rd_fld(INSTR, int, long *);
+
+/*****************************************************************************/
+/***************************** GLOBALS ***************************************/
+/*****************************************************************************/
+
+
+#endif

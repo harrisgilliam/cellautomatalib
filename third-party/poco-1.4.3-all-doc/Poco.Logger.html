@@ -1,0 +1,407 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Logger</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="symbol">class Logger</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> Logging<br />
+<b>Header:</b> Poco/Logger.h</p>
+<h2>Description</h2>
+<div class="description">
+<p><a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> is a special <a href="Poco.Channel.html" title="class Poco::Channel">Channel</a> that acts as the main entry point into the logging framework. </p>
+<p>An application uses instances of the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> class to generate its log messages and send them on their way to their final destination. <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> instances are organized in a hierarchical, tree-like manner and are maintained by the framework. Every <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> object has exactly one direct ancestor, with the exception of the root logger. A newly created logger inherits its properties - channel and level - from its direct ancestor. Every logger is connected to a channel, to which it passes on its messages. Furthermore, every logger has a log level, which is used for filtering messages based on their priority. Only messages with a priority equal to or higher than the specified level are passed on. For example, if the level of a logger is set to three (PRIO_ERROR), only messages with priority PRIO_ERROR, PRIO_CRITICAL and PRIO_FATAL will propagate. If the level is set to zero, the logger is effectively disabled. </p>
+<p>The name of a logger determines the logger's place within the logger hierarchy. The name of the root logger is always &quot;&quot;, the empty string. For all other loggers, the name is made up of one or more components, separated by a period. For example, the loggers with the name HTTPServer.RequestHandler and HTTPServer.Listener are descendants of the logger HTTPServer, which itself is a descendant of the root logger. There is not limit as to how deep the logger hierarchy can become. Once a logger has been created and it has inherited the channel and level from its ancestor, it loses the connection to it. So changes to the level or channel of a logger do not affect its descendants. This greatly simplifies the implementation of the framework and is no real restriction, because almost always levels and channels are set up at application startup and never changed afterwards. Nevertheless, there are methods to simultaneously change the level and channel of all loggers in a certain hierarchy. </p>
+<p>There are also convenience macros available that wrap the actual logging statement into a check whether the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level is sufficient to actually log the message. This allows to increase the application performance if many complex log statements are used. The macros also add the source file path and line number into the log message so that it is available to formatters. Variants of these macros that allow message formatting with <a href="Poco.html#7182" title="Poco::format()">Poco::format</a>() are also available. Up to four arguments are supported. </p>
+<p>Examples: </p>
+<pre>poco_warning(logger, &quot;This is a warning&quot;);
+poco_information_f2(logger, &quot;An informational message with args: %d, %d&quot;, 1, 2);
+</pre>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.Channel.html" title="class Poco::Channel">Channel</a></p>
+<p><b>All Base Classes: </b><a href="Poco.Channel.html" title="class Poco::Channel">Channel</a>, <a href="Poco.Configurable.html" title="class Poco::Configurable">Configurable</a>, <a href="Poco.RefCountedObject.html" title="class Poco::RefCountedObject">RefCountedObject</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Logger.html#8352" title="Poco::Logger::add()">add</a>, <a href="Poco.Logger.html#8317" title="Poco::Logger::create()">create</a>, <a href="Poco.Logger.html#8224" title="Poco::Logger::critical()">critical</a>, <a href="Poco.Logger.html#8254" title="Poco::Logger::debug()">debug</a>, <a href="Poco.Logger.html#8324" title="Poco::Logger::destroy()">destroy</a>, <a href="Poco.Logger.html#8266" title="Poco::Logger::dump()">dump</a>, <a href="Poco.Logger.html#8230" title="Poco::Logger::error()">error</a>, <a href="Poco.Logger.html#8218" title="Poco::Logger::fatal()">fatal</a>, <a href="Poco.Logger.html#8354" title="Poco::Logger::find()">find</a>, <a href="Poco.Logger.html#8281" title="Poco::Logger::format()">format</a>, <a href="Poco.Logger.html#8299" title="Poco::Logger::formatDump()">formatDump</a>, <a href="Poco.Logger.html#8313" title="Poco::Logger::get()">get</a>, <a href="Poco.Logger.html#8201" title="Poco::Logger::getChannel()">getChannel</a>, <a href="Poco.Logger.html#8204" title="Poco::Logger::getLevel()">getLevel</a>, <a href="Poco.Logger.html#8322" title="Poco::Logger::has()">has</a>, <a href="Poco.Logger.html#8248" title="Poco::Logger::information()">information</a>, <a href="Poco.Logger.html#8271" title="Poco::Logger::is()">is</a>, <a href="Poco.Logger.html#8210" title="Poco::Logger::log()">log</a>, <a href="Poco.Logger.html#8198" title="Poco::Logger::name()">name</a>, <a href="Poco.Logger.html#8327" title="Poco::Logger::names()">names</a>, <a href="Poco.Logger.html#8242" title="Poco::Logger::notice()">notice</a>, <a href="Poco.Logger.html#8350" title="Poco::Logger::parent()">parent</a>, <a href="Poco.Logger.html#8329" title="Poco::Logger::parseLevel()">parseLevel</a>, <a href="Poco.Logger.html#8321" title="Poco::Logger::root()">root</a>, <a href="Poco.Logger.html#8199" title="Poco::Logger::setChannel()">setChannel</a>, <a href="Poco.Logger.html#8202" title="Poco::Logger::setLevel()">setLevel</a>, <a href="Poco.Logger.html#8207" title="Poco::Logger::setProperty()">setProperty</a>, <a href="Poco.Logger.html#8326" title="Poco::Logger::shutdown()">shutdown</a>, <a href="Poco.Logger.html#8260" title="Poco::Logger::trace()">trace</a>, <a href="Poco.Logger.html#8315" title="Poco::Logger::unsafeGet()">unsafeGet</a>, <a href="Poco.Logger.html#8236" title="Poco::Logger::warning()">warning</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.Channel.html#4268" title="Poco::Channel::close()">close</a>, <a href="Poco.RefCountedObject.html#9831" title="Poco::RefCountedObject::duplicate()">duplicate</a>, <a href="Poco.Channel.html#4274" title="Poco::Channel::getProperty()">getProperty</a>, <a href="Poco.Channel.html#4269" title="Poco::Channel::log()">log</a>, <a href="Poco.Channel.html#4267" title="Poco::Channel::open()">open</a>, <a href="Poco.RefCountedObject.html#9833" title="Poco::RefCountedObject::referenceCount()">referenceCount</a>, <a href="Poco.RefCountedObject.html#9832" title="Poco::RefCountedObject::release()">release</a>, <a href="Poco.Channel.html#4271" title="Poco::Channel::setProperty()">setProperty</a></p>
+<h2>Types</h2>
+<h3><a name="8332">LoggerMap</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">typedef std::map &lt; std::string, <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> * &gt; <a href="Poco.Logger.html#8332" title="Poco::Logger::LoggerMap">LoggerMap</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Constructors</h2>
+<h3><a name="8333">Logger</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Channel.html" title="class Poco::Channel">Channel</a> * pChannel,<br />&nbsp;&nbsp;&nbsp;&nbsp;int level<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="8337">~Logger</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">~<a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>();</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="8317">create</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> &amp; create(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Channel.html" title="class Poco::Channel">Channel</a> * pChannel,<br />&nbsp;&nbsp;&nbsp;&nbsp;int level = Message::PRIO_INFORMATION<br />);</p>
+<div class="description">
+<p>Creates and returns a reference to a <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> with the given name. The <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s <a href="Poco.Channel.html" title="class Poco::Channel">Channel</a> and log level as set as specified. </p>
+</div>
+<h3><a name="8224">critical</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void critical(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; msg<br />);</p>
+<div class="description">
+<p>If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level is at least PRIO_CRITICAL, creates a <a href="Poco.Message.html" title="class Poco::Message">Message</a> with priority PRIO_CRITICAL and the given message text and sends it to the attached channel. </p>
+</div>
+<h3><a name="8226">critical</a></h3>
+<p class="decl">void critical(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; msg,<br />&nbsp;&nbsp;&nbsp;&nbsp;const char * file,<br />&nbsp;&nbsp;&nbsp;&nbsp;int line<br />);</p>
+<div class="description">
+<p>If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level is at least PRIO_CRITICAL, creates a <a href="Poco.Message.html" title="class Poco::Message">Message</a> with priority PRIO_CRITICAL and the given message text and sends it to the attached channel. </p>
+<p><a href="Poco.File.html" title="class Poco::File">File</a> must be a static string, such as the value of the __FILE__ macro. The string is not copied internally for performance reasons.	 </p>
+</div>
+<h3><a name="8274">critical</a></h3>
+<p class="decl">bool critical() const;</p>
+<div class="description">
+<p>Returns true if the log level is at least PRIO_CRITICAL. </p>
+</div>
+<h3><a name="8254">debug</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void debug(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; msg<br />);</p>
+<div class="description">
+<p>If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level is at least PRIO_DEBUG, creates a <a href="Poco.Message.html" title="class Poco::Message">Message</a> with priority PRIO_DEBUG and the given message text and sends it to the attached channel. </p>
+</div>
+<h3><a name="8256">debug</a></h3>
+<p class="decl">void debug(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; msg,<br />&nbsp;&nbsp;&nbsp;&nbsp;const char * file,<br />&nbsp;&nbsp;&nbsp;&nbsp;int line<br />);</p>
+<div class="description">
+<p>If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level is at least PRIO_DEBUG, creates a <a href="Poco.Message.html" title="class Poco::Message">Message</a> with priority PRIO_DEBUG and the given message text and sends it to the attached channel. </p>
+<p><a href="Poco.File.html" title="class Poco::File">File</a> must be a static string, such as the value of the __FILE__ macro. The string is not copied internally for performance reasons.	 </p>
+</div>
+<h3><a name="8279">debug</a></h3>
+<p class="decl">bool debug() const;</p>
+<div class="description">
+<p>Returns true if the log level is at least PRIO_DEBUG. </p>
+</div>
+<h3><a name="8324">destroy</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static void destroy(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name<br />);</p>
+<div class="description">
+<p>Destroys the logger with the specified name. Does nothing if the logger is not found. </p>
+<p>After a logger has been destroyed, all references to it become invalid.	 </p>
+</div>
+<h3><a name="8266">dump</a></h3>
+<p class="decl">void dump(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; msg,<br />&nbsp;&nbsp;&nbsp;&nbsp;const void * buffer,<br />&nbsp;&nbsp;&nbsp;&nbsp;std::size_t length,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Message.html#8585" title="enum  Poco::Message::Priority">Message::Priority</a> prio = Message::PRIO_DEBUG<br />);</p>
+<div class="description">
+<p>Logs the given message, followed by the data in buffer. </p>
+<p>The data in buffer is written in canonical hex+ASCII form: Offset (4 bytes) in hexadecimal, followed by sixteen  space-separated, two column, hexadecimal bytes, followed by the same sixteen bytes as ASCII characters. For bytes outside the range 32 .. 127, a dot is printed. </p>
+</div>
+<h3><a name="8230">error</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void error(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; msg<br />);</p>
+<div class="description">
+<p>If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level is at least PRIO_ERROR, creates a <a href="Poco.Message.html" title="class Poco::Message">Message</a> with priority PRIO_ERROR and the given message text and sends it to the attached channel. </p>
+</div>
+<h3><a name="8232">error</a></h3>
+<p class="decl">void error(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; msg,<br />&nbsp;&nbsp;&nbsp;&nbsp;const char * file,<br />&nbsp;&nbsp;&nbsp;&nbsp;int line<br />);</p>
+<div class="description">
+<p>If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level is at least PRIO_ERROR, creates a <a href="Poco.Message.html" title="class Poco::Message">Message</a> with priority PRIO_ERROR and the given message text and sends it to the attached channel. </p>
+<p><a href="Poco.File.html" title="class Poco::File">File</a> must be a static string, such as the value of the __FILE__ macro. The string is not copied internally for performance reasons.	 </p>
+</div>
+<h3><a name="8275">error</a></h3>
+<p class="decl">bool error() const;</p>
+<div class="description">
+<p>Returns true if the log level is at least PRIO_ERROR. </p>
+</div>
+<h3><a name="8218">fatal</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void fatal(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; msg<br />);</p>
+<div class="description">
+<p>If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level is at least PRIO_FATAL, creates a <a href="Poco.Message.html" title="class Poco::Message">Message</a> with priority PRIO_FATAL and the given message text and sends it to the attached channel. </p>
+</div>
+<h3><a name="8220">fatal</a></h3>
+<p class="decl">void fatal(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; msg,<br />&nbsp;&nbsp;&nbsp;&nbsp;const char * file,<br />&nbsp;&nbsp;&nbsp;&nbsp;int line<br />);</p>
+<div class="description">
+<p>If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level is at least PRIO_FATAL, creates a <a href="Poco.Message.html" title="class Poco::Message">Message</a> with priority PRIO_FATAL and the given message text and sends it to the attached channel. </p>
+<p><a href="Poco.File.html" title="class Poco::File">File</a> must be a static string, such as the value of the __FILE__ macro. The string is not copied internally for performance reasons.	 </p>
+</div>
+<h3><a name="8273">fatal</a></h3>
+<p class="decl">bool fatal() const;</p>
+<div class="description">
+<p>Returns true if the log level is at least PRIO_FATAL. </p>
+</div>
+<h3><a name="8281">format</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static std::string format(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; fmt,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; arg<br />);</p>
+<div class="description">
+<p>Replaces all occurences of $0 in fmt with the string given in arg and returns the result. To include a dollar sign in the result string, specify two dollar signs ($$) in the format string. </p>
+</div>
+<h3><a name="8284">format</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static std::string format(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; fmt,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; arg0,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; arg1<br />);</p>
+<div class="description">
+<p>Replaces all occurences of $&lt;n&gt; in fmt with the string given in arg&lt;n&gt; and returns the result. To include a dollar sign in the result string, specify two dollar signs ($$) in the format string. </p>
+</div>
+<h3><a name="8288">format</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static std::string format(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; fmt,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; arg0,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; arg1,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; arg2<br />);</p>
+<div class="description">
+<p>Replaces all occurences of $&lt;n&gt; in fmt with the string given in arg&lt;n&gt; and returns the result. To include a dollar sign in the result string, specify two dollar signs ($$) in the format string. </p>
+</div>
+<h3><a name="8293">format</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static std::string format(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; fmt,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; arg0,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; arg1,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; arg2,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; arg3<br />);</p>
+<div class="description">
+<p>Replaces all occurences of $&lt;n&gt; in fmt with the string given in arg&lt;n&gt; and returns the result. To include a dollar sign in the result string, specify two dollar signs ($$) in the format string. </p>
+</div>
+<h3><a name="8299">formatDump</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static void formatDump(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::string &amp; message,<br />&nbsp;&nbsp;&nbsp;&nbsp;const void * buffer,<br />&nbsp;&nbsp;&nbsp;&nbsp;std::size_t length<br />);</p>
+<div class="description">
+<p>Creates a hex-dump of the given buffer and appends it to the given message string. </p>
+</div>
+<h3><a name="8313">get</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> &amp; get(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name<br />);</p>
+<div class="description">
+<p>Returns a reference to the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> with the given name. If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> does not yet exist, it is created, based on its parent logger. </p>
+</div>
+<h3><a name="8201">getChannel</a></h3>
+<p class="decl"><a href="Poco.Channel.html" title="class Poco::Channel">Channel</a> * getChannel() const;</p>
+<div class="description">
+<p>Returns the <a href="Poco.Channel.html" title="class Poco::Channel">Channel</a> attached to the logger. </p>
+</div>
+<h3><a name="8204">getLevel</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">int getLevel() const;</p>
+<div class="description">
+<p>Returns the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level. </p>
+</div>
+<h3><a name="8322">has</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> * has(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name<br />);</p>
+<div class="description">
+<p>Returns a pointer to the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> with the given name if it exists, or a null pointer otherwse. </p>
+</div>
+<h3><a name="8248">information</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void information(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; msg<br />);</p>
+<div class="description">
+<p>If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level is at least PRIO_INFORMATION, creates a <a href="Poco.Message.html" title="class Poco::Message">Message</a> with priority PRIO_INFORMATION and the given message text and sends it to the attached channel. </p>
+</div>
+<h3><a name="8250">information</a></h3>
+<p class="decl">void information(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; msg,<br />&nbsp;&nbsp;&nbsp;&nbsp;const char * file,<br />&nbsp;&nbsp;&nbsp;&nbsp;int line<br />);</p>
+<div class="description">
+<p>If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level is at least PRIO_INFORMATION, creates a <a href="Poco.Message.html" title="class Poco::Message">Message</a> with priority PRIO_INFORMATION and the given message text and sends it to the attached channel. </p>
+<p><a href="Poco.File.html" title="class Poco::File">File</a> must be a static string, such as the value of the __FILE__ macro. The string is not copied internally for performance reasons.	 </p>
+</div>
+<h3><a name="8278">information</a></h3>
+<p class="decl">bool information() const;</p>
+<div class="description">
+<p>Returns true if the log level is at least PRIO_INFORMATION. </p>
+</div>
+<h3><a name="8271">is</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool is(<br />&nbsp;&nbsp;&nbsp;&nbsp;int level<br />) const;</p>
+<div class="description">
+<p>Returns true if at least the given log level is set. </p>
+</div>
+<h3><a name="8210">log</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void log(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Message.html" title="class Poco::Message">Message</a> &amp; msg<br />);</p>
+<div class="description">
+<p>Logs the given message if its priority is greater than or equal to the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Channel.html#4269" title="Poco::Channel::log()">Poco::Channel::log()</a></p></div>
+<h3><a name="8212">log</a></h3>
+<p class="decl">void log(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Exception.html" title="class Poco::Exception">Exception</a> &amp; exc<br />);</p>
+<div class="description">
+<p>Logs the given exception with priority PRIO_ERROR.	 </p>
+</div>
+<h3><a name="8214">log</a></h3>
+<p class="decl">void log(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Exception.html" title="class Poco::Exception">Exception</a> &amp; exc,<br />&nbsp;&nbsp;&nbsp;&nbsp;const char * file,<br />&nbsp;&nbsp;&nbsp;&nbsp;int line<br />);</p>
+<div class="description">
+<p>Logs the given exception with priority PRIO_ERROR.	 </p>
+<p><a href="Poco.File.html" title="class Poco::File">File</a> must be a static string, such as the value of the __FILE__ macro. The string is not copied internally for performance reasons.	 </p>
+</div>
+<h3><a name="8198">name</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const std::string &amp; name() const;</p>
+<div class="description">
+<p>Returns the name of the logger, which is set as the message source on all messages created by the logger. </p>
+</div>
+<h3><a name="8327">names</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static void names(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::vector &lt; std::string &gt; &amp; names<br />);</p>
+<div class="description">
+<p>Fills the given vector with the names of all currently defined loggers. </p>
+</div>
+<h3><a name="8242">notice</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void notice(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; msg<br />);</p>
+<div class="description">
+<p>If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level is at least PRIO_NOTICE, creates a <a href="Poco.Message.html" title="class Poco::Message">Message</a> with priority PRIO_NOTICE and the given message text and sends it to the attached channel. </p>
+</div>
+<h3><a name="8244">notice</a></h3>
+<p class="decl">void notice(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; msg,<br />&nbsp;&nbsp;&nbsp;&nbsp;const char * file,<br />&nbsp;&nbsp;&nbsp;&nbsp;int line<br />);</p>
+<div class="description">
+<p>If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level is at least PRIO_NOTICE, creates a <a href="Poco.Message.html" title="class Poco::Message">Message</a> with priority PRIO_NOTICE and the given message text and sends it to the attached channel. </p>
+<p><a href="Poco.File.html" title="class Poco::File">File</a> must be a static string, such as the value of the __FILE__ macro. The string is not copied internally for performance reasons.	 </p>
+</div>
+<h3><a name="8277">notice</a></h3>
+<p class="decl">bool notice() const;</p>
+<div class="description">
+<p>Returns true if the log level is at least PRIO_NOTICE. </p>
+</div>
+<h3><a name="8329">parseLevel</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static int parseLevel(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; level<br />);</p>
+<div class="description">
+<p>Parses a symbolic log level from a string and returns the resulting numeric level. </p>
+<p>Valid symbolic levels are: </p>
+<ul>
+<li>none (turns off logging) </li>
+<li>fatal </li>
+<li>critical </li>
+<li>error </li>
+<li>warning </li>
+<li>notice </li>
+<li>information </li>
+<li>debug </li>
+<li>trace </li>
+</ul>
+<p>The level is not case sensitive. </p>
+</div>
+<h3><a name="8321">root</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> &amp; root();</p>
+<div class="description">
+<p>Returns a reference to the root logger, which is the ultimate ancestor of all Loggers. </p>
+</div>
+<h3><a name="8199">setChannel</a></h3>
+<p class="decl">void setChannel(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Channel.html" title="class Poco::Channel">Channel</a> * pChannel<br />);</p>
+<div class="description">
+<p>Attaches the given <a href="Poco.Channel.html" title="class Poco::Channel">Channel</a> to the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>. </p>
+</div>
+<h3><a name="8306">setChannel</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static void setChannel(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Channel.html" title="class Poco::Channel">Channel</a> * pChannel<br />);</p>
+<div class="description">
+<p>Attaches the given <a href="Poco.Channel.html" title="class Poco::Channel">Channel</a> to all loggers that are descendants of the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> with the given name. </p>
+</div>
+<h3><a name="8202">setLevel</a></h3>
+<p class="decl">void setLevel(<br />&nbsp;&nbsp;&nbsp;&nbsp;int level<br />);</p>
+<div class="description">
+<p>Sets the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level. </p>
+<p>See <a href="Poco.Message.html#8585" title="enum  Poco::Message::Priority">Message::Priority</a> for valid log levels. Setting the log level to zero turns off logging for that <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>. </p>
+</div>
+<h3><a name="8205">setLevel</a></h3>
+<p class="decl">void setLevel(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; level<br />);</p>
+<div class="description">
+<p>Sets the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level using a symbolic value. </p>
+<p>Valid values are: </p>
+<ul>
+<li>none (turns off logging) </li>
+<li>fatal </li>
+<li>critical </li>
+<li>error </li>
+<li>warning </li>
+<li>notice </li>
+<li>information </li>
+<li>debug </li>
+<li>trace </li>
+</ul>
+</div>
+<h3><a name="8303">setLevel</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static void setLevel(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name,<br />&nbsp;&nbsp;&nbsp;&nbsp;int level<br />);</p>
+<div class="description">
+<p>Sets the given log level on all loggers that are descendants of the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> with the given name. </p>
+</div>
+<h3><a name="8207">setProperty</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void setProperty(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; value<br />);</p>
+<div class="description">
+<p>Sets or changes a configuration property. </p>
+<p>Only the &quot;channel&quot; and &quot;level&quot; properties are supported, which allow setting the target channel and log level, respectively, via the <a href="Poco.LoggingRegistry.html" title="class Poco::LoggingRegistry">LoggingRegistry</a>. The &quot;channel&quot; and &quot;level&quot; properties are set-only. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Channel.html#4271" title="Poco::Channel::setProperty()">Poco::Channel::setProperty()</a></p></div>
+<h3><a name="8309">setProperty</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static void setProperty(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; loggerName,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; propertyName,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; value<br />);</p>
+<div class="description">
+<p>Sets or changes a configuration property for all loggers that are descendants of the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> with the given name. </p>
+</div>
+<h3><a name="8326">shutdown</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static void shutdown();</p>
+<div class="description">
+<p>Shuts down the logging framework and releases all Loggers. </p>
+</div>
+<h3><a name="8260">trace</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void trace(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; msg<br />);</p>
+<div class="description">
+<p>If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level is at least PRIO_TRACE, creates a <a href="Poco.Message.html" title="class Poco::Message">Message</a> with priority PRIO_TRACE and the given message text and sends it to the attached channel. </p>
+</div>
+<h3><a name="8262">trace</a></h3>
+<p class="decl">void trace(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; msg,<br />&nbsp;&nbsp;&nbsp;&nbsp;const char * file,<br />&nbsp;&nbsp;&nbsp;&nbsp;int line<br />);</p>
+<div class="description">
+<p>If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level is at least PRIO_TRACE, creates a <a href="Poco.Message.html" title="class Poco::Message">Message</a> with priority PRIO_TRACE and the given message text and sends it to the attached channel. </p>
+<p><a href="Poco.File.html" title="class Poco::File">File</a> must be a static string, such as the value of the __FILE__ macro. The string is not copied internally for performance reasons.	 </p>
+</div>
+<h3><a name="8280">trace</a></h3>
+<p class="decl">bool trace() const;</p>
+<div class="description">
+<p>Returns true if the log level is at least PRIO_TRACE. </p>
+</div>
+<h3><a name="8315">unsafeGet</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> &amp; unsafeGet(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name<br />);</p>
+<div class="description">
+<p>Returns a reference to the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> with the given name. If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> does not yet exist, it is created, based on its parent logger. </p>
+<p>WARNING: This method is not thread safe. You should probably use <a href="Poco.Logger.html#8313" title="Poco::Logger::get()">get</a>() instead. The only time this method should be used is during program initialization, when only one thread is running. </p>
+</div>
+<h3><a name="8236">warning</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void warning(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; msg<br />);</p>
+<div class="description">
+<p>If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level is at least PRIO_WARNING, creates a <a href="Poco.Message.html" title="class Poco::Message">Message</a> with priority PRIO_WARNING and the given message text and sends it to the attached channel. </p>
+</div>
+<h3><a name="8238">warning</a></h3>
+<p class="decl">void warning(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; msg,<br />&nbsp;&nbsp;&nbsp;&nbsp;const char * file,<br />&nbsp;&nbsp;&nbsp;&nbsp;int line<br />);</p>
+<div class="description">
+<p>If the <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a>'s log level is at least PRIO_WARNING, creates a <a href="Poco.Message.html" title="class Poco::Message">Message</a> with priority PRIO_WARNING and the given message text and sends it to the attached channel. </p>
+<p><a href="Poco.File.html" title="class Poco::File">File</a> must be a static string, such as the value of the __FILE__ macro. The string is not copied internally for performance reasons.	 </p>
+</div>
+<h3><a name="8276">warning</a></h3>
+<p class="decl">bool warning() const;</p>
+<div class="description">
+<p>Returns true if the log level is at least PRIO_WARNING. </p>
+</div>
+<h3><a name="8352">add</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static void add(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> * pLogger<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="8354">find</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> * find(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="8346">format</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static std::string format(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; fmt,<br />&nbsp;&nbsp;&nbsp;&nbsp;int argc,<br />&nbsp;&nbsp;&nbsp;&nbsp;std::string argv[]<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="8338">log</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void log(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; text,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Message.html#8585" title="enum  Poco::Message::Priority">Message::Priority</a> prio<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="8341">log</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void log(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; text,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Message.html#8585" title="enum  Poco::Message::Priority">Message::Priority</a> prio,<br />&nbsp;&nbsp;&nbsp;&nbsp;const char * file,<br />&nbsp;&nbsp;&nbsp;&nbsp;int line<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="8350">parent</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.Logger.html" title="class Poco::Logger">Logger</a> &amp; parent(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Variables</h2>
+<h3><a name="8331">ROOT</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const std::string <a href="Poco.Logger.html#8331" title="Poco::Logger::ROOT">ROOT</a>;</p>
+<div class="description">
+<p>The name of the root logger (&quot;&quot;).	 </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

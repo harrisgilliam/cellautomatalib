@@ -1,0 +1,699 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>POCO C++ Libraries GNU Make Build System</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="category">Introduction</h1>
+<h1 class="title">POCO C++ Libraries GNU Make Build System</h1>
+</div>
+<div class="body">
+<h2>Contents</h2>
+<div class="toc"><ul>
+<li class="level1"><a href="#0">Introduction</a></li>
+<li class="level2"><a href="#1">Build System Features</a></li>
+<li class="level2"><a href="#2">Build System Overview</a></li>
+<li class="level3"><a href="#3">Configuration Files</a></li>
+<li class="level3"><a href="#4">Rule Files</a></li>
+<li class="level3"><a href="#5">Script Files</a></li>
+<li class="level2"><a href="#6">Filesystem Layout</a></li>
+<li class="level3"><a href="#7">Sources</a></li>
+<li class="level3"><a href="#8">Build Products</a></li>
+<li class="level2"><a href="#9">Project Makefiles</a></li>
+<li class="level3"><a href="#10">Library Makefiles</a></li>
+<li class="level3"><a href="#11">Executable Makefiles</a></li>
+<li class="level3"><a href="#12">Plugin Makefiles</a></li>
+<li class="level1"><a href="#13">Build System Reference</a></li>
+<li class="level2"><a href="#14">Postbuild Command</a></li>
+<li class="level2"><a href="#15">Make Targets</a></li>
+<li class="level3"><a href="#16">clean</a></li>
+<li class="level3"><a href="#17">all</a></li>
+<li class="level3"><a href="#18">static_debug</a></li>
+<li class="level3"><a href="#19">static_release</a></li>
+<li class="level3"><a href="#20">shared_debug</a></li>
+<li class="level3"><a href="#21">shared_release</a></li>
+<li class="level2"><a href="#22">Environment Variables</a></li>
+<li class="level3"><a href="#23">POCO_BASE</a></li>
+<li class="level3"><a href="#24">POCO_BUILD</a></li>
+<li class="level3"><a href="#25">POCO_CONFIG</a></li>
+<li class="level3"><a href="#26">POCO_TARGET_OSNAME and POCO_TARGET_OSARCH</a></li>
+<li class="level3"><a href="#27">OSARCH_64BITS</a></li>
+<li class="level3"><a href="#28">PROJECT_BASE</a></li>
+<li class="level2"><a href="#29">Special Files</a></li>
+<li class="level3"><a href="#30">components</a></li>
+<li class="level3"><a href="#31">libversion</a></li>
+<li class="level3"><a href="#32">Configuring the Build Process</a></li>
+<li class="level2"><a href="#33">General Settings</a></li>
+<li class="level3"><a href="#34">LINKMODE</a></li>
+<li class="level3"><a href="#35">TOOL</a></li>
+<li class="level3"><a href="#36">POCO_TARGET_OSNAME and POCO_TARGET_OSARCH</a></li>
+<li class="level2"><a href="#37">Tool Definition</a></li>
+<li class="level3"><a href="#38">CC</a></li>
+<li class="level3"><a href="#39">CXX</a></li>
+<li class="level3"><a href="#40">LINK</a></li>
+<li class="level3"><a href="#41">STRIP</a></li>
+<li class="level3"><a href="#42">LIB</a></li>
+<li class="level3"><a href="#43">RANLIB</a></li>
+<li class="level3"><a href="#44">SHLIB</a></li>
+<li class="level3"><a href="#45">SHLIBLN</a></li>
+<li class="level3"><a href="#46">DEP</a></li>
+<li class="level3"><a href="#47">SHELL</a></li>
+<li class="level3"><a href="#48">RM</a></li>
+<li class="level3"><a href="#49">CP</a></li>
+<li class="level3"><a href="#50">MKDIR</a></li>
+<li class="level2"><a href="#51">Shared Library Extensions</a></li>
+<li class="level3"><a href="#52">SHAREDLIBEXT</a></li>
+<li class="level3"><a href="#53">SHAREDLIBLINKEXT</a></li>
+<li class="level2"><a href="#54">Compiler and Linker Flags</a></li>
+<li class="level3"><a href="#55">CFLAGS</a></li>
+<li class="level3"><a href="#56">CFLAGS32</a></li>
+<li class="level3"><a href="#57">CFLAGS64</a></li>
+<li class="level3"><a href="#58">CXXFLAGS</a></li>
+<li class="level3"><a href="#59">CXXFLAGS32</a></li>
+<li class="level3"><a href="#60">CXXFLAGS64</a></li>
+<li class="level3"><a href="#61">LINKFLAGS</a></li>
+<li class="level3"><a href="#62">LINKFLAGS32</a></li>
+<li class="level3"><a href="#63">LINKFLAGS64</a></li>
+<li class="level3"><a href="#64">STATICOPT_CC</a></li>
+<li class="level3"><a href="#65">STATICOPT_CXX</a></li>
+<li class="level3"><a href="#66">STATICOPT_LINK</a></li>
+<li class="level3"><a href="#67">SHAREDOPT_CC</a></li>
+<li class="level3"><a href="#68">SHAREDOPT_CXX</a></li>
+<li class="level3"><a href="#69">SHAREDOPT_LINK</a></li>
+<li class="level3"><a href="#70">DEBUGOPT_CC</a></li>
+<li class="level3"><a href="#71">DEBUGOPT_CXX</a></li>
+<li class="level3"><a href="#72">DEBUGOPT_LINK</a></li>
+<li class="level3"><a href="#73">RELEASEOPT_CC</a></li>
+<li class="level3"><a href="#74">RELEASEOPT_CXX</a></li>
+<li class="level3"><a href="#75">RELEASEOPT_LINK</a></li>
+<li class="level2"><a href="#76">System Specific Flags</a></li>
+<li class="level3"><a href="#77">SYSFLAGS</a></li>
+<li class="level3"><a href="#78">SYSLIBS</a></li>
+</ul></div>
+<div class="description">
+<p></p><h2><a name="0">Introduction</a></h2><p>
+</p>
+<p>The POCO C++ Libraries use a built system based on  <a href="http://www.gnu.org/software/make/" target="_blank">GNU Make</a> on every platform  capable of running it. This includes Linux, Mac OS X, virtually every other Unix platform, as well as Cygwin and MinGW on Windows. </p>
+<p>Why GNU Make? Well, GNU Make is available virtually everywhere and it's usually readily available, such as on Linux and Mac OS X.  Sure, there are more advanced build systems out there, but the  philisophy for POCO is download &mdash; compile &mdash; go. Requiring the user  to download and install another build tool just for getting  POCO to work is unacceptable. </p>
+<p>The build system consists of a number of make files, as well as a few  supporting shell scripts. All core files are located within the <i>build</i>  directory in the POCO distribution. For every library and executable,  there is a small make file describing the kind of project,  its input files, and the output. </p>
+<p>The POCO build system automatically determines the dependencies  between source and header files. This is done when a source file is  compiled for the first time, or after a source file has been changed.  This relieves the developer from the tedious task of maintining file  dependencies manually - one of the biggest drawbacks of GNU Make. </p>
+<p></p>
+<p></p><h3><a name="1">Build System Features</a></h3><p>
+</p>
+<p>The POCO build system supports the following features: </p>
+<p></p>
+<ul>
+<li>building libraries, applications and plugins </li>
+<li>debug and release builds </li>
+<li>dynamic and static linking </li>
+<li>32-bit and 64-bit builds </li>
+<li>automatic dependency detection </li>
+<li>easy to use </li>
+<li>support for cross-compiling for embedded platforms such as Embedded Linux or iOS </li>
+</ul>
+<p></p>
+<p></p><h3><a name="2">Build System Overview</a></h3><p>
+</p>
+<p>The core of the build system consists of three different kinds of files &mdash; platform configuration files, make rules and shell scripts. All are located in the <i>build</i> directory within the POCO C++ Libraries root directory. </p>
+<p></p>
+<pre>build/
+  config/
+    Darwin
+    Linux
+    HP-UX
+    ...
+
+  rules/
+    compile
+    dylib
+    exec
+    global
+    lib
+
+  script/
+    makedepend.gcc
+    makedepend.cxx
+    makedepend.SunCC
+    makeldpath
+    projname
+    shlibln
+    ...
+</pre>
+<p> </p>
+<p></p>
+<p></p><h4><a name="3">Configuration Files</a></h4><p>
+</p>
+<p>Configuration files contain all the knowledge how the toolchain (compiler and linker)  must be invoked for a given platform. Configuration files for the most common  Unix platforms and their toolchains, as well as for Cygwin and MinGW are already  part of POCO.  Support for an additional platform (or a variation of a platform) can be added  by creating a new (or copying and modifying) an existing build configuration file. </p>
+<p>Configuration files are located in the <i>build/config</i> directory. </p>
+<p></p>
+<p></p><h4><a name="4">Rule Files</a></h4><p>
+</p>
+<p>Rule files contain platform independent make rules for compiling and  linking executables or (static and shared) libraries from source files,  using the tools defined in a configuration file. Rule files are located  in the <i>build/rules</i> directory. </p>
+<p></p>
+<p></p><h4><a name="5">Script Files</a></h4><p>
+</p>
+<p>Script files are called by the build system's make files to do things that  cannot be expressed in make files. For example, there are scripts for  invoking a particular C++ compiler in such a way that it produces a list of  dependencies for later inclusion by the build system. Script files are  located in the <i>build/script</i> directory. </p>
+<p></p>
+<p></p>
+<p></p><h3><a name="6">Filesystem Layout</a></h3><p>
+</p>
+<p></p><h4><a name="7">Sources</a></h4><p>
+</p>
+<p>The build system expects a project's files (header files, source files, Makefiles)  to be in a certain directory layout. First, all project directories must be located in or under the same directory where the  <i>build</i> directory is located, or in a directory below.  All header files must be in the <i>include</i> directory (or a subdirectory of it).  All source files must be in the <i>src</i> directory.  Finally, there must be a Makefile (named <i>Makefile</i>) located in the project directory. </p>
+<p>Below is a sample for a POCO source directory hierarchy: </p>
+<p></p>
+<pre>poco/
+  build/
+  Foundation/
+  Net/
+  Util/
+  XML/
+  ...
+
+  MyLib/
+    include/
+      MyLib.h
+      MyClass.h
+
+    src/
+      MyClass.cpp
+
+    Makefile
+</pre>
+<p> </p>
+<p></p>
+<p></p><h4><a name="8">Build Products</a></h4><p>
+</p>
+<p>The POCO build system puts final build products (executables and libraries)  and intermediate products (object files, dependency files) into certain directories.  Unless specified otherwise (by setting the environment variable  POCO_BUILD accordingly &mdash; see below), these directories are located within  the source directory tree. All libraries are put into a  directory with the path <i>lib/&lt;OSNAME&gt;/&lt;OSARCH&gt;</i>, within the POCO base directory.  Executables are put into a directory with the path <i>bin/&lt;OSNAME&gt;/&lt;OSARCH&gt;</i>,  within the project directory. Object files are put into a directory with the  path <i>obj/&lt;OSNAME&gt;/&lt;OSARCH&gt;</i>, within the project directory.  Dependency files are put into <i>.dep/&lt;OSNAME&gt;/&lt;OSARCH&gt;</i>,  also within the project directory. </p>
+<p>Unless specified otherwise (by setting the Makefile variables  <tt>$(POCO_TARGET_OSNAME)</tt> and <tt>$(POCO_TARGET_OSARCH)</tt>, <i>&lt;OSNAME&gt;</i> is the  name of the host's operating system, as obtained by a call to  <i>uname</i> (or something equivalent), and <i>&lt;OSARCH&gt;</i> is the name of the  host's hardware architecture, as obtained by a call to <i>uname -m</i> (or something equivalent). </p>
+<p>Taking into account the build products, a typical project hierarchy looks like this: </p>
+<p></p>
+<p></p>
+<pre>poco/
+  build/
+  lib/
+    Linux/
+      i686/
+        libCppUnit.so.1
+        libCppUnitd.so.1
+        libCppUnit.so
+        libCppUnitd.so
+        libPocoFouncation.so.1
+        ...
+
+  Foundation/
+    ...
+    testsuite/
+      ...
+      bin/
+        Linux/
+          i686/
+            testrunner
+            testrunnerd
+            ...
+
+  Net/
+  Util/
+  XML/
+  ...
+
+  MyLib/
+    .dep/
+      Linux/
+        i686/
+          MyClass.d
+
+    obj/
+      Linux/
+        i686/
+          MyClass.o
+
+    include/
+      MyLib.h
+      MyClass.h
+
+    src/
+      MyClass.cpp
+
+    Makefile
+</pre>
+<p> </p>
+<p></p>
+<p></p><h3><a name="9">Project Makefiles</a></h3><p>
+</p>
+<p>Depending on the kind of project, a project Makefile comes in one of three variants. </p>
+<p></p>
+<p></p><h4><a name="10">Library Makefiles</a></h4><p>
+</p>
+<p>The Makefile for a library always looks like this: </p>
+<p></p>
+<pre>#
+# Makefile for a library
+#
+
+include $(POCO_BASE)/build/rules/global
+
+objects = MyClass ...
+
+target = MyLib
+target_version = 1
+target_libs = PocoFoundation ...
+
+include $(POCO_BASE)/build/rules/lib
+</pre>
+<p> </p>
+<p></p>
+<p>Every Makefile always has to include <i>$(POCO_BASE)/build/rules/global</i> first.  In the <i>objects</i> section, the source files (located in the <i>src</i> directory)  must be specified. The file extension must not be included; the build system  will find files ending in .cpp (C++ sources) and .c (C sources).  <i>target</i> specifies the name of the library, <i>target_version</i> specifies the  version number for the shared library. <i>target_libs</i> specifies the  libraries required for linking the library. </p>
+<p>Last in the Makefile is the inclusion of <i>$(POCO_BASE)/build/rules/lib</i>,  which includes the rules for building a shared or static library. </p>
+<p></p>
+<p></p><h4><a name="11">Executable Makefiles</a></h4><p>
+</p>
+<p>Makefiles for executables look similar to the ones for libraries. </p>
+<p></p>
+<p></p>
+<pre>#
+# Makefile for a library
+#
+
+include $(POCO_BASE)/build/rules/global
+
+objects = MyClass ...
+
+target = MyLib
+target_libs = PocoFoundation ...
+
+include $(POCO_BASE)/build/rules/exec
+</pre>
+<p> </p>
+<p></p>
+<p></p>
+<p>The only differences are the missing <i>target_version</i> entry, and the  <i>$(POCO_BASE)/build/rules/exec</i> file, which is included instead of  <i>$(POCO_BASE)/build/rules/lib</i> at the end of the Makefile. </p>
+<p></p>
+<p></p>
+<p></p><h4><a name="12">Plugin Makefiles</a></h4><p>
+</p>
+<p></p>
+<p></p>
+<p>Makefiles for plugins - shared libraries that are loadable dynamically at runtime - again look almost the same as Makefiles for ordinary libraries or executables. </p>
+<p></p>
+<pre>#
+# Makefile for a library
+#
+
+include $(POCO_BASE)/build/rules/global
+
+objects = MyClass ...
+
+target = MyPlugin
+target_libs = PocoFoundation ...
+
+include $(POCO_BASE)/build/rules/dylib
+</pre>
+<p> </p>
+<p></p>
+<p>The difference is the file that is included at the end of the Makefile:  <i>$(POCO_BASE)/build/rules/dylib</i>. </p>
+<p></p>
+<p></p><h2><a name="13">Build System Reference</a></h2><p>
+</p>
+<p></p><h3><a name="14">Postbuild Command</a></h3><p>
+</p>
+<p>A Makefile can contain a so-called postbuild command &mdash; a shell command  that will be executed when the target has been built successfully.  To specify a postbuild command, define the variable <i>postbuild</i>  in your Makefile, e.g. </p>
+<p></p>
+<pre>#
+# Makefile for a library
+#
+
+include $(POCO_BASE)/build/rules/global
+
+objects = MyClass ...
+
+target = MyLib
+target_libs = PocoFoundation ...
+
+postbuild = echo &quot;The build is done.&quot;
+
+include $(POCO_BASE)/build/rules/exec
+</pre>
+<p> </p>
+<p></p>
+<p></p><h3><a name="15">Make Targets</a></h3><p>
+</p>
+<p>Independently of which kind of product (library, executable, plugin) is  being built, there are always five make targets available: </p>
+<p></p>
+<p></p><h4><a name="16">clean</a></h4><p>
+</p>
+<p>The <i>clean</i> target will remove all executable and intermediate object files,  forcing a full rebuild with the next make.  </p>
+<p></p>
+<p></p><h4><a name="17">all</a></h4><p>
+</p>
+<p><i>all</i> is the default target, used if no other target is specified.  Depending on the current configuration, it will either build a statically linked or  dynamically linked library/executable, or both. </p>
+<p></p>
+<p></p><h4><a name="18">static_debug</a></h4><p>
+</p>
+<p>The <i>static_debug</i> target will build a statically linked debug version of  the library or executable. Statically linked executables will be linked in the <i>static</i> subdirectory within the <i>bin/&lt;OSNAME&gt;/&lt;OSARCH&gt;</i> directory. Debug libraries and executables have a 'd' appended to their basename  (e.g., MyLibd.so). </p>
+<p></p>
+<p></p><h4><a name="19">static_release</a></h4><p>
+</p>
+<p>The <i>static_release</i> target will build a statically linked release  version of the library or executable.  </p>
+<p></p>
+<p></p><h4><a name="20">shared_debug</a></h4><p>
+</p>
+<p>The <i>shared_debug</i> target will build a dynamically linked debug version  of the library or executable. The library or executable will  have the suffix <i>d</i> appended to its name (e.g., if target is MyExec,  the actual name of the executable will be MyExecd). </p>
+<p></p>
+<p></p><h4><a name="21">shared_release</a></h4><p>
+</p>
+<p>The <i>shared_release</i> target will build a dynamically linked release  version of the library or executable. </p>
+<p></p>
+<p></p><h3><a name="22">Environment Variables</a></h3><p>
+</p>
+<p>The POCO build system requires or uses certain environment variables to work properly. </p>
+<p></p><h4><a name="23">POCO_BASE</a></h4><p>
+</p>
+<p><i>POCO_BASE</i> is required and specifies the directory where the POCO  source tree is located. </p>
+<p></p>
+<p></p><h4><a name="24">POCO_BUILD</a></h4><p>
+</p>
+<p><i>POCO_BUILD</i> specifies the directory where the build system puts all  intermediate build files (object files, dependency files) and build  products (libraries and executables). Normally, these files are located  within the POCO source tree. Setting POCO_BUILD allows to keep the POCO  source tree clean and free of binaries. </p>
+<p></p>
+<p></p><h4><a name="25">POCO_CONFIG</a></h4><p>
+</p>
+<p><i>POCO_CONFIG</i> specifies the build configuration file (located in build/config)  to use. Defaults to the output of <i>uname</i> if not specified. </p>
+<p></p>
+<p></p><h4><a name="26">POCO_TARGET_OSNAME and POCO_TARGET_OSARCH</a></h4><p>
+</p>
+<p><i>POCO_TARGET_OSNAME</i> and &gt;*POCO_TARGET_OSARCH</i> are used in  cross builds, to specify the operating system name and hardware  architecture of the target. These names is used to find the directory  where intermediate object files and final build products are put.  Intermediate files are always put into <i>obj/&lt;OSNAME&gt;/&lt;OSARCH&gt;</i>  and final build products are put into <i>lib/&lt;OSNAME&gt;/&lt;OSARCH&gt;</i>, or  <i>bin/&lt;OSNAME&gt;/&lt;OSARCH&gt;</i>, respectively.  If <i>POCO_TARGET_OSNAME</i> is specified, its value becomes the  value for <i>&lt;OSNAME&gt;</i>. If <i>POCO_TARGET_OSARCH</i> is specified, its value  likewise becomes the value for <i>&lt;OSARCH&gt;</i> </p>
+<p>The default value for <i>&lt;OSNAME&gt;</i> is the output of <i>uname</i> or a similar command.  The default value for <i>&lt;OSARCH&gt;</i> is the output of <i>uname -m</i> or a similar command. </p>
+<p></p>
+<p></p><h4><a name="27">OSARCH_64BITS</a></h4><p>
+</p>
+<p>If defined to 1, will force a 64 bit build on platforms that support 64 bit builds. </p>
+<p></p>
+<p></p><h4><a name="28">PROJECT_BASE</a></h4><p>
+</p>
+<p></p>
+<p>Setting this environment variable allows you to use the build system to  build POCO-based libraries and executables outside the POCO_BASE directory  hierarchy. Given a directory <i>/projects</i> containing a project directory  <i>MyProject</i> (that is, <i>/projects/MyProject</i>), <i>PROJECT_BASE</i>  must be set to <i>/projects</i>. Assuming <i>/projects/MyProject/Makefile</i>  is available, you can change to the <i>/projects/MyProject</i> directory and  invoke <i>gmake</i> to build your project. <i>POCO_BASE</i> must still be set  and point to the POCO source tree, as usual. </p>
+<p></p>
+<p></p><h3><a name="29">Special Files</a></h3><p>
+</p>
+<p></p><h4><a name="30">components</a></h4><p>
+</p>
+<p>The build system requires a file named <i>components</i> being located in  <i>$(POCO_BASE)</i>. This file contains a list of project names, one per line.  The contents of this file are used by the build system to automatically  build include search paths. For example, if <i>components</i> has the following content: </p>
+<p></p>
+<pre>Foundation
+XML
+Util
+Net
+</pre>
+<p> </p>
+<p>the following include search path options will be used for compiling: </p>
+<p></p>
+<ul>
+<li>I$(POCO_BASE)/Foundation/include -I$(POCO_BASE)/XML/include -I$(POCO_BASE)/Util/include -I$(POCO_BASE)/Net/include </li>
+</ul>
+<p> </p>
+<p></p>
+<p>If a new library is being added to POCO, a corresponding entry should be made in the <i>components</i> file, so that the compiler can find its header files. </p>
+<p></p>
+<p></p><h4><a name="31">libversion</a></h4><p>
+</p>
+<p>The content of the file <i>libversion</i>, located in <i>$(POCO_BASE)</i>,  will be stored in the variable <i>$(LIBVERSION)</i>. This variable can be used  in a Makefile as the value for the <i>target_version</i> variable. </p>
+<p></p>
+<p></p><h4><a name="32">Configuring the Build Process</a></h4><p>
+</p>
+<p>The build process is configured by build configuration files,  located in the <i>build/config</i> directory.  Unless specified otherwise, by setting the <i>POCO_CONFIG</i>  environment variable accordingly, the build system selects the  build configuration file with the same name as the host's  operating system (output of <i>uname</i>). If you need support for a  new operating system, or just need to customize an existing configuration,  you'll usually create a new build configuration file (by copying an existing one). </p>
+<p></p>
+<pre>A typical build configuration file looks like this:
+
+#
+# $Id: //poco/1.3/build/config/Linux#4 $
+#
+# Linux
+#
+# Make settings for Linux 2.6/gcc 3.3
+#
+#
+
+#
+# General Settings
+#
+LINKMODE = SHARED
+
+#
+# Define Tools
+#
+CC      = gcc
+CXX     = g++
+LINK    = $(CXX)
+LIB     = ar -cr
+RANLIB  = ranlib
+SHLIB   = $(CXX) -shared -Wl,-soname,$(notdir $@) -o $@
+SHLIBLN = $(POCO_BASE)/build/script/shlibln
+STRIP   = strip
+DEP     = $(POCO_BASE)/build/script/makedepend.gcc 
+SHELL   = sh
+RM      = rm -rf
+CP      = cp
+MKDIR   = mkdir -p
+
+#
+# Extension for Shared Libraries
+#
+SHAREDLIBEXT     = .so.$(target_version)
+SHAREDLIBLINKEXT = .so
+
+#
+# Compiler and Linker Flags
+#
+CFLAGS          = 
+CFLAGS32        =
+CFLAGS64        =
+CXXFLAGS        = -Wall -Wno-sign-compare
+CXXFLAGS32      =
+CXXFLAGS64      =
+LINKFLAGS       =
+LINKFLAGS32     =
+LINKFLAGS64     =
+STATICOPT_CC    =
+STATICOPT_CXX   =
+STATICOPT_LINK  = -static
+SHAREDOPT_CC    = -fPIC
+SHAREDOPT_CXX   = -fPIC
+SHAREDOPT_LINK  = -Wl,-rpath,$(LIBPATH)
+DEBUGOPT_CC     = -g -D_DEBUG
+DEBUGOPT_CXX    = -g -D_DEBUG
+DEBUGOPT_LINK   = -g
+RELEASEOPT_CC   = -O2 -DNDEBUG
+RELEASEOPT_CXX  = -O2 -DNDEBUG
+RELEASEOPT_LINK = -O2
+
+#
+# System Specific Flags
+#
+SYSFLAGS = -D_XOPEN_SOURCE=500 -D_REENTRANT -D_THREAD_SAFE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE -DPOCO_HAVE_FD_EPOLL
+
+#
+# System Specific Libraries
+#
+SYSLIBS  = -lpthread -ldl -lrt
+</pre>
+<p> </p>
+<p>The various settings in the build configuration file are described below. </p>
+<p></p><h3><a name="33">General Settings</a></h3><p>
+</p>
+<p></p><h4><a name="34">LINKMODE</a></h4><p>
+</p>
+<p>This specifies the default link mode, which can have the values  <i>STATIC</i>, <i>SHARED</i> or <i>BOTH</i>. </p>
+<p></p>
+<p></p><h4><a name="35">TOOL</a></h4><p>
+</p>
+<p>For cross builds, <i>TOOL</i> specifies the prefix for the toolchain executables, e.g. </p>
+<p></p>
+<pre>TOOL = arm-unknown-linux-gnu
+</pre>
+<p> </p>
+<p><i>TOOL</i> can later be used in the tool section, as in: </p>
+<p></p>
+<pre>CC  = $(TOOL)-gcc
+CXX = $(TOOL)-g++
+...
+</pre>
+<p> </p>
+<p></p>
+<p></p><h4><a name="36">POCO_TARGET_OSNAME and POCO_TARGET_OSARCH</a></h4><p>
+</p>
+<p>The general settings section is also the right place to define  <i>POCO_TARGET_OSNAME</i> and <i>POCO_TARGET_OSARCH</i> for cross builds. </p>
+<p></p>
+<p></p><h3><a name="37">Tool Definition</a></h3><p>
+</p>
+<p></p><h4><a name="38">CC</a></h4><p>
+</p>
+<p><i>CC</i> specifies the command for invoking the C compiler. </p>
+<p></p>
+<p></p><h4><a name="39">CXX</a></h4><p>
+</p>
+<p><i>CXX</i> specifies the command for invoking the C++ compiler. </p>
+<p></p>
+<p></p><h4><a name="40">LINK</a></h4><p>
+</p>
+<p><i>LINK</i> specifies the command for invoking the link editor. </p>
+<p></p>
+<p></p><h4><a name="41">STRIP</a></h4><p>
+</p>
+<p><i>STRIP</i> specifies the command for invoking the strip utility. </p>
+<p></p>
+<p></p><h4><a name="42">LIB</a></h4><p>
+</p>
+<p><i>LIB</i> specifies the command for invoking the library archiver utility. </p>
+<p></p>
+<p></p><h4><a name="43">RANLIB</a></h4><p>
+</p>
+<p><i>RANLIB</i> specifies the command for invoking the library table of contents updater  utility. </p>
+<p></p>
+<p></p><h4><a name="44">SHLIB</a></h4><p>
+</p>
+<p><i>SHLIB</i> specifies the command for creating shared libraries. </p>
+<p></p>
+<p></p><h4><a name="45">SHLIBLN</a></h4><p>
+</p>
+<p><i>SHLIBLN</i> specifies the command for creating shared library  symbolic links (e.g. <i>libPocoFoundation.so</i> -&gt; <i>libPocoFoundation.so.1</i>) </p>
+<p></p>
+<p></p><h4><a name="46">DEP</a></h4><p>
+</p>
+<p><i>DEP</i> specifies the command for creating or updating the dependencies. This is usually a shell script invoking the C/C++ compiler in a special way to generate a list of dependencies. </p>
+<p></p>
+<p></p><h4><a name="47">SHELL</a></h4><p>
+</p>
+<p><i>SHELL</i> specifies the command for invoking the POSIX shell. </p>
+<p></p>
+<p></p><h4><a name="48">RM</a></h4><p>
+</p>
+<p><i>RM</i> specifies the command for deleting files and directories. </p>
+<p></p>
+<p></p><h4><a name="49">CP</a></h4><p>
+</p>
+<p><i>CP</i> specifies the command for copying files. </p>
+<p></p>
+<p></p><h4><a name="50">MKDIR</a></h4><p>
+</p>
+<p><i>MKDIR</i> specifies the command for creating directories. </p>
+<p></p>
+<p></p><h3><a name="51">Shared Library Extensions</a></h3><p>
+</p>
+<p></p><h4><a name="52">SHAREDLIBEXT</a></h4><p>
+</p>
+<p><i>SHAREDLIBEXT</i> specifies the extension for shared libraries.  This usually includes a version number (e.g. <i>.so.1</i>). </p>
+<p></p>
+<p></p><h4><a name="53">SHAREDLIBLINKEXT</a></h4><p>
+</p>
+<p><i>SHAREDLIBLINKEXT</i> specifies the extension for shared library  symbolic links. (e.g., <i>.so</i>) </p>
+<p></p>
+<p></p><h3><a name="54">Compiler and Linker Flags</a></h3><p>
+</p>
+<p></p><h4><a name="55">CFLAGS</a></h4><p>
+</p>
+<p><i>CFLAGS</i> specifies additional flags passed to the C compiler. </p>
+<p></p>
+<p></p><h4><a name="56">CFLAGS32</a></h4><p>
+</p>
+<p><i>CFLAGS32</i> specifies additional flags passed to the C compiler  if compiling in 32 bit mode. </p>
+<p></p>
+<p></p><h4><a name="57">CFLAGS64</a></h4><p>
+</p>
+<p><i>CFLAGS64</i> specifies additional flags passed to the C compiler  if compiling in 64 bit mode. </p>
+<p></p>
+<p></p><h4><a name="58">CXXFLAGS</a></h4><p>
+</p>
+<p><i>CXXFLAGS</i> specifies additional flags passed to the C++ compiler. </p>
+<p></p>
+<p></p><h4><a name="59">CXXFLAGS32</a></h4><p>
+</p>
+<p><i>CXXFLAGS32</i> specifies additional flags passed to the C++ compiler if  compiling in 32 bit mode. </p>
+<p></p>
+<p></p><h4><a name="60">CXXFLAGS64</a></h4><p>
+</p>
+<p><i>CXXFLAGS64</i> specifies additional flags passed to the C++ compiler if  compiling in 64 bit mode. </p>
+<p></p>
+<p></p><h4><a name="61">LINKFLAGS</a></h4><p>
+</p>
+<p><i>LINKFLAGS</i> specifies additional flags passed to the linker. </p>
+<p></p>
+<p></p><h4><a name="62">LINKFLAGS32</a></h4><p>
+</p>
+<p><i>LINKFLAGS32</i> specifies additional flags passed to the linker if  compiling in 32 bit mode. </p>
+<p></p>
+<p></p><h4><a name="63">LINKFLAGS64</a></h4><p>
+</p>
+<p><i>LINKFLAGS64</i> specifies additional flags passed to the linker if  compiling in 64 bit mode. </p>
+<p></p>
+<p></p><h4><a name="64">STATICOPT_CC</a></h4><p>
+</p>
+<p><i>STATICOPT_CC</i> specifies additonal flags passed to the C compiler  if compiling for static linking. </p>
+<p></p>
+<p></p><h4><a name="65">STATICOPT_CXX</a></h4><p>
+</p>
+<p><i>STATICOPT_CXX</i> specifies additonal flags passed to the C++ compiler if  compiling for static linking. </p>
+<p></p>
+<p></p><h4><a name="66">STATICOPT_LINK</a></h4><p>
+</p>
+<p><i>STATICOPT_LINK</i> specifies additonal flags passed to the linker for  static linking. </p>
+<p></p>
+<p></p><h4><a name="67">SHAREDOPT_CC</a></h4><p>
+</p>
+<p><i>SHAREDOPT_CC</i> specifies additonal flags passed to the C compiler if  compiling for dynamic linking. </p>
+<p></p>
+<p></p><h4><a name="68">SHAREDOPT_CXX</a></h4><p>
+</p>
+<p><i>SHAREDOPT_CXX</i> specifies additonal flags passed to the C++ compiler if  compiling for dynamic linking. </p>
+<p></p>
+<p></p><h4><a name="69">SHAREDOPT_LINK</a></h4><p>
+</p>
+<p><i>SHAREDOPT_LINK</i> specifies additonal flags passed to the linker for dynamic linking. </p>
+<p></p>
+<p></p><h4><a name="70">DEBUGOPT_CC</a></h4><p>
+</p>
+<p><i>DEBUGOPT_CC</i> specifies additional flags passed to the C compiler if compiling in debug mode. </p>
+<p></p>
+<p></p><h4><a name="71">DEBUGOPT_CXX</a></h4><p>
+</p>
+<p><i>DEBUGOPT_CXX</i> specifies additional flags passed to the C++ compiler if compiling in debug mode. </p>
+<p></p>
+<p></p><h4><a name="72">DEBUGOPT_LINK</a></h4><p>
+</p>
+<p><i>DEBUGOPT_LINK</i> specifies additional flags passed to the linker if linking in debug mode. </p>
+<p></p>
+<p></p><h4><a name="73">RELEASEOPT_CC</a></h4><p>
+</p>
+<p><i>RELEASEOPT_CC</i> specifies additional flags passed to the C compiler if compiling in release mode. </p>
+<p></p>
+<p></p><h4><a name="74">RELEASEOPT_CXX</a></h4><p>
+</p>
+<p><i>RELEASEOPT_CXX</i> specifies additional flags passed to the C++ compiler if compiling in release mode. </p>
+<p></p>
+<p></p><h4><a name="75">RELEASEOPT_LINK</a></h4><p>
+</p>
+<p><i>RELEASEOPT_LINK</i> specifies additional flags passed to the linker if linking in release mode. </p>
+<p></p>
+<p></p><h3><a name="76">System Specific Flags</a></h3><p>
+</p>
+<p></p><h4><a name="77">SYSFLAGS</a></h4><p>
+</p>
+<p><i>SYSFLAGS</i> specifies flags passed to both the C and C++ compiler. This usually contains system-specific include paths and settings such as -D_XOPEN_SOURCE=500 or -D_THREAD_SAFE. </p>
+<p></p>
+<p></p><h4><a name="78">SYSLIBS</a></h4><p>
+</p>
+<p><i>SYSLIBS</i> specifies flags passed to the linker. Usually, this flags specify system-specific libraries, such as -lpthread or -ldl. </p>
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+</body>
+</html>

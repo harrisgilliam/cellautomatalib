@@ -1,0 +1,91 @@
+#ifndef _Pipecomm_H_
+#define _Pipecomm_H_
+
+#include <CAM++.H>
+
+#include "std++.H"
+
+extern "C" {
+#include <stdio.h>
+}
+
+/*****************************************************************************/
+/********************************* DEFINES ***********************************/
+/*****************************************************************************/
+#define CAM_PIPEALL	1    /* Everything is fine, process all messages    */
+#define CAM_PIPENONE	2    /* No messages processed			    */
+#define CAM_PIPEPAUSE	4    /* No messages processed, reply on hold	    */
+#define CAM_PIPESILENT	256  /* Don't send internal error codes to forth    */
+#define CAM_PIPEVERBOSE 512  /* Send internal error codes to forth	    */
+#define CAM_PIPEHDPLX   1024 /* Half Duplex, return codes sent by user      */
+#define CAM_PIPEFDPLX   2048 /* Full Duplex, return codes sent by ParseMesg */
+
+#ifdef __cplusplus
+/*****************************************************************************/
+/******************************** TEMPLATES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/*************************** CLASSES & TYPEDEFS ******************************/
+/*****************************************************************************/
+struct Cmdt {
+  unsigned char opcode[5];
+  unsigned char * (*Do)(void *, unsigned char *, unsigned char *);
+};
+typedef Cmdt *CMDT;
+
+class Pipecomm {
+public:
+  struct Modestat {
+    unsigned char mode : 4;
+    unsigned char verbose : 1;
+    unsigned char fdplx : 1;
+    
+    Modestat(void) : mode(CAM_PIPEALL), verbose(0), fdplx(1) { }
+    Modestat(int m, int v, int d) : mode(m), verbose(v), fdplx(d) { }
+  };
+
+  int infd, outfd;
+  CMDT cmdt;
+  Modestat modestat;
+
+
+  Pipecomm(int = -1, int = -1, CMDT = NULL);
+  virtual ~Pipecomm(void);
+
+  DECL_BZERO(Pipecomm)
+
+
+  void SetPipeDescriptors(int, int);
+  void SetPipeCmdTable(CMDT);
+  void SetPipeMode(int);
+  int ParsePipeMesg(void *);
+  int SendPipeCommand(unsigned char *, unsigned char *);
+  int GetPipeResponse(unsigned char *, unsigned char *);
+  int TwoWayPipeCmd(char *, unsigned char *, unsigned char *, unsigned char *,
+		    unsigned char *);
+  int SendPipeMesg(unsigned char *);
+  
+  void sendmesg(int);
+
+private:
+  static unsigned char dummy[9];
+};
+typedef Pipecomm *PIPECOMM;
+
+/*****************************************************************************/
+/********************************* INLINES ***********************************/
+/*****************************************************************************/
+
+
+#endif
+/*****************************************************************************/
+/******************************* PROTOTYPES **********************************/
+/*****************************************************************************/
+
+/*****************************************************************************/
+/********************************* GLOBALS ***********************************/
+/*****************************************************************************/
+
+#endif

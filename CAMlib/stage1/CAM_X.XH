@@ -1,0 +1,73 @@
+#ifndef _CAM_X_H_
+#define _CAM_X_H_
+
+/*****************************************************************************/
+/****************************** DEFINES **************************************/
+/*****************************************************************************/
+#define CAM_XGreyMap(cmap) CAM_XGrayMap(cmap)
+
+
+/*****************************************************************************/
+/***************************** TYPEDEFS **************************************/
+/*****************************************************************************/
+typedef struct XCAM_mapentry {
+  unsigned short i, r, g, b;
+} MapEntry, *MAPENTRY;
+
+typedef struct XCAM_cmap {
+  int shmid, desc;
+  MAPENTRY map;
+} XCamCmap, *XCAMCMAP;
+
+typedef struct XCAM_image {
+  int shmid, desc;
+  char *img;
+} XCamImag, *XCAMIMAG;
+
+typedef struct XCAM_pipe {
+  int pid;
+  int rd, wr;
+} XCamPipe, *XCAMPIPE;
+
+typedef void (*XCAMCMAPFUNC)(int, unsigned short *, unsigned short *, 
+			     unsigned short *);
+
+
+
+/*****************************************************************************/
+/**************************** PROTOTYPES *************************************/
+/*****************************************************************************/
+extern "C" {
+  int CAM_XShmAlloc(int *, char **, int , key_t);
+  void CAM_XShmFree(int, char *);
+  int CAM_XShmi(int, int, int *, int);
+  int CAM_XShmc(int, int, int *, int);
+  int CAM_XKeri(int, int, int *, int);
+  int CAM_XKerc(int, int, int *, int);
+  int CAM_XGlbx(int, int, int);
+  int CAM_XGlby(int, int, int);
+  int CAM_XAply(int, int, int);
+  int CAM_XFree(int, int, int);
+  int CAM_XQuit(int, int);
+  int CAM_XStart(XCAMPIPE);
+  int CAM_XFinish(XCAMPIPE);
+  int CAM_XCreateImage(XCAMPIPE, int, int, XCAMIMAG);
+  int CAM_XDestroyImage(XCAMPIPE, XCAMIMAG);
+  int CAM_XCreateColormap(XCAMPIPE, XCAMCMAP);
+  int CAM_XDestroyColormap(XCAMPIPE, XCAMCMAP);
+  int CAM_XDisplayImage(XCAMPIPE, XCAMIMAG);
+  int CAM_XUseColormap(XCAMPIPE, XCAMCMAP);
+  void CAM_XGrayMap(XCAMCMAP);
+  void CAM_XFuncToMap(XCAMCMAP, XCAMCMAPFUNC);
+#ifdef _XLIB_H_
+  void CAM_SendKeyString(XKeyEvent *, FILE *);
+#endif
+}
+
+
+/*****************************************************************************/
+/***************************** GLOBALS ***************************************/
+/*****************************************************************************/
+
+
+#endif

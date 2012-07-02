@@ -1,0 +1,64 @@
+#ifndef _CAM_util_h_
+#define _CAM_util_h_
+
+#include <CAM/CAM_objects.h>
+
+
+/*****************************************************************************/
+/****************************** DEFINES **************************************/
+/*****************************************************************************/
+#define llhead(l)	(l)->head
+#define lltail(l)	(l)->tail
+#define llcur(l)	(l)->ce
+#define llsize(l)	(l)->sz
+#define lldata(e)	(e)->data
+#define llnext(e)	(e)->fl
+#define llprev(e)	(e)->bl
+#define llcreate	_llcreate
+#define lldestroy(l)	_lldestroy(l)
+#define lladdlast(l,d)	_lladdlast((l), (char *)(d))
+#define lladdfirst(l,d)	_lladdfirst((l), (char *)(d))
+#define llremove(l,d)	_llremove((l), (char *)(d))
+#define llfind(l,d)	_llfind((l), (char *)(d))
+#define BIT8		1
+#define BIT16		2
+#define BIT32		4
+
+
+
+/*****************************************************************************/
+/***************************** TYPEDEFS **************************************/
+/*****************************************************************************/
+
+
+
+/*****************************************************************************/
+/**************************** PROTOTYPES *************************************/
+/*****************************************************************************/
+void UnpackBits(unsigned short *, int, int, int, unsigned char *, int);
+void UnpackAllPlanes(unsigned short *, int, int, long[]);
+void PackBits(unsigned short *, int, int, unsigned char *, int);
+void PackConstantAllPlanes(unsigned short *, int, long);
+void PackConstantPlanes(unsigned short *, int, int, long);
+void PackAllPlanes(unsigned short *, int, long *);
+Spec GetSpec(int);
+LL _llcreate();
+LLE _llfind(LL, char *);
+void _lldestroy(LL);
+void _lladdlast(LL, char *);
+void _lladdfirst(LL, char *);
+void _llremove(LL, char *);
+int choose_dcp(long), choose_ppc(long), choose_mpc(long);
+void print_steplist(CAM8, STEPLIST);
+int page_round(int);
+int sizteen_round(int);
+int count_ones(long);
+
+
+
+/*****************************************************************************/
+/***************************** GLOBALS ***************************************/
+/*****************************************************************************/
+
+
+#endif

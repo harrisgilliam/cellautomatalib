@@ -1,0 +1,302 @@
+#ifndef _Tube_H_
+#define _Tube_H_
+
+#include <CAM++.H>
+
+#include "std++.H"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <stdarg.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/socket.h>
+#include <sys/time.h>
+#include <netinet/in.h>
+
+  int recvfrom(int, char *, int, int, struct sockaddr *, int *);
+
+#ifdef __cplusplus
+}
+#endif
+
+/*****************************************************************************/
+/********************************* DEFINES ***********************************/
+/*****************************************************************************/
+
+
+#ifdef __cplusplus
+/*****************************************************************************/
+/******************************** TEMPLATES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/*************************** CLASSES & TYPEDEFS ******************************/
+/*****************************************************************************/
+class Socket {
+public:
+  int sd;
+  int alen;
+  struct sockaddr_in sa;
+
+  Socket(void);
+  virtual ~Socket(void);
+
+  DECL_BZERO(Socket)
+  DECL_BCOPY(Socket)
+  DECL_BCMP(Socket)
+
+  void mimic(const Socket &);
+  void mimic(const Socket *);
+
+  inline int NEW(void);
+};
+typedef Socket *SOCKET;
+
+class Message {
+public:
+  char opcode[6];
+  union {
+    int i;
+    char c[sizeof(int)];
+  } len;
+  struct iovec iov[MSG_MAXIOVLEN];
+  struct msghdr data;
+
+  Message(void);
+  ~Message(void);
+
+  DECL_BZERO(Message)
+  DECL_BCOPY(Message)
+  DECL_BCMP(Message)
+
+  void mimic(const Message &);
+  void mimic(const Message *);
+
+  inline int & IOVLEN(void);
+  inline int EMPTY(void);
+  inline struct iovec & IOV(int);
+  inline caddr_t & BASE(int);
+  inline int & LEN(int);
+  inline void RESET(void);
+  inline void ADD(caddr_t, int);
+};
+typedef Message *MESSAGE;
+
+class Tube {
+public:
+  enum { NReuse = 0, Reuse = 1};
+  enum { Udp = 0, Tcp = 1 };
+
+  SOCKET s1;
+  SOCKET s2;
+  int type;
+  int port;
+  int qlen;
+  struct timeval *time;
+  char *host;
+
+  Tube(void);
+  Tube(int, int);
+  virtual ~Tube(void);
+
+  DECL_BZERO(Tube)
+
+  virtual void mimic(const Tube &);
+  virtual void mimic(const Tube *);
+
+  virtual void Client(char *, int);
+  virtual void Connect(void);
+  virtual void Connect(char *, int);
+  virtual void Connect(va_list);
+  virtual void Server(int, int);
+  virtual void Accept(va_list);
+  virtual void Accept(int = -1, int = -1);
+  virtual void SetTimeout(unsigned int, unsigned int);
+  virtual Tube * Split(void);
+  virtual int SendMessage(MESSAGE);
+  virtual int Send(char *, ...);
+  virtual int Send(char *, va_list);
+  virtual int ReadOpcode(MESSAGE);
+  virtual int ReadLength(MESSAGE);
+  virtual int ReadInfo(MESSAGE);
+  virtual int ReadData(MESSAGE);
+  virtual int Receive(MESSAGE);
+  virtual void Close(void);
+
+
+protected:
+  void bind_tube(void);
+  int select_test(int, struct timeval *);
+
+  inline void SET_USED(void);
+  inline void SET_UNUSED(void);
+  inline int USED(void);
+  inline void SET_BOUND(void);
+  inline void SET_UNBOUND(void);
+  inline int BOUND(void);
+  inline void SET_CONNECTED(void);
+  inline void SET_UNCONNECTED(void);
+  inline int CONNECTED(void);
+  inline int REUSABLE(void);
+  inline int TCP(void);
+  inline int cond_recvfrom(char *, int, struct sockaddr *, int *);
+  inline int sure_recvfrom(char *, int, struct sockaddr *, int *);
+};
+typedef Tube *TUBE;
+
+/*****************************************************************************/
+/********************************* INLINES ***********************************/
+/*****************************************************************************/
+inline int & Message::IOVLEN(void)
+{
+  return(data.msg_iovlen);
+}
+
+inline int Message::EMPTY(void)
+{
+  return(IOVLEN() == 2);
+}
+
+inline struct iovec & Message::IOV(int i)
+{
+  return(data.msg_iov[i]);
+}
+
+inline caddr_t & Message::BASE(int i)
+{
+  return(IOV(i).iov_base);
+}
+
+inline int & Message::LEN(int i)
+{
+  return(IOV(i).iov_len);
+}
+
+inline void Message::RESET(void)
+{
+  data.msg_iovlen = 2;
+  memset(opcode, 0, 6);
+  len.i = 0;
+}
+
+inline void Message::ADD(caddr_t b, int l)
+{
+  data.msg_iov[IOVLEN()].iov_base = b;
+  data.msg_iov[IOVLEN()].iov_len = l;
+  IOVLEN()++;
+}
+
+inline int Socket::NEW(void)
+{
+  return(sd == -1);
+}
+
+inline void Tube::SET_USED(void)
+{
+  type |= 0x1;
+}
+
+inline void Tube::SET_UNUSED(void)
+{
+  type &= ~0x1;
+}
+
+inline int Tube::USED(void)
+{
+  return((type & 0x1) == 0x1);
+}
+
+inline void Tube::SET_BOUND(void)
+{
+  type |= 0x2;
+}
+
+inline void Tube::SET_UNBOUND(void)
+{
+  type &= ~0x2;
+}
+
+inline int Tube::BOUND(void)
+{
+  return((type & 0x2) == 0x2);
+}
+
+inline void Tube::SET_CONNECTED(void)
+{
+  type |= 0x8;
+}
+
+inline void Tube::SET_UNCONNECTED(void)
+{
+  type &= ~0x8;
+}
+
+inline int Tube::CONNECTED(void)
+{
+  return((type & 0x8) == 0x8);
+}
+
+inline int Tube::REUSABLE(void)
+{
+  return((type & 0x4) == 0x4);
+}
+
+inline int Tube::TCP(void)
+{
+  return((type & 0x10) == 0x10);
+}
+
+inline int Tube::cond_recvfrom(char *b, int len, struct sockaddr *from,
+			       int *fromlen)
+{
+  int r;
+  CAM_tb.ENTER("Tube::cond_recvfrom");
+
+  if (select_test(s2->sd, time) == 0) {
+    CAM_tb.LEAVE();
+    return(0);
+  }
+
+  CamAbort((r = recvfrom(s2->sd, b, len, 0, from, fromlen)) == -1,
+	   "recvfrom call failed");
+
+  CAM_tb.LEAVE();
+  return(r);
+}
+
+inline int Tube::sure_recvfrom(char *b, int len, struct sockaddr *from,
+			       int *fromlen)
+{
+  int tr, ar;
+  CAM_tb.ENTER("sure_recvfrom");
+
+  tr = cond_recvfrom(b, len, from, fromlen);
+
+  while (tr != len) {
+    tr += (ar = cond_recvfrom(b + tr, len - tr, from, fromlen));
+    if (ar == 0) {
+      CAM_tb.LEAVE();
+      return(0);
+    }
+  }
+
+  CAM_tb.LEAVE();
+  return(tr);
+}
+
+
+#endif
+/*****************************************************************************/
+/******************************* PROTOTYPES **********************************/
+/*****************************************************************************/
+
+/*****************************************************************************/
+/********************************* GLOBALS ***********************************/
+/*****************************************************************************/
+
+
+#endif

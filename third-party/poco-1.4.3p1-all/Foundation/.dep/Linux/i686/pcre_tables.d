@@ -1,0 +1,2 @@
+/storage/Projects/cellautomatalib/third-party/poco-1.4.3p1-all/Foundation/obj/Linux/i686/debug_static/pcre_tables.o /storage/Projects/cellautomatalib/third-party/poco-1.4.3p1-all/Foundation/obj/Linux/i686/release_static/pcre_tables.o /storage/Projects/cellautomatalib/third-party/poco-1.4.3p1-all/Foundation/obj/Linux/i686/debug_shared/pcre_tables.o /storage/Projects/cellautomatalib/third-party/poco-1.4.3p1-all/Foundation/obj/Linux/i686/release_shared/pcre_tables.o: src/pcre_tables.c src/pcre_config.h src/pcre_internal.h \
+ src/pcre.h src/ucp.h

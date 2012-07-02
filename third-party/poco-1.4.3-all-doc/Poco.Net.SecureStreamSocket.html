@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Net::SecureStreamSocket</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Net.html" class="namespace">Poco::Net</a></h1>
+<h1 class="symbol">class SecureStreamSocket</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> NetSSL_OpenSSL<br />
+<b>Package:</b> SSLSockets<br />
+<b>Header:</b> Poco/Net/SecureStreamSocket.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>A subclass of <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> for secure SSL sockets. </p>
+<p>A few notes about nonblocking IO: sendBytes() and receiveBytes() can return a negative value when using a nonblocking socket, which means  a SSL handshake is currently in progress and more data needs to be read or written for the handshake to continue. If sendBytes() or receiveBytes() return <a href="Poco.Net.SecureStreamSocket.html#17001" title="Poco::Net::SecureStreamSocket::ERR_SSL_WANT_WRITE">ERR_SSL_WANT_WRITE</a>, sendBytes() must be called as soon as possible (usually, after select() indicates that data can be written). Likewise, if <a href="Poco.Net.SecureStreamSocket.html#17000" title="Poco::Net::SecureStreamSocket::ERR_SSL_WANT_READ">ERR_SSL_WANT_READ</a> is returned, receiveBytes() must be called as soon as data is available for reading (indicated by select()). </p>
+<p>The SSL handshake is delayed until the first sendBytes() or  receiveBytes() operation is performed on the socket. No automatic post connection check (checking the peer certificate for a valid hostname) is performed when using nonblocking I/O. To manually perform peer certificate validation, call <a href="Poco.Net.SecureStreamSocket.html#17064" title="Poco::Net::SecureStreamSocket::verifyPeerCertificate()">verifyPeerCertificate</a>() after the SSL handshake has been completed. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a></p>
+<p><b>All Base Classes: </b><a href="Poco.Net.Socket.html" title="class Poco::Net::Socket">Socket</a>, <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Net.SecureStreamSocket.html#17072" title="Poco::Net::SecureStreamSocket::abort()">abort</a>, <a href="Poco.Net.SecureStreamSocket.html#17039" title="Poco::Net::SecureStreamSocket::attach()">attach</a>, <a href="Poco.Net.SecureStreamSocket.html#17067" title="Poco::Net::SecureStreamSocket::completeHandshake()">completeHandshake</a>, <a href="Poco.Net.SecureStreamSocket.html#17060" title="Poco::Net::SecureStreamSocket::context()">context</a>, <a href="Poco.Net.SecureStreamSocket.html#17068" title="Poco::Net::SecureStreamSocket::currentSession()">currentSession</a>, <a href="Poco.Net.SecureStreamSocket.html#17063" title="Poco::Net::SecureStreamSocket::getLazyHandshake()">getLazyHandshake</a>, <a href="Poco.Net.SecureStreamSocket.html#17038" title="Poco::Net::SecureStreamSocket::getPeerHostName()">getPeerHostName</a>, <a href="Poco.Net.SecureStreamSocket.html#17034" title="Poco::Net::SecureStreamSocket::havePeerCertificate()">havePeerCertificate</a>, <a href="Poco.Net.SecureStreamSocket.html#17032" title="Poco::Net::SecureStreamSocket::operator =()">operator&nbsp;=</a>, <a href="Poco.Net.SecureStreamSocket.html#17035" title="Poco::Net::SecureStreamSocket::peerCertificate()">peerCertificate</a>, <a href="Poco.Net.SecureStreamSocket.html#17071" title="Poco::Net::SecureStreamSocket::sessionWasReused()">sessionWasReused</a>, <a href="Poco.Net.SecureStreamSocket.html#17061" title="Poco::Net::SecureStreamSocket::setLazyHandshake()">setLazyHandshake</a>, <a href="Poco.Net.SecureStreamSocket.html#17036" title="Poco::Net::SecureStreamSocket::setPeerHostName()">setPeerHostName</a>, <a href="Poco.Net.SecureStreamSocket.html#17069" title="Poco::Net::SecureStreamSocket::useSession()">useSession</a>, <a href="Poco.Net.SecureStreamSocket.html#17064" title="Poco::Net::SecureStreamSocket::verifyPeerCertificate()">verifyPeerCertificate</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.Net.Socket.html#15656" title="Poco::Net::Socket::address()">address</a>, <a href="Poco.Net.Socket.html#15579" title="Poco::Net::Socket::available()">available</a>, <a href="Poco.Net.Socket.html#15570" title="Poco::Net::Socket::close()">close</a>, <a href="Poco.Net.StreamSocket.html#16087" title="Poco::Net::StreamSocket::connect()">connect</a>, <a href="Poco.Net.StreamSocket.html#16092" title="Poco::Net::StreamSocket::connectNB()">connectNB</a>, <a href="Poco.Net.Socket.html#15655" title="Poco::Net::Socket::getBlocking()">getBlocking</a>, <a href="Poco.Net.Socket.html#15643" title="Poco::Net::Socket::getKeepAlive()">getKeepAlive</a>, <a href="Poco.Net.Socket.html#15635" title="Poco::Net::Socket::getLinger()">getLinger</a>, <a href="Poco.Net.Socket.html#15640" title="Poco::Net::Socket::getNoDelay()">getNoDelay</a>, <a href="Poco.Net.Socket.html#15652" title="Poco::Net::Socket::getOOBInline()">getOOBInline</a>, <a href="Poco.Net.Socket.html#15612" title="Poco::Net::Socket::getOption()">getOption</a>, <a href="Poco.Net.Socket.html#15585" title="Poco::Net::Socket::getReceiveBufferSize()">getReceiveBufferSize</a>, <a href="Poco.Net.Socket.html#15591" title="Poco::Net::Socket::getReceiveTimeout()">getReceiveTimeout</a>, <a href="Poco.Net.Socket.html#15646" title="Poco::Net::Socket::getReuseAddress()">getReuseAddress</a>, <a href="Poco.Net.Socket.html#15649" title="Poco::Net::Socket::getReusePort()">getReusePort</a>, <a href="Poco.Net.Socket.html#15582" title="Poco::Net::Socket::getSendBufferSize()">getSendBufferSize</a>, <a href="Poco.Net.Socket.html#15588" title="Poco::Net::Socket::getSendTimeout()">getSendTimeout</a>, <a href="Poco.Net.Socket.html#15658" title="Poco::Net::Socket::impl()">impl</a>, <a href="Poco.Net.Socket.html#15560" title="Poco::Net::Socket::operator !=()">operator&nbsp;!=</a>, <a href="Poco.Net.Socket.html#15562" title="Poco::Net::Socket::operator <()">operator&nbsp;&lt;</a>, <a href="Poco.Net.Socket.html#15564" title="Poco::Net::Socket::operator <=()">operator&nbsp;&lt;=</a>, <a href="Poco.Net.Socket.html#15555" title="Poco::Net::Socket::operator =()">operator&nbsp;=</a>, <a href="Poco.Net.Socket.html#15558" title="Poco::Net::Socket::operator ==()">operator&nbsp;==</a>, <a href="Poco.Net.Socket.html#15566" title="Poco::Net::Socket::operator >()">operator&nbsp;&gt;</a>, <a href="Poco.Net.Socket.html#15568" title="Poco::Net::Socket::operator >=()">operator&nbsp;&gt;=</a>, <a href="Poco.Net.Socket.html#15657" title="Poco::Net::Socket::peerAddress()">peerAddress</a>, <a href="Poco.Net.Socket.html#15576" title="Poco::Net::Socket::poll()">poll</a>, <a href="Poco.Net.StreamSocket.html#16101" title="Poco::Net::StreamSocket::receiveBytes()">receiveBytes</a>, <a href="Poco.Net.Socket.html#15659" title="Poco::Net::Socket::secure()">secure</a>, <a href="Poco.Net.Socket.html#15571" title="Poco::Net::Socket::select()">select</a>, <a href="Poco.Net.StreamSocket.html#16097" title="Poco::Net::StreamSocket::sendBytes()">sendBytes</a>, <a href="Poco.Net.StreamSocket.html#16105" title="Poco::Net::StreamSocket::sendUrgent()">sendUrgent</a>, <a href="Poco.Net.Socket.html#15653" title="Poco::Net::Socket::setBlocking()">setBlocking</a>, <a href="Poco.Net.Socket.html#15641" title="Poco::Net::Socket::setKeepAlive()">setKeepAlive</a>, <a href="Poco.Net.Socket.html#15632" title="Poco::Net::Socket::setLinger()">setLinger</a>, <a href="Poco.Net.Socket.html#15638" title="Poco::Net::Socket::setNoDelay()">setNoDelay</a>, <a href="Poco.Net.Socket.html#15650" title="Poco::Net::Socket::setOOBInline()">setOOBInline</a>, <a href="Poco.Net.Socket.html#15592" title="Poco::Net::Socket::setOption()">setOption</a>, <a href="Poco.Net.Socket.html#15583" title="Poco::Net::Socket::setReceiveBufferSize()">setReceiveBufferSize</a>, <a href="Poco.Net.Socket.html#15589" title="Poco::Net::Socket::setReceiveTimeout()">setReceiveTimeout</a>, <a href="Poco.Net.Socket.html#15644" title="Poco::Net::Socket::setReuseAddress()">setReuseAddress</a>, <a href="Poco.Net.Socket.html#15647" title="Poco::Net::Socket::setReusePort()">setReusePort</a>, <a href="Poco.Net.Socket.html#15580" title="Poco::Net::Socket::setSendBufferSize()">setSendBufferSize</a>, <a href="Poco.Net.Socket.html#15586" title="Poco::Net::Socket::setSendTimeout()">setSendTimeout</a>, <a href="Poco.Net.StreamSocket.html#16096" title="Poco::Net::StreamSocket::shutdown()">shutdown</a>, <a href="Poco.Net.StreamSocket.html#16094" title="Poco::Net::StreamSocket::shutdownReceive()">shutdownReceive</a>, <a href="Poco.Net.StreamSocket.html#16095" title="Poco::Net::StreamSocket::shutdownSend()">shutdownSend</a>, <a href="Poco.Net.Socket.html#15664" title="Poco::Net::Socket::sockfd()">sockfd</a>, <a href="Poco.Net.Socket.html#15660" title="Poco::Net::Socket::supportsIPv4()">supportsIPv4</a>, <a href="Poco.Net.Socket.html#15661" title="Poco::Net::Socket::supportsIPv6()">supportsIPv6</a></p>
+<h2>Enumerations</h2>
+<h3><i>Anonymous</i></h3>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="17000">ERR_SSL_WANT_READ</a> = - 1</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="17001">ERR_SSL_WANT_WRITE</a> = - 2</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Constructors</h2>
+<h3><a name="17002">SecureStreamSocket</a></h3>
+<p class="decl"><a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a>();</p>
+<div class="description">
+<p>Creates an unconnected secure stream socket using the default client SSL context. </p>
+<p>Before sending or receiving data, the socket must be connected with a call to connect(). </p>
+</div>
+<h3><a name="17003">SecureStreamSocket</a></h3>
+<p class="decl">explicit <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Context.html#16450" title="Poco::Net::Context::Ptr">Context::Ptr</a> pContext<br />);</p>
+<div class="description">
+<p>Creates an unconnected secure stream socket using the given SSL context. </p>
+<p>Before sending or receiving data, the socket must be connected with a call to connect(). </p>
+</div>
+<h3><a name="17008">SecureStreamSocket</a></h3>
+<p class="decl">explicit <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.SocketAddress.html" title="class Poco::Net::SocketAddress">SocketAddress</a> &amp; address<br />);</p>
+<div class="description">
+<p>Creates a secure stream socket using the default  client SSL context and connects it to the socket specified by address. </p>
+</div>
+<h3><a name="17029">SecureStreamSocket</a></h3>
+<p class="decl"><a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.Socket.html" title="class Poco::Net::Socket">Socket</a> &amp; socket<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a> with the <a href="Poco.Net.SocketImpl.html" title="class Poco::Net::SocketImpl">SocketImpl</a> from another socket. The <a href="Poco.Net.SocketImpl.html" title="class Poco::Net::SocketImpl">SocketImpl</a> must be a <a href="Poco.Net.SecureStreamSocketImpl.html" title="class Poco::Net::SecureStreamSocketImpl">SecureStreamSocketImpl</a>, otherwise an <a href="Poco.InvalidArgumentException.html" title="class Poco::InvalidArgumentException">InvalidArgumentException</a> will be thrown. </p>
+</div>
+<h3><a name="17005">SecureStreamSocket</a></h3>
+<p class="decl"><a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Context.html#16450" title="Poco::Net::Context::Ptr">Context::Ptr</a> pContext,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Session.html#17158" title="Poco::Net::Session::Ptr">Session::Ptr</a> pSession<br />);</p>
+<div class="description">
+<p>Creates an unconnected secure stream socket using the given SSL context. </p>
+<p>Before sending or receiving data, the socket must be connected with a call to connect(). </p>
+<p>The given <a href="Poco.Net.Session.html" title="class Poco::Net::Session">Session</a> is reused, if possible (client session caching is enabled for the given <a href="Poco.Net.Context.html" title="class Poco::Net::Context">Context</a>, and the server agrees to reuse the session). </p>
+</div>
+<h3><a name="17010">SecureStreamSocket</a></h3>
+<p class="decl"><a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.SocketAddress.html" title="class Poco::Net::SocketAddress">SocketAddress</a> &amp; address,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Context.html#16450" title="Poco::Net::Context::Ptr">Context::Ptr</a> pContext<br />);</p>
+<div class="description">
+<p>Creates a secure stream socket using the given  client SSL context and connects it to the socket specified by address. </p>
+</div>
+<h3><a name="17017">SecureStreamSocket</a></h3>
+<p class="decl"><a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.SocketAddress.html" title="class Poco::Net::SocketAddress">SocketAddress</a> &amp; address,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; hostName<br />);</p>
+<div class="description">
+<p>Creates a secure stream socket using the default  client SSL context and connects it to the socket specified by address. </p>
+<p>The given host name is used for certificate verification. </p>
+</div>
+<h3><a name="17013">SecureStreamSocket</a></h3>
+<p class="decl"><a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.SocketAddress.html" title="class Poco::Net::SocketAddress">SocketAddress</a> &amp; address,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Context.html#16450" title="Poco::Net::Context::Ptr">Context::Ptr</a> pContext,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Session.html#17158" title="Poco::Net::Session::Ptr">Session::Ptr</a> pSession<br />);</p>
+<div class="description">
+<p>Creates a secure stream socket using the given  client SSL context and connects it to the socket specified by address. </p>
+<p>The given <a href="Poco.Net.Session.html" title="class Poco::Net::Session">Session</a> is reused, if possible (client session caching is enabled for the given <a href="Poco.Net.Context.html" title="class Poco::Net::Context">Context</a>, and the server agrees to reuse the session). </p>
+</div>
+<h3><a name="17020">SecureStreamSocket</a></h3>
+<p class="decl"><a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.SocketAddress.html" title="class Poco::Net::SocketAddress">SocketAddress</a> &amp; address,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; hostName,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Context.html#16450" title="Poco::Net::Context::Ptr">Context::Ptr</a> pContext<br />);</p>
+<div class="description">
+<p>Creates a secure stream socket using the given  client SSL context and connects it to the socket specified by address. </p>
+<p>The given host name is used for certificate verification. </p>
+</div>
+<h3><a name="17024">SecureStreamSocket</a></h3>
+<p class="decl"><a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.SocketAddress.html" title="class Poco::Net::SocketAddress">SocketAddress</a> &amp; address,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; hostName,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Context.html#16450" title="Poco::Net::Context::Ptr">Context::Ptr</a> pContext,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Session.html#17158" title="Poco::Net::Session::Ptr">Session::Ptr</a> pSession<br />);</p>
+<div class="description">
+<p>Creates a secure stream socket using the given  client SSL context and connects it to the socket specified by address. </p>
+<p>The given host name is used for certificate verification. </p>
+<p>The given <a href="Poco.Net.Session.html" title="class Poco::Net::Session">Session</a> is reused, if possible (client session caching is enabled for the given <a href="Poco.Net.Context.html" title="class Poco::Net::Context">Context</a>, and the server agrees to reuse the session). </p>
+</div>
+<h3><a name="17073">SecureStreamSocket</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.SocketImpl.html" title="class Poco::Net::SocketImpl">SocketImpl</a> * pImpl<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="17031">~SecureStreamSocket</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual ~<a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="17072">abort</a></h3>
+<p class="decl">void abort();</p>
+<div class="description">
+<p>Aborts the SSL connection by closing the underlying TCP connection. No orderly SSL shutdown is performed. </p>
+</div>
+<h3><a name="17039">attach</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a> attach(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> &amp; streamSocket<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a> over an existing socket connection. The given <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> must be connected. A SSL handshake will be performed. </p>
+</div>
+<h3><a name="17041">attach</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a> attach(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> &amp; streamSocket,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Context.html#16450" title="Poco::Net::Context::Ptr">Context::Ptr</a> pContext<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a> over an existing socket connection. The given <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> must be connected. A SSL handshake will be performed. </p>
+</div>
+<h3><a name="17044">attach</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a> attach(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> &amp; streamSocket,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Context.html#16450" title="Poco::Net::Context::Ptr">Context::Ptr</a> pContext,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Session.html#17158" title="Poco::Net::Session::Ptr">Session::Ptr</a> pSession<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a> over an existing socket connection. The given <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> must be connected. A SSL handshake will be performed. </p>
+<p>The given <a href="Poco.Net.Session.html" title="class Poco::Net::Session">Session</a> is reused, if possible (client session caching is enabled for the given <a href="Poco.Net.Context.html" title="class Poco::Net::Context">Context</a>, and the server agrees to reuse the session). </p>
+</div>
+<h3><a name="17048">attach</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a> attach(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> &amp; streamSocket,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; peerHostName<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a> over an existing socket connection. The given <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> must be connected. A SSL handshake will be performed. </p>
+</div>
+<h3><a name="17051">attach</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a> attach(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> &amp; streamSocket,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; peerHostName,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Context.html#16450" title="Poco::Net::Context::Ptr">Context::Ptr</a> pContext<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a> over an existing socket connection. The given <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> must be connected. A SSL handshake will be performed. </p>
+</div>
+<h3><a name="17055">attach</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a> attach(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> &amp; streamSocket,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; peerHostName,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Context.html#16450" title="Poco::Net::Context::Ptr">Context::Ptr</a> pContext,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Session.html#17158" title="Poco::Net::Session::Ptr">Session::Ptr</a> pSession<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a> over an existing socket connection. The given <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> must be connected. A SSL handshake will be performed. </p>
+<p>The given <a href="Poco.Net.Session.html" title="class Poco::Net::Session">Session</a> is reused, if possible (client session caching is enabled for the given <a href="Poco.Net.Context.html" title="class Poco::Net::Context">Context</a>, and the server agrees to reuse the session). </p>
+</div>
+<h3><a name="17067">completeHandshake</a></h3>
+<p class="decl">int completeHandshake();</p>
+<div class="description">
+<p>Completes the SSL handshake. </p>
+<p>If the SSL connection was the result of an accept(), the server-side handshake is completed, otherwise a client-side handshake is performed. </p>
+<p>Returns 1 if the handshake was successful, <a href="Poco.Net.SecureStreamSocket.html#17000" title="Poco::Net::SecureStreamSocket::ERR_SSL_WANT_READ">ERR_SSL_WANT_READ</a> or <a href="Poco.Net.SecureStreamSocket.html#17001" title="Poco::Net::SecureStreamSocket::ERR_SSL_WANT_WRITE">ERR_SSL_WANT_WRITE</a> if more data is required to complete the handshake. In this case, <a href="Poco.Net.SecureStreamSocket.html#17067" title="Poco::Net::SecureStreamSocket::completeHandshake()">completeHandshake</a>() should be called again, after the necessary condition has been met. </p>
+</div>
+<h3><a name="17060">context</a></h3>
+<p class="decl"><a href="Poco.Net.Context.html#16450" title="Poco::Net::Context::Ptr">Context::Ptr</a> context() const;</p>
+<div class="description">
+<p>Returns the SSL context used by this socket. </p>
+</div>
+<h3><a name="17068">currentSession</a></h3>
+<p class="decl"><a href="Poco.Net.Session.html#17158" title="Poco::Net::Session::Ptr">Session::Ptr</a> currentSession();</p>
+<div class="description">
+<p>Returns the SSL session of the current connection, for reuse in a future connection (if session caching is enabled). </p>
+<p>If no connection is established, returns null. </p>
+</div>
+<h3><a name="17063">getLazyHandshake</a></h3>
+<p class="decl">bool getLazyHandshake() const;</p>
+<div class="description">
+<p>Returns true if <a href="Poco.Net.SecureStreamSocket.html#17061" title="Poco::Net::SecureStreamSocket::setLazyHandshake()">setLazyHandshake</a>(true) has been called. </p>
+</div>
+<h3><a name="17038">getPeerHostName</a></h3>
+<p class="decl">const std::string &amp; getPeerHostName() const;</p>
+<div class="description">
+<p>Returns the peer's host name used for certificate validation. </p>
+</div>
+<h3><a name="17034">havePeerCertificate</a></h3>
+<p class="decl">bool havePeerCertificate() const;</p>
+<div class="description">
+<p>Returns true if and only if the peer has presented a certificate. </p>
+</div>
+<h3><a name="17032">operator =</a></h3>
+<p class="decl"><a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a> &amp; operator = (<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.Socket.html" title="class Poco::Net::Socket">Socket</a> &amp; socket<br />);</p>
+<div class="description">
+<p>Assignment operator. </p>
+<p>Releases the socket's <a href="Poco.Net.SocketImpl.html" title="class Poco::Net::SocketImpl">SocketImpl</a> and attaches the <a href="Poco.Net.SocketImpl.html" title="class Poco::Net::SocketImpl">SocketImpl</a> from the other socket and increments the reference count of the <a href="Poco.Net.SocketImpl.html" title="class Poco::Net::SocketImpl">SocketImpl</a>.	 </p>
+</div>
+<h3><a name="17035">peerCertificate</a></h3>
+<p class="decl"><a href="Poco.Net.X509Certificate.html" title="class Poco::Net::X509Certificate">X509Certificate</a> peerCertificate() const;</p>
+<div class="description">
+<p>Returns the peer's X509 certificate. </p>
+<p>Throws a <a href="Poco.Net.SSLException.html" title="class Poco::Net::SSLException">SSLException</a> if the peer did not present a certificate. </p>
+</div>
+<h3><a name="17071">sessionWasReused</a></h3>
+<p class="decl">bool sessionWasReused();</p>
+<div class="description">
+<p>Returns true if and only if a reused session was negotiated during the handshake. </p>
+</div>
+<h3><a name="17061">setLazyHandshake</a></h3>
+<p class="decl">void setLazyHandshake(<br />&nbsp;&nbsp;&nbsp;&nbsp;bool flag = true<br />);</p>
+<div class="description">
+<p>Enable lazy SSL handshake. If enabled, the SSL handshake will be performed the first time date is sent or received over the connection. </p>
+</div>
+<h3><a name="17036">setPeerHostName</a></h3>
+<p class="decl">void setPeerHostName(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; hostName<br />);</p>
+<div class="description">
+<p>Sets the peer's host name used for certificate validation. </p>
+</div>
+<h3><a name="17069">useSession</a></h3>
+<p class="decl">void useSession(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Session.html#17158" title="Poco::Net::Session::Ptr">Session::Ptr</a> pSession<br />);</p>
+<div class="description">
+<p>Sets the SSL session to use for the next connection. Setting a previously saved <a href="Poco.Net.Session.html" title="class Poco::Net::Session">Session</a> object is necessary to enable session caching. </p>
+<p>To remove the currently set session, a null pointer can be given. </p>
+<p>Must be called before connect() to be effective. </p>
+</div>
+<h3><a name="17064">verifyPeerCertificate</a></h3>
+<p class="decl">void verifyPeerCertificate();</p>
+<div class="description">
+<p>Performs post-connect (or post-accept) peer certificate validation, using the peer host name set with <a href="Poco.Net.SecureStreamSocket.html#17036" title="Poco::Net::SecureStreamSocket::setPeerHostName()">setPeerHostName</a>(), or the peer's IP address string if no peer host name has been set. </p>
+<p>Should only be used for non-blocking connections, after the initial SSL handshake has been performed (see <a href="Poco.Net.SecureStreamSocket.html#17067" title="Poco::Net::SecureStreamSocket::completeHandshake()">completeHandshake</a>()). </p>
+</div>
+<h3><a name="17065">verifyPeerCertificate</a></h3>
+<p class="decl">void verifyPeerCertificate(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; hostName<br />);</p>
+<div class="description">
+<p>Performs post-connect (or post-accept) peer certificate validation using the given host name. </p>
+<p>Should only be used for non-blocking connections, after the initial SSL handshake has been performed (see <a href="Poco.Net.SecureStreamSocket.html#17067" title="Poco::Net::SecureStreamSocket::completeHandshake()">completeHandshake</a>()). </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

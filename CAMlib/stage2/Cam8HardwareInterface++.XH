@@ -1,0 +1,283 @@
+#ifndef _CAM8HARDWARECORE_H_
+#define _CAM8HARDWARECORE_H_
+
+#include <list>
+#include <iterator>
+
+#include <Cam8Lib++.H>
+#include <Cam8Interface++.H>
+#include <Cam8Instr++.H>
+#include <Cam8Steplist++.H>
+
+extern "C" {
+#include <sys/ioctl.h>
+#include <sys/types.h>
+}
+
+using namespace std;
+
+
+/*****************************************************************************/
+/********************************* DEFINES ***********************************/
+/*****************************************************************************/
+/*
+ * These are specific to the old SPARC device driver.
+ */
+
+/*
+ * ioctl macros defined for the cam interface:
+ */
+
+#define CIOSTEP    _IOW('c', 1, u_int32_t)               /* schedule step list */
+#define CIOSTOP    _IO('c', 2)                       /* stop and wait */
+
+#define CIORINTF   _IO('c', 3)                       /* reset interface */
+#define CIORCAM    _IO('c', 4)                       /* reset CAM */
+#define CIOSPARC2  _IOR('c', 5, u_int32_t)               /* SS1 or SS2? */
+
+#define CIORDNLP   _IOR('c', 8, u_int32_t)               /* drct. read NLP */
+#define CIORDISR   _IOR('c', 9, u_int32_t)               /* drct. read ISR */
+#define CIORDCIP   _IOR('c', 10, u_int32_t)              /* drct. read CIP */
+#define CIORDPIP   _IOR('c', 11, u_int32_t)              /* drct. read PIP */
+
+#define CIOWRNLP   _IOW('c', 16, u_int32_t)              /* drct. write NLP */
+#define CIOWRRER   _IOW('c', 17, u_int32_t)              /* drct. write RER */
+#define CIOWRDSL   _IOW('c', 18, u_int32_t)              /* drct. write DSL */
+#define CIOWRDBL   _IOW('c', 19, u_int32_t)              /* drct. write DBL */
+
+#define CIOMALLOC  _IOWR('c', 20, struct umem_block) /* allocate memory */
+#define CIOMFREE   _IOW('c', 21, struct umem_block)  /* free memory */
+#define CIOMFALL   _IO('c', 22)                      /* free all memory */
+#define CIOMAP     _IOWR('c', 23, caddr_t)           /* map ifc to ker addr */
+
+#define CIOLOG     _IOW('c', 30, u_int32_t)              /* control syslog entries */
+
+#define CIOTEST    _IOWR('c', 100, u_int32_t)            /* test, one r/w parm */
+
+/*
+ * Error codes returned by user entry routines
+ */
+
+#define CIOERRMASK   0x80              /* mask for CIO errors */
+
+/* if the bits below are set, that indicates the appropriate error. */
+#define CIOTIMERR    0x88              /* timeout intp error */
+#define CIOSBUSERR   0x84              /* sbus intp error */
+#define CIOCAMERR    0x82              /* cam intp error */
+
+
+/*****************************************************************************/
+/******************************** TEMPLATES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/*************************** CLASSES & TYPEDEFS ******************************/
+/*****************************************************************************/
+// The step list is a series or stream of CAM8 instructions structured
+// as a linked list.  This worked well on the early sun4c
+// architectures first used with CAM8 but has become a serious problem
+// with the later architectures that separate the user and kernel
+// address spaces.  Things are further complicated by the non-standard
+// linked list method of transferring data.  All other devices use DMA
+// transfers from a single or multiple contiguous memory segments.
+// The step list could link between segments that are not contiguous
+// at all.  To make the CAM8 interface card behave more like a typical
+// device we place restrictions on how step lists can be constructed.
+// We divide the step list into a series of buffers of a reasonable
+// length.  These buffers need not follow each other directly in
+// memory but they do provide a contiguous segment that we can write
+// instructions into.  Each of these buffers will get transfered by
+// the CAM8 interface in a single DMA transfer.  Since we haven't yet
+// enabled the interrupts we must poll the interface to know when the
+// transfer is complete.  This means that during the transfer the
+// processor is locked into the device driver code.  A long transfer
+// would severely affect system performance so these buffers must not
+// be too long.  The memory segments are managed by the slbuf data
+// structure.
+//
+// Some CAM8 instructions do not have fields and are listed as zero
+// length.  These instructions, like lutio and scanio, are used to
+// transfer arbitrary sized buffers of data to and from CAM8.  We
+// handle these by defining copyin and copyout operations.  When we
+// are writing to CAM8 we allocate an inline memory chunk of the same
+// size of the buffer and copy the data into the chunk before
+// scheduling the step list.  When we are reading from CAM8 we do the
+// same except we copy the data out of the chunk into the buffer after
+// scheduling the step list.
+
+struct copyop {
+	void *src;
+	void *dst;
+	u_int32_t sz;
+};
+
+struct slbuf {
+	bool fragmented;
+	u_int32_t len;
+	u_int32_t remain;
+	u_int8_t *data;
+	u_int8_t *ptr;
+	list<copyop> cpyin;
+	list<copyop> cpyout;
+
+	slbuf(u_int32_t size)
+	{
+		fragmented = false;
+		len = size;
+		remain = size;
+		data = new u_int8_t[size];
+		ptr = data;
+	}
+
+	~slbuf(void)
+	{
+		delete [] data;
+		cpyin.clear();
+		cpyout.clear();
+	}
+
+
+	inline void copyin(CAM8INSTR i, void *ptr, u_int32_t len)
+	{
+		copyop no;
+
+		no.src = ptr;
+		no.dst = i->AdrData();
+		no.sz = len;
+
+		cpyin.push_back(no);
+	}
+
+	inline void copyout(CAM8INSTR i, void *ptr, u_int32_t len)
+	{
+		copyop no;
+
+		no.src = i->AdrData();
+		no.dst = ptr;
+		no.sz = len;
+
+		cpyout.push_back(no);
+	}
+
+};
+typedef slbuf *SLBUF;
+
+
+class Cam8HardwareInterface : public Cam8Interface {
+public:
+	Cam8HardwareInterface(void);
+	Cam8HardwareInterface(char * fname);
+	Cam8HardwareInterface(int fd);
+	virtual ~Cam8HardwareInterface(void);
+
+	void ResetInterface(void);
+	void InitInterface(void);
+	void HaltInterface(void);
+	void ClearException(void);
+	void ClearFault(void);
+	void EnableInterfaceExceptions(void);
+	void EnableTimeoutException(void);
+	void EnableCamException(void);
+	void DisableInterfaceExceptions(void);
+	void DisableTimeoutException(void);
+	void DisableCamException(void);
+	void EnableInterfaceInterrupts(void);
+	void EnableNewlistInterrupt(void);
+	void EnableTimeoutInterrupt(void);
+	void EnableSBusInterrupt(void);
+	void EnableCamInterrupt(void);
+	void EnableSoftInterrupt(void);
+	void DisableInterfaceInterrupts(void);
+	void DisableNewlistInterrupt(void);
+	void DisableTimeoutInterrupt(void);
+	void DisableSBusInterrupt(void);
+	void DisableCamInterrupt(void);
+	void DisableSoftInterrupt(void);
+	void ClearInterfaceInterrupts(void);
+	void SetScanLength(u_int32_t h, u_int32_t n);
+	void SetBlankLength(u_int32_t h, u_int32_t n);
+
+	void ExecuteSteplist(Cam8Steplist &);
+
+	bool Read_NLP(u_int32_t *);
+	bool Read_ISR(u_int32_t *);
+	bool Read_CIP(u_int32_t *);
+	bool Read_PIP(u_int32_t *);
+	bool Write_NLP(const u_int32_t *);
+	bool Write_RER(const u_int32_t *);
+	bool Write_DSL(const u_int32_t *);
+	bool Write_DBL(const u_int32_t *);
+
+	caddr_t Alloc_Instr(u_int32_t);
+	void Free_Instr(caddr_t);
+
+protected:
+	static const u_int32_t def_buf_len = 8192;
+
+	list<slbuf> slbuf_list;
+	list<slbuf>::iterator inuse;
+	CAM8INSTR lasti;
+
+private:
+	int camfd;
+
+	void INITIATE_IFC_RESET(void);
+	void HALT_IFC(void);
+	void CLEAR_EXCEPTION(void);
+	void CLEAR_FAULT(void);
+	void ENABLE_IFC_EXCEPTIONS(void);
+	void ENABLE_TIMEOUT_EXCEPTION(void);
+	void ENABLE_CAM_EXCEPTION(void);
+	void DISABLE_IFC_EXCEPTIONS(void);
+	void DISABLE_TIMEOUT_EXCEPTION(void);
+	void DISABLE_CAM_EXCEPTION(void);
+	void ENABLE_IFC_INTS(void);
+	void ENABLE_NEWLIST_INT(void);
+	void ENABLE_TIMEOUT_INT(void);
+	void ENABLE_SBUS_INT(void);
+	void ENABLE_CAM_INT(void);
+	void ENABLE_SOFT_INT(void);
+	void DISABLE_IFC_INTS(void);
+	void DISABLE_NEWLIST_INT(void);
+	void DISABLE_TIMEOUT_INT(void);
+	void DISABLE_SBUS_INT(void);
+	void DISABLE_CAM_INT(void);
+	void DISABLE_SOFT_INT(void);
+	void CLEAR_IFC_INTS(void);
+	void SET_SCAN_LEN(int h, int n);
+	void SET_BLANK_LEN(int h, int n);
+};
+
+
+/*
+ * These are specific to the old SPARC device driver.
+ */
+
+ struct umem_block {
+	u_int32_t nbytes;                          /* length of memory block */
+	caddr_t ifc;                           /* dvma pointer to memory block */
+	caddr_t ker;                           /* user pointer to memory block */
+ };
+
+ struct imem_block {
+	 u_int32_t nbytes;                          /* length of memory block */
+	 caddr_t ifc;                           /* dvma pointer to memory block */
+	 caddr_t ker;							 /* kernal pointer to memory block */
+	 struct seg *seg;                       /* segment memory is located in */
+ };
+
+ /*****************************************************************************/
+ /********************************* INLINES ***********************************/
+ /*****************************************************************************/
+
+
+ /*****************************************************************************/
+ /******************************* PROTOTYPES **********************************/
+ /*****************************************************************************/
+
+
+ /*****************************************************************************/
+ /********************************* GLOBALS ***********************************/
+ /*****************************************************************************/
+#endif

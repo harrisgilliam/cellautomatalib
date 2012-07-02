@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::SharedLibrary</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="symbol">class SharedLibrary</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> SharedLibrary<br />
+<b>Header:</b> Poco/SharedLibrary.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>The <a href="Poco.SharedLibrary.html" title="class Poco::SharedLibrary">SharedLibrary</a> class dynamically  loads shared libraries at run-time. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b>SharedLibraryImpl</p>
+<p><b>All Base Classes: </b>SharedLibraryImpl</p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.SharedLibrary.html#10103" title="Poco::SharedLibrary::getPath()">getPath</a>, <a href="Poco.SharedLibrary.html#10101" title="Poco::SharedLibrary::getSymbol()">getSymbol</a>, <a href="Poco.SharedLibrary.html#10099" title="Poco::SharedLibrary::hasSymbol()">hasSymbol</a>, <a href="Poco.SharedLibrary.html#10098" title="Poco::SharedLibrary::isLoaded()">isLoaded</a>, <a href="Poco.SharedLibrary.html#10092" title="Poco::SharedLibrary::load()">load</a>, <a href="Poco.SharedLibrary.html#10104" title="Poco::SharedLibrary::suffix()">suffix</a>, <a href="Poco.SharedLibrary.html#10097" title="Poco::SharedLibrary::unload()">unload</a></p>
+<h2>Enumerations</h2>
+<h3><a name="10082">Flags</a></h3>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="10083">SHLIB_GLOBAL</a> = 1</p>
+<div class="description">
+<p>On platforms that use dlopen(), use RTLD_GLOBAL. This is the default if no flags are given. </p>
+<p>This flag is ignored on platforms that do not use dlopen(). </p>
+</div>
+<p class="decl"><a name="10084">SHLIB_LOCAL</a> = 2</p>
+<div class="description">
+<p>On platforms that use dlopen(), use RTLD_LOCAL instead of RTLD_GLOBAL. </p>
+<p>Note that if this flag is specified, RTTI (including dynamic_cast and throw) will not work for types defined in the shared library with GCC and possibly other compilers as well. See <a href="http://gcc.gnu.org/faq.html#dso" target="_blank">http://gcc.gnu.org/faq.html#dso</a> for more information. </p>
+<p>This flag is ignored on platforms that do not use dlopen(). </p>
+</div>
+<h2>Constructors</h2>
+<h3><a name="10085">SharedLibrary</a></h3>
+<p class="decl"><a href="Poco.SharedLibrary.html" title="class Poco::SharedLibrary">SharedLibrary</a>();</p>
+<div class="description">
+<p>Creates a <a href="Poco.SharedLibrary.html" title="class Poco::SharedLibrary">SharedLibrary</a> object. </p>
+</div>
+<h3><a name="10086">SharedLibrary</a></h3>
+<p class="decl"><a href="Poco.SharedLibrary.html" title="class Poco::SharedLibrary">SharedLibrary</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; path<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.SharedLibrary.html" title="class Poco::SharedLibrary">SharedLibrary</a> object and loads a library from the given path. </p>
+</div>
+<h3><a name="10088">SharedLibrary</a></h3>
+<p class="decl"><a href="Poco.SharedLibrary.html" title="class Poco::SharedLibrary">SharedLibrary</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; path,<br />&nbsp;&nbsp;&nbsp;&nbsp;int flags<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.SharedLibrary.html" title="class Poco::SharedLibrary">SharedLibrary</a> object and loads a library from the given path, using the given flags.  See the <a href="Poco.SharedLibrary.html#10082" title="enum  Poco::SharedLibrary::Flags">Flags</a> enumeration for valid values. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="10091">~SharedLibrary</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual ~<a href="Poco.SharedLibrary.html" title="class Poco::SharedLibrary">SharedLibrary</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.SharedLibrary.html" title="class Poco::SharedLibrary">SharedLibrary</a>. The actual library remains loaded. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="10103">getPath</a></h3>
+<p class="decl">const std::string &amp; getPath() const;</p>
+<div class="description">
+<p>Returns the path of the library, as specified in a call to <a href="Poco.SharedLibrary.html#10092" title="Poco::SharedLibrary::load()">load</a>() or the  constructor. </p>
+</div>
+<h3><a name="10101">getSymbol</a></h3>
+<p class="decl">void * getSymbol(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name<br />);</p>
+<div class="description">
+<p>Returns the address of the symbol with the given name. For functions, this is the entry point of the function. Throws a <a href="Poco.NotFoundException.html" title="class Poco::NotFoundException">NotFoundException</a> if the symbol does not exist. </p>
+</div>
+<h3><a name="10099">hasSymbol</a></h3>
+<p class="decl">bool hasSymbol(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name<br />);</p>
+<div class="description">
+<p>Returns true if and only if the loaded library contains a symbol with the given name. </p>
+</div>
+<h3><a name="10098">isLoaded</a></h3>
+<p class="decl">bool isLoaded() const;</p>
+<div class="description">
+<p>Returns true if and only if a library has been loaded. </p>
+</div>
+<h3><a name="10092">load</a></h3>
+<p class="decl">void load(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; path<br />);</p>
+<div class="description">
+<p>Loads a shared library from the given path. Throws a <a href="Poco.LibraryAlreadyLoadedException.html" title="class Poco::LibraryAlreadyLoadedException">LibraryAlreadyLoadedException</a> if a library has already been loaded. Throws a <a href="Poco.LibraryLoadException.html" title="class Poco::LibraryLoadException">LibraryLoadException</a> if the library cannot be loaded. </p>
+</div>
+<h3><a name="10094">load</a></h3>
+<p class="decl">void load(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; path,<br />&nbsp;&nbsp;&nbsp;&nbsp;int flags<br />);</p>
+<div class="description">
+<p>Loads a shared library from the given path, using the given flags. See the <a href="Poco.SharedLibrary.html#10082" title="enum  Poco::SharedLibrary::Flags">Flags</a> enumeration for valid values. Throws a <a href="Poco.LibraryAlreadyLoadedException.html" title="class Poco::LibraryAlreadyLoadedException">LibraryAlreadyLoadedException</a> if a library has already been loaded. Throws a <a href="Poco.LibraryLoadException.html" title="class Poco::LibraryLoadException">LibraryLoadException</a> if the library cannot be loaded. </p>
+</div>
+<h3><a name="10104">suffix</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static std::string suffix();</p>
+<div class="description">
+<p>Returns the platform-specific filename suffix for shared libraries (including the period). In debug mode, the suffix also includes a &quot;d&quot; to specify the debug version of a library. </p>
+</div>
+<h3><a name="10097">unload</a></h3>
+<p class="decl">void unload();</p>
+<div class="description">
+<p>Unloads a shared library. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

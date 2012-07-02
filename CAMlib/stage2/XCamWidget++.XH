@@ -1,0 +1,237 @@
+#ifndef _XCamWidget_H_
+#define _XCamWidget_H_
+
+#include <CAM++.H>
+#include <Pipecomm++.H>
+
+#include "std++.H"
+
+extern "C" {
+#include <stdio.h>
+#include <tcl.h>
+#include <tk.h>
+}
+
+/*****************************************************************************/
+/********************************* DEFINES ***********************************/
+/*****************************************************************************/
+/* Default descriptor table and command table sizes */
+#define DESCTBLSZ 32
+
+#ifdef __cplusplus
+/*****************************************************************************/
+/******************************** TEMPLATES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/*************************** CLASSES & TYPEDEFS ******************************/
+/*****************************************************************************/
+extern "C" {
+  static int XCAMWidgetCmd(ClientData, Tcl_Interp *, int, char **);
+  static void XCAMDestroy(char *);
+  static void XCAMEventProc(ClientData, XEvent *);
+  static void XCAMKeyProc(ClientData, XEvent *);
+  static void XCAMInputFDProc(ClientData, int);
+  static void XCAMRedrawProc(ClientData, XEvent *);
+  static unsigned char * XCAMSetupSHMI(void *, unsigned char *, unsigned char *);
+  static unsigned char * XCAMSetupSHMC(void *, unsigned char *, unsigned char *);
+  static unsigned char * XCAMSetupKERI(void *, unsigned char *, unsigned char *);
+  static unsigned char * XCAMSetupKERC(void *, unsigned char *, unsigned char *);
+  static unsigned char * XCAMSetGLBX(void *, unsigned char *, unsigned char *);
+  static unsigned char * XCAMSetGLBY(void *, unsigned char *, unsigned char *);
+  static unsigned char * XCAMApply(void *, unsigned char *, unsigned char *);
+  static unsigned char * XCAMFree(void *, unsigned char *, unsigned char *);
+  static unsigned char * XCAMFreeAndExit(void *, unsigned char *, unsigned char *);
+  static unsigned char * XCAMNullCmmd(void *, unsigned char *, unsigned char *);
+}
+
+class XCamWidget {
+public:
+  struct CamCm {
+    unsigned short p;
+    unsigned short r, g, b;
+  };
+  typedef CamCm *CAMCM;
+
+  struct Shm_Info {
+    int id;
+    int cnt;
+#ifdef XSHM
+    XShmSegmentInfo info;
+#endif
+  };
+  typedef Shm_Info *SHM_INFO;
+
+  typedef int (XCamWidget::*DESC_APPLY_FUNC)(void *, void *);
+
+  struct XCam_Desc {
+    char type;
+    union {
+      XImage *i;
+      CAMCM c;
+    } obj;
+    Shm_Info shm;
+    DESC_APPLY_FUNC Apply;
+  };
+  typedef XCam_Desc *XCAM_DESC;
+
+
+
+  Tk_Window tkwin;		/* 
+				 * Window that embodies the XCamWidget.  NULL
+				 * means window has been deleted but
+				 * widget record hasn't been cleaned up yet.
+				 */
+  Tcl_Interp *ti;		/* Interpreter associated with widget. */
+  Display *dpy;		        /* X's token for the window's display. */
+  int s;                        /* X's token for the screen number */
+  Window w;                     /* X's token for the window id */
+  Visual *v;                    /* This pane's visual */
+  Colormap cmap;                /* This pane's colormap */
+  Colormap pcmap;               /* This pane's previous colormap */
+  Cursor cur;                   /* Current cursor for window, or None. */
+  GC gc;                        /* GC */
+#ifdef XSHM
+  Status xshmok;                /* okay to use XSHM extension ? */
+#endif
+  int width, height;            /* Dimensions to request for XCamWidget */
+  int black;                    /* Which pixel is closest to black */
+  int CompType;                 /* Type of XShm Completion Event */
+  XCam_Desc dtbl[DESCTBLSZ];    /* Descriptpor table */
+  int glbx, glby;               /* Global X and Y buffer sizes */
+  int locx, locy;               /* Local X and Y buffer sizes */
+  int lid;                      /* Descriptor of last image displayed */
+  int lcu;                      /* Descriptor of last colormap used */
+  int pmode;                    /* Processing mode: none, all, or pause */
+  int capture;                  /* Type of frame capture being done */
+  unsigned int ftot;            /* Number of frames to capture */
+  unsigned int fcnt;            /* Number of frames that have been captured */
+  char *fcmd;                   /* Base name of files frames are captured in */
+  int camfd;			/* CAM8 device driver file descriptor */
+  FILE *forth_fifo;		/* FIFO for passing keys to the Forth interp */
+  int retv[2];                  /* Current return value code */
+  PIPECOMM pc;			/* Pipecomm object */
+
+
+  XCamWidget(int = -1, int = -1, int = -1);
+  virtual ~XCamWidget(void);
+
+  DECL_BZERO(XCamWidget)
+
+  int XCmd(ClientData, Tcl_Interp *, int, char **);
+
+
+protected:
+  int WidgetCmd(Tcl_Interp *, int, char **);
+  int Configure(Tcl_Interp *,int, char **, int);
+  int PipeImag(Tcl_Interp *, int, char **);
+  int WriteImag(Tcl_Interp *, int, char **);
+  int WriteCmap(Tcl_Interp *, int, char **);
+  int ResizeWindow(Tcl_Interp *, int, char **);
+  int ToggleCaptureFrames(Tcl_Interp *, int, char **);
+
+  void Destroy(void);
+  void EventProc(XEvent *);
+  void KeyProc(XEvent *);
+  void InputFDProc(int);
+
+  int desc_idx(char *);
+  int SetLOCX(unsigned char *);
+  int SetLOCY(unsigned char *);
+  int AllocCmap(void *);
+  int DispXSHMImage(void *);
+  int DispXImage(void *);
+  int FindClosestColor(Colormap, unsigned short, unsigned short, unsigned short);
+  void CaptureFrame(XCAM_DESC);
+  void Get_XColors(XColor *);
+  void CopyColormap(Colormap, Colormap);
+
+  unsigned char * SetupSHMI(unsigned char *, unsigned char *);
+  unsigned char * SetupSHMC(unsigned char *, unsigned char *);
+  unsigned char * SetupKERI(unsigned char *, unsigned char *);
+  unsigned char * SetupKERC(unsigned char *, unsigned char *);
+  unsigned char * SetGLBX(unsigned char *, unsigned char *);
+  unsigned char * SetGLBY(unsigned char *, unsigned char *);
+  unsigned char * Apply(unsigned char *, unsigned char *);
+  unsigned char * Free(unsigned char *, unsigned char *);
+  unsigned char * FreeAndExit(unsigned char *, unsigned char *);
+  unsigned char * NullCmmd(unsigned char *, unsigned char *);
+  
+  void SendKeyString(XKeyEvent *, FILE *);
+
+  inline void FindNxt(int &);
+  inline void SETRETV(int, int);
+  inline void FATALERROR(void);
+
+
+
+  friend int XCAMWidgetCmd(ClientData, Tcl_Interp *, int, char **);
+  friend void XCAMDestroy(char *);
+  friend void XCAMEventProc(ClientData, XEvent *);
+  friend void XCAMKeyProc(ClientData, XEvent *);
+  friend void XCAMInputFDProc(ClientData, int);
+  friend void XCAMRedrawProc(ClientData, XEvent *);
+  friend unsigned char * XCAMSetupSHMI(void *, unsigned char *, unsigned char *);
+  friend unsigned char * XCAMSetupSHMC(void *, unsigned char *, unsigned char *);
+  friend unsigned char * XCAMSetupKERI(void *, unsigned char *, unsigned char *);
+  friend unsigned char * XCAMSetupKERC(void *, unsigned char *, unsigned char *);
+  friend unsigned char * XCAMSetGLBX(void *, unsigned char *, unsigned char *);
+  friend unsigned char * XCAMSetGLBY(void *, unsigned char *, unsigned char *);
+  friend unsigned char * XCAMApply(void *, unsigned char *, unsigned char *);
+  friend unsigned char * XCAMFree(void *, unsigned char *, unsigned char *);
+  friend unsigned char * XCAMFreeAndExit(void *, unsigned char *, unsigned char *);
+  friend unsigned char * XCAMNullCmmd(void *, unsigned char *, unsigned char *);
+};
+typedef XCamWidget *XCAMWIDGET;
+
+
+/*****************************************************************************/
+/********************************* INLINES ***********************************/
+/*****************************************************************************/
+inline void XCamWidget::FindNxt(int &n)
+{
+  int i;
+
+  n = -1;
+  for(i = 0; i < DESCTBLSZ; i++)
+    if (dtbl[i].type == 0) {
+      n = i;
+      break;
+    }
+}
+
+inline void XCamWidget::SETRETV(int e, int c)
+{
+  retv[0] = e;
+  retv[1] = c;
+}
+
+inline void XCamWidget::FATALERROR(void) 
+{
+  retv[0] = retv[1] = -1;
+}
+
+inline int lowbit(int x)
+{
+  return(x & (~x + 1));
+}
+
+inline int Image_Size(XImage *image)
+{
+  if (image->format != ZPixmap)
+    return(image->bytes_per_line * image->height * image->depth);
+  
+  return(image->bytes_per_line * image->height);
+}
+
+#endif
+/*****************************************************************************/
+/******************************* PROTOTYPES **********************************/
+/*****************************************************************************/
+
+/*****************************************************************************/
+/********************************* GLOBALS ***********************************/
+/*****************************************************************************/
+
+#endif

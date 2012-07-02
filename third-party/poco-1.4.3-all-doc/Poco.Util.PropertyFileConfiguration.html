@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Util::PropertyFileConfiguration</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Util.html" class="namespace">Poco::Util</a></h1>
+<h1 class="symbol">class PropertyFileConfiguration</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Util<br />
+<b>Package:</b> Configuration<br />
+<b>Header:</b> Poco/Util/PropertyFileConfiguration.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>This implementation of a Configuration reads properties from a Java-style properties file. </p>
+<p>The file syntax is implemented as follows. </p>
+<ul>
+<li>a line starting with a hash '#' or exclamation mark '!' is treated as a comment and ignored </li>
+<li>every other line denotes a property assignment in the form &lt;key&gt; = &lt;value&gt; or &lt;key&gt; : &lt;value&gt; </li>
+</ul>
+<p>Keys and values may contain special characters represented by the following escape sequences: </p>
+<ul>
+<li>\t: tab (0x09) </li>
+<li>\n: line feed (0x0a) </li>
+<li>\r: carriage return (0x0d) </li>
+<li>\f: form feed (0x0c) </li>
+</ul>
+<p>For every other sequence that starts with a backslash, the backslash is removed. Therefore, the sequence \a would just yield an 'a'. </p>
+<p>A value can spread across multiple lines if the last character in a line (the character immediately before the carriage return or line feed character) is a single backslash. </p>
+<p>Property names are case sensitive. Leading and trailing whitespace is removed from both keys and values. A property name can neither contain a colon ':' nor an equal sign '=' character. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.Util.MapConfiguration.html" title="class Poco::Util::MapConfiguration">MapConfiguration</a></p>
+<p><b>All Base Classes: </b><a href="Poco.RefCountedObject.html" title="class Poco::RefCountedObject">Poco::RefCountedObject</a>, <a href="Poco.Util.AbstractConfiguration.html" title="class Poco::Util::AbstractConfiguration">AbstractConfiguration</a>, <a href="Poco.Util.MapConfiguration.html" title="class Poco::Util::MapConfiguration">MapConfiguration</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Util.PropertyFileConfiguration.html#18118" title="Poco::Util::PropertyFileConfiguration::load()">load</a>, <a href="Poco.Util.PropertyFileConfiguration.html#18122" title="Poco::Util::PropertyFileConfiguration::save()">save</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.Util.MapConfiguration.html#17719" title="Poco::Util::MapConfiguration::begin()">begin</a>, <a href="Poco.Util.MapConfiguration.html#17704" title="Poco::Util::MapConfiguration::clear()">clear</a>, <a href="Poco.Util.AbstractConfiguration.html#17283" title="Poco::Util::AbstractConfiguration::createView()">createView</a>, <a href="Poco.RefCountedObject.html#9831" title="Poco::RefCountedObject::duplicate()">duplicate</a>, <a href="Poco.Util.AbstractConfiguration.html#17291" title="Poco::Util::AbstractConfiguration::enableEvents()">enableEvents</a>, <a href="Poco.Util.MapConfiguration.html#17720" title="Poco::Util::MapConfiguration::end()">end</a>, <a href="Poco.Util.AbstractConfiguration.html#17300" title="Poco::Util::AbstractConfiguration::enumerate()">enumerate</a>, <a href="Poco.Util.AbstractConfiguration.html#17293" title="Poco::Util::AbstractConfiguration::eventsEnabled()">eventsEnabled</a>, <a href="Poco.Util.AbstractConfiguration.html#17287" title="Poco::Util::AbstractConfiguration::expand()">expand</a>, <a href="Poco.Util.AbstractConfiguration.html#17261" title="Poco::Util::AbstractConfiguration::getBool()">getBool</a>, <a href="Poco.Util.AbstractConfiguration.html#17256" title="Poco::Util::AbstractConfiguration::getDouble()">getDouble</a>, <a href="Poco.Util.AbstractConfiguration.html#17251" title="Poco::Util::AbstractConfiguration::getInt()">getInt</a>, <a href="Poco.Util.AbstractConfiguration.html#17294" title="Poco::Util::AbstractConfiguration::getRaw()">getRaw</a>, <a href="Poco.Util.AbstractConfiguration.html#17246" title="Poco::Util::AbstractConfiguration::getRawString()">getRawString</a>, <a href="Poco.Util.AbstractConfiguration.html#17241" title="Poco::Util::AbstractConfiguration::getString()">getString</a>, <a href="Poco.Util.AbstractConfiguration.html#17239" title="Poco::Util::AbstractConfiguration::has()">has</a>, <a href="Poco.Util.AbstractConfiguration.html#17237" title="Poco::Util::AbstractConfiguration::hasOption()">hasOption</a>, <a href="Poco.Util.AbstractConfiguration.html#17235" title="Poco::Util::AbstractConfiguration::hasProperty()">hasProperty</a>, <a href="Poco.Util.AbstractConfiguration.html#17278" title="Poco::Util::AbstractConfiguration::keys()">keys</a>, <a href="Poco.Util.AbstractConfiguration.html#17307" title="Poco::Util::AbstractConfiguration::parseBool()">parseBool</a>, <a href="Poco.Util.AbstractConfiguration.html#17305" title="Poco::Util::AbstractConfiguration::parseInt()">parseInt</a>, <a href="Poco.RefCountedObject.html#9833" title="Poco::RefCountedObject::referenceCount()">referenceCount</a>, <a href="Poco.RefCountedObject.html#9832" title="Poco::RefCountedObject::release()">release</a>, <a href="Poco.Util.AbstractConfiguration.html#17289" title="Poco::Util::AbstractConfiguration::remove()">remove</a>, <a href="Poco.Util.AbstractConfiguration.html#17303" title="Poco::Util::AbstractConfiguration::removeRaw()">removeRaw</a>, <a href="Poco.Util.AbstractConfiguration.html#17275" title="Poco::Util::AbstractConfiguration::setBool()">setBool</a>, <a href="Poco.Util.AbstractConfiguration.html#17272" title="Poco::Util::AbstractConfiguration::setDouble()">setDouble</a>, <a href="Poco.Util.AbstractConfiguration.html#17269" title="Poco::Util::AbstractConfiguration::setInt()">setInt</a>, <a href="Poco.Util.AbstractConfiguration.html#17297" title="Poco::Util::AbstractConfiguration::setRaw()">setRaw</a>, <a href="Poco.Util.AbstractConfiguration.html#17309" title="Poco::Util::AbstractConfiguration::setRawWithEvent()">setRawWithEvent</a>, <a href="Poco.Util.AbstractConfiguration.html#17266" title="Poco::Util::AbstractConfiguration::setString()">setString</a></p>
+<h2>Constructors</h2>
+<h3><a name="18113">PropertyFileConfiguration</a></h3>
+<p class="decl"><a href="Poco.Util.PropertyFileConfiguration.html" title="class Poco::Util::PropertyFileConfiguration">PropertyFileConfiguration</a>();</p>
+<div class="description">
+<p>Creates an empty <a href="Poco.Util.PropertyFileConfiguration.html" title="class Poco::Util::PropertyFileConfiguration">PropertyFileConfiguration</a>. </p>
+</div>
+<h3><a name="18114">PropertyFileConfiguration</a></h3>
+<p class="decl"><a href="Poco.Util.PropertyFileConfiguration.html" title="class Poco::Util::PropertyFileConfiguration">PropertyFileConfiguration</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::istream &amp; istr<br />);</p>
+<div class="description">
+<p>Creates an <a href="Poco.Util.PropertyFileConfiguration.html" title="class Poco::Util::PropertyFileConfiguration">PropertyFileConfiguration</a> and loads the configuration data from the given stream, which must be in properties file format. </p>
+</div>
+<h3><a name="18116">PropertyFileConfiguration</a></h3>
+<p class="decl"><a href="Poco.Util.PropertyFileConfiguration.html" title="class Poco::Util::PropertyFileConfiguration">PropertyFileConfiguration</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; path<br />);</p>
+<div class="description">
+<p>Creates an <a href="Poco.Util.PropertyFileConfiguration.html" title="class Poco::Util::PropertyFileConfiguration">PropertyFileConfiguration</a> and loads the configuration data from the given file, which must be in properties file format. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="18126">~PropertyFileConfiguration</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">~<a href="Poco.Util.PropertyFileConfiguration.html" title="class Poco::Util::PropertyFileConfiguration">PropertyFileConfiguration</a>();</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="18118">load</a></h3>
+<p class="decl">void load(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::istream &amp; istr<br />);</p>
+<div class="description">
+<p>Loads the configuration data from the given stream, which  must be in properties file format. </p>
+</div>
+<h3><a name="18120">load</a></h3>
+<p class="decl">void load(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; path<br />);</p>
+<div class="description">
+<p>Loads the configuration data from the given file, which  must be in properties file format. </p>
+</div>
+<h3><a name="18122">save</a></h3>
+<p class="decl">void save(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::ostream &amp; ostr<br />) const;</p>
+<div class="description">
+<p>Writes the configuration data to the given stream. </p>
+<p>The data is written as a sequence of statements in the form &lt;key&gt;: &lt;value&gt; separated by a newline character. </p>
+</div>
+<h3><a name="18124">save</a></h3>
+<p class="decl">void save(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; path<br />) const;</p>
+<div class="description">
+<p>Writes the configuration data to the given file. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

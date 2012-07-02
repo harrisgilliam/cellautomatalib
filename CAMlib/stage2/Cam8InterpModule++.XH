@@ -1,0 +1,384 @@
+#ifndef _CAM8INTERPMODULE_H
+#define _CAM8INTERPMODULE_H
+
+#include <CaLib++.H>
+
+#include <Cam8Instr++.H>
+#include <Cam8SimInstrQueue++.H>
+#include <Cam8SimInterface++.H>
+#include <Cam8SimModule++.H>
+
+#include <Poco/Thread.h>
+#include <Poco/Runnable.h>
+
+extern "C" {
+#include <sys/types.h>
+}
+
+
+/*****************************************************************************/
+/********************************* DEFINES ***********************************/
+/*****************************************************************************/
+
+
+
+/*****************************************************************************/
+/******************************** TEMPLATES **********************************/
+/*****************************************************************************/
+
+
+
+/*****************************************************************************/
+/*************************** CLASSES & TYPEDEFS ******************************/
+/*****************************************************************************/
+typedef struct {
+	char *base;
+	int type;
+} Bt, *BT;
+
+
+typedef struct ModuleRegisters {
+	/* CAM8 Registers */
+	u_int8_t MSR[CHIPS_PER_MOD];
+
+	u_int8_t SSM[CHIPS_PER_MOD];
+	u_int8_t RT[CHIPS_PER_MOD];
+	u_int8_t ECT[CHIPS_PER_MOD];
+	u_int8_t RPK[CHIPS_PER_MOD];
+	u_int8_t ALT[CHIPS_PER_MOD];
+
+	int32_t KA[CHIPS_PER_MOD];
+	u_int8_t XKS[CHIPS_PER_MOD];
+	u_int8_t YKS[CHIPS_PER_MOD];
+	u_int8_t ZKS[CHIPS_PER_MOD];
+	u_int8_t XKMF[CHIPS_PER_MOD];
+	u_int8_t YKMF[CHIPS_PER_MOD];
+	u_int8_t ZKMF[CHIPS_PER_MOD];
+
+	u_int8_t SABSR[CHIPS_PER_MOD];
+
+	u_int8_t LAS[CHIPS_PER_MOD];
+	u_int8_t LAM[CHIPS_PER_MOD];
+
+	u_int8_t FOS[CHIPS_PER_MOD];
+	u_int8_t FOM[CHIPS_PER_MOD];
+
+	u_int8_t SDS[CHIPS_PER_MOD];
+	u_int8_t SDM[CHIPS_PER_MOD];
+
+	u_int8_t ECS[CHIPS_PER_MOD];
+	u_int8_t ECM[CHIPS_PER_MOD];
+
+	u_int8_t DDS[CHIPS_PER_MOD];
+	u_int8_t DDM[CHIPS_PER_MOD];
+
+	u_int8_t SSR[CHIPS_PER_MOD];
+
+	int32_t ECR[CHIPS_PER_MOD];
+
+	int16_t LIR[CHIPS_PER_MOD];
+
+	u_int8_t LIPR[CHIPS_PER_MOD];
+
+	u_int16_t *LIOR;
+
+	int32_t SIR[CHIPS_PER_MOD];
+
+	u_int8_t SSA[24][CHIPS_PER_MOD];
+#define SIPR 	SSA
+#define SSA0	SSA[0]
+#define SSA1	SSA[1]
+#define SSA2	SSA[2]
+#define SSA3	SSA[3]
+#define SSA4	SSA[4]
+#define SSA5	SSA[5]
+#define SSA6	SSA[6]
+#define SSA7	SSA[7]
+#define SSA8	SSA[8]
+#define SSA9	SSA[9]
+#define SSA10	SSA[10]
+#define SSA11	SSA[11]
+#define SSA12	SSA[12]
+#define SSA13	SSA[13]
+#define SSA14	SSA[14]
+#define SSA15	SSA[15]
+#define SSA16	SSA[16]
+#define SSA17	SSA[17]
+#define SSA18	SSA[18]
+#define SSA19	SSA[19]
+#define SSA20	SSA[20]
+#define SSA21	SSA[21]
+#define SSA22	SSA[22]
+#define SSA23	SSA[23]
+
+	u_int8_t *SIOR;
+
+	u_int8_t SM[CHIPS_PER_MOD];
+	u_int8_t ESC[CHIPS_PER_MOD];
+	u_int8_t ESW[CHIPS_PER_MOD];
+	u_int8_t EST[CHIPS_PER_MOD];
+	u_int8_t SBRC[CHIPS_PER_MOD];
+	u_int8_t RCL[CHIPS_PER_MOD];
+	u_int8_t ECL[CHIPS_PER_MOD];
+	u_int8_t STM[CHIPS_PER_MOD];
+
+	int32_t OSR[CHIPS_PER_MOD];
+
+	int32_t DCM[CHIPS_PER_MOD];
+	u_int8_t XDCP[CHIPS_PER_MOD];
+	u_int8_t YDCP[CHIPS_PER_MOD];
+	u_int8_t ZDCP[CHIPS_PER_MOD];
+
+	u_int8_t LPL[CHIPS_PER_MOD];
+	u_int8_t FPL[CHIPS_PER_MOD];
+	u_int8_t DCS[CHIPS_PER_MOD];
+	u_int8_t TBD[CHIPS_PER_MOD];
+	u_int8_t TMS[CHIPS_PER_MOD];
+	u_int8_t NBF[CHIPS_PER_MOD];
+	u_int8_t SRE[CHIPS_PER_MOD];
+	u_int8_t ALS[CHIPS_PER_MOD];
+
+	u_int8_t MAFS[CHIPS_PER_MOD];
+	u_int8_t MBFS[CHIPS_PER_MOD];
+
+	u_int8_t XMPC[CHIPS_PER_MOD];
+	u_int8_t XPPC[CHIPS_PER_MOD];
+	u_int8_t YMPC[CHIPS_PER_MOD];
+	u_int8_t YPPC[CHIPS_PER_MOD];
+	u_int8_t ZMPC[CHIPS_PER_MOD];
+	u_int8_t ZPPC[CHIPS_PER_MOD];
+
+	u_int8_t MIDR[CHIPS_PER_MOD];
+
+	u_int8_t GIDR[CHIPS_PER_MOD];
+
+	u_int8_t BPIE[CHIPS_PER_MOD];
+	u_int8_t BCIE[CHIPS_PER_MOD];
+	u_int8_t GCIE[CHIPS_PER_MOD];
+	u_int8_t MAIE[CHIPS_PER_MOD];
+	u_int8_t MBIE[CHIPS_PER_MOD];
+	u_int8_t SSIE[CHIPS_PER_MOD];
+	u_int8_t XHIE[CHIPS_PER_MOD];
+	u_int8_t RLIE[CHIPS_PER_MOD];
+	u_int8_t URIE[CHIPS_PER_MOD];
+	u_int8_t ISIE[CHIPS_PER_MOD];
+
+	u_int8_t BPIF[CHIPS_PER_MOD];
+	u_int8_t BCIF[CHIPS_PER_MOD];
+	u_int8_t GCIF[CHIPS_PER_MOD];
+	u_int8_t MAIF[CHIPS_PER_MOD];
+	u_int8_t MBIF[CHIPS_PER_MOD];
+	u_int8_t SSIF[CHIPS_PER_MOD];
+	u_int8_t XHIF[CHIPS_PER_MOD];
+	u_int8_t RLIF[CHIPS_PER_MOD];
+	u_int8_t URIF[CHIPS_PER_MOD];
+	u_int8_t ISIF[CHIPS_PER_MOD];
+
+	u_int8_t VWE[CHIPS_PER_MOD];
+	u_int8_t VWIE[CHIPS_PER_MOD];
+	u_int8_t VWIF[CHIPS_PER_MOD];
+
+	u_int8_t LDOC[CHIPS_PER_MOD];
+	u_int8_t HDOC[CHIPS_PER_MOD];
+
+	/* Not actual CAM8 Registers but needed state info */
+
+	u_int8_t *FRAMEb;				/* FRAME buffer */
+	u_int16_t nNumPlanes;
+	u_int8_t WhyScan;
+	bool bDestSrcMatrix [CHIPS_PER_MOD][NUM_DEST][NUM_SRC];
+	bool bSourceRegChange;
+	bool bDestChange;
+	bool bForceGeneralScan;
+	bool bByteMode;
+	bool bImmediate;
+	bool bReadMode;
+} ModuleRegisters, *MODULEREGISTERS;
+
+
+class Cam8InterpModule : public Cam8SimModule {
+public:
+
+	Cam8InterpModule(CAM8SIMINSTRQUEUE);
+	~Cam8InterpModule();
+
+	DECL_BZERO(Cam8InterpModule);
+
+	// executed by thread class
+	void run(void);
+	void halt(void);
+
+
+protected:
+	static const int lBitPlaneSize = 512 * 1024;
+	static const int lLUTSize = 65536*2;
+
+	bool stop;
+
+	CAM8SIMINSTRQUEUE iq;
+	ModuleRegisters mregs;
+
+	int VWECHK;
+	char debug;
+	u_int8_t *pcHeap;
+	Bt base_type[790];
+	u_int32_t pbuf[CHIPS_PER_MOD];
+	bool bDestSrcMatrix [CHIPS_PER_MOD][NUM_DEST][NUM_SRC];			// exec time
+	u_int16_t *LUTb[2];			/* LUT buffers */
+	int32_t SITE_ADDR;
+	int32_t lDCMRHighBit;
+	int32_t lDCMRLowBit;
+	int32_t lNumXBits;
+	int32_t bit;
+	int32_t HIGH_BIT_MASK;
+	int32_t X_HIGH_BIT_MASK;
+	int32_t X_BYTE_LENGTH;
+	int32_t X_CTR;
+	int32_t SITE_CTR;
+	int32_t OFFSETS[CHIPS_PER_MOD];
+	int32_t BIT_OFFSETS[CHIPS_PER_MOD];
+	int32_t DCMR;
+	int32_t SCAN_INDEX_REG;
+	int32_t LUT_ADDR;
+	int32_t BIT_PLANE_ADDR[CHIPS_PER_MOD];
+	int32_t NEXT_WORD_ADDR[CHIPS_PER_MOD];
+	int32_t PLANE_WORD[CHIPS_PER_MOD];
+	int32_t EVENT_COUNT[CHIPS_PER_MOD];
+	int32_t UNGLUE_DATA;
+	int32_t GLUE_DATA;
+	int32_t SITE_DATA;
+	int32_t TBUS_DATA;
+	int32_t LUT_DATA;
+	int32_t DISP_DATA;
+	int32_t TBUS_ADDR;
+	int32_t FRAME_ADDR;
+	int32_t TEMP1;
+	int32_t TEMP2;
+	int32_t TEMP3;
+	int32_t TEMP4;
+	int32_t TEMP5;
+	int32_t TEMP6;
+	int32_t TEMP7;
+	int32_t TEMP8;
+	int32_t TEMP9;
+	int32_t TEMP10;
+	FILE * DEBUGFILE;
+	struct timeval tvStart, tvEnd;
+	struct timezone tzZone;
+
+
+
+	void Generate_Interrupt(int);
+
+	virtual void SimReadInstr(u_int16_t *, u_int32_t, u_int32_t, u_int32_t);
+	virtual void SimExecScan(void);
+	virtual void SimGeneralScan(void);
+	virtual void SimScanNoPerm(void);
+	virtual void SimUpdateSite(void);
+	virtual void SimUpdateCode(void);
+	virtual void SimSweepCode(void);
+	virtual void SimLoadFirstWord(u_int32_t []);
+	virtual void SimGetNextWord(u_int16_t);
+	virtual void SimSaveLastWord(u_int32_t []);
+	virtual void SimLoadPlaneWords(void);
+	virtual void SimSavePlaneWords(void);
+	virtual void CheckNoPerm(void);
+	virtual void MapFunction(u_int32_t *, u_int32_t *, u_int8_t);
+	virtual void BuildDest(int16_t, u_int32_t *, u_int8_t, u_int8_t);
+	virtual void BuildBitDest(int16_t, u_int32_t *, u_int8_t, u_int8_t, u_int16_t);
+	virtual void BuildBitwiseDest(int16_t, u_int32_t *, u_int8_t [], u_int8_t []);
+	virtual u_int32_t * PermuteScanIndex(void);
+	virtual void DoKick(int16_t);
+
+	inline void ConstantSetAll(u_int8_t *, u_int8_t);
+	inline void ConstantSetAll(int16_t *, int16_t);
+	inline void ConstantSetAll(int32_t *, int32_t);
+	inline void SetAll(u_int8_t *, u_int8_t *);
+	inline void SetAll(int16_t *, int16_t *);
+	inline void SetAll(int32_t *, int32_t *);
+
+	inline void SENTER(int, char *, int);
+
+private:
+	void InitHeap(void);
+	void InitStepList(void);
+	void InitSimulator(void);
+	void UnpackState(u_int16_t * base, u_int32_t reg_fld, bool imm);
+	void UnpackStateInto(u_int16_t * base, u_int32_t reg_fld, bool imm, caddr_t dest, int type);
+	void PackState(u_int16_t * base, u_int32_t reg_fld);
+	void PackStateFrom(u_int16_t *base, u_int32_t reg_fld, caddr_t src, int type);
+	void vwecheck(u_int16_t * base, u_int32_t reg_fld, bool imm);
+	u_int32_t AddSiteAddress(u_int32_t, u_int32_t);
+	u_int32_t SubSiteAddress(u_int32_t, u_int32_t);
+	u_int32_t ScanLength(void);
+	u_int32_t SweepLength(u_int32_t *);
+	u_int32_t DCMRHighBit(void);
+	u_int32_t DCMRLowBit(void);
+	void UpdateDCMR(void);
+	u_int8_t IsSrcNeeded(int16_t);
+	u_int8_t IsSrcSame(int16_t);
+	u_int8_t IsDestUpdated(int16_t);
+	u_int16_t CalcNumPlanes(void);
+	void UpdateDestSrcMatrix(void);
+};
+
+
+/*****************************************************************************/
+/********************************* INLINES ***********************************/
+/*****************************************************************************/
+
+inline void Cam8InterpModule::SENTER(int i, char *b, int t)
+{
+	base_type[i].base = b;
+	base_type[i].type = t;
+}
+
+inline void Cam8InterpModule::ConstantSetAll(u_int8_t *r, u_int8_t v)
+{
+	register int i;
+	for(i = 0; i < CHIPS_PER_MOD; i++)
+		r[i]=v;
+}
+
+inline void Cam8InterpModule::ConstantSetAll(int16_t *r, int16_t v)
+{
+	register int i;
+	for(i = 0; i < CHIPS_PER_MOD; i++)
+		r[i]=v;
+}
+
+inline void Cam8InterpModule::ConstantSetAll(int32_t *r, int32_t v)
+{
+	register int i;
+	for(i = 0; i < CHIPS_PER_MOD; i++)
+		r[i]=v;
+}
+
+inline void Cam8InterpModule::SetAll(u_int8_t *r, u_int8_t *v)
+{
+	memcpy(r, v, CHIPS_PER_MOD * sizeof(u_int8_t));
+}
+
+inline void Cam8InterpModule::SetAll(int16_t *r, int16_t *v)
+{
+	memcpy(r, v, CHIPS_PER_MOD * sizeof(int16_t));
+}
+
+inline void Cam8InterpModule::SetAll(int32_t *r, int32_t *v)
+{
+	memcpy(r, v, CHIPS_PER_MOD * sizeof(int32_t));
+}
+
+
+
+/*****************************************************************************/
+/******************************* PROTOTYPES **********************************/
+/*****************************************************************************/
+
+
+
+/*****************************************************************************/
+/********************************* GLOBALS ***********************************/
+/*****************************************************************************/
+
+#endif

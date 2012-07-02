@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Net::SecureSocketImpl</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Net.html" class="namespace">Poco::Net</a></h1>
+<h1 class="symbol">class SecureSocketImpl</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> NetSSL_OpenSSL<br />
+<b>Package:</b> SSLSockets<br />
+<b>Header:</b> Poco/Net/SecureSocketImpl.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>The <a href="Poco.Net.SocketImpl.html" title="class Poco::Net::SocketImpl">SocketImpl</a> for <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a>. </p>
+</div>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Net.SecureSocketImpl.html#16954" title="Poco::Net::SecureSocketImpl::abort()">abort</a>, <a href="Poco.Net.SecureSocketImpl.html#16936" title="Poco::Net::SecureSocketImpl::acceptConnection()">acceptConnection</a>, <a href="Poco.Net.SecureSocketImpl.html#16978" title="Poco::Net::SecureSocketImpl::acceptSSL()">acceptSSL</a>, <a href="Poco.Net.SecureSocketImpl.html#16963" title="Poco::Net::SecureSocketImpl::available()">available</a>, <a href="Poco.Net.SecureSocketImpl.html#16947" title="Poco::Net::SecureSocketImpl::bind()">bind</a>, <a href="Poco.Net.SecureSocketImpl.html#16953" title="Poco::Net::SecureSocketImpl::close()">close</a>, <a href="Poco.Net.SecureSocketImpl.html#16964" title="Poco::Net::SecureSocketImpl::completeHandshake()">completeHandshake</a>, <a href="Poco.Net.SecureSocketImpl.html#16938" title="Poco::Net::SecureSocketImpl::connect()">connect</a>, <a href="Poco.Net.SecureSocketImpl.html#16945" title="Poco::Net::SecureSocketImpl::connectNB()">connectNB</a>, <a href="Poco.Net.SecureSocketImpl.html#16979" title="Poco::Net::SecureSocketImpl::connectSSL()">connectSSL</a>, <a href="Poco.Net.SecureSocketImpl.html#16967" title="Poco::Net::SecureSocketImpl::context()">context</a>, <a href="Poco.Net.SecureSocketImpl.html#16974" title="Poco::Net::SecureSocketImpl::currentSession()">currentSession</a>, <a href="Poco.Net.SecureSocketImpl.html#16973" title="Poco::Net::SecureSocketImpl::getPeerHostName()">getPeerHostName</a>, <a href="Poco.Net.SecureSocketImpl.html#16985" title="Poco::Net::SecureSocketImpl::handleError()">handleError</a>, <a href="Poco.Net.SecureSocketImpl.html#16983" title="Poco::Net::SecureSocketImpl::isLocalHost()">isLocalHost</a>, <a href="Poco.Net.SecureSocketImpl.html#16950" title="Poco::Net::SecureSocketImpl::listen()">listen</a>, <a href="Poco.Net.SecureSocketImpl.html#16966" title="Poco::Net::SecureSocketImpl::peerCertificate()">peerCertificate</a>, <a href="Poco.Net.SecureSocketImpl.html#16959" title="Poco::Net::SecureSocketImpl::receiveBytes()">receiveBytes</a>, <a href="Poco.Net.SecureSocketImpl.html#16987" title="Poco::Net::SecureSocketImpl::reset()">reset</a>, <a href="Poco.Net.SecureSocketImpl.html#16955" title="Poco::Net::SecureSocketImpl::sendBytes()">sendBytes</a>, <a href="Poco.Net.SecureSocketImpl.html#16977" title="Poco::Net::SecureSocketImpl::sessionWasReused()">sessionWasReused</a>, <a href="Poco.Net.SecureSocketImpl.html#16971" title="Poco::Net::SecureSocketImpl::setPeerHostName()">setPeerHostName</a>, <a href="Poco.Net.SecureSocketImpl.html#16952" title="Poco::Net::SecureSocketImpl::shutdown()">shutdown</a>, <a href="Poco.Net.SecureSocketImpl.html#16965" title="Poco::Net::SecureSocketImpl::sockfd()">sockfd</a>, <a href="Poco.Net.SecureSocketImpl.html#16975" title="Poco::Net::SecureSocketImpl::useSession()">useSession</a>, <a href="Poco.Net.SecureSocketImpl.html#16968" title="Poco::Net::SecureSocketImpl::verifyPeerCertificate()">verifyPeerCertificate</a>, <a href="Poco.Net.SecureSocketImpl.html#16981" title="Poco::Net::SecureSocketImpl::verifyPeerCertificateImpl()">verifyPeerCertificateImpl</a></p>
+<h2>Constructors</h2>
+<h3><a name="16932">SecureSocketImpl</a></h3>
+<p class="decl"><a href="Poco.Net.SecureSocketImpl.html" title="class Poco::Net::SecureSocketImpl">SecureSocketImpl</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.AutoPtr.html" title="class Poco::AutoPtr">Poco::AutoPtr</a> &lt; <a href="Poco.Net.SocketImpl.html" title="class Poco::Net::SocketImpl">SocketImpl</a> &gt; pSocketImpl,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Context.html#16450" title="Poco::Net::Context::Ptr">Context::Ptr</a> pContext<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.Net.SecureSocketImpl.html" title="class Poco::Net::SecureSocketImpl">SecureSocketImpl</a> using an already connected stream socket. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="16935">~SecureSocketImpl</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual ~<a href="Poco.Net.SecureSocketImpl.html" title="class Poco::Net::SecureSocketImpl">SecureSocketImpl</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Net.SecureSocketImpl.html" title="class Poco::Net::SecureSocketImpl">SecureSocketImpl</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="16954">abort</a></h3>
+<p class="decl">void abort();</p>
+<div class="description">
+<p>Aborts the connection by closing the underlying TCP connection. No orderly SSL shutdown is performed. </p>
+</div>
+<h3><a name="16936">acceptConnection</a></h3>
+<p class="decl"><a href="Poco.Net.SocketImpl.html" title="class Poco::Net::SocketImpl">SocketImpl</a> * acceptConnection(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.SocketAddress.html" title="class Poco::Net::SocketAddress">SocketAddress</a> &amp; clientAddr<br />);</p>
+<div class="description">
+<p>Get the next completed connection from the socket's completed connection queue. </p>
+<p>If the queue is empty, waits until a connection request completes. </p>
+<p>Returns a new SSL socket for the connection with the client. </p>
+<p>The client socket's address is returned in clientAddr. </p>
+</div>
+<h3><a name="16963">available</a></h3>
+<p class="decl">int available() const;</p>
+<div class="description">
+<p>Returns the number of bytes available from the SSL buffer for immediate reading. </p>
+</div>
+<h3><a name="16947">bind</a></h3>
+<p class="decl">void bind(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.SocketAddress.html" title="class Poco::Net::SocketAddress">SocketAddress</a> &amp; address,<br />&nbsp;&nbsp;&nbsp;&nbsp;bool reuseAddress = false<br />);</p>
+<div class="description">
+<p>Bind a local address to the socket. </p>
+<p>This is usually only done when establishing a server socket. SSL clients should not bind a socket to a specific address. </p>
+<p>If reuseAddress is true, sets the SO_REUSEADDR socket option. </p>
+</div>
+<h3><a name="16953">close</a></h3>
+<p class="decl">void close();</p>
+<div class="description">
+<p>Close the socket. </p>
+</div>
+<h3><a name="16964">completeHandshake</a></h3>
+<p class="decl">int completeHandshake();</p>
+<div class="description">
+<p>Completes the SSL handshake. </p>
+<p>If the SSL connection was the result of an accept(), the server-side handshake is completed, otherwise a client-side handshake is performed.  </p>
+</div>
+<h3><a name="16938">connect</a></h3>
+<p class="decl">void connect(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.SocketAddress.html" title="class Poco::Net::SocketAddress">SocketAddress</a> &amp; address,<br />&nbsp;&nbsp;&nbsp;&nbsp;bool performHandshake<br />);</p>
+<div class="description">
+<p>Initializes the socket and establishes a secure connection to  the TCP server at the given address. </p>
+<p>If performHandshake is true, the SSL handshake is performed immediately  after establishing the connection. Otherwise, the handshake is performed the first time <a href="Poco.Net.SecureSocketImpl.html#16955" title="Poco::Net::SecureSocketImpl::sendBytes()">sendBytes</a>(), <a href="Poco.Net.SecureSocketImpl.html#16959" title="Poco::Net::SecureSocketImpl::receiveBytes()">receiveBytes</a>() or <a href="Poco.Net.SecureSocketImpl.html#16964" title="Poco::Net::SecureSocketImpl::completeHandshake()">completeHandshake</a>() is called. </p>
+</div>
+<h3><a name="16941">connect</a></h3>
+<p class="decl">void connect(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.SocketAddress.html" title="class Poco::Net::SocketAddress">SocketAddress</a> &amp; address,<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Timespan.html" title="class Poco::Timespan">Poco::Timespan</a> &amp; timeout,<br />&nbsp;&nbsp;&nbsp;&nbsp;bool performHandshake<br />);</p>
+<div class="description">
+<p>Initializes the socket, sets the socket timeout and  establishes a secure connection to the TCP server at the given address. </p>
+<p>If performHandshake is true, the SSL handshake is performed immediately  after establishing the connection. Otherwise, the handshake is performed the first time <a href="Poco.Net.SecureSocketImpl.html#16955" title="Poco::Net::SecureSocketImpl::sendBytes()">sendBytes</a>(), <a href="Poco.Net.SecureSocketImpl.html#16959" title="Poco::Net::SecureSocketImpl::receiveBytes()">receiveBytes</a>() or <a href="Poco.Net.SecureSocketImpl.html#16964" title="Poco::Net::SecureSocketImpl::completeHandshake()">completeHandshake</a>() is called. </p>
+</div>
+<h3><a name="16945">connectNB</a></h3>
+<p class="decl">void connectNB(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.SocketAddress.html" title="class Poco::Net::SocketAddress">SocketAddress</a> &amp; address<br />);</p>
+<div class="description">
+<p>Initializes the socket and establishes a secure connection to  the TCP server at the given address. Prior to opening the connection the socket is set to nonblocking mode. </p>
+</div>
+<h3><a name="16967">context</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Net.Context.html#16450" title="Poco::Net::Context::Ptr">Context::Ptr</a> context() const;</p>
+<div class="description">
+<p>Returns the SSL context used for this socket. </p>
+</div>
+<h3><a name="16974">currentSession</a></h3>
+<p class="decl"><a href="Poco.Net.Session.html#17158" title="Poco::Net::Session::Ptr">Session::Ptr</a> currentSession();</p>
+<div class="description">
+<p>Returns the SSL session of the current connection, for reuse in a future connection (if session caching is enabled). </p>
+<p>If no connection is established, returns null. </p>
+</div>
+<h3><a name="16973">getPeerHostName</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const std::string &amp; getPeerHostName() const;</p>
+<div class="description">
+<p>Returns the peer host name. </p>
+</div>
+<h3><a name="16950">listen</a></h3>
+<p class="decl">void listen(<br />&nbsp;&nbsp;&nbsp;&nbsp;int backlog = 64<br />);</p>
+<div class="description">
+<p>Puts the socket into listening state. </p>
+<p>The socket becomes a passive socket that can accept incoming connection requests. </p>
+<p>The backlog argument specifies the maximum number of connections that can be queued for this socket. </p>
+</div>
+<h3><a name="16966">peerCertificate</a></h3>
+<p class="decl">X509 * peerCertificate() const;</p>
+<div class="description">
+<p>Returns the peer's certificate. </p>
+</div>
+<h3><a name="16959">receiveBytes</a></h3>
+<p class="decl">int receiveBytes(<br />&nbsp;&nbsp;&nbsp;&nbsp;void * buffer,<br />&nbsp;&nbsp;&nbsp;&nbsp;int length,<br />&nbsp;&nbsp;&nbsp;&nbsp;int flags = 0<br />);</p>
+<div class="description">
+<p>Receives data from the socket and stores it in buffer. Up to length bytes are received. </p>
+<p>Returns the number of bytes received. </p>
+</div>
+<h3><a name="16955">sendBytes</a></h3>
+<p class="decl">int sendBytes(<br />&nbsp;&nbsp;&nbsp;&nbsp;const void * buffer,<br />&nbsp;&nbsp;&nbsp;&nbsp;int length,<br />&nbsp;&nbsp;&nbsp;&nbsp;int flags = 0<br />);</p>
+<div class="description">
+<p>Sends the contents of the given buffer through the socket. <a href="Poco.Any.html" title="class Poco::Any">Any</a> specified flags are ignored. </p>
+<p>Returns the number of bytes sent, which may be less than the number of bytes specified. </p>
+</div>
+<h3><a name="16977">sessionWasReused</a></h3>
+<p class="decl">bool sessionWasReused();</p>
+<div class="description">
+<p>Returns true if and only if a reused session was negotiated during the handshake. </p>
+</div>
+<h3><a name="16971">setPeerHostName</a></h3>
+<p class="decl">void setPeerHostName(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; hostName<br />);</p>
+<div class="description">
+<p>Sets the peer host name for certificate validation purposes. </p>
+</div>
+<h3><a name="16952">shutdown</a></h3>
+<p class="decl">void shutdown();</p>
+<div class="description">
+<p>Shuts down the connection by attempting an orderly SSL shutdown, then actually shutting down the TCP connection. </p>
+</div>
+<h3><a name="16965">sockfd</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">int sockfd();</p>
+<div class="description">
+<p>Returns the underlying socket descriptor. </p>
+</div>
+<h3><a name="16975">useSession</a></h3>
+<p class="decl">void useSession(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Session.html#17158" title="Poco::Net::Session::Ptr">Session::Ptr</a> pSession<br />);</p>
+<div class="description">
+<p>Sets the SSL session to use for the next connection. Setting a previously saved <a href="Poco.Net.Session.html" title="class Poco::Net::Session">Session</a> object is necessary to enable session caching. </p>
+<p>To remove the currently set session, a null pointer can be given. </p>
+<p>Must be called before <a href="Poco.Net.SecureSocketImpl.html#16938" title="Poco::Net::SecureSocketImpl::connect()">connect</a>() to be effective. </p>
+</div>
+<h3><a name="16968">verifyPeerCertificate</a></h3>
+<p class="decl">void verifyPeerCertificate();</p>
+<div class="description">
+<p>Performs post-connect (or post-accept) peer certificate validation, using the peer host name set with <a href="Poco.Net.SecureSocketImpl.html#16971" title="Poco::Net::SecureSocketImpl::setPeerHostName()">setPeerHostName</a>(), or the peer's IP address string if no peer host name has been set. </p>
+</div>
+<h3><a name="16969">verifyPeerCertificate</a></h3>
+<p class="decl">void verifyPeerCertificate(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; hostName<br />);</p>
+<div class="description">
+<p>Performs post-connect (or post-accept) peer certificate validation using the given peer host name. </p>
+</div>
+<h3><a name="16978">acceptSSL</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void acceptSSL();</p>
+<div class="description">
+<p>Performs a server-side SSL handshake and certificate verification. </p>
+</div>
+<h3><a name="16979">connectSSL</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void connectSSL(<br />&nbsp;&nbsp;&nbsp;&nbsp;bool performHandshake<br />);</p>
+<div class="description">
+<p>Performs a client-side SSL handshake and establishes a secure  connection over an already existing TCP connection. </p>
+</div>
+<h3><a name="16985">handleError</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">int handleError(<br />&nbsp;&nbsp;&nbsp;&nbsp;int rc<br />);</p>
+<div class="description">
+<p>Handles an SSL error by throwing an appropriate exception. </p>
+</div>
+<h3><a name="16983">isLocalHost</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static bool isLocalHost(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; hostName<br />);</p>
+<div class="description">
+<p>Returns true if and only if the given host name is the local host  (either &quot;localhost&quot; or &quot;127.0.0.1&quot;). </p>
+</div>
+<h3><a name="16987">reset</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void reset();</p>
+<div class="description">
+<p>Prepares the socket for re-use.  </p>
+<p>After closing and resetting a socket, the socket can be used for a new connection. </p>
+<p>Note that simply closing a socket is not sufficient to be able to re-use it again. </p>
+</div>
+<h3><a name="16981">verifyPeerCertificateImpl</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">long verifyPeerCertificateImpl(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; hostName<br />);</p>
+<div class="description">
+<p>Performs post-connect (or post-accept) peer certificate validation. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

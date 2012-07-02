@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Net::SecureSMTPClientSession</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Net.html" class="namespace">Poco::Net</a></h1>
+<h1 class="symbol">class SecureSMTPClientSession</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> NetSSL_OpenSSL<br />
+<b>Package:</b> Mail<br />
+<b>Header:</b> Poco/Net/SecureSMTPClientSession.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>This class implements an Simple Mail Transfer Procotol (SMTP, <a href="http://www.ietf.org/rfc/rfc2821.txt" target="_blank">RFC 2821</a>) client for sending e-mail messages that supports the STARTTLS command for secure connections. </p>
+<p>Usage is as follows: </p>
+<ol>
+<li>Create a <a href="Poco.Net.SecureSMTPClientSession.html" title="class Poco::Net::SecureSMTPClientSession">SecureSMTPClientSession</a> object. </li>
+<li>Call login() or login(hostname). </li>
+<li>Call <a href="Poco.Net.SecureSMTPClientSession.html#16855" title="Poco::Net::SecureSMTPClientSession::startTLS()">startTLS</a>() to switch to a secure connection. Check the return value to see if a secure connection has actually been established (not all servers may support STARTTLS). </li>
+<li>Call any of the login() methods to securely authenticate with a username and password. </li>
+<li>Send the message(s). </li>
+</ol>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.Net.SMTPClientSession.html" title="class Poco::Net::SMTPClientSession">SMTPClientSession</a></p>
+<p><b>All Base Classes: </b><a href="Poco.Net.SMTPClientSession.html" title="class Poco::Net::SMTPClientSession">SMTPClientSession</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Net.SecureSMTPClientSession.html#16855" title="Poco::Net::SecureSMTPClientSession::startTLS()">startTLS</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.Net.SMTPClientSession.html#15461" title="Poco::Net::SMTPClientSession::close()">close</a>, <a href="Poco.Net.SMTPClientSession.html#15447" title="Poco::Net::SMTPClientSession::getTimeout()">getTimeout</a>, <a href="Poco.Net.SMTPClientSession.html#15484" title="Poco::Net::SMTPClientSession::isPermanentNegative()">isPermanentNegative</a>, <a href="Poco.Net.SMTPClientSession.html#15478" title="Poco::Net::SMTPClientSession::isPositiveCompletion()">isPositiveCompletion</a>, <a href="Poco.Net.SMTPClientSession.html#15480" title="Poco::Net::SMTPClientSession::isPositiveIntermediate()">isPositiveIntermediate</a>, <a href="Poco.Net.SMTPClientSession.html#15482" title="Poco::Net::SMTPClientSession::isTransientNegative()">isTransientNegative</a>, <a href="Poco.Net.SMTPClientSession.html#15448" title="Poco::Net::SMTPClientSession::login()">login</a>, <a href="Poco.Net.SMTPClientSession.html#15495" title="Poco::Net::SMTPClientSession::loginUsingCRAM()">loginUsingCRAM</a>, <a href="Poco.Net.SMTPClientSession.html#15489" title="Poco::Net::SMTPClientSession::loginUsingCRAMMD5()">loginUsingCRAMMD5</a>, <a href="Poco.Net.SMTPClientSession.html#15492" title="Poco::Net::SMTPClientSession::loginUsingCRAMSHA1()">loginUsingCRAMSHA1</a>, <a href="Poco.Net.SMTPClientSession.html#15499" title="Poco::Net::SMTPClientSession::loginUsingLogin()">loginUsingLogin</a>, <a href="Poco.Net.SMTPClientSession.html#15502" title="Poco::Net::SMTPClientSession::loginUsingPlain()">loginUsingPlain</a>, <a href="Poco.Net.SMTPClientSession.html#15460" title="Poco::Net::SMTPClientSession::open()">open</a>, <a href="Poco.Net.SMTPClientSession.html#15464" title="Poco::Net::SMTPClientSession::sendCommand()">sendCommand</a>, <a href="Poco.Net.SMTPClientSession.html#15462" title="Poco::Net::SMTPClientSession::sendMessage()">sendMessage</a>, <a href="Poco.Net.SMTPClientSession.html#15445" title="Poco::Net::SMTPClientSession::setTimeout()">setTimeout</a>, <a href="Poco.Net.SMTPClientSession.html#15505" title="Poco::Net::SMTPClientSession::socket()">socket</a></p>
+<h2>Constructors</h2>
+<h3><a name="16849">SecureSMTPClientSession</a></h3>
+<p class="decl">explicit <a href="Poco.Net.SecureSMTPClientSession.html" title="class Poco::Net::SecureSMTPClientSession">SecureSMTPClientSession</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> &amp; socket<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.Net.SecureSMTPClientSession.html" title="class Poco::Net::SecureSMTPClientSession">SecureSMTPClientSession</a> using the given socket, which must be connected to a SMTP server. </p>
+</div>
+<h3><a name="16851">SecureSMTPClientSession</a></h3>
+<p class="decl"><a href="Poco.Net.SecureSMTPClientSession.html" title="class Poco::Net::SecureSMTPClientSession">SecureSMTPClientSession</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; host,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.html#11581" title="Poco::UInt16">Poco::UInt16</a> port = SMTP_PORT<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.Net.SecureSMTPClientSession.html" title="class Poco::Net::SecureSMTPClientSession">SecureSMTPClientSession</a> using a socket connected to the given host and port. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="16854">~SecureSMTPClientSession</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual ~<a href="Poco.Net.SecureSMTPClientSession.html" title="class Poco::Net::SecureSMTPClientSession">SecureSMTPClientSession</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Net.SMTPClientSession.html" title="class Poco::Net::SMTPClientSession">SMTPClientSession</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="16855">startTLS</a></h3>
+<p class="decl">bool startTLS();</p>
+<div class="description">
+<p>Sends a STARTTLS command and, if successful,  creates a secure SSL/TLS connection over the existing socket connection. </p>
+<p>Must be called after login() or login(hostname). If successful, login() can be called again to authenticate the user. </p>
+<p>Returns true if the STARTTLS command was successful, false otherwise. </p>
+</div>
+<h3><a name="16856">startTLS</a></h3>
+<p class="decl">bool startTLS(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.Context.html#16450" title="Poco::Net::Context::Ptr">Context::Ptr</a> pContext<br />);</p>
+<div class="description">
+<p>Sends a STARTTLS command and, if successful,  creates a secure SSL/TLS connection over the existing socket connection. </p>
+<p>Uses the given <a href="Poco.Net.Context.html" title="class Poco::Net::Context">Context</a> object for creating the SSL/TLS connection. </p>
+<p>Must be called after login() or login(hostname). If successful, login() can be called again to authenticate the user. </p>
+<p>Returns true if the STARTTLS command was successful, false otherwise. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

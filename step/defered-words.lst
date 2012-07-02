@@ -1,0 +1,80 @@
+allstep.txt:step-list.fth:defer *step*
+explore.fth:defer reload
+explore.fth:defer after-load        ' noop is after-load
+explore.fth:\ instruction should defer until the next "start-instruction" is
+explore.fth:\ execution can be deferred until later.  All that "start-instruction"
+explore.fth:\ does is finish all previous deferred executions, and then continue.
+explore.fth:variable finish-ptr                         \ contains addr of deferred code
+explore.fth:defer helper-vocabulary         ' hidden is helper-vocabulary
+explore.fth:' compile-local-variable is compile-do-undefined  \ make c-d-u deferred
+Binary file forth.exe matches
+step-assm.fth:defer new-field0
+step-assm.fth:defer new-field1
+step-assm.fth:defer new-field2
+step-assm.fth:defer new-field3
+step-assm.fth:defer new-field4
+step-assm.fth:defer new-field5
+step-assm.fth:defer new-field6
+step-assm.fth:defer new-field7
+step-assm.fth:defer new-field8
+step-assm.fth:defer new-field9
+step-assm.fth:defer new-field10
+step-assm.fth:defer new-field11
+step-assm.fth:defer new-field12
+step-assm.fth:defer new-field13
+step-assm.fth:defer new-field14
+step-assm.fth:defer new-field15 
+step-assm.fth:"new-field" deferred words are also set to point to these fields, and
+step-count.fth:\ defer next-table
+step-count.fth:defer count-layers
+step-count.fth:defer count-lut
+step-hood.fth:After the table is compiled, the deferred word "after-table-creation"
+step-hood.fth:defer after-table-creation
+step-init.fth:defer init-bufs         ' noop is init-bufs
+step-init.fth:defer init-high-level           \ high-level initialization
+step-init.fth:defer init-driver
+step-init.fth:defer abort-hook        ' (abort is abort-hook
+step-init.fth:defer new-machine
+step-keys.fth:also a deferred word, which initially (after "new-experiment") points
+step-keys.fth:defer when-starting   
+step-keys.fth:defer when-stopping   
+step-keys.fth:defer update-step
+step-keys.fth:defer macro-step
+step-keys.fth:defer show
+step-keys.fth:defer idle-frame
+step-keys.fth:defer while-stopped
+step-keys.fth:defer init-keys
+step-last.fth:\ that has been finished by redefining the deferred word "finish-instr".
+step-list.fth:defer schedule-list
+step-list.fth:defer wait-for-nlp
+step-list.fth:defer handle-soft-int
+step-list.fth:defer alloc-p           ' (alloc-p) is alloc-p
+step-list.fth:defer free-p            ' (free-p) is free-p
+step-list.fth:defer alloc-h           ' (alloc-h) is alloc-h
+step-list.fth:defer free-h            ' (free-p) is free-h
+step-list.fth:defer slave! (s value reg# -- )         \ write value to slave reg
+step-list.fth:defer slave@ (s reg# -- value )         \ read value from slave reg
+step-list.fth:\ of any instruction, we execute a deferred word, "finish-instr" before
+step-list.fth:defer finish-instr      ' noop       is finish-instr
+step-list.fth:defer last-action  ' noop is last-action
+step-list.fth:defer schedule-stop
+step-list.fth:defer *step*
+step-list.fth:defer step-noop
+step-maps.fth:defer standard-cmap
+step-show.fth:The deferred word "space" sets up information about the dimensions of
+step-show.fth:defer before-display
+step-show.fth:defer display-step
+step-show.fth:defer after-display
+step-show.fth:We will have "new-experiment" call "init-display" to set the deferred
+step-sim3.fth:defer simulator
+step-sim3.fth:defer simulator-display         
+step-space.fth:defer space
+step-space.fth:defer init-after-space
+step-sprd.fth:defer smap
+step-xlat.fth:defer sim-ciomap
+step-xlat.fth:defer alloc-raw  (s len -- addr.user addr.ifc )
+step-xlat.fth:defer free-raw   (s addr.user addr.ifc len -- )
+step-xlat.fth:defer ifc@  (s addr.ifc -- contents )
+step-xlat.fth:defer ifc2@ (s addr.ifc -- val.addr+4 val.addr )
+step-xlat.fth:defer init-topology
+step-xmon.fth:defer update-cmap

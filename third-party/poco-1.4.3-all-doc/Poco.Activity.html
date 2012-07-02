@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Activity</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="template">template &lt; class C &gt;</h1>
+<h1 class="symbol">class Activity</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> Threading<br />
+<b>Header:</b> Poco/Activity.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>This template class helps to implement active objects. An active object uses threads to decouple method execution from method invocation, or to perform tasks autonomously, without intervention of a caller. </p>
+<p>An activity is a (typically longer running) method that executes within its own task. Activities can be started automatically (upon object construction) or manually at a later time. Activities can also be stopped at any time. However, to make stopping an activity work, the method implementing the activity has to check periodically whether it has been requested to stop, and if so, return.  Activities are stopped before the object they belong to is destroyed. Methods implementing activities cannot have arguments or return values.  </p>
+<p><a href="Poco.Activity.html" title="class Poco::Activity">Activity</a> objects are used as follows: </p>
+<p></p>
+<pre>class ActiveObject
+{
+public:
+    ActiveObject(): 
+        _activity(this, &amp;ActiveObject::runActivity)
+    {
+        ...
+    }
+
+    ...
+
+protected:
+    void runActivity()
+    {
+        while (!_activity.isStopped())
+        {
+            ...
+        }
+    }
+
+private:
+    Activity&lt;ActiveObject&gt; _activity;
+};
+</pre>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.Runnable.html" title="class Poco::Runnable">Runnable</a></p>
+<p><b>All Base Classes: </b><a href="Poco.Runnable.html" title="class Poco::Runnable">Runnable</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Activity.html#3574" title="Poco::Activity::isRunning()">isRunning</a>, <a href="Poco.Activity.html#3573" title="Poco::Activity::isStopped()">isStopped</a>, <a href="Poco.Activity.html#3575" title="Poco::Activity::run()">run</a>, <a href="Poco.Activity.html#3568" title="Poco::Activity::start()">start</a>, <a href="Poco.Activity.html#3569" title="Poco::Activity::stop()">stop</a>, <a href="Poco.Activity.html#3570" title="Poco::Activity::wait()">wait</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.Runnable.html#9982" title="Poco::Runnable::run()">run</a></p>
+<h2>Types</h2>
+<h3><a name="3563">Callback</a></h3>
+<p class="decl">typedef typename RunnableAdapterType::<a href="Poco.Activity.html#3563" title="Poco::Activity::Callback">Callback</a> <a href="Poco.Activity.html#3563" title="Poco::Activity::Callback">Callback</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="3562">RunnableAdapterType</a></h3>
+<p class="decl">typedef <a href="Poco.RunnableAdapter.html" title="class Poco::RunnableAdapter">RunnableAdapter</a> &lt; C &gt; <a href="Poco.Activity.html#3562" title="Poco::Activity::RunnableAdapterType">RunnableAdapterType</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Constructors</h2>
+<h3><a name="3564">Activity</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Activity.html" title="class Poco::Activity">Activity</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;C * pOwner,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Activity.html#3563" title="Poco::Activity::Callback">Callback</a> method<br />);</p>
+<div class="description">
+<p>Creates the activity. Call <a href="Poco.Activity.html#3568" title="Poco::Activity::start()">start</a>() to start it. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="3567">~Activity</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">~<a href="Poco.Activity.html" title="class Poco::Activity">Activity</a>();</p>
+<div class="description">
+<p>Stops and destroys the activity. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="3574">isRunning</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool isRunning() const;</p>
+<div class="description">
+<p>Returns true if the activity is running. </p>
+</div>
+<h3><a name="3573">isStopped</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool isStopped() const;</p>
+<div class="description">
+<p>Returns true if the activity has been requested to stop. </p>
+</div>
+<h3><a name="3568">start</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void start();</p>
+<div class="description">
+<p>Starts the activity by acquiring a thread for it from the default thread pool. </p>
+</div>
+<h3><a name="3569">stop</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void stop();</p>
+<div class="description">
+<p>Requests to stop the activity. </p>
+</div>
+<h3><a name="3570">wait</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void wait();</p>
+<div class="description">
+<p>Waits for the activity to complete. </p>
+</div>
+<h3><a name="3571">wait</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void wait(<br />&nbsp;&nbsp;&nbsp;&nbsp;long milliseconds<br />);</p>
+<div class="description">
+<p>Waits the given interval for the activity to complete. An <a href="Poco.TimeoutException.html" title="class Poco::TimeoutException">TimeoutException</a> is thrown if the activity does not complete within the given interval. </p>
+</div>
+<h3><a name="3575">run</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void run();</p>
+<div class="description">
+<p></p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Runnable.html#9982" title="Poco::Runnable::run()">Poco::Runnable::run()</a></p></div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

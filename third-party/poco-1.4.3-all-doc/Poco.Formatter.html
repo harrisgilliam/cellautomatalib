@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Formatter</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="symbol">class Formatter</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> Logging<br />
+<b>Header:</b> Poco/Formatter.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>The base class for all <a href="Poco.Formatter.html" title="class Poco::Formatter">Formatter</a> classes. </p>
+<p>A formatter basically takes a <a href="Poco.Message.html" title="class Poco::Message">Message</a> object and formats it into a string. How the formatting is exactly done is up to the implementation of <a href="Poco.Formatter.html" title="class Poco::Formatter">Formatter</a>. For example, a very simple implementation might simply take the message's Text (see <a href="Poco.Message.html#8620" title="Poco::Message::getText()">Message::getText</a>()). A useful implementation should at least take the <a href="Poco.Message.html" title="class Poco::Message">Message</a>'s Time, Priority and Text fields and put them into a string. </p>
+<p>The <a href="Poco.Formatter.html" title="class Poco::Formatter">Formatter</a> class supports the <a href="Poco.Configurable.html" title="class Poco::Configurable">Configurable</a> interface, so the behaviour of certain formatters is configurable. </p>
+<p>Trivial implementations of of <a href="Poco.Formatter.html#7267" title="Poco::Formatter::getProperty()">getProperty</a>() and  <a href="Poco.Formatter.html#7264" title="Poco::Formatter::setProperty()">setProperty</a>() are provided. </p>
+<p>Subclasses must at least provide a <a href="Poco.Formatter.html#7261" title="Poco::Formatter::format()">format</a>() method. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.Configurable.html" title="class Poco::Configurable">Configurable</a>, <a href="Poco.RefCountedObject.html" title="class Poco::RefCountedObject">RefCountedObject</a></p>
+<p><b>All Base Classes: </b><a href="Poco.Configurable.html" title="class Poco::Configurable">Configurable</a>, <a href="Poco.RefCountedObject.html" title="class Poco::RefCountedObject">RefCountedObject</a></p>
+<p><b>Known Derived Classes: </b><a href="Poco.PatternFormatter.html" title="class Poco::PatternFormatter">PatternFormatter</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Formatter.html#7261" title="Poco::Formatter::format()">format</a>, <a href="Poco.Formatter.html#7267" title="Poco::Formatter::getProperty()">getProperty</a>, <a href="Poco.Formatter.html#7264" title="Poco::Formatter::setProperty()">setProperty</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.RefCountedObject.html#9831" title="Poco::RefCountedObject::duplicate()">duplicate</a>, <a href="Poco.Configurable.html#4397" title="Poco::Configurable::getProperty()">getProperty</a>, <a href="Poco.RefCountedObject.html#9833" title="Poco::RefCountedObject::referenceCount()">referenceCount</a>, <a href="Poco.RefCountedObject.html#9832" title="Poco::RefCountedObject::release()">release</a>, <a href="Poco.Configurable.html#4394" title="Poco::Configurable::setProperty()">setProperty</a></p>
+<h2>Constructors</h2>
+<h3><a name="7259">Formatter</a></h3>
+<p class="decl"><a href="Poco.Formatter.html" title="class Poco::Formatter">Formatter</a>();</p>
+<div class="description">
+<p>Creates the formatter. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="7260">~Formatter</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual ~<a href="Poco.Formatter.html" title="class Poco::Formatter">Formatter</a>();</p>
+<div class="description">
+<p>Destroys the formatter. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="7261">format</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual void format(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Message.html" title="class Poco::Message">Message</a> &amp; msg,<br />&nbsp;&nbsp;&nbsp;&nbsp;std::string &amp; text<br />) = 0;</p>
+<div class="description">
+<p>Formats the message and places the result in text.  Subclasses must override this method. </p>
+</div>
+<h3><a name="7267">getProperty</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">std::string getProperty(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name<br />) const;</p>
+<div class="description">
+<p>Throws a <a href="Poco.PropertyNotSupportedException.html" title="class Poco::PropertyNotSupportedException">PropertyNotSupportedException</a>. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Configurable.html#4397" title="Poco::Configurable::getProperty()">Poco::Configurable::getProperty()</a></p></div>
+<h3><a name="7264">setProperty</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void setProperty(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; value<br />);</p>
+<div class="description">
+<p>Throws a <a href="Poco.PropertyNotSupportedException.html" title="class Poco::PropertyNotSupportedException">PropertyNotSupportedException</a>. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Configurable.html#4394" title="Poco::Configurable::setProperty()">Poco::Configurable::setProperty()</a></p></div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+#ifndef _CAM8INTERFACE_H_
+#define _CAM8INTERFACE_H_
+
+#include <Cam8Lib++.H>
+#include <Cam8Steplist++.H>
+
+#include <algorithm>
+
+
+extern "C" {
+	#include <sys/types.h>
+}
+
+
+/*****************************************************************************/
+/********************************* DEFINES ***********************************/
+/*****************************************************************************/
+/* NLP/NLP */
+#define CAM_INTERFACE_HALTED    0x00000008 /* Interface Halted?            */
+#define CAM_WAIT_FOR_HOST       0x00000004 /* CAM waiting for host? status */
+#define CAM_EXCEPTION_STATUS    0x00000002 /* Interface Exception status   */
+#define CAM_NLP_WRITTEN         0x00000001 /* CAM NLP written? status      */
+
+
+/* ISR/RER */
+#define CAM_INT_PENDING_STATUS  0x0000001F /* Status of all Interrupt Bits */
+#define CAM_NEWLIST_INT_STATUS  0x00000010 /* Status new-list interrupt    */
+#define CAM_TIMEOUT_INT_STATUS  0x00000008 /* Status timeout interrupt     */
+#define CAM_SBUS_INT_STATUS     0x00000004 /* Status Sbus interrupt        */
+#define CAM_CAM_INT_STATUS      0x00000002 /* Status CAM interrupt         */
+#define CAM_SOFT_INT_STATUS     0x00000001 /* Status interrupt             */
+
+#define CAM_RESET_INTERFACE     0x80000000 /* Reset the interface          */
+#define CAM_HALT_INTERFACE      0x00008000 /* Halt the interface           */
+#define CAM_CLEAR_EXCEPTION     0x00004000 /* Clear exceptions (enable     */
+					   	   	   	   	   	   /* exceptions caused by timeout)*/
+#define CAM_ENABLE_TIMEOUT_EXC  0x00004000 /* enable exceptions caused     */
+					   	   	   	   	   	   /* by timeout (clear exceptions)*/
+#define CAM_RESUME_AFTER_ERR    0x00002000 /* Resume after error ack       */
+										   /* (enable exceptions by CAM    */
+										   /* interrupt)                   */
+#define CAM_ENABLE_CAMINT_EXC   0x00002000 /* enable exceptions by CAM     */
+					   	   	   	   	   	   /* interrupt (resume after      */
+					   	   	   	   	   	   /* error ack)                   */
+#define CAM_ENABLE_NEWLIST_INT  0x00001000 /* Enable new-list interrupt    */
+#define CAM_ENABLE_TIMEOUT_INT  0x00000800 /* Enable timeout interrupt     */
+#define CAM_ENABLE_SBUS_INT     0x00000400 /* Enable Sbus interrupt        */
+#define CAM_ENABLE_CAM_INT      0x00000200 /* Enable CAM interrupt         */
+#define CAM_ENABLE_SOFT_INT     0x00000100 /* Enable soft interrupt        */
+#define CAM_DISABLE_TIMEOUT_EXC 0x00000040 /* Disable new-list interrupt   */
+#define CAM_DISABLE_CAMINT_EXC  0x00000020 /* Disable timeout interrupt    */
+#define CAM_DISABLE_NEWLIST_INT 0x00000010 /* Disable new-list interrupt   */
+#define CAM_DISABLE_TIMEOUT_INT 0x00000008 /* Disable timeout interrupt    */
+#define CAM_DISABLE_SBUS_INT    0x00000004 /* Disable Sbus interrupt       */
+#define CAM_DISABLE_CAM_INT     0x00000002 /* Disable CAM interrupt        */
+#define CAM_DISABLE_SOFT_INT    0x00000001 /* Disable soft interrupt       */
+
+
+/* CIP/DSL */
+#define CAM_TRANSFER_WAITING   0x00000008  /* Is CAM waiting to transfer?  */
+#define CAM_DONE_STATUS        0x00000004  /* CAM Done status              */
+#define CAM_PARTIAL_WRITE      0x00000002  /* Partial write after Sbus err?*/
+#define CAM_FSM_SUSPENDED      0x00000001  /* Is Sbus FSM suspended?       */
+
+
+/* PIP/DBL */
+#define CAM_INTRFC_RESET_PNDNG 0x00000008  /* Interface reset pending?     */
+#define CAM_SS2                0x00000004  /* CAM SS2 mode set?            */
+#define CAM_SCANNING_STATUS    0x00000002  /* CAM scanning status          */
+#define CAM_INTERRUPT_STATUS   0x00000001  /* CAM interrupt status         */
+
+
+#define SCTBL_SZ			1024
+
+
+/*****************************************************************************/
+/******************************** TEMPLATES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/*************************** CLASSES & TYPEDEFS ******************************/
+/*****************************************************************************/
+// Forward declaration
+class Cam8Steplist;
+
+
+class Cam8Interface {
+public:
+	virtual void ResetInterface(void) = 0;
+	virtual void InitInterface(void) = 0;
+	virtual void HaltInterface(void) = 0;
+	virtual void ClearException(void) = 0;
+	virtual void ClearFault(void) = 0;
+	virtual void EnableInterfaceExceptions(void) = 0;
+	virtual void EnableTimeoutException(void) = 0;
+	virtual void EnableCamException(void) = 0;
+	virtual void DisableInterfaceExceptions(void) = 0;
+	virtual void DisableTimeoutException(void) = 0;
+	virtual void DisableCamException(void) = 0;
+	virtual void EnableInterfaceInterrupts(void) = 0;
+	virtual void EnableNewlistInterrupt(void) = 0;
+	virtual void EnableTimeoutInterrupt(void) = 0;
+	virtual void EnableSBusInterrupt(void) = 0;
+	virtual void EnableCamInterrupt(void) = 0;
+	virtual void EnableSoftInterrupt(void) = 0;
+	virtual void DisableInterfaceInterrupts(void) = 0;
+	virtual void DisableNewlistInterrupt(void) = 0;
+	virtual void DisableTimeoutInterrupt(void) = 0;
+	virtual void DisableSBusInterrupt(void) = 0;
+	virtual void DisableCamInterrupt(void) = 0;
+	virtual void DisableSoftInterrupt(void) = 0;
+	virtual void ClearInterfaceInterrupts(void) = 0;
+	virtual void SetScanLength(u_int32_t h, u_int32_t n) = 0;
+	virtual void SetBlankLength(u_int32_t h, u_int32_t n) = 0;
+
+	virtual void ExecuteSteplist(Cam8Steplist &) = 0;
+
+	virtual bool Read_NLP(u_int32_t *) = 0;
+	virtual bool Read_ISR(u_int32_t *) = 0;
+	virtual bool Read_CIP(u_int32_t *) = 0;
+	virtual bool Read_PIP(u_int32_t *) = 0;
+	virtual bool Write_NLP(const u_int32_t *) = 0;
+	virtual bool Write_RER(const u_int32_t *) = 0;
+	virtual bool Write_DSL(const u_int32_t *) = 0;
+	virtual bool Write_DBL(const u_int32_t *) = 0;
+
+	virtual caddr_t Alloc_Instr(u_int32_t) = 0;
+	virtual void Free_Instr(caddr_t) = 0;
+};
+typedef Cam8Interface *CAM8INTERFACE;
+
+
+/*****************************************************************************/
+/********************************* INLINES ***********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/******************************* PROTOTYPES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/********************************* GLOBALS ***********************************/
+/*****************************************************************************/
+#endif

@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Data::AbstractSessionImpl</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Data.html" class="namespace">Poco::Data</a></h1>
+<h1 class="template">template &lt; class C &gt;</h1>
+<h1 class="symbol">class AbstractSessionImpl</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Data<br />
+<b>Package:</b> DataCore<br />
+<b>Header:</b> Poco/Data/AbstractSessionImpl.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>A partial implementation of <a href="Poco.Data.SessionImpl.html" title="class Poco::Data::SessionImpl">SessionImpl</a>, providing features and properties management. </p>
+<p>To implement a certain feature or property, a subclass must provide setter and getter methods and register them with <a href="Poco.Data.AbstractSessionImpl.html#2327" title="Poco::Data::AbstractSessionImpl::addFeature()">addFeature</a>() or <a href="Poco.Data.AbstractSessionImpl.html#2331" title="Poco::Data::AbstractSessionImpl::addProperty()">addProperty</a>(). </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.Data.SessionImpl.html" title="class Poco::Data::SessionImpl">SessionImpl</a></p>
+<p><b>All Base Classes: </b><a href="Poco.Data.SessionImpl.html" title="class Poco::Data::SessionImpl">SessionImpl</a>, <a href="Poco.RefCountedObject.html" title="class Poco::RefCountedObject">Poco::RefCountedObject</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Data.AbstractSessionImpl.html#2327" title="Poco::Data::AbstractSessionImpl::addFeature()">addFeature</a>, <a href="Poco.Data.AbstractSessionImpl.html#2331" title="Poco::Data::AbstractSessionImpl::addProperty()">addProperty</a>, <a href="Poco.Data.AbstractSessionImpl.html#2320" title="Poco::Data::AbstractSessionImpl::getFeature()">getFeature</a>, <a href="Poco.Data.AbstractSessionImpl.html#2325" title="Poco::Data::AbstractSessionImpl::getProperty()">getProperty</a>, <a href="Poco.Data.AbstractSessionImpl.html#2317" title="Poco::Data::AbstractSessionImpl::setFeature()">setFeature</a>, <a href="Poco.Data.AbstractSessionImpl.html#2322" title="Poco::Data::AbstractSessionImpl::setProperty()">setProperty</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.Data.SessionImpl.html#3021" title="Poco::Data::SessionImpl::begin()">begin</a>, <a href="Poco.Data.SessionImpl.html#3024" title="Poco::Data::SessionImpl::close()">close</a>, <a href="Poco.Data.SessionImpl.html#3022" title="Poco::Data::SessionImpl::commit()">commit</a>, <a href="Poco.Data.SessionImpl.html#3020" title="Poco::Data::SessionImpl::createStatementImpl()">createStatementImpl</a>, <a href="Poco.RefCountedObject.html#9831" title="Poco::RefCountedObject::duplicate()">duplicate</a>, <a href="Poco.Data.SessionImpl.html#3030" title="Poco::Data::SessionImpl::getFeature()">getFeature</a>, <a href="Poco.Data.SessionImpl.html#3035" title="Poco::Data::SessionImpl::getProperty()">getProperty</a>, <a href="Poco.Data.SessionImpl.html#3025" title="Poco::Data::SessionImpl::isConnected()">isConnected</a>, <a href="Poco.Data.SessionImpl.html#3026" title="Poco::Data::SessionImpl::isTransaction()">isTransaction</a>, <a href="Poco.RefCountedObject.html#9833" title="Poco::RefCountedObject::referenceCount()">referenceCount</a>, <a href="Poco.RefCountedObject.html#9832" title="Poco::RefCountedObject::release()">release</a>, <a href="Poco.Data.SessionImpl.html#3023" title="Poco::Data::SessionImpl::rollback()">rollback</a>, <a href="Poco.Data.SessionImpl.html#3027" title="Poco::Data::SessionImpl::setFeature()">setFeature</a>, <a href="Poco.Data.SessionImpl.html#3032" title="Poco::Data::SessionImpl::setProperty()">setProperty</a></p>
+<h2>Types</h2>
+<h3><a name="2314">Poco::Any</a></h3>
+<p class="decl">typedef <a href="Poco.Any.html" title="class Poco::Any">Poco::Any</a> (C::* PropertyGetter)(const std::string &amp;);</p>
+<div class="description">
+<p>The getter method for a property. </p>
+</div>
+<h3><a name="2312">bool</a></h3>
+<p class="decl">typedef bool (C::* FeatureGetter)(const std::string &amp;);</p>
+<div class="description">
+<p>The getter method for a feature. </p>
+</div>
+<h3><a name="2311">void</a></h3>
+<p class="decl">typedef void (C::* FeatureSetter)(const std::string &amp;, bool);</p>
+<div class="description">
+<p>The setter method for a feature. </p>
+</div>
+<h3><a name="2313">void</a></h3>
+<p class="decl">typedef void (C::* PropertySetter)(const std::string &amp;, const <a href="Poco.Any.html" title="class Poco::Any">Poco::Any</a> &amp;);</p>
+<div class="description">
+<p>The setter method for a property. </p>
+</div>
+<h2>Constructors</h2>
+<h3><a name="2315">AbstractSessionImpl</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Data.AbstractSessionImpl.html" title="class Poco::Data::AbstractSessionImpl">AbstractSessionImpl</a>();</p>
+<div class="description">
+<p>Creates the <a href="Poco.Data.AbstractSessionImpl.html" title="class Poco::Data::AbstractSessionImpl">AbstractSessionImpl</a>. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="2316">~AbstractSessionImpl</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">~<a href="Poco.Data.AbstractSessionImpl.html" title="class Poco::Data::AbstractSessionImpl">AbstractSessionImpl</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Data.AbstractSessionImpl.html" title="class Poco::Data::AbstractSessionImpl">AbstractSessionImpl</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="2320">getFeature</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool getFeature(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name<br />);</p>
+<div class="description">
+<p>Looks a feature up in the features map and calls the feature's getter, if there is one. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Data.SessionImpl.html#3030" title="Poco::Data::SessionImpl::getFeature()">Poco::Data::SessionImpl::getFeature()</a></p></div>
+<h3><a name="2325">getProperty</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Any.html" title="class Poco::Any">Poco::Any</a> getProperty(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name<br />);</p>
+<div class="description">
+<p>Looks a property up in the properties map and calls the property's getter, if there is one. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Data.SessionImpl.html#3035" title="Poco::Data::SessionImpl::getProperty()">Poco::Data::SessionImpl::getProperty()</a></p></div>
+<h3><a name="2317">setFeature</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void setFeature(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name,<br />&nbsp;&nbsp;&nbsp;&nbsp;bool state<br />);</p>
+<div class="description">
+<p>Looks a feature up in the features map and calls the feature's setter, if there is one. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Data.SessionImpl.html#3027" title="Poco::Data::SessionImpl::setFeature()">Poco::Data::SessionImpl::setFeature()</a></p></div>
+<h3><a name="2322">setProperty</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void setProperty(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name,<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Any.html" title="class Poco::Any">Poco::Any</a> &amp; value<br />);</p>
+<div class="description">
+<p>Looks a property up in the properties map and calls the property's setter, if there is one. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Data.SessionImpl.html#3032" title="Poco::Data::SessionImpl::setProperty()">Poco::Data::SessionImpl::setProperty()</a></p></div>
+<h3><a name="2327">addFeature</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void addFeature(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name,<br />&nbsp;&nbsp;&nbsp;&nbsp;FeatureSetter setter,<br />&nbsp;&nbsp;&nbsp;&nbsp;FeatureGetter getter<br />);</p>
+<div class="description">
+<p>Adds a feature to the map of supported features. </p>
+<p>The setter or getter can be null, in case setting or getting a feature is not supported. </p>
+</div>
+<h3><a name="2331">addProperty</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void addProperty(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name,<br />&nbsp;&nbsp;&nbsp;&nbsp;PropertySetter setter,<br />&nbsp;&nbsp;&nbsp;&nbsp;PropertyGetter getter<br />);</p>
+<div class="description">
+<p>Adds a property to the map of supported properties. </p>
+<p>The setter or getter can be null, in case setting or getting a property is not supported. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

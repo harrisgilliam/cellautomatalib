@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::DeflatingInputStream</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="symbol">class DeflatingInputStream</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> Streams<br />
+<b>Header:</b> Poco/DeflatingStream.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>This stream compresses all data passing through it using zlib's deflate algorithm. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.DeflatingIOS.html" title="class Poco::DeflatingIOS">DeflatingIOS</a>, std::istream</p>
+<p><b>All Base Classes: </b><a href="Poco.DeflatingIOS.html" title="class Poco::DeflatingIOS">DeflatingIOS</a>, std::ios, std::istream</p>
+<h2>Member Summary</h2>
+<p><b>Inherited Functions: </b><a href="Poco.DeflatingIOS.html#4794" title="Poco::DeflatingIOS::rdbuf()">rdbuf</a></p>
+<h2>Constructors</h2>
+<h3><a name="4809">DeflatingInputStream</a></h3>
+<p class="decl"><a href="Poco.DeflatingInputStream.html" title="class Poco::DeflatingInputStream">DeflatingInputStream</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::istream &amp; istr,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.DeflatingStreamBuf.html#4740" title="enum  Poco::DeflatingStreamBuf::StreamType">DeflatingStreamBuf::StreamType</a> type = DeflatingStreamBuf::STREAM_ZLIB,<br />&nbsp;&nbsp;&nbsp;&nbsp;int level = (- 1)<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.DeflatingIOS.html" title="class Poco::DeflatingIOS">DeflatingIOS</a> for compressing data read from the given input stream. </p>
+</div>
+<h3><a name="4813">DeflatingInputStream</a></h3>
+<p class="decl"><a href="Poco.DeflatingInputStream.html" title="class Poco::DeflatingInputStream">DeflatingInputStream</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::istream &amp; istr,<br />&nbsp;&nbsp;&nbsp;&nbsp;int windowBits,<br />&nbsp;&nbsp;&nbsp;&nbsp;int level<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.DeflatingIOS.html" title="class Poco::DeflatingIOS">DeflatingIOS</a> for compressing data read from the given input stream. </p>
+<p>Please refer to the zlib documentation of deflateInit2() for a description of the windowBits parameter. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="4817">~DeflatingInputStream</a></h3>
+<p class="decl">~<a href="Poco.DeflatingInputStream.html" title="class Poco::DeflatingInputStream">DeflatingInputStream</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.DeflatingInputStream.html" title="class Poco::DeflatingInputStream">DeflatingInputStream</a>. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

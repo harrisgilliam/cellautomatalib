@@ -1,0 +1,62 @@
+#ifndef _CAM_dev_h_
+#define _CAM_dev_h_
+
+
+#include <CAM/CAM_objects.h>
+
+
+/*****************************************************************************/
+/****************************** DEFINES **************************************/
+/*****************************************************************************/
+#define INITIATE_IFC_RESET(c8)		CAM_dev(c8, CIOWRRER, 0x80000000)
+#define HALT_IFC(c8)			CAM_dev(c8, CIOWRRER, 0x00008000)
+#define CLEAR_EXCEPTION(c8)		CAM_dev(c8, CIOWRRER, 0x00004000)
+#define CLEAR_FAULT(c8)			CAM_dev(c8, CIOWRRER, 0x00002000)
+#define ENABLE_IFC_EXCEPTIONS(c8)	CAM_dev(c8, CIOWRRER, 0x00006000)
+#define ENABLE_TIMEOUT_EXCEPTION(c8)	CAM_dev(c8, CIOWRRER, 0x00004000)
+#define ENABLE_CAM_EXCEPTION(c8)	CAM_dev(c8, CIOWRRER, 0x00002000)
+#define DISABLE_IFC_EXCEPTIONS(c8)	CAM_dev(c8, CIOWRRER, 0x00000060)
+#define DISABLE_TIMEOUT_EXCEPTION(c8)	CAM_dev(c8, CIOWRRER, 0x00000040)
+#define DISABLE_CAM_EXCEPTION(c8)	CAM_dev(c8, CIOWRRER, 0x00000020)
+#define ENABLE_IFC_INTS(c8)		CAM_dev(c8, CIOWRRER, 0x00001f00)
+#define ENABLE_NEWLIST_INT(c8)		CAM_dev(c8, CIOWRRER, 0x00001000)
+#define ENABLE_TIMEOUT_INT(c8)		CAM_dev(c8, CIOWRRER, 0x00000800)
+#define ENABLE_SBUS_INT(c8)		CAM_dev(c8, CIOWRRER, 0x00000400)
+#define ENABLE_CAM_INT(c8)		CAM_dev(c8, CIOWRRER, 0x00000200)
+#define ENABLE_SOFT_INT(c8)		CAM_dev(c8, CIOWRRER, 0x00000100)
+#define DISABLE_IFC_INTS(c8)		CAM_dev(c8, CIOWRRER, 0x0000001f)
+#define DISABLE_NEWLIST_INT(c8)		CAM_dev(c8, CIOWRRER, 0x00000010)
+#define DISABLE_TIMEOUT_INT(c8)		CAM_dev(c8, CIOWRRER, 0x00000008)
+#define DISABLE_SBUS_INT(c8)		CAM_dev(c8, CIOWRRER, 0x00000004)
+#define DISABLE_CAM_INT(c8)		CAM_dev(c8, CIOWRRER, 0x00000002)
+#define DISABLE_SOFT_INT(c8)		CAM_dev(c8, CIOWRRER, 0x00000001)
+#define CLEAR_IFC_INTS(c8)		CAM_dev(c8, CIORDISR, 0)
+#define SET_SCAN_LEN(c8,h,v)		CAM_dev(c8, CIOWRDSL, ((v)<<16)|(h))
+#define SET_BLANK_LEN(c8,h,v)		CAM_dev(c8, CIOWRDBL, ((v)<<16)|(h))
+
+
+
+/*****************************************************************************/
+/***************************** TYPEDEFS **************************************/
+/*****************************************************************************/
+
+
+
+/*****************************************************************************/
+/**************************** PROTOTYPES *************************************/
+/*****************************************************************************/
+void CAM_set_scan(CAM8, unsigned int, unsigned int);
+void CAM_reset_ifc(CAM8);
+void CAM_reset_cam(CAM8);
+void CAM_reset_video(CAM8);
+void CAM_reset_sync(CAM8);
+int CAM_dev(CAM8, int, int);
+
+
+
+/*****************************************************************************/
+/***************************** GLOBALS ***************************************/
+/*****************************************************************************/
+
+
+#endif

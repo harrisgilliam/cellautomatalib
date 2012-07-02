@@ -1,0 +1,65 @@
+Cam8Experiment
+
+
+---------------------------------------------------------------------------
+
+Cam8Instr
+
+	Has all the code needed to make CAM8 register instructions.
+All values and frobnication of the instruction data handled by this
+code.
+
+---------------------------------------------------------------------------
+
+Cam8Steplist
+
+	Has all the code needed to implement new steplist methodology.
+Cam8Steplist will eventually be a subclass of an instruction stream
+class which is a general abstraction for a sequence of instructions
+sent to a cellular automata machine for execution.  This is where we
+start to leave the CAM8 specific world and move into the CA library
+general world.
+
+---------------------------------------------------------------------------
+
+Cam8
+
+	Main class for users who are writing programs that only run on
+CAM8.  Need methods that parallel ForthSTEP CAM assembly words.  Based
+on c8cpp code but need to check implementation because c8cpp has bugs.
+
+---------------------------------------------------------------------------
+
+Cam8Core
+
+	This is an abstract class: prototype methods for memory
+management, reading/writing register set, initializing and error
+detection.
+
+---------------------------------------------------------------------------
+
+Cam8HardwareCore
+
+	Subclass of Cam8Core.  Interface to real hardware.  Interact
+with device driver.
+
+---------------------------------------------------------------------------
+
+Cam8SimCore
+
+	Subclass of Cam8Core.  Interact with C interpreter version of
+cam8sim code.
+
+---------------------------------------------------------------------------
+
+Cam8SimSPARCCore
+
+	Subclass of Cam8Core.  Interact with Just-In-Time compiler
+version of cam8sim code for SPARC.
+
+---------------------------------------------------------------------------
+
+Cam8SimPICore
+
+	Subclass of Cam8Core.  Interact with external cam8sim process
+via pipe interface.

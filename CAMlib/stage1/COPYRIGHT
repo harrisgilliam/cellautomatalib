@@ -1,0 +1,37 @@
+The following software is Copyright (c) 1990 - 1997:
+	STEP Research Inc.
+	MIT Laboratory for Computer Science - Information Mechanics Group
+
+Various people have contributed to the design and implementation of these
+programs as noted below.  This code comprises the programming environment
+for the CAM8 computer.
+
+CAMlib		- HL Gilliam, D Risacher, M Muzumdar
+XCAM		- HL Gilliam
+cam8sim		- M Shah, HL Gilliam
+cam8utils	- N Margolus, D Risacher, HL Gilliam
+campat		- D Risacher, M Muzumdar, HL Gilliam
+demos		- N Margolus, T Toffoli, D Risacher, R D'Sousa, HL Gilliam, etc
+devdri		- K Streeter, HL Gilliam
+ppmtools	- D Risacher
+pystep		- HL Gilliam
+step		- N Margolus, T Toffoli, HL Gilliam, D Risacher
+ 
+All rights reserved.
+
+Permission to use, copy, modify, and distribute this software and its
+associated documentation for any purpose and without fee is hereby
+granted, provided that the above copyright notice appears in all
+copies, and that both that copyright notice and this permission notice
+appear in supporting documentation, and that the name of the author
+not be used in advertising or publicity pertaining to distribution of
+the software without specific, written prior permission.
+
+THE AUTHORS DISCLAIM ALL WARRANTIES WITH REGARD TO THIS SOFTWARE,
+INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS.  IN
+NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY SPECIAL, INDIRECT OR
+CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF
+USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+

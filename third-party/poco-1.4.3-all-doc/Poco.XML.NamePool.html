@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::XML::NamePool</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.XML.html" class="namespace">Poco::XML</a></h1>
+<h1 class="symbol">class NamePool</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> XML<br />
+<b>Package:</b> XML<br />
+<b>Header:</b> Poco/XML/NamePool.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>A hashtable that stores <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> names consisting of an <a href="Poco.URI.html" title="class Poco::URI">URI</a>, a local name and a qualified name. </p>
+</div>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.XML.NamePool.html#21090" title="Poco::XML::NamePool::duplicate()">duplicate</a>, <a href="Poco.XML.NamePool.html#21092" title="Poco::XML::NamePool::hash()">hash</a>, <a href="Poco.XML.NamePool.html#21084" title="Poco::XML::NamePool::insert()">insert</a>, <a href="Poco.XML.NamePool.html#21091" title="Poco::XML::NamePool::release()">release</a></p>
+<h2>Constructors</h2>
+<h3><a name="21082">NamePool</a></h3>
+<p class="decl"><a href="Poco.XML.NamePool.html" title="class Poco::XML::NamePool">NamePool</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;unsigned long size = 251<br />);</p>
+<div class="description">
+<p>Creates a name pool with room for up to size strings. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="21096">~NamePool</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">~<a href="Poco.XML.NamePool.html" title="class Poco::XML::NamePool">NamePool</a>();</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="21090">duplicate</a></h3>
+<p class="decl">void duplicate();</p>
+<div class="description">
+<p>Increments the reference count. </p>
+</div>
+<h3><a name="21084">insert</a></h3>
+<p class="decl">const <a href="Poco.XML.Name.html" title="class Poco::XML::Name">Name</a> &amp; insert(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.XML.html#21390" title="Poco::XML::XMLString">XMLString</a> &amp; qname,<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.XML.html#21390" title="Poco::XML::XMLString">XMLString</a> &amp; namespaceURI,<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.XML.html#21390" title="Poco::XML::XMLString">XMLString</a> &amp; localName<br />);</p>
+<div class="description">
+<p>Returns a const reference to an <a href="Poco.XML.Name.html" title="class Poco::XML::Name">Name</a> for the given names. Creates the <a href="Poco.XML.Name.html" title="class Poco::XML::Name">Name</a> if it does not already exist. Throws a <a href="Poco.PoolOverflowException.html" title="class Poco::PoolOverflowException">PoolOverflowException</a> if the name pool is full. </p>
+</div>
+<h3><a name="21088">insert</a></h3>
+<p class="decl">const <a href="Poco.XML.Name.html" title="class Poco::XML::Name">Name</a> &amp; insert(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.XML.Name.html" title="class Poco::XML::Name">Name</a> &amp; name<br />);</p>
+<div class="description">
+<p>Returns a const reference to an <a href="Poco.XML.Name.html" title="class Poco::XML::Name">Name</a> for the given name. Creates the <a href="Poco.XML.Name.html" title="class Poco::XML::Name">Name</a> if it does not already exist. Throws a <a href="Poco.PoolOverflowException.html" title="class Poco::PoolOverflowException">PoolOverflowException</a> if the name pool is full. </p>
+</div>
+<h3><a name="21091">release</a></h3>
+<p class="decl">void release();</p>
+<div class="description">
+<p>Decrements the reference count and deletes the object if the reference count reaches zero. </p>
+</div>
+<h3><a name="21092">hash</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">unsigned long hash(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.XML.html#21390" title="Poco::XML::XMLString">XMLString</a> &amp; qname,<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.XML.html#21390" title="Poco::XML::XMLString">XMLString</a> &amp; namespaceURI,<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.XML.html#21390" title="Poco::XML::XMLString">XMLString</a> &amp; localName<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

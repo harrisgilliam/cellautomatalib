@@ -1,0 +1,260 @@
+#ifndef _CAM_objects_H_
+#define _CAM_objects_H_
+
+
+
+/*****************************************************************************/
+/****************************** DEFINES **************************************/
+/*****************************************************************************/
+#define NUM_DIM(c8,p)		(c8)->spc->p.num_dim
+#define TOP_DIM(c8,p)		(c8)->spc->p.top_dim
+#define NUM_CELLS(c8,p)		(c8)->spc->p.num_cells
+#define DMASK(c8,p)		(c8)->spc->p.dmask
+#define EXTENTS(c8,p)		(c8)->spc->p.extents
+#define POS(c8,p)		(c8)->spc->p.pos
+#define LEN(c8,p)		(c8)->spc->p.len
+#define NUM_MODULES_d(c8,d)	(c8)->spc->num_modules[d]
+#define NUM_MODULES_X(c8)	(c8)->spc->num_modules[0]
+#define NUM_MODULES_Y(c8)	(c8)->spc->num_modules[1]
+#define NUM_MODULES_Z(c8)	(c8)->spc->num_modules[2]
+#define GLUE_d(c8,d)		(c8)->spc->glue[d]
+#define GLUE_X(c8)		(c8)->spc->glue[0]
+#define GLUE_Y(c8)		(c8)->spc->glue[1]
+#define GLUE_Z(c8)		(c8)->spc->glue[2]
+#define NUM_MODULES(c8)		(c8)->mp->num_modules
+#define NUM_d(c8,d)		(c8)->mp->num[d]
+#define NUM_X(c8)		(c8)->mp->num[0]
+#define NUM_Y(c8)		(c8)->mp->num[1]
+#define NUM_Z(c8)		(c8)->mp->num[2]
+#define NUM_LAYERS(c8)		(c8)->mp->num_layers
+#define NUM_LEVELS(c8)		(c8)->mp->num_levels
+#define MAXID(c8)		((1 << NUM_LAYERS(c8)) - 1)
+#define DRAM_SIZE(c8)		(c8)->mp->dram_size
+#define DRAM_ROW(c8)		(c8)->mp->dram_row
+#define SWEEP_OVERHEAD(c8)	(c8)->mp->sweep_overhead
+#define MODULE_LIST(c8)		(c8)->spc->module_xyz_list
+#define COPY_SS(c8,p1,p2)						\
+	bcopy((char*)(&((c8)->spc->p1)), (char*)(&((c8)->spc->p2)),	\
+	      sizeof(struct spc_state))
+#define CLOCKS__REFRESH(c8)	390
+#define SUBSECTORS__SECTOR(c8)	(NUM_CELLS(c8,sector)/NUM_CELLS(c8,subsector))
+#define CLOCKS__SWEEP(c8,v)	((1 << (v)) + SWEEP_OVERHEAD(c8))
+#define CUT__SECTOR(c8,d)						\
+	(31 & (LEN(c8, sector)[d] + (LEN(c8, sector)[d] != 0 ?		\
+				     POS(c8, sector)[d] - 1 : 0)))
+#define REFRESHES__SWEEP(c8,v) \
+	MIN(31, CLOCKS__SWEEP(c8,v) / CLOCKS__REFRESH(c8) + 1)
+#define SWEEPS__REFRESH(c8,v) \
+	MIN(256, MAX(1, CLOCKS__REFRESH(c8) / CLOCKS__SWEEP(c8,v)))
+
+
+
+/*****************************************************************************/
+/***************************** TYPEDEFS **************************************/
+/*****************************************************************************/
+typedef struct linked_list_element {
+  struct linked_list_element *fl, *bl;
+  char *data;
+} *LLE, Lle;
+
+typedef struct linked_list {
+  LLE head, tail;
+  LLE ce;
+  int sz;
+} *LL, Ll;
+
+/** a PAGE is a range of memory which can be parceled out into BUFFERS **/
+typedef struct page_struct {
+  /* pointers to the page in user, kernel and interface address space */
+  char *usr, *ker, *ifc;
+  int sz;               /* size of actual page */
+  char *free;           /* pointer to first free byte */
+  int bytes;            /* number of usable bytes in page */
+  int koff, ioff;       /* offset to add for kernel, interface addresses */
+} *PAGE, Page;
+
+/** a HEAP is a set of PAGEs **/
+typedef struct heap_struct {
+  LL pglst;             /* list of pages */
+  PAGE ffp;             /* first free page */
+  int sz;               /* num pages in heap */
+  int bytes;            /* num bytes free in current page */
+  int dyn;              /* boolean: allocate more pages? */
+  int camfd;            /* fd for device driver */
+} *HEAP, Heap;
+
+/** a BUFFER is a piece of memory which stores things
+    like steplist entries, pattern data, LUTs, or color maps **/
+typedef struct buffer_struct {
+  char *ptr;       /* ptr to the actual data */
+  int sz, kersz;   /* size of usable buffer area, real size of buffer */
+  int koff, ioff;  /* offsets to kernel and interace addresses */
+  int camfd;       /* /dev/cam fd */
+  HEAP hp;	   /* pointer to heap if buffer was allocate from one */
+} *BUFFER, Buffer;
+
+typedef Buffer *INBUF, Inbuf;
+
+/** a INSTR is a CAM instruction **/
+typedef struct instr_struct {
+  INBUF sle;
+  INBUF usr_buf;
+  INBUF def_buf;
+  HEAP hp;
+  int regnum, buflen;
+} *INSTR, Instr;
+
+typedef Buffer *LUT, Lut;
+
+/** a C8CE is an entry in a colormap for the CAM8  **/
+typedef struct cam8_colormap_entry {
+  unsigned short i, r, g, b;
+} *C8CE, C8ce;
+
+/** a CMAP is the structure which holds a color map **/
+typedef struct cmap_struct {
+  BUFFER buf;   /* ptr to the BUFFER structure */
+  C8CE map;     /* ptr to the actual data */
+                /* map == buf->ptr */
+} *CMAP, Cmap;
+
+/** a DEFAULTS is the default values for cam instructions **/
+typedef struct defaults_struct {
+  int defining_defaults;   /* boolean: are we defining? */
+  BUFFER std[29];           /* standard defaults */
+  BUFFER my[29];            /* user set defaults */
+  BUFFER *defbuf;
+  HEAP hp;
+  INSTR save_instr;
+  int save_regnum;
+  INBUF save_buf;
+  int save_buflen;
+} *DEFAULTS, Defaults;
+
+/** a STEPLIST is a list of CAM8 instructions **/
+typedef struct steplist_struct {
+  HEAP mem;          /* ptr to the heap which holds the sl */
+  INSTR list;          /* ptr to the first instruction       */
+  INSTR prev_instr;  /* ptr to the previous instr   ??     */
+  INSTR jump_point;
+  int nested_link;
+  int camfd, length; /* length in instructions (?) */
+  int head, link, jump;
+} *STEPLIST, Steplist;
+
+/** a PORT is a structure for passing instructions to CAM8 **/
+typedef struct port_struct {
+  STEPLIST prev, cur;             /* steplists to send */
+  int last_ints;                                  /* ? */
+  int camint_was_seen, timeout_was_seen;      /* bools */
+  int timeout_is_allowed, camint_is_allowed;  /* bools */
+} *PORT, Port;
+
+typedef struct subcell_struct {
+  BUFFER offset[SCTBL_SZ];
+  int max_subcell_declared, declared_subcell_num;
+  int assemble_subcell_num;
+} *SUBCELL, Subcell;
+
+/** a SPCST is the details of space implementation ?? **/
+typedef struct spc_state {
+  int extents[24];         /* size of dimension in sites */
+  unsigned short len[24];  /* bit length of dim */
+  unsigned short pos[24];  /* bit positn of dim in Kick Reg */
+  int num_dim, top_dim, dmask, num_cells;
+} *SPCST, Spcst;
+
+/** a SPACE is an abstract experiment space for a CA ?? **/
+typedef struct space_struct {
+  Spcst space;           /* the whole experiment space */
+  Spcst subspace;        /* a part of the experiment space */
+  Spcst sector;          /* the space contained in 1 module */
+  Spcst subsector;       /* a section of a module */
+  int glue[3];
+  int num_modules[3];
+  unsigned char module_xyz_list[8];
+} *SPACE, Space;
+
+/** a C8MACH is the parameters of the actual hardware **/
+typedef struct c8mach_struct {
+  unsigned int num_modules;
+  unsigned int num[3];
+  unsigned int num_layers, num_levels;
+  unsigned int maxid;
+  unsigned int dram_size, dram_row;
+  unsigned int flush_delay;
+  unsigned int scan_io_delay;
+  unsigned int clocks_per_refresh;
+  unsigned int sweep_overhead;
+  unsigned int lut_len;
+} *C8MACH, C8mach;
+
+/** a CAM8 is an abstract CA machine  **/
+typedef struct cam8_struct {
+  PORT pt;
+  C8MACH mp;               /* ptr to the hardware data */
+  HEAP hp;
+  SPACE spc;               /* ptr to the abstract space */
+  SUBCELL sc;              /* ptr to the subcell configuration */
+  DEFAULTS def;
+  INSTR cir;
+  CAMSTREAM in, out, err, dbug;
+  int regnum;
+  int camfd;
+  int single_arg;
+  int layer_mask;
+} *CAM8, Cam8;
+
+
+
+/*****************************************************************************/
+/**************************** PROTOTYPES *************************************/
+/*****************************************************************************/
+extern "C" {
+  PAGE CAM_create_page(CAM8);
+  void CAM_destroy_page(CAM8, PAGE);
+  HEAP CAM_create_heap(CAM8, int, int);
+  void CAM_destroy_heap(CAM8, HEAP);
+  void CAM_expand_heap(CAM8, HEAP, int);
+  BUFFER CAM_create_buffer(CAM8);
+  void CAM_destroy_buffer(CAM8, BUFFER);
+  void CAM_fill_buffer(CAM8, BUFFER, int);
+  void CAM_copy_buffer(CAM8, BUFFER, BUFFER);
+  INBUF CAM_create_inbuf(CAM8);
+  void CAM_destroy_inbuf(CAM8, INBUF);
+  void CAM_fill_inbuf(CAM8, INBUF, int);
+  void CAM_mimic_inbuf(CAM8, INBUF, INBUF);
+  void CAM_copy_inbuf(CAM8, INBUF, INBUF);
+  INSTR CAM_create_instr(CAM8);
+  void CAM_destroy_instr(CAM8, INSTR);
+  void CAM_fill_instr(CAM8, INSTR, int);
+  void CAM_mimic_instr(CAM8, INSTR, INSTR);
+  LUT CAM_create_lut(CAM8);
+  void CAM_destroy_lut(CAM8, LUT);
+  CMAP CAM_create_cmap(CAM8);
+  void CAM_destroy_cmap(CAM8, CMAP);
+  DEFAULTS CAM_create_defaults(CAM8);
+  void CAM_destroy_defaults(CAM8, DEFAULTS);
+  STEPLIST CAM_create_steplist(CAM8);
+  void CAM_destroy_steplist(CAM8, STEPLIST);
+  PORT CAM_create_port(CAM8);
+  void CAM_destroy_port(CAM8, PORT);
+  SUBCELL CAM_create_subcell(CAM8);
+  void CAM_destroy_subcell(CAM8, SUBCELL);
+  SPACE CAM_create_space(CAM8);
+  void CAM_destroy_space(CAM8, SPACE);
+  C8MACH CAM_create_c8mach(CAM8);
+  void CAM_destroy_c8mach(CAM8, C8MACH);
+  CAM8 CAM_create_cam8(int);
+  void CAM_destroy_cam8(CAM8);
+}
+
+
+
+/*****************************************************************************/
+/***************************** GLOBALS ***************************************/
+/*****************************************************************************/
+
+
+
+#endif

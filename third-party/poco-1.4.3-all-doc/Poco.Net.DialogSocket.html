@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Net::DialogSocket</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Net.html" class="namespace">Poco::Net</a></h1>
+<h1 class="symbol">class DialogSocket</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Net<br />
+<b>Package:</b> Sockets<br />
+<b>Header:</b> Poco/Net/DialogSocket.h</p>
+<h2>Description</h2>
+<div class="description">
+<p><a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a> is a subclass of <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> that can be used for implementing request-response based client server connections. </p>
+<p>A request is always a single-line command terminated by CR-LF. </p>
+<p>A response can either be a single line of text terminated by CR-LF, or multiple lines of text in the format used by the FTP and SMTP protocols. </p>
+<p>Limited support for the TELNET protocol (<a href="http://www.ietf.org/rfc/rfc854.txt" target="_blank">RFC 854</a>) is available. </p>
+<p>Warning: Do not call receiveBytes() on a <a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a>. Due to internal buffering in <a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a>, receiveBytes() may return an unexpected result and interfere with <a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a>'s buffering. Use <a href="Poco.Net.DialogSocket.html#12458" title="Poco::Net::DialogSocket::receiveRawBytes()">receiveRawBytes</a>() instead. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a></p>
+<p><b>All Base Classes: </b><a href="Poco.Net.Socket.html" title="class Poco::Net::Socket">Socket</a>, <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Net.DialogSocket.html#12484" title="Poco::Net::DialogSocket::allocBuffer()">allocBuffer</a>, <a href="Poco.Net.DialogSocket.html#12456" title="Poco::Net::DialogSocket::get()">get</a>, <a href="Poco.Net.DialogSocket.html#12433" title="Poco::Net::DialogSocket::operator =()">operator&nbsp;=</a>, <a href="Poco.Net.DialogSocket.html#12457" title="Poco::Net::DialogSocket::peek()">peek</a>, <a href="Poco.Net.DialogSocket.html#12486" title="Poco::Net::DialogSocket::receiveLine()">receiveLine</a>, <a href="Poco.Net.DialogSocket.html#12452" title="Poco::Net::DialogSocket::receiveMessage()">receiveMessage</a>, <a href="Poco.Net.DialogSocket.html#12458" title="Poco::Net::DialogSocket::receiveRawBytes()">receiveRawBytes</a>, <a href="Poco.Net.DialogSocket.html#12488" title="Poco::Net::DialogSocket::receiveStatusLine()">receiveStatusLine</a>, <a href="Poco.Net.DialogSocket.html#12454" title="Poco::Net::DialogSocket::receiveStatusMessage()">receiveStatusMessage</a>, <a href="Poco.Net.DialogSocket.html#12485" title="Poco::Net::DialogSocket::refill()">refill</a>, <a href="Poco.Net.DialogSocket.html#12437" title="Poco::Net::DialogSocket::sendByte()">sendByte</a>, <a href="Poco.Net.DialogSocket.html#12443" title="Poco::Net::DialogSocket::sendMessage()">sendMessage</a>, <a href="Poco.Net.DialogSocket.html#12439" title="Poco::Net::DialogSocket::sendString()">sendString</a>, <a href="Poco.Net.DialogSocket.html#12462" title="Poco::Net::DialogSocket::sendTelnetCommand()">sendTelnetCommand</a>, <a href="Poco.Net.DialogSocket.html#12461" title="Poco::Net::DialogSocket::synch()">synch</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.Net.Socket.html#15656" title="Poco::Net::Socket::address()">address</a>, <a href="Poco.Net.Socket.html#15579" title="Poco::Net::Socket::available()">available</a>, <a href="Poco.Net.Socket.html#15570" title="Poco::Net::Socket::close()">close</a>, <a href="Poco.Net.StreamSocket.html#16087" title="Poco::Net::StreamSocket::connect()">connect</a>, <a href="Poco.Net.StreamSocket.html#16092" title="Poco::Net::StreamSocket::connectNB()">connectNB</a>, <a href="Poco.Net.Socket.html#15655" title="Poco::Net::Socket::getBlocking()">getBlocking</a>, <a href="Poco.Net.Socket.html#15643" title="Poco::Net::Socket::getKeepAlive()">getKeepAlive</a>, <a href="Poco.Net.Socket.html#15635" title="Poco::Net::Socket::getLinger()">getLinger</a>, <a href="Poco.Net.Socket.html#15640" title="Poco::Net::Socket::getNoDelay()">getNoDelay</a>, <a href="Poco.Net.Socket.html#15652" title="Poco::Net::Socket::getOOBInline()">getOOBInline</a>, <a href="Poco.Net.Socket.html#15612" title="Poco::Net::Socket::getOption()">getOption</a>, <a href="Poco.Net.Socket.html#15585" title="Poco::Net::Socket::getReceiveBufferSize()">getReceiveBufferSize</a>, <a href="Poco.Net.Socket.html#15591" title="Poco::Net::Socket::getReceiveTimeout()">getReceiveTimeout</a>, <a href="Poco.Net.Socket.html#15646" title="Poco::Net::Socket::getReuseAddress()">getReuseAddress</a>, <a href="Poco.Net.Socket.html#15649" title="Poco::Net::Socket::getReusePort()">getReusePort</a>, <a href="Poco.Net.Socket.html#15582" title="Poco::Net::Socket::getSendBufferSize()">getSendBufferSize</a>, <a href="Poco.Net.Socket.html#15588" title="Poco::Net::Socket::getSendTimeout()">getSendTimeout</a>, <a href="Poco.Net.Socket.html#15658" title="Poco::Net::Socket::impl()">impl</a>, <a href="Poco.Net.Socket.html#15560" title="Poco::Net::Socket::operator !=()">operator&nbsp;!=</a>, <a href="Poco.Net.Socket.html#15562" title="Poco::Net::Socket::operator <()">operator&nbsp;&lt;</a>, <a href="Poco.Net.Socket.html#15564" title="Poco::Net::Socket::operator <=()">operator&nbsp;&lt;=</a>, <a href="Poco.Net.Socket.html#15555" title="Poco::Net::Socket::operator =()">operator&nbsp;=</a>, <a href="Poco.Net.Socket.html#15558" title="Poco::Net::Socket::operator ==()">operator&nbsp;==</a>, <a href="Poco.Net.Socket.html#15566" title="Poco::Net::Socket::operator >()">operator&nbsp;&gt;</a>, <a href="Poco.Net.Socket.html#15568" title="Poco::Net::Socket::operator >=()">operator&nbsp;&gt;=</a>, <a href="Poco.Net.Socket.html#15657" title="Poco::Net::Socket::peerAddress()">peerAddress</a>, <a href="Poco.Net.Socket.html#15576" title="Poco::Net::Socket::poll()">poll</a>, <a href="Poco.Net.StreamSocket.html#16101" title="Poco::Net::StreamSocket::receiveBytes()">receiveBytes</a>, <a href="Poco.Net.Socket.html#15659" title="Poco::Net::Socket::secure()">secure</a>, <a href="Poco.Net.Socket.html#15571" title="Poco::Net::Socket::select()">select</a>, <a href="Poco.Net.StreamSocket.html#16097" title="Poco::Net::StreamSocket::sendBytes()">sendBytes</a>, <a href="Poco.Net.StreamSocket.html#16105" title="Poco::Net::StreamSocket::sendUrgent()">sendUrgent</a>, <a href="Poco.Net.Socket.html#15653" title="Poco::Net::Socket::setBlocking()">setBlocking</a>, <a href="Poco.Net.Socket.html#15641" title="Poco::Net::Socket::setKeepAlive()">setKeepAlive</a>, <a href="Poco.Net.Socket.html#15632" title="Poco::Net::Socket::setLinger()">setLinger</a>, <a href="Poco.Net.Socket.html#15638" title="Poco::Net::Socket::setNoDelay()">setNoDelay</a>, <a href="Poco.Net.Socket.html#15650" title="Poco::Net::Socket::setOOBInline()">setOOBInline</a>, <a href="Poco.Net.Socket.html#15592" title="Poco::Net::Socket::setOption()">setOption</a>, <a href="Poco.Net.Socket.html#15583" title="Poco::Net::Socket::setReceiveBufferSize()">setReceiveBufferSize</a>, <a href="Poco.Net.Socket.html#15589" title="Poco::Net::Socket::setReceiveTimeout()">setReceiveTimeout</a>, <a href="Poco.Net.Socket.html#15644" title="Poco::Net::Socket::setReuseAddress()">setReuseAddress</a>, <a href="Poco.Net.Socket.html#15647" title="Poco::Net::Socket::setReusePort()">setReusePort</a>, <a href="Poco.Net.Socket.html#15580" title="Poco::Net::Socket::setSendBufferSize()">setSendBufferSize</a>, <a href="Poco.Net.Socket.html#15586" title="Poco::Net::Socket::setSendTimeout()">setSendTimeout</a>, <a href="Poco.Net.StreamSocket.html#16096" title="Poco::Net::StreamSocket::shutdown()">shutdown</a>, <a href="Poco.Net.StreamSocket.html#16094" title="Poco::Net::StreamSocket::shutdownReceive()">shutdownReceive</a>, <a href="Poco.Net.StreamSocket.html#16095" title="Poco::Net::StreamSocket::shutdownSend()">shutdownSend</a>, <a href="Poco.Net.Socket.html#15664" title="Poco::Net::Socket::sockfd()">sockfd</a>, <a href="Poco.Net.Socket.html#15660" title="Poco::Net::Socket::supportsIPv4()">supportsIPv4</a>, <a href="Poco.Net.Socket.html#15661" title="Poco::Net::Socket::supportsIPv6()">supportsIPv6</a></p>
+<h2>Enumerations</h2>
+<h3><a name="12467">TelnetCodes</a></h3>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12468">TELNET_SE</a> = 240</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12469">TELNET_NOP</a> = 241</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12470">TELNET_DM</a> = 242</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12471">TELNET_BRK</a> = 243</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12472">TELNET_IP</a> = 244</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12473">TELNET_AO</a> = 245</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12474">TELNET_AYT</a> = 246</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12475">TELNET_EC</a> = 247</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12476">TELNET_EL</a> = 248</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12477">TELNET_GA</a> = 249</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12478">TELNET_SB</a> = 250</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12479">TELNET_WILL</a> = 251</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12480">TELNET_WONT</a> = 252</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12481">TELNET_DO</a> = 253</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12482">TELNET_DONT</a> = 254</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12483">TELNET_IAC</a> = 255</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Constructors</h2>
+<h3><a name="12425">DialogSocket</a></h3>
+<p class="decl"><a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a>();</p>
+<div class="description">
+<p>Creates an unconnected stream socket. </p>
+<p>Before sending or receiving data, the socket must be connected with a call to connect(). </p>
+</div>
+<h3><a name="12426">DialogSocket</a></h3>
+<p class="decl">explicit <a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.SocketAddress.html" title="class Poco::Net::SocketAddress">SocketAddress</a> &amp; address<br />);</p>
+<div class="description">
+<p>Creates a stream socket and connects it to the socket specified by address. </p>
+</div>
+<h3><a name="12428">DialogSocket</a></h3>
+<p class="decl"><a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.Socket.html" title="class Poco::Net::Socket">Socket</a> &amp; socket<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a> with the <a href="Poco.Net.SocketImpl.html" title="class Poco::Net::SocketImpl">SocketImpl</a> from another socket. The <a href="Poco.Net.SocketImpl.html" title="class Poco::Net::SocketImpl">SocketImpl</a> must be a <a href="Poco.Net.StreamSocketImpl.html" title="class Poco::Net::StreamSocketImpl">StreamSocketImpl</a>, otherwise an <a href="Poco.InvalidArgumentException.html" title="class Poco::InvalidArgumentException">InvalidArgumentException</a> will be thrown. </p>
+</div>
+<h3><a name="12430">DialogSocket</a></h3>
+<p class="decl"><a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a> &amp; socket<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a> as copy of another dialog socket. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="12432">~DialogSocket</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">~<a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="12456">get</a></h3>
+<p class="decl">int get();</p>
+<div class="description">
+<p>Reads one character from the connection. </p>
+<p>Returns -1 (<a href="Poco.Net.DialogSocket.html#12492" title="Poco::Net::DialogSocket::EOF_CHAR">EOF_CHAR</a>) if no more characters are available. </p>
+</div>
+<h3><a name="12433">operator =</a></h3>
+<p class="decl"><a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a> &amp; operator = (<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.Socket.html" title="class Poco::Net::Socket">Socket</a> &amp; socket<br />);</p>
+<div class="description">
+<p>Assignment operator. </p>
+<p>Releases the socket's <a href="Poco.Net.SocketImpl.html" title="class Poco::Net::SocketImpl">SocketImpl</a> and attaches the <a href="Poco.Net.SocketImpl.html" title="class Poco::Net::SocketImpl">SocketImpl</a> from the other socket and increments the reference count of the <a href="Poco.Net.SocketImpl.html" title="class Poco::Net::SocketImpl">SocketImpl</a>.	 </p>
+</div>
+<h3><a name="12435">operator =</a></h3>
+<p class="decl"><a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a> &amp; operator = (<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a> &amp; socket<br />);</p>
+<div class="description">
+<p>Assignment operator. </p>
+</div>
+<h3><a name="12457">peek</a></h3>
+<p class="decl">int peek();</p>
+<div class="description">
+<p>Returns the character that would be returned by the next call to <a href="Poco.Net.DialogSocket.html#12456" title="Poco::Net::DialogSocket::get()">get</a>(), without actually extracting the character from the buffer. </p>
+<p>Returns -1 (<a href="Poco.Net.DialogSocket.html#12492" title="Poco::Net::DialogSocket::EOF_CHAR">EOF_CHAR</a>) if no more characters are available. </p>
+</div>
+<h3><a name="12452">receiveMessage</a></h3>
+<p class="decl">bool receiveMessage(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::string &amp; message<br />);</p>
+<div class="description">
+<p>Receives a single-line message, terminated by CR-LF, from the socket connection and appends it to response. </p>
+<p>Returns true if a message has been read or false if the connection has been closed by the peer. </p>
+</div>
+<h3><a name="12458">receiveRawBytes</a></h3>
+<p class="decl">int receiveRawBytes(<br />&nbsp;&nbsp;&nbsp;&nbsp;void * buffer,<br />&nbsp;&nbsp;&nbsp;&nbsp;int length<br />);</p>
+<div class="description">
+<p>Read up to length bytes from the connection and place them into buffer. If there are data bytes in the internal buffer, these bytes are returned first. </p>
+<p>Use this member function instead of receiveBytes(). </p>
+<p>Returns the number of bytes read, which may be less than requested. </p>
+</div>
+<h3><a name="12454">receiveStatusMessage</a></h3>
+<p class="decl">int receiveStatusMessage(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::string &amp; message<br />);</p>
+<div class="description">
+<p>Receives a single-line or multi-line response from the socket connection. The format must be according to one of the response formats specified in the FTP (<a href="http://www.ietf.org/rfc/rfc959.txt" target="_blank">RFC 959</a>)  or SMTP (<a href="http://www.ietf.org/rfc/rfc2821.txt" target="_blank">RFC 2821</a>) specifications. </p>
+<p>The first line starts with a 3-digit status code. Following the status code is either a space character (' ' )  (in case of a single-line response) or a minus character ('-') in case of a multi-line response. The following lines can have a three-digit status code followed by a minus-sign and some text, or some arbitrary text only. The last line again begins with a three-digit status code (which must be the same as the one in the first line), followed by a space and some arbitrary  text. All lines must be terminated by a CR-LF sequence. </p>
+<p>The response contains all response lines, separated by a newline character, including the status code. The status code is returned. If the response line does not contain a status code, 0 is returned. </p>
+</div>
+<h3><a name="12437">sendByte</a></h3>
+<p class="decl">void sendByte(<br />&nbsp;&nbsp;&nbsp;&nbsp;unsigned char ch<br />);</p>
+<div class="description">
+<p>Sends a single byte over the socket connection. </p>
+</div>
+<h3><a name="12443">sendMessage</a></h3>
+<p class="decl">void sendMessage(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; message<br />);</p>
+<div class="description">
+<p>Appends a CR-LF sequence to the message and sends it over the socket connection. </p>
+</div>
+<h3><a name="12445">sendMessage</a></h3>
+<p class="decl">void sendMessage(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; message,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; arg<br />);</p>
+<div class="description">
+<p>Concatenates message and arg, separated by a space, appends a CR-LF sequence, and sends the result over the socket connection. </p>
+</div>
+<h3><a name="12448">sendMessage</a></h3>
+<p class="decl">void sendMessage(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; message,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; arg1,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; arg2<br />);</p>
+<div class="description">
+<p>Concatenates message and args, separated by a space, appends a CR-LF sequence, and sends the result over the socket connection. </p>
+</div>
+<h3><a name="12439">sendString</a></h3>
+<p class="decl">void sendString(<br />&nbsp;&nbsp;&nbsp;&nbsp;const char * str<br />);</p>
+<div class="description">
+<p>Sends the given null-terminated string over the socket connection. </p>
+</div>
+<h3><a name="12441">sendString</a></h3>
+<p class="decl">void sendString(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; str<br />);</p>
+<div class="description">
+<p>Sends the given string over the socket connection. </p>
+</div>
+<h3><a name="12462">sendTelnetCommand</a></h3>
+<p class="decl">void sendTelnetCommand(<br />&nbsp;&nbsp;&nbsp;&nbsp;unsigned char command<br />);</p>
+<div class="description">
+<p>Sends a TELNET command sequence (<a href="Poco.Net.DialogSocket.html#12483" title="Poco::Net::DialogSocket::TELNET_IAC">TELNET_IAC</a> followed by the given command) over the connection. </p>
+</div>
+<h3><a name="12464">sendTelnetCommand</a></h3>
+<p class="decl">void sendTelnetCommand(<br />&nbsp;&nbsp;&nbsp;&nbsp;unsigned char command,<br />&nbsp;&nbsp;&nbsp;&nbsp;unsigned char arg<br />);</p>
+<div class="description">
+<p>Sends a TELNET command sequence (<a href="Poco.Net.DialogSocket.html#12483" title="Poco::Net::DialogSocket::TELNET_IAC">TELNET_IAC</a> followed by the given command, followed by arg) over the connection. </p>
+</div>
+<h3><a name="12461">synch</a></h3>
+<p class="decl">void synch();</p>
+<div class="description">
+<p>Sends a TELNET SYNCH signal over the connection. </p>
+<p>According to <a href="http://www.ietf.org/rfc/rfc854.txt" target="_blank">RFC 854</a>, a <a href="Poco.Net.DialogSocket.html#12470" title="Poco::Net::DialogSocket::TELNET_DM">TELNET_DM</a> char is sent via sendUrgent(). </p>
+</div>
+<h3><a name="12484">allocBuffer</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void allocBuffer();</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="12486">receiveLine</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool receiveLine(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::string &amp; line<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="12488">receiveStatusLine</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">int receiveStatusLine(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::string &amp; line<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="12485">refill</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void refill();</p>
+<div class="description">
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

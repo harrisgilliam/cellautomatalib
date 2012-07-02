@@ -1,0 +1,49 @@
+#ifndef _CAM_space_H_
+#define _CAM_space_H_
+
+#include <CAM/CAM_objects.H>
+
+/*****************************************************************************/
+/****************************** DEFINES **************************************/
+/*****************************************************************************/
+
+
+
+/*****************************************************************************/
+/***************************** TYPEDEFS **************************************/
+/*****************************************************************************/
+
+
+
+/*****************************************************************************/
+/**************************** PROTOTYPES *************************************/
+/*****************************************************************************/
+extern "C" {
+  void CAM_space_(CAM8, int, va_list);
+  void CAM_space(CAM8, int, ...);
+  void CAM_subspace_(CAM8, int, va_list);
+  void CAM_subspace(CAM8, int, ...);
+  void CAM_sector_(CAM8, int, va_list);
+  void CAM_sector(CAM8, int, ...);
+  void CAM_subsector_(CAM8, int, va_list);
+  void CAM_subsector(CAM8, int, ...);
+  void CAM_full_space(CAM8);
+  void CAM_disjoint_topology(CAM8);
+  void CAM_mesh_topology(CAM8);
+  void CAM_y_strip_topology(CAM8);
+  void CAM_recalc_sector_defaults(CAM8);
+  void CAM_sector_defaults(CAM8);
+  void CAM_magnify_subsector_defaults(CAM8, int[]);
+  void CAM_magnify(CAM8, unsigned int);
+  void CAM_recalc_subsector_defaults(CAM8);
+  void CAM_subsector_defaults(CAM8);
+}
+
+
+
+/*****************************************************************************/
+/***************************** GLOBALS ***************************************/
+/*****************************************************************************/
+
+
+#endif

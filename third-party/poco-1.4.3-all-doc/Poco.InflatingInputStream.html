@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::InflatingInputStream</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="symbol">class InflatingInputStream</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> Streams<br />
+<b>Header:</b> Poco/InflatingStream.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>This stream decompresses all data passing through it using zlib's inflate algorithm. Example: </p>
+<pre>std::ifstream istr(&quot;data.gz&quot;, std::ios::binary);
+InflatingInputStream inflater(istr, InflatingStreamBuf::STREAM_GZIP);
+std::string data;
+inflater &gt;&gt; data;
+</pre>
+<p>The underlying input stream can contain more than one gzip/deflate stream. After a gzip/deflate stream has been processed, <a href="Poco.InflatingInputStream.html#7759" title="Poco::InflatingInputStream::reset()">reset</a>() can be called to inflate the next stream. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.InflatingIOS.html" title="class Poco::InflatingIOS">InflatingIOS</a>, std::istream</p>
+<p><b>All Base Classes: </b><a href="Poco.InflatingIOS.html" title="class Poco::InflatingIOS">InflatingIOS</a>, std::ios, std::istream</p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.InflatingInputStream.html#7759" title="Poco::InflatingInputStream::reset()">reset</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.InflatingIOS.html#7740" title="Poco::InflatingIOS::rdbuf()">rdbuf</a></p>
+<h2>Constructors</h2>
+<h3><a name="7752">InflatingInputStream</a></h3>
+<p class="decl"><a href="Poco.InflatingInputStream.html" title="class Poco::InflatingInputStream">InflatingInputStream</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::istream &amp; istr,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.InflatingStreamBuf.html#7692" title="enum  Poco::InflatingStreamBuf::StreamType">InflatingStreamBuf::StreamType</a> type = InflatingStreamBuf::STREAM_ZLIB<br />);</p>
+<div class="description">
+<p>Creates an <a href="Poco.InflatingInputStream.html" title="class Poco::InflatingInputStream">InflatingInputStream</a> for expanding the compressed data read from  the given input stream. </p>
+</div>
+<h3><a name="7755">InflatingInputStream</a></h3>
+<p class="decl"><a href="Poco.InflatingInputStream.html" title="class Poco::InflatingInputStream">InflatingInputStream</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::istream &amp; istr,<br />&nbsp;&nbsp;&nbsp;&nbsp;int windowBits<br />);</p>
+<div class="description">
+<p>Creates an <a href="Poco.InflatingInputStream.html" title="class Poco::InflatingInputStream">InflatingInputStream</a> for expanding the compressed data read from  the given input stream. </p>
+<p>Please refer to the zlib documentation of inflateInit2() for a description of the windowBits parameter. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="7758">~InflatingInputStream</a></h3>
+<p class="decl">~<a href="Poco.InflatingInputStream.html" title="class Poco::InflatingInputStream">InflatingInputStream</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.InflatingInputStream.html" title="class Poco::InflatingInputStream">InflatingInputStream</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="7759">reset</a></h3>
+<p class="decl">void reset();</p>
+<div class="description">
+<p>Resets the zlib machinery so that another zlib stream can be read from the same underlying input stream. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

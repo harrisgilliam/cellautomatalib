@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::XML::EventDispatcher</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.XML.html" class="namespace">Poco::XML</a></h1>
+<h1 class="symbol">class EventDispatcher</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> XML<br />
+<b>Package:</b> DOM<br />
+<b>Header:</b> Poco/DOM/EventDispatcher.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>This helper class manages event listener subscriptions and event dispatching for <a href="Poco.XML.AbstractNode.html" title="class Poco::XML::AbstractNode">AbstractNode</a>. </p>
+<p>The <a href="Poco.XML.EventListener.html" title="class Poco::XML::EventListener">EventListener</a> list is managed in such a way that event listeners can be added and removed even from within an <a href="Poco.XML.EventListener.html" title="class Poco::XML::EventListener">EventListener</a>, while events are being dispatched. </p>
+</div>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.XML.EventDispatcher.html#19904" title="Poco::XML::EventDispatcher::addEventListener()">addEventListener</a>, <a href="Poco.XML.EventDispatcher.html#19916" title="Poco::XML::EventDispatcher::bubbleEvent()">bubbleEvent</a>, <a href="Poco.XML.EventDispatcher.html#19914" title="Poco::XML::EventDispatcher::captureEvent()">captureEvent</a>, <a href="Poco.XML.EventDispatcher.html#19912" title="Poco::XML::EventDispatcher::dispatchEvent()">dispatchEvent</a>, <a href="Poco.XML.EventDispatcher.html#19908" title="Poco::XML::EventDispatcher::removeEventListener()">removeEventListener</a></p>
+<h2>Constructors</h2>
+<h3><a name="19902">EventDispatcher</a></h3>
+<p class="decl"><a href="Poco.XML.EventDispatcher.html" title="class Poco::XML::EventDispatcher">EventDispatcher</a>();</p>
+<div class="description">
+<p>Creates the <a href="Poco.XML.EventDispatcher.html" title="class Poco::XML::EventDispatcher">EventDispatcher</a>. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="19903">~EventDispatcher</a></h3>
+<p class="decl">~<a href="Poco.XML.EventDispatcher.html" title="class Poco::XML::EventDispatcher">EventDispatcher</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.XML.EventDispatcher.html" title="class Poco::XML::EventDispatcher">EventDispatcher</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="19904">addEventListener</a></h3>
+<p class="decl">void addEventListener(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.XML.html#21390" title="Poco::XML::XMLString">XMLString</a> &amp; type,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.XML.EventListener.html" title="class Poco::XML::EventListener">EventListener</a> * listener,<br />&nbsp;&nbsp;&nbsp;&nbsp;bool useCapture<br />);</p>
+<div class="description">
+<p>Adds an <a href="Poco.XML.EventListener.html" title="class Poco::XML::EventListener">EventListener</a> to the internal list. </p>
+</div>
+<h3><a name="19916">bubbleEvent</a></h3>
+<p class="decl">void bubbleEvent(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.XML.Event.html" title="class Poco::XML::Event">Event</a> * evt<br />);</p>
+<div class="description">
+<p>Dispatches the event in its bubbling phase. </p>
+<p>Also removes all EventListeners marked for deletion from the  event dispatcher list. </p>
+</div>
+<h3><a name="19914">captureEvent</a></h3>
+<p class="decl">void captureEvent(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.XML.Event.html" title="class Poco::XML::Event">Event</a> * evt<br />);</p>
+<div class="description">
+<p>Dispatches the event in its capturing phase. </p>
+<p>Also removes all EventListeners marked for deletion from the  event dispatcher list. </p>
+</div>
+<h3><a name="19912">dispatchEvent</a></h3>
+<p class="decl">void dispatchEvent(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.XML.Event.html" title="class Poco::XML::Event">Event</a> * evt<br />);</p>
+<div class="description">
+<p>Dispatches the event. </p>
+<p>Also removes all EventListeners marked for deletion from the  event dispatcher list. </p>
+</div>
+<h3><a name="19908">removeEventListener</a></h3>
+<p class="decl">void removeEventListener(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.XML.html#21390" title="Poco::XML::XMLString">XMLString</a> &amp; type,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.XML.EventListener.html" title="class Poco::XML::EventListener">EventListener</a> * listener,<br />&nbsp;&nbsp;&nbsp;&nbsp;bool useCapture<br />);</p>
+<div class="description">
+<p>Removes an <a href="Poco.XML.EventListener.html" title="class Poco::XML::EventListener">EventListener</a> from the internal list. </p>
+<p>If a dispatch is currently in progress, the list entry is only marked for deletion. If no dispatch is currently in progress, all EventListeners marked for deletion are removed from the list. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

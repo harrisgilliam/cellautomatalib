@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::XML::NodeIterator</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.XML.html" class="namespace">Poco::XML</a></h1>
+<h1 class="symbol">class NodeIterator</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> XML<br />
+<b>Package:</b> DOM<br />
+<b>Header:</b> Poco/DOM/NodeIterator.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>Iterators are used to step through a set of nodes, e.g. the set of nodes in a <a href="Poco.XML.NodeList.html" title="class Poco::XML::NodeList">NodeList</a>, the document subtree governed by a particular <a href="Poco.XML.Node.html" title="class Poco::XML::Node">Node</a>, the results of a query, or any other set of nodes. The set of nodes to be iterated is determined by the implementation of the <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a>. DOM Level 2 specifies a single <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a> implementation for document-order traversal of a document subtree. </p>
+<p>A <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a> can be directly instantiated using one of its constructors - the DocumentTraversal interface is not needed and therefore not implemented. Unlike most other DOM classes, <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a> supports value semantics. </p>
+<p>If the <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a>'s current node is removed from the document, the result of calling any of the movement methods is undefined. This behavior does not conform to the DOM Level 2 Traversal specification. </p>
+</div>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.XML.NodeIterator.html#20138" title="Poco::XML::NodeIterator::accept()">accept</a>, <a href="Poco.XML.NodeIterator.html#20136" title="Poco::XML::NodeIterator::currentNodeNP()">currentNodeNP</a>, <a href="Poco.XML.NodeIterator.html#20137" title="Poco::XML::NodeIterator::detach()">detach</a>, <a href="Poco.XML.NodeIterator.html#20133" title="Poco::XML::NodeIterator::expandEntityReferences()">expandEntityReferences</a>, <a href="Poco.XML.NodeIterator.html#20132" title="Poco::XML::NodeIterator::filter()">filter</a>, <a href="Poco.XML.NodeIterator.html#20142" title="Poco::XML::NodeIterator::last()">last</a>, <a href="Poco.XML.NodeIterator.html#20140" title="Poco::XML::NodeIterator::next()">next</a>, <a href="Poco.XML.NodeIterator.html#20134" title="Poco::XML::NodeIterator::nextNode()">nextNode</a>, <a href="Poco.XML.NodeIterator.html#20127" title="Poco::XML::NodeIterator::operator =()">operator&nbsp;=</a>, <a href="Poco.XML.NodeIterator.html#20141" title="Poco::XML::NodeIterator::previous()">previous</a>, <a href="Poco.XML.NodeIterator.html#20135" title="Poco::XML::NodeIterator::previousNode()">previousNode</a>, <a href="Poco.XML.NodeIterator.html#20130" title="Poco::XML::NodeIterator::root()">root</a>, <a href="Poco.XML.NodeIterator.html#20131" title="Poco::XML::NodeIterator::whatToShow()">whatToShow</a></p>
+<h2>Constructors</h2>
+<h3><a name="20125">NodeIterator</a></h3>
+<p class="decl"><a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a> &amp; iterator<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a> by copying another <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a>. </p>
+</div>
+<h3><a name="20121">NodeIterator</a></h3>
+<p class="decl"><a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.XML.Node.html" title="class Poco::XML::Node">Node</a> * root,<br />&nbsp;&nbsp;&nbsp;&nbsp;unsigned long whatToShow,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.XML.NodeFilter.html" title="class Poco::XML::NodeFilter">NodeFilter</a> * pFilter = 0<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a> over the subtree rooted at the specified node. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="20129">~NodeIterator</a></h3>
+<p class="decl">~<a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="20136">currentNodeNP</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.XML.Node.html" title="class Poco::XML::Node">Node</a> * currentNodeNP() const;</p>
+<div class="description">
+<p>Returns the current node in the set. </p>
+<p>Leaves the <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a> unchanged. </p>
+<p>Warning: This is a proprietary extension to the DOM Level 2 <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a> interface. </p>
+</div>
+<h3><a name="20137">detach</a></h3>
+<p class="decl">void detach();</p>
+<div class="description">
+<p>Detaches the <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a> from the set which it iterated over, releasing any computational resources and placing the iterator in the INVALID state. After detach has been invoked, calls to nextNode or previousNode will raise the exception INVALID_STATE_ERR. </p>
+</div>
+<h3><a name="20133">expandEntityReferences</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool expandEntityReferences() const;</p>
+<div class="description">
+<p>The value of this flag determines whether the children of entity reference nodes are visible to the iterator. If false, they and their descendants will be rejected. Note that this rejection takes precedence over whatToShow and the filter. Also note that this is currently the only situation where NodeIterators may reject a complete subtree rather than skipping individual nodes. </p>
+<p>To produce a view of the document that has entity references expanded and does not expose the entity reference node itself, use the whatToShow flags to hide the entity reference node and set expandEntityReferences to true when creating the iterator. To produce a view of the document that has entity reference nodes but no entity expansion, use the whatToShow flags to show the entity reference node and set expandEntityReferences to false. </p>
+<p>This implementation does not support entity reference expansion and thus always returns false. </p>
+</div>
+<h3><a name="20132">filter</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.XML.NodeFilter.html" title="class Poco::XML::NodeFilter">NodeFilter</a> * filter() const;</p>
+<div class="description">
+<p>The <a href="Poco.XML.NodeFilter.html" title="class Poco::XML::NodeFilter">NodeFilter</a> used to screen nodes. </p>
+</div>
+<h3><a name="20134">nextNode</a></h3>
+<p class="decl"><a href="Poco.XML.Node.html" title="class Poco::XML::Node">Node</a> * nextNode();</p>
+<div class="description">
+<p>Returns the next node in the set and advances the position of the iterator in the set. After a <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a> is created, the first call to <a href="Poco.XML.NodeIterator.html#20134" title="Poco::XML::NodeIterator::nextNode()">nextNode</a>() returns the first node in the set. </p>
+</div>
+<h3><a name="20127">operator =</a></h3>
+<p class="decl"><a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a> &amp; operator = (<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a> &amp; iterator<br />);</p>
+<div class="description">
+<p>Assignment operator. </p>
+</div>
+<h3><a name="20135">previousNode</a></h3>
+<p class="decl"><a href="Poco.XML.Node.html" title="class Poco::XML::Node">Node</a> * previousNode();</p>
+<div class="description">
+<p>Returns the previous node in the set and moves the position of the <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a> backwards in the set. </p>
+</div>
+<h3><a name="20130">root</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.XML.Node.html" title="class Poco::XML::Node">Node</a> * root() const;</p>
+<div class="description">
+<p>The root node of the <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a>, as specified when it was created. </p>
+</div>
+<h3><a name="20131">whatToShow</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">unsigned long whatToShow() const;</p>
+<div class="description">
+<p>This attribute determines which node types are presented via the iterator.  The available set of constants is defined in the <a href="Poco.XML.NodeFilter.html" title="class Poco::XML::NodeFilter">NodeFilter</a> interface.  Nodes not accepted by whatToShow will be skipped, but their children may  still be considered. Note that this skip takes precedence over the filter,  if any. </p>
+</div>
+<h3><a name="20138">accept</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool accept(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.XML.Node.html" title="class Poco::XML::Node">Node</a> * pNode<br />) const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="20142">last</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.XML.Node.html" title="class Poco::XML::Node">Node</a> * last();</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="20140">next</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.XML.Node.html" title="class Poco::XML::Node">Node</a> * next() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="20141">previous</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.XML.Node.html" title="class Poco::XML::Node">Node</a> * previous() const;</p>
+<div class="description">
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

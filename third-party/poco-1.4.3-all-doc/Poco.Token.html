@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Token</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="symbol">class Token</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> Streams<br />
+<b>Header:</b> Poco/Token.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>The base class for all token classes that can be registered with the <a href="Poco.StreamTokenizer.html" title="class Poco::StreamTokenizer">StreamTokenizer</a>. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Known Derived Classes: </b><a href="Poco.InvalidToken.html" title="class Poco::InvalidToken">InvalidToken</a>, <a href="Poco.EOFToken.html" title="class Poco::EOFToken">EOFToken</a>, <a href="Poco.WhitespaceToken.html" title="class Poco::WhitespaceToken">WhitespaceToken</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Token.html#11474" title="Poco::Token::asChar()">asChar</a>, <a href="Poco.Token.html#11473" title="Poco::Token::asFloat()">asFloat</a>, <a href="Poco.Token.html#11472" title="Poco::Token::asInteger()">asInteger</a>, <a href="Poco.Token.html#11471" title="Poco::Token::asString()">asString</a>, <a href="Poco.Token.html#11467" title="Poco::Token::finish()">finish</a>, <a href="Poco.Token.html#11475" title="Poco::Token::is()">is</a>, <a href="Poco.Token.html#11464" title="Poco::Token::start()">start</a>, <a href="Poco.Token.html#11469" title="Poco::Token::tokenClass()">tokenClass</a>, <a href="Poco.Token.html#11470" title="Poco::Token::tokenString()">tokenString</a></p>
+<h2>Enumerations</h2>
+<h3><a name="11444">Class</a></h3>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="11445">IDENTIFIER_TOKEN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="11446">KEYWORD_TOKEN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="11447">SEPARATOR_TOKEN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="11448">OPERATOR_TOKEN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="11449">STRING_LITERAL_TOKEN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="11450">CHAR_LITERAL_TOKEN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="11451">INTEGER_LITERAL_TOKEN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="11452">LONG_INTEGER_LITERAL_TOKEN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="11453">FLOAT_LITERAL_TOKEN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="11454">DOUBLE_LITERAL_TOKEN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="11455">COMMENT_TOKEN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="11456">SPECIAL_COMMENT_TOKEN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="11457">PREPROCESSOR_TOKEN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="11458">WHITESPACE_TOKEN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="11459">EOF_TOKEN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="11460">INVALID_TOKEN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="11461">USER_TOKEN</a></p>
+<div class="description">
+<p></p>
+</div>
+<h2>Constructors</h2>
+<h3><a name="11462">Token</a></h3>
+<p class="decl"><a href="Poco.Token.html" title="class Poco::Token">Token</a>();</p>
+<div class="description">
+<p>Creates the <a href="Poco.Token.html" title="class Poco::Token">Token</a>. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="11463">~Token</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual ~<a href="Poco.Token.html" title="class Poco::Token">Token</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Token.html" title="class Poco::Token">Token</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="11474">asChar</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual char asChar() const;</p>
+<div class="description">
+<p>Returns a char representation of the token. </p>
+</div>
+<h3><a name="11473">asFloat</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual double asFloat() const;</p>
+<div class="description">
+<p>Returns a floating-point representation of the token. </p>
+</div>
+<h3><a name="11472">asInteger</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual int asInteger() const;</p>
+<div class="description">
+<p>Returns an integer representation of the token. </p>
+</div>
+<h3><a name="11471">asString</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual std::string asString() const;</p>
+<div class="description">
+<p>Returns a string representation of the token. </p>
+</div>
+<h3><a name="11467">finish</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual void finish(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::istream &amp; istr<br />);</p>
+<div class="description">
+<p>Builds the token by reading and appending  the remaining characters from istr. </p>
+</div>
+<h3><a name="11475">is</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool is(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Token.html#11444" title="enum  Poco::Token::Class">Class</a> tokenClass<br />) const;</p>
+<div class="description">
+<p>Returns true if and only if the token has the given class. </p>
+</div>
+<h3><a name="11464">start</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual bool start(<br />&nbsp;&nbsp;&nbsp;&nbsp;char c,<br />&nbsp;&nbsp;&nbsp;&nbsp;std::istream &amp; istr<br />);</p>
+<div class="description">
+<p>Checks if the given character (and, optionally, the next character in the input stream) start a valid token. Returns true if so, false otherwise. </p>
+<p>The current read position in istr must not be changed. In other words, only the peek() method of istream may be used. </p>
+<p>If the character starts the token, it should be set as the token's value. </p>
+</div>
+<h3><a name="11469">tokenClass</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual <a href="Poco.Token.html#11444" title="enum  Poco::Token::Class">Class</a> tokenClass() const;</p>
+<div class="description">
+<p>Returns the kind of the token. </p>
+</div>
+<h3><a name="11470">tokenString</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const std::string &amp; tokenString() const;</p>
+<div class="description">
+<p>Returns the token's raw string. </p>
+</div>
+<h2>Variables</h2>
+<h3><a name="11477">_value</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">std::string _value;</p>
+<div class="description">
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+9/27/95
+	Change LUT, CMAP to allocate from the UNIX heap initially and
+then allocate device driver space only when needed.  Would have to
+allocate whenever the IFC or KER address is requested.  This allows
+the LUT and CMAP data types to be used w/o CAM8.  Would be difficult
+to extend this to STEPLIST or INBUF.  Probably can extend this to
+BUFFER.  This would also allow the caching of look up tables,
+colormaps and buffers (typically pattern data) on the UNIX heap.  When
+no more device driver memory is available one or more BUFFERs, LUTs or
+CMAPs can be cached by allocating UNIX heap, copying the contents and
+deallocating the device driver memory.  This provides a speed memory
+tradeoff.
+
+	Need to intergrate the EQV and ECLASS data types into CAMlib.
+The code for eqv2lut (the lexer and supporting procedures) will also
+be rolled into the library.
+

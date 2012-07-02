@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Nullable</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="template">template &lt; typename C &gt;</h1>
+<h1 class="symbol">class Nullable</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> Core<br />
+<b>Header:</b> Poco/Nullable.h</p>
+<h2>Description</h2>
+<div class="description">
+<p><a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> is a simple wrapper class for value types that allows to introduce a &quot;null&quot; value or state to value objects. </p>
+<p>The class is useful for passing parameters to functions when parameters are optional and no default values  should be used. </p>
+<p>A <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> can be default constructed. In this case,  the <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> will have a Null value and <a href="Poco.Nullable.html#9077" title="Poco::Nullable::isNull()">isNull</a>() will return true. Calling <a href="Poco.Nullable.html#9074" title="Poco::Nullable::value()">value</a>() (without default value) on a Null object will throw a <a href="Poco.NullValueException.html" title="class Poco::NullValueException">NullValueException</a>. </p>
+<p>A <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> can also be constructed from a value. It is possible to assign a value to a <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a>, and to reset a <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> to contain a Null value by calling <a href="Poco.Nullable.html#9078" title="Poco::Nullable::clear()">clear</a>(). </p>
+<p>For use with <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a>, the value type should support default construction. </p>
+</div>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Nullable.html#9064" title="Poco::Nullable::assign()">assign</a>, <a href="Poco.Nullable.html#9078" title="Poco::Nullable::clear()">clear</a>, <a href="Poco.Nullable.html#9077" title="Poco::Nullable::isNull()">isNull</a>, <a href="Poco.Nullable.html#9068" title="Poco::Nullable::operator =()">operator&nbsp;=</a>, <a href="Poco.Nullable.html#9072" title="Poco::Nullable::swap()">swap</a>, <a href="Poco.Nullable.html#9074" title="Poco::Nullable::value()">value</a></p>
+<h2>Constructors</h2>
+<h3><a name="9058">Nullable</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a>();</p>
+<div class="description">
+<p>Creates an empty <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a>. </p>
+</div>
+<h3><a name="9059">Nullable</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const C &amp; value<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> with the given value. </p>
+</div>
+<h3><a name="9061">Nullable</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> &amp; other<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> by copying another one. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="9063">~Nullable</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">~<a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="9064">assign</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> &amp; assign(<br />&nbsp;&nbsp;&nbsp;&nbsp;const C &amp; value<br />);</p>
+<div class="description">
+<p>Assigns a value to the <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a>. </p>
+</div>
+<h3><a name="9066">assign</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> &amp; assign(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> &amp; other<br />);</p>
+<div class="description">
+<p>Assigns another <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a>. </p>
+</div>
+<h3><a name="9078">clear</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void clear();</p>
+<div class="description">
+<p>Clears the <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a>. </p>
+</div>
+<h3><a name="9077">isNull</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool isNull() const;</p>
+<div class="description">
+<p>Returns true if and only if the <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> is empty. </p>
+</div>
+<h3><a name="9068">operator =</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> &amp; operator = (<br />&nbsp;&nbsp;&nbsp;&nbsp;const C &amp; value<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="9070">operator =</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> &amp; operator = (<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> &amp; other<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="9072">swap</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void swap(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> &amp; other<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="9074">value</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const C &amp; value() const;</p>
+<div class="description">
+<p>Returns the <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a>'s value. </p>
+<p>Throws a <a href="Poco.NullValueException.html" title="class Poco::NullValueException">NullValueException</a> if the <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> is empty. </p>
+</div>
+<h3><a name="9075">value</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const C &amp; value(<br />&nbsp;&nbsp;&nbsp;&nbsp;const C &amp; deflt<br />) const;</p>
+<div class="description">
+<p>Returns the <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a>'s value, or the given default value if the <a href="Poco.Nullable.html" title="class Poco::Nullable">Nullable</a> is empty. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

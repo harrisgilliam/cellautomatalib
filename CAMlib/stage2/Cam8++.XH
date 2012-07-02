@@ -1,0 +1,481 @@
+#ifndef _CAM8_H_
+#define _CAM8_H_
+
+#include <cstdarg>
+#include <cstring>
+
+#include <map>
+#include <algorithm>
+
+#include <Cam++.H>
+
+#include <Cam8Lib++.H>
+#include <Cam8Interface++.H>
+#include <Cam8Instr++.H>
+#include <Cam8Lut++.H>
+#include <Cam8Cmap++.H>
+#include <Cam8Steplist++.H>
+
+extern "C" {
+#include <sys/types.h>
+}
+
+
+
+using namespace std;
+
+
+/*****************************************************************************/
+/********************************* DEFINES ***********************************/
+/*****************************************************************************/
+#define NUM_DIM(p)				(p).num_dim
+#define TOP_DIM(p)				(p).top_dim
+#define NUM_CELLS(p)			(p).num_cells
+#define DMASK(p)				(p).dmask
+#define EXTENTS(p)				(p).extents
+#define POS(p)					(p).pos
+#define LEN(p)					(p).len
+#define NUM_MODULES_d(d)		dim_modules[d]
+#define NUM_MODULES_X			dim_modules[0]
+#define NUM_MODULES_Y			dim_modules[1]
+#define NUM_MODULES_Z			dim_modules[2]
+#define GLUE_d(d)				glue[d]
+#define GLUE_X					glue[0]
+#define GLUE_Y					glue[1]
+#define GLUE_Z					glue[2]
+#define NUM_MODULES				num_modules
+#define NUM_d(d)				dim_modules[d]
+#define NUM_X					dim_modules[0]
+#define NUM_Y					dim_modules[1]
+#define NUM_Z					dim_modules[2]
+#define NUM_LAYERS				num_layers
+#define NUM_LEVELS				num_levels
+#define MAXID					((1 << NUM_LAYERS)) - 1)
+#define DRAM_SIZE				dram_size
+#define DRAM_ROW				dram_row
+#define SWEEP_OVERHEAD			sweep_overhead
+#define MODULE_LIST				module_xyz_list
+#define COPY_SS(p1,p2)			bcopy((char*)(&(p1)), (char*)(&(p2)), sizeof(struct spc_state))
+#define CLOCKS__REFRESH(c8)		390
+#define SUBSECTORS__SECTOR		(NUM_CELLS(sector) / NUM_CELLS(subsector))
+#define CLOCKS__SWEEP(c8,v)		((1 << (v)) + SWEEP_OVERHEAD)
+#define CUT__SECTOR(c8,d)		(31 & (LEN(sector)[d] + (LEN(sector)[d] != 0 ? POS(sector)[d] - 1 : 0)))
+#define REFRESHES__SWEEP(v)		min(31, CLOCKS__SWEEP(v) / CLOCKS__REFRESH + 1)
+#define SWEEPS__REFRESH(v)		min(256, MAX(1, CLOCKS__REFRESH / CLOCKS__SWEEP(v)))
+
+
+#define REG_FUNC_DECL(cls, fname)			\
+	cls * fname(u_int32_t o, ...);			\
+	cls * fname(Cam8Steplist & sl, ...)
+
+
+/*****************************************************************************/
+/******************************** TEMPLATES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/*************************** CLASSES & TYPEDEFS ******************************/
+/*****************************************************************************/
+
+// Forward declaration
+class Cam8Experiment;
+
+
+struct Spcst {
+	u_int32_t extents[24];
+	u_int16_t len[24];
+	u_int16_t pos[24];
+	u_int32_t num_dim;
+	u_int32_t top_dim;
+	u_int32_t dmask;
+	u_int32_t num_cells;
+
+	INLINE_BZERO(Spcst);
+
+	inline void copy(const Spcst & s);
+	inline void copy(const Spcst * s);
+};
+
+
+typedef struct SubCell {
+	caddr_t offset[SCTBL_SZ];
+	u_int32_t max_subcell_declared;
+	u_int32_t declared_subcell_num;
+	u_int32_t assemble_subcell_num;
+
+	INLINE_BZERO(SubCell);
+} *SUBCELL;
+
+
+// This class has all the methods for building instructions.  We have
+// the notion of the "current instruction" which is just the chunk of
+// memory within one of those buffers that we are modifying.  When we
+// call the link method then the current instruction is permanently
+// added to the step list.  There is a fair amount of book keeping
+// that has to be done to make this happen correctly.  Users are
+// allowed to call any of the instruction building methods as many
+// times as they want between calls to the link method.  This means
+// that they may change the opcode multiple times and we have to make
+// sure memory is properly allocated and used.  Any memory used and
+// modified by the current instruction is not removed from the pool of
+// available memory until the link method is called.
+
+class Cam8 : public Cam {
+public:
+	friend class Cam8Experiment;
+
+	Cam8();
+	Cam8(CAM8INTERFACE);
+	virtual ~Cam8(void);
+
+	void use_interface(CAM8INTERFACE);
+	void init(void);
+
+	CAM8INSTR reg(Cam8Steplist & sl, int32_t r, ...);
+
+	REG_FUNC_DECL(SelectInstr, select);
+	REG_FUNC_DECL(RunInstr, run);
+	REG_FUNC_DECL(KickInstr, kick);
+	REG_FUNC_DECL(SaBitInstr, sa_bit);
+	REG_FUNC_DECL(LutSrcInstr, lut_src);
+	REG_FUNC_DECL(FlySrcInstr, fly_src);
+	REG_FUNC_DECL(SiteSrcInstr, site_src);
+	REG_FUNC_DECL(EventSrcInstr, event_src);
+	REG_FUNC_DECL(DisplayInstr, display);
+	REG_FUNC_DECL(ShowScanInstr, show_scan);
+	REG_FUNC_DECL(EventInstr, event);
+	REG_FUNC_DECL(LutIndexInstr, lut_index);
+	REG_FUNC_DECL(LutPermInstr, lut_perm);
+	REG_FUNC_DECL(LutIoInstr, lut_io);
+	REG_FUNC_DECL(ScanIndexInstr, scan_index);
+	REG_FUNC_DECL(ScanPermInstr, scan_perm);
+	REG_FUNC_DECL(ScanIoInstr, scan_io);
+	REG_FUNC_DECL(ScanFormatInstr, scan_format);
+	REG_FUNC_DECL(OffsetInstr, offset);
+	REG_FUNC_DECL(DimensionInstr, dimension);
+	REG_FUNC_DECL(EnvironmentInstr, environment);
+	REG_FUNC_DECL(MultiInstr, multi);
+	REG_FUNC_DECL(ConnectInstr, connect);
+	REG_FUNC_DECL(ModuleIdInstr, module_id);
+	REG_FUNC_DECL(GroupIdInstr, group_id);
+	REG_FUNC_DECL(IntEnableInstr, int_enable);
+	REG_FUNC_DECL(IntFlagsInstr, int_flags);
+	REG_FUNC_DECL(VerifyInstr, verify);
+	REG_FUNC_DECL(DramCountInstr, dram_count);
+
+	REG_FUNC_DECL(Cam8Instr, delay);
+
+	CAM8INSTR switch_luts(void);
+	CAM8INSTR switch_luts(Cam8Steplist & sl);
+
+	CAM8INSTR lut_data(Cam8Steplist & sl, Cam8Lut & lut);
+	CAM8INSTR lut_data(Cam8Steplist & sl, ...);
+
+	void define_steplist(Cam8Steplist &);
+	void free_steplist(Cam8Steplist &);
+
+
+
+	INLINE_BZERO(Cam8);
+
+
+protected:
+	CAM8INTERFACE iface;
+	bool single_arg;
+	u_int32_t layer_mask;
+	u_int32_t ka[16], xks[16], yks[16], zks[16], xkmf[16], ykmf[16], zkmf[16];
+	u_int32_t incomp_size;
+	CAM8INSTR incomp;
+	Spcst space;           /* the whole experiment space */
+	Spcst subspace;        /* a part of the experiment space */
+	Spcst sector;          /* the space contained in 1 module */
+	Spcst subsector;       /* a section of a module */
+	bool glue[3];
+	u_int8_t module_xyz_list[8];
+	u_int32_t dim_modules[3];		// number of modules in each dimension
+	u_int32_t num_modules;			// total number of modules
+	u_int32_t num_layers;
+	u_int32_t num_levels;
+	u_int32_t maxid;
+	u_int32_t dram_size;
+	u_int32_t dram_row;
+	u_int32_t flush_delay;
+	u_int32_t scan_io_delay;
+	u_int32_t clocks_per_refresh;
+	u_int32_t sweep_overhead;
+	u_int32_t lut_len;
+
+	void assemble(int32_t o, ...);
+	void assemble(int32_t o, u_int32_t argc, int32_t argv[]);
+	void assemble(va_list args);
+	void assemble(u_int32_t lmask, bool sarg, u_int32_t argc, int32_t argv[]);
+	void assemble(u_int32_t argc, int32_t argv[]);
+	void assemble(microcode & mc, bool multiple);
+
+	SELECTINSTR select(microcode mc);
+	RUNINSTR run(microcode mc);
+	KICKINSTR kick(microcode mc);
+	SABITINSTR sa_bit(microcode mc);
+	LUTSRCINSTR lut_src(microcode mc);
+	FLYSRCINSTR fly_src(microcode mc);
+	SITESRCINSTR site_src(microcode mc);
+	EVENTSRCINSTR event_src(microcode mc);
+	DISPLAYINSTR display(microcode mc);
+	SHOWSCANINSTR show_scan(microcode mc);
+	EVENTINSTR event(microcode mc);
+	LUTINDEXINSTR lut_index(microcode mc);
+	LUTPERMINSTR lut_perm(microcode mc);
+	LUTIOINSTR lut_io(microcode mc);
+	SCANINDEXINSTR scan_index(microcode mc);
+	SCANPERMINSTR scan_perm(microcode mc);
+	SCANIOINSTR scan_io(microcode mc);
+	SCANFORMATINSTR scan_format(microcode mc);
+	OFFSETINSTR offset(microcode mc);
+	DIMENSIONINSTR dimension(microcode mc);
+	ENVIRONMENTINSTR environment(microcode mc);
+	MULTIINSTR multi(microcode mc);
+	CONNECTINSTR connect(microcode mc);
+	MODULEIDINSTR module_id(microcode mc);
+	GROUPIDINSTR group_id(microcode mc);
+	INTENABLEINSTR int_enable(microcode mc);
+	INTFLAGSINSTR int_flags(microcode mc);
+	VERIFYINSTR verify(microcode mc);
+	DRAMCOUNTINSTR dram_count(microcode mc);
+
+	CAM8INSTR delay(microcode mc);
+
+	caddr_t finish_instr(CAM8INSTR);
+
+	CAM8INSTR link(Cam8Steplist &);
+	CAM8INSTR link(Cam8Steplist &, CAM8INSTR);
+
+	void conv_immed(void);
+
+
+	inline void setup_register(u_int32_t r);
+	inline void def(u_int32_t r);
+	inline void reg_length(u_int32_t camwords);
+	inline void reg_buffer(caddr_t ptr);
+	inline void inline_buffer(u_int32_t bytelen);
+	inline void kick_twiddle(u_int16_t len[], u_int16_t pos[], bool glue[],
+			u_int32_t dim, int32_t dist, u_int32_t * ksflag, u_int32_t * kmflag);
+	inline void kick_x(int32_t val);
+	inline void kick_x(u_int16_t len[], u_int16_t pos[], bool glue[], int32_t val);
+	inline void kick_y(int32_t val);
+	inline void kick_y(u_int16_t len[], u_int16_t pos[], bool glue[], int32_t val);
+	inline void kick_z(int32_t val);
+	inline void kick_z(u_int16_t len[], u_int16_t pos[], bool glue[], int32_t val);
+	inline void kick_n(u_int32_t dir, int32_t val);
+	inline void kick_n(u_int16_t len[], u_int16_t pos[], bool glue[], u_int32_t dir, int32_t val);
+	inline void finish_kick(void);
+
+	inline caddr_t resize_incomp(u_int32_t);
+
+private:
+	map<u_int32_t, caddr_t> reg_defaults;
+
+	void define(u_int32_t r, ...);
+};
+typedef Cam8 *CAM8;
+
+/*****************************************************************************/
+/********************************* INLINES ***********************************/
+/*****************************************************************************/
+inline void Spcst::copy(const Spcst & s)
+{
+	memcpy(this, &s, sizeof(Spcst));
+}
+
+inline void Spcst::copy(const Spcst * s)
+{
+	memcpy(this, s, sizeof(Spcst));
+}
+
+
+inline void Cam8::reg_length(u_int32_t camwords)
+{
+	incomp->XferLength(camwords);
+}
+
+
+inline void Cam8::reg_buffer(caddr_t ptr)
+{
+	incomp->AdrData(ptr);
+}
+
+inline caddr_t Cam8::resize_incomp(u_int32_t sz)
+{
+	if (incomp_size < sz) {
+		incomp = (CAM8INSTR) realloc(incomp, sz);
+		incomp_size = sz;
+	}
+
+	return (caddr_t) incomp;
+}
+
+
+inline void Cam8::inline_buffer(u_int32_t bytelen)
+{
+	caddr_t chunk;
+
+	chunk = resize_incomp(SL_HEADER_SIZE + bytelen);
+	incomp->XferLength(bytelen / sizeof(u_int16_t));
+	incomp->AdrData(chunk + SL_HEADER_SIZE);
+}
+
+
+inline void Cam8::kick_twiddle(u_int16_t len[], u_int16_t pos[],
+		bool glue[], u_int32_t dim, int32_t dist, u_int32_t * ksflag, u_int32_t * kmflag)
+{
+	int32_t i;
+	u_int32_t dim_mask;
+
+	TENTER("Cam8::kick_twiddle");
+
+	dim_mask = (1 << len[dim]) - 1;
+
+	for (i = 0; i < 16; i++)
+		if (layer_mask & (1 << i)) {
+			ka[i] = (ka[i] & ~(dim_mask << pos[dim])) |
+					( (dist & dim_mask) << pos[dim] );
+
+			if (dim < 3) {
+				if (glue[dim])
+					ksflag[i] = dist < 0 ? 1 : 0;
+
+				kmflag[i] = dist == dim_mask + 1 ? 1 : 0;
+			}
+		}
+
+	TLEAVE();
+}
+
+
+inline void Cam8::kick_x(int32_t val)
+{
+	kick_x(sector.len, sector.pos, glue, val);
+}
+
+
+inline void Cam8::kick_x(u_int16_t len[], u_int16_t pos[], bool glue[], int32_t val)
+{
+	kick_twiddle(len, pos, glue, 0, val, xks, xkmf);
+}
+
+
+inline void Cam8::kick_y(int32_t val)
+{
+	kick_y(sector.len, sector.pos, glue, val);
+}
+
+
+inline void Cam8::kick_y(u_int16_t len[], u_int16_t pos[], bool glue[], int32_t val)
+{
+	kick_twiddle(len, pos, glue, 1, val, yks, ykmf);
+}
+
+
+inline void Cam8::kick_z(int32_t val)
+{
+	kick_z(sector.len, sector.pos, glue, val);
+}
+
+
+inline void Cam8::kick_z(u_int16_t len[], u_int16_t pos[], bool glue[], int32_t val)
+{
+	kick_twiddle(len, pos, glue, 2, val, zks, zkmf);
+}
+
+
+inline void Cam8::kick_n(u_int32_t dir, int32_t val)
+{
+	kick_n(sector.len, sector.pos, glue, dir, val);
+}
+
+
+inline void Cam8::kick_n(u_int16_t len[], u_int16_t pos[], bool glue[], u_int32_t dir, int32_t val)
+{
+	kick_twiddle(len, pos, glue, dir, val, NULL, NULL);
+}
+
+
+inline void Cam8::finish_kick(void)
+{
+	incomp->wr_fld(0xFFFF, FALSE, FLD_KA, ka);
+	incomp->wr_fld(0xFFFF, FALSE, FLD_XKS, xks);
+	incomp->wr_fld(0xFFFF, FALSE, FLD_YKS, yks);
+	incomp->wr_fld(0xFFFF, FALSE, FLD_ZKS, zks);
+	incomp->wr_fld(0xFFFF, FALSE, FLD_XKMF, xkmf);
+	incomp->wr_fld(0xFFFF, FALSE, FLD_YKMF, ykmf);
+	incomp->wr_fld(0xFFFF, FALSE, FLD_ZKMF, zkmf);
+}
+
+
+inline void Cam8::setup_register(u_int32_t r)
+{
+	u_int32_t bl = Register_Specs.BITLEN(r);
+	u_int32_t s = bl * sizeof(u_int16_t) + SL_HEADER_SIZE;
+
+	resize_incomp(s);
+	memset((void *) incomp, 0, s);
+
+	incomp->Opcode(r);
+
+	// If bitlen is > 0 then this is a fixed length instruction
+	if (bl > 0) {
+		// The transfer size is in units of camwords (16 bits)
+		incomp->XferLength(bl);
+
+		// The data buffer containing the values comes right after the header
+		incomp->AdrData(((caddr_t) incomp) + SL_HEADER_SIZE);
+	}
+
+	if (r == REG_KR) {
+		/* Zero arrays used for calculating kicks */
+		memset(ka, 0, sizeof(int32_t) * 16);
+		memset(xks, 0, sizeof(int32_t) * 16);
+		memset(yks, 0, sizeof(int32_t) * 16);
+		memset(zks, 0, sizeof(int32_t) * 16);
+		memset(xkmf, 0, sizeof(int32_t) * 16);
+		memset(ykmf, 0, sizeof(int32_t) * 16);
+		memset(zkmf, 0, sizeof(int32_t) * 16);
+	}
+}
+
+
+inline void Cam8::def(u_int32_t r)
+{
+	CAM8INSTR c8i = (CAM8INSTR) reg_defaults[RFINDEX(r)];
+	u_int32_t bl = Register_Specs.BITLEN(r);
+
+	TENTER("inline void Cam8::def(u_int32_t r)");
+
+	if (c8i != NULL) {
+		incomp->Opcode(c8i->Opcode());
+		incomp->Flags(c8i->Flags());
+	}
+
+	incomp->XferLength(bl);
+
+	if (bl > 0) {
+		if (c8i != NULL)
+			memcpy((void *) incomp->AdrData(), (const void *) c8i->AdrData(), bl * sizeof(u_int16_t));
+		else
+			memset((void *) incomp->AdrData(), 0, bl * sizeof(u_int16_t));
+	}
+
+	TLEAVE();
+}
+
+
+/*****************************************************************************/
+/******************************* PROTOTYPES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/********************************* GLOBALS ***********************************/
+/*****************************************************************************/
+
+#endif

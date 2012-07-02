@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Net::TCPServerDispatcher</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Net.html" class="namespace">Poco::Net</a></h1>
+<h1 class="symbol">class TCPServerDispatcher</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Net<br />
+<b>Package:</b> TCPServer<br />
+<b>Header:</b> Poco/Net/TCPServerDispatcher.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>A helper class for <a href="Poco.Net.TCPServer.html" title="class Poco::Net::TCPServer">TCPServer</a> that dispatches connections to server connection threads. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.Runnable.html" title="class Poco::Runnable">Poco::Runnable</a></p>
+<p><b>All Base Classes: </b><a href="Poco.Runnable.html" title="class Poco::Runnable">Poco::Runnable</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Net.TCPServerDispatcher.html#16218" title="Poco::Net::TCPServerDispatcher::beginConnection()">beginConnection</a>, <a href="Poco.Net.TCPServerDispatcher.html#16212" title="Poco::Net::TCPServerDispatcher::currentConnections()">currentConnections</a>, <a href="Poco.Net.TCPServerDispatcher.html#16210" title="Poco::Net::TCPServerDispatcher::currentThreads()">currentThreads</a>, <a href="Poco.Net.TCPServerDispatcher.html#16204" title="Poco::Net::TCPServerDispatcher::duplicate()">duplicate</a>, <a href="Poco.Net.TCPServerDispatcher.html#16219" title="Poco::Net::TCPServerDispatcher::endConnection()">endConnection</a>, <a href="Poco.Net.TCPServerDispatcher.html#16207" title="Poco::Net::TCPServerDispatcher::enqueue()">enqueue</a>, <a href="Poco.Net.TCPServerDispatcher.html#16213" title="Poco::Net::TCPServerDispatcher::maxConcurrentConnections()">maxConcurrentConnections</a>, <a href="Poco.Net.TCPServerDispatcher.html#16216" title="Poco::Net::TCPServerDispatcher::params()">params</a>, <a href="Poco.Net.TCPServerDispatcher.html#16214" title="Poco::Net::TCPServerDispatcher::queuedConnections()">queuedConnections</a>, <a href="Poco.Net.TCPServerDispatcher.html#16215" title="Poco::Net::TCPServerDispatcher::refusedConnections()">refusedConnections</a>, <a href="Poco.Net.TCPServerDispatcher.html#16205" title="Poco::Net::TCPServerDispatcher::release()">release</a>, <a href="Poco.Net.TCPServerDispatcher.html#16206" title="Poco::Net::TCPServerDispatcher::run()">run</a>, <a href="Poco.Net.TCPServerDispatcher.html#16209" title="Poco::Net::TCPServerDispatcher::stop()">stop</a>, <a href="Poco.Net.TCPServerDispatcher.html#16211" title="Poco::Net::TCPServerDispatcher::totalConnections()">totalConnections</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.Runnable.html#9982" title="Poco::Runnable::run()">run</a></p>
+<h2>Constructors</h2>
+<h3><a name="16200">TCPServerDispatcher</a></h3>
+<p class="decl"><a href="Poco.Net.TCPServerDispatcher.html" title="class Poco::Net::TCPServerDispatcher">TCPServerDispatcher</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.TCPServerConnectionFactory.html#16185" title="Poco::Net::TCPServerConnectionFactory::Ptr">TCPServerConnectionFactory::Ptr</a> pFactory,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.ThreadPool.html" title="class Poco::ThreadPool">Poco::ThreadPool</a> &amp; threadPool,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.TCPServerParams.html#16238" title="Poco::Net::TCPServerParams::Ptr">TCPServerParams::Ptr</a> pParams<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.Net.TCPServerDispatcher.html" title="class Poco::Net::TCPServerDispatcher">TCPServerDispatcher</a>. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="16217">~TCPServerDispatcher</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">~<a href="Poco.Net.TCPServerDispatcher.html" title="class Poco::Net::TCPServerDispatcher">TCPServerDispatcher</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Net.TCPServerDispatcher.html" title="class Poco::Net::TCPServerDispatcher">TCPServerDispatcher</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="16212">currentConnections</a></h3>
+<p class="decl">int currentConnections() const;</p>
+<div class="description">
+<p>Returns the number of currently handled connections.	 </p>
+</div>
+<h3><a name="16210">currentThreads</a></h3>
+<p class="decl">int currentThreads() const;</p>
+<div class="description">
+<p>Returns the number of currently used threads. </p>
+</div>
+<h3><a name="16204">duplicate</a></h3>
+<p class="decl">void duplicate();</p>
+<div class="description">
+<p>Increments the object's reference count. </p>
+</div>
+<h3><a name="16207">enqueue</a></h3>
+<p class="decl">void enqueue(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> &amp; socket<br />);</p>
+<div class="description">
+<p>Queues the given socket connection. </p>
+</div>
+<h3><a name="16213">maxConcurrentConnections</a></h3>
+<p class="decl">int maxConcurrentConnections() const;</p>
+<div class="description">
+<p>Returns the maximum number of concurrently handled connections.	 </p>
+</div>
+<h3><a name="16216">params</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const <a href="Poco.Net.TCPServerParams.html" title="class Poco::Net::TCPServerParams">TCPServerParams</a> &amp; params() const;</p>
+<div class="description">
+<p>Returns a const reference to the TCPServerParam object. </p>
+</div>
+<h3><a name="16214">queuedConnections</a></h3>
+<p class="decl">int queuedConnections() const;</p>
+<div class="description">
+<p>Returns the number of queued connections.	 </p>
+</div>
+<h3><a name="16215">refusedConnections</a></h3>
+<p class="decl">int refusedConnections() const;</p>
+<div class="description">
+<p>Returns the number of refused connections. </p>
+</div>
+<h3><a name="16205">release</a></h3>
+<p class="decl">void release();</p>
+<div class="description">
+<p>Decrements the object's reference count and deletes the object if the count reaches zero.	 </p>
+</div>
+<h3><a name="16206">run</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void run();</p>
+<div class="description">
+<p>Runs the dispatcher. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Runnable.html#9982" title="Poco::Runnable::run()">Poco::Runnable::run()</a></p></div>
+<h3><a name="16209">stop</a></h3>
+<p class="decl">void stop();</p>
+<div class="description">
+<p>Stops the dispatcher. </p>
+</div>
+<h3><a name="16211">totalConnections</a></h3>
+<p class="decl">int totalConnections() const;</p>
+<div class="description">
+<p>Returns the total number of handled connections. </p>
+</div>
+<h3><a name="16218">beginConnection</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void beginConnection();</p>
+<div class="description">
+<p>Updates the performance counters. </p>
+</div>
+<h3><a name="16219">endConnection</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void endConnection();</p>
+<div class="description">
+<p>Updates the performance counters. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

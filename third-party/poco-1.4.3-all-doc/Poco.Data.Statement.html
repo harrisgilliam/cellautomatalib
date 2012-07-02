@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Data::Statement</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Data.html" class="namespace">Poco::Data</a></h1>
+<h1 class="symbol">class Statement</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Data<br />
+<b>Package:</b> DataCore<br />
+<b>Header:</b> Poco/Data/Statement.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>A <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> is used to execute SQL statements.  It does not contain code of its own. Its main purpose is to forward calls to the concrete <a href="Poco.Data.StatementImpl.html" title="class Poco::Data::StatementImpl">StatementImpl</a> stored inside. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Known Derived Classes: </b><a href="Poco.Data.RecordSet.html" title="class Poco::Data::RecordSet">RecordSet</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Data.Statement.html#3109" title="Poco::Data::Statement::done()">done</a>, <a href="Poco.Data.Statement.html#3108" title="Poco::Data::Statement::execute()">execute</a>, <a href="Poco.Data.Statement.html#3110" title="Poco::Data::Statement::extractions()">extractions</a>, <a href="Poco.Data.Statement.html#3111" title="Poco::Data::Statement::metaColumn()">metaColumn</a>, <a href="Poco.Data.Statement.html#3095" title="Poco::Data::Statement::operator <<()">operator&nbsp;&lt;&lt;</a>, <a href="Poco.Data.Statement.html#3091" title="Poco::Data::Statement::operator =()">operator&nbsp;=</a>, <a href="Poco.Data.Statement.html#3097" title="Poco::Data::Statement::operator,()">operator,</a>, <a href="Poco.Data.Statement.html#3093" title="Poco::Data::Statement::swap()">swap</a>, <a href="Poco.Data.Statement.html#3107" title="Poco::Data::Statement::toString()">toString</a></p>
+<h2>Types</h2>
+<h3><a name="3083">Manipulator</a></h3>
+<p class="decl">typedef void (* <a href="Poco.Data.Statement.html#3083" title="Poco::Data::Statement::Manipulator">Manipulator</a>)(<a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> &amp;);</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Constructors</h2>
+<h3><a name="3084">Statement</a></h3>
+<p class="decl"><a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Data.StatementImpl.html" title="class Poco::Data::StatementImpl">StatementImpl</a> * pImpl<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a>. </p>
+</div>
+<h3><a name="3086">Statement</a></h3>
+<p class="decl">explicit <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a> &amp; session<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> for the given <a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a>. </p>
+<p>The following: </p>
+<p></p>
+<pre>Statement stmt(sess);
+stmt &lt;&lt; &quot;SELECT * FROM Table&quot;, ...
+</pre>
+<p>is equivalent to: </p>
+<p></p>
+<pre>Statement stmt(sess &lt;&lt; &quot;SELECT * FROM Table&quot;, ...);
+</pre>
+<p>but in some cases better readable. </p>
+</div>
+<h3><a name="3089">Statement</a></h3>
+<p class="decl"><a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> &amp; stmt<br />);</p>
+<div class="description">
+<p>Copy constructor </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="3088">~Statement</a></h3>
+<p class="decl">~<a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="3109">done</a></h3>
+<p class="decl">bool done();</p>
+<div class="description">
+<p>Returns if the statement was completely executed or if a previously set limit stopped it and there is more work to do. When no limit is set, it will always - after calling <a href="Poco.Data.Statement.html#3108" title="Poco::Data::Statement::execute()">execute</a>() - return true. </p>
+</div>
+<h3><a name="3108">execute</a></h3>
+<p class="decl"><a href="Poco.html#11583" title="Poco::UInt32">Poco::UInt32</a> execute();</p>
+<div class="description">
+<p>Executes the whole statement. Stops when either a limit is hit or the whole statement was executed. Returns the number of rows extracted from the Database. </p>
+</div>
+<h3><a name="3095">operator &lt;&lt;</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">template &lt; typename T &gt; <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> &amp; operator &lt;&lt; (<br />&nbsp;&nbsp;&nbsp;&nbsp;const T &amp; t<br />);</p>
+<div class="description">
+<p>Concatenates the send data to a string version of the SQL statement. </p>
+</div>
+<h3><a name="3091">operator =</a></h3>
+<p class="decl"><a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> &amp; operator = (<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> &amp; stmt<br />);</p>
+<div class="description">
+<p>Assignment operator. </p>
+</div>
+<h3><a name="3097">operator,</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> &amp; operator, (<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Data.Statement.html#3083" title="Poco::Data::Statement::Manipulator">Manipulator</a> manip<br />);</p>
+<div class="description">
+<p>Handles manipulators, such as now. </p>
+</div>
+<h3><a name="3099">operator,</a></h3>
+<p class="decl"><a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> &amp; operator, (<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Data.AbstractBinding.html" title="class Poco::Data::AbstractBinding">AbstractBinding</a> * info<br />);</p>
+<div class="description">
+<p>Registers the <a href="Poco.Data.Binding.html" title="class Poco::Data::Binding">Binding</a> at the <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> </p>
+</div>
+<h3><a name="3101">operator,</a></h3>
+<p class="decl"><a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> &amp; operator, (<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Data.AbstractExtraction.html" title="class Poco::Data::AbstractExtraction">AbstractExtraction</a> * extract<br />);</p>
+<div class="description">
+<p>Registers objects used for extracting data at the <a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a>. </p>
+</div>
+<h3><a name="3103">operator,</a></h3>
+<p class="decl"><a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> &amp; operator, (<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Data.Limit.html" title="class Poco::Data::Limit">Limit</a> &amp; extrLimit<br />);</p>
+<div class="description">
+<p>Sets a limit on the maximum number of rows a select is allowed to return. </p>
+<p>Set per default to <a href="Poco.Data.Limit.html#2772" title="Poco::Data::Limit::LIMIT_UNLIMITED">Limit::LIMIT_UNLIMITED</a> which disables the limit. </p>
+</div>
+<h3><a name="3105">operator,</a></h3>
+<p class="decl"><a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> &amp; operator, (<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Data.Range.html" title="class Poco::Data::Range">Range</a> &amp; extrRange<br />);</p>
+<div class="description">
+<p>Sets a an etxraction <a href="Poco.Data.Range.html" title="class Poco::Data::Range">Range</a> on the maximum number of rows a select is allowed to return. </p>
+<p>Set per default to <a href="Poco.Data.Limit.html#2772" title="Poco::Data::Limit::LIMIT_UNLIMITED">Limit::LIMIT_UNLIMITED</a> which disables the range. </p>
+</div>
+<h3><a name="3093">swap</a></h3>
+<p class="decl">void swap(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Data.Statement.html" title="class Poco::Data::Statement">Statement</a> &amp; other<br />);</p>
+<div class="description">
+<p>Swaps the statement with another one. </p>
+</div>
+<h3><a name="3107">toString</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">std::string toString() const;</p>
+<div class="description">
+<p>Creates a string from the accumulated SQL statement </p>
+</div>
+<h3><a name="3110">extractions</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const <a href="Poco.Data.html#2212" title="Poco::Data::AbstractExtractionVec">AbstractExtractionVec</a> &amp; extractions() const;</p>
+<div class="description">
+<p>Returns the extractions vector. </p>
+</div>
+<h3><a name="3111">metaColumn</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const <a href="Poco.Data.MetaColumn.html" title="class Poco::Data::MetaColumn">MetaColumn</a> &amp; metaColumn(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::size_t pos<br />) const;</p>
+<div class="description">
+<p>Returns the type for the column at specified position. </p>
+</div>
+<h3><a name="3113">metaColumn</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const <a href="Poco.Data.MetaColumn.html" title="class Poco::Data::MetaColumn">MetaColumn</a> &amp; metaColumn(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name<br />) const;</p>
+<div class="description">
+<p>Returns the type for the column with specified name. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

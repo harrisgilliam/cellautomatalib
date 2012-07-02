@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::StreamTokenizer</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="symbol">class StreamTokenizer</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> Streams<br />
+<b>Header:</b> Poco/StreamTokenizer.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>A stream tokenizer splits an input stream into a sequence of tokens of different kinds. Various token kinds can be registered with the tokenizer. </p>
+</div>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.StreamTokenizer.html#10502" title="Poco::StreamTokenizer::addToken()">addToken</a>, <a href="Poco.StreamTokenizer.html#10500" title="Poco::StreamTokenizer::attachToStream()">attachToStream</a>, <a href="Poco.StreamTokenizer.html#10507" title="Poco::StreamTokenizer::next()">next</a></p>
+<h2>Constructors</h2>
+<h3><a name="10496">StreamTokenizer</a></h3>
+<p class="decl"><a href="Poco.StreamTokenizer.html" title="class Poco::StreamTokenizer">StreamTokenizer</a>();</p>
+<div class="description">
+<p>Creates a <a href="Poco.StreamTokenizer.html" title="class Poco::StreamTokenizer">StreamTokenizer</a> with no attached stream. </p>
+</div>
+<h3><a name="10497">StreamTokenizer</a></h3>
+<p class="decl"><a href="Poco.StreamTokenizer.html" title="class Poco::StreamTokenizer">StreamTokenizer</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::istream &amp; istr<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.StreamTokenizer.html" title="class Poco::StreamTokenizer">StreamTokenizer</a> with no attached stream. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="10499">~StreamTokenizer</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual ~<a href="Poco.StreamTokenizer.html" title="class Poco::StreamTokenizer">StreamTokenizer</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.StreamTokenizer.html" title="class Poco::StreamTokenizer">StreamTokenizer</a> and deletes all registered tokens. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="10502">addToken</a></h3>
+<p class="decl">void addToken(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Token.html" title="class Poco::Token">Token</a> * pToken<br />);</p>
+<div class="description">
+<p>Adds a token class to the tokenizer. The tokenizer takes ownership of the token and deletes it when no longer needed. Comment and whitespace tokens will be marked as ignorable, which means that <a href="Poco.StreamTokenizer.html#10507" title="Poco::StreamTokenizer::next()">next</a>() will not return them. </p>
+</div>
+<h3><a name="10504">addToken</a></h3>
+<p class="decl">void addToken(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Token.html" title="class Poco::Token">Token</a> * pToken,<br />&nbsp;&nbsp;&nbsp;&nbsp;bool ignore<br />);</p>
+<div class="description">
+<p>Adds a token class to the tokenizer. The tokenizer takes ownership of the token and deletes it when no longer needed. If ignore is true, the token will be marked as ignorable, which means that <a href="Poco.StreamTokenizer.html#10507" title="Poco::StreamTokenizer::next()">next</a>() will not return it. </p>
+</div>
+<h3><a name="10500">attachToStream</a></h3>
+<p class="decl">void attachToStream(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::istream &amp; istr<br />);</p>
+<div class="description">
+<p>Attaches the tokenizer to an input stream. </p>
+</div>
+<h3><a name="10507">next</a></h3>
+<p class="decl">const <a href="Poco.Token.html" title="class Poco::Token">Token</a> * next();</p>
+<div class="description">
+<p>Extracts the next token from the input stream. Returns a pointer to an <a href="Poco.EOFToken.html" title="class Poco::EOFToken">EOFToken</a> if there are no more characters to read.  Returns a pointer to an <a href="Poco.InvalidToken.html" title="class Poco::InvalidToken">InvalidToken</a> if an invalid character is encountered. If a token is marked as ignorable, it will not be returned, and the next token will be examined. Never returns a NULL pointer. You must not delete the token returned by <a href="Poco.StreamTokenizer.html#10507" title="Poco::StreamTokenizer::next()">next</a>(). </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

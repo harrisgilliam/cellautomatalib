@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Data::SessionFactory</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Data.html" class="namespace">Poco::Data</a></h1>
+<h1 class="symbol">class SessionFactory</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Data<br />
+<b>Package:</b> DataCore<br />
+<b>Header:</b> Poco/Data/SessionFactory.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>A <a href="Poco.Data.SessionFactory.html" title="class Poco::Data::SessionFactory">SessionFactory</a> is a singleton class that stores <a href="Poco.Data.SessionFactory.html#3014" title="Poco::Data::SessionFactory::Connectors">Connectors</a> and allows to  create Sessions of the required type: </p>
+<p></p>
+<pre>Session ses(SessionFactory::instance().create(connector, connectionString));
+</pre>
+<p>where the first param presents the type of session one wants to create (e.g. for <a href="Poco.Data.SQLite.html" title="namespace Poco::Data::SQLite">SQLite</a> one would choose &quot;<a href="Poco.Data.SQLite.html" title="namespace Poco::Data::SQLite">SQLite</a>&quot;) and the second param is the connection string that the connector requires to connect to the database. </p>
+<p>A concrete example to open an <a href="Poco.Data.SQLite.html" title="namespace Poco::Data::SQLite">SQLite</a> database stored in the file &quot;dummy.db&quot; would be </p>
+<p></p>
+<pre>Session ses(SessionFactory::instance().create(SQLite::Connector::KEY, &quot;dummy.db&quot;));
+</pre>
+<p>An even simpler way to create a session is to use the two argument constructor of <a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a>, which automatically invokes the <a href="Poco.Data.SessionFactory.html" title="class Poco::Data::SessionFactory">SessionFactory</a>: </p>
+<p></p>
+<pre>Session ses(&quot;SQLite&quot;, &quot;dummy.db&quot;);
+</pre>
+</div>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Data.SessionFactory.html#2997" title="Poco::Data::SessionFactory::add()">add</a>, <a href="Poco.Data.SessionFactory.html#3002" title="Poco::Data::SessionFactory::create()">create</a>, <a href="Poco.Data.SessionFactory.html#2996" title="Poco::Data::SessionFactory::instance()">instance</a>, <a href="Poco.Data.SessionFactory.html#3000" title="Poco::Data::SessionFactory::remove()">remove</a></p>
+<h2>Constructors</h2>
+<h3><a name="2994">SessionFactory</a></h3>
+<p class="decl"><a href="Poco.Data.SessionFactory.html" title="class Poco::Data::SessionFactory">SessionFactory</a>();</p>
+<div class="description">
+<p>Creates the <a href="Poco.Data.SessionFactory.html" title="class Poco::Data::SessionFactory">SessionFactory</a>. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="2995">~SessionFactory</a></h3>
+<p class="decl">~<a href="Poco.Data.SessionFactory.html" title="class Poco::Data::SessionFactory">SessionFactory</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Data.SessionFactory.html" title="class Poco::Data::SessionFactory">SessionFactory</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="2997">add</a></h3>
+<p class="decl">void add(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; key,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Data.Connector.html" title="class Poco::Data::Connector">Connector</a> * pIn<br />);</p>
+<div class="description">
+<p>Registers a <a href="Poco.Data.Connector.html" title="class Poco::Data::Connector">Connector</a> under the given key at the factory. If a registration for that key is already active, the first registration will be kept, only its reference count will be increased. Always takes ownership of parameter pIn. </p>
+</div>
+<h3><a name="3002">create</a></h3>
+<p class="decl"><a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a> create(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; key,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; connectionString<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.Data.Session.html" title="class Poco::Data::Session">Session</a> for the given key with the connectionString. Throws an <a href="Poco.html" title="namespace Poco">Poco</a>:<a href="Poco.Data.UnknownDataBaseException.html" title="class Poco::Data::UnknownDataBaseException">Data::UnknownDataBaseException</a> if no <a href="Poco.Data.Connector.html" title="class Poco::Data::Connector">Connector</a> is registered for that key. </p>
+</div>
+<h3><a name="2996">instance</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.Data.SessionFactory.html" title="class Poco::Data::SessionFactory">SessionFactory</a> &amp; instance();</p>
+<div class="description">
+<p>returns the static instance of the singleton. </p>
+</div>
+<h3><a name="3000">remove</a></h3>
+<p class="decl">void remove(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; key<br />);</p>
+<div class="description">
+<p>Lowers the reference count for the <a href="Poco.Data.Connector.html" title="class Poco::Data::Connector">Connector</a> registered under that key. If the count reaches zero, the object is removed. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

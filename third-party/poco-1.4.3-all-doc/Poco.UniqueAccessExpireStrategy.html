@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::UniqueAccessExpireStrategy</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="template">template &lt; class TKey, class TValue &gt;</h1>
+<h1 class="symbol">class UniqueAccessExpireStrategy</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> Cache<br />
+<b>Header:</b> Poco/UniqueAccessExpireStrategy.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>An <a href="Poco.UniqueExpireStrategy.html" title="class Poco::UniqueExpireStrategy">UniqueExpireStrategy</a> implements time based expiration of cache entries. In contrast to <a href="Poco.ExpireStrategy.html" title="class Poco::ExpireStrategy">ExpireStrategy</a> which only allows to set a per cache expiration value, it allows to define  expiration per CacheEntry. Each TValue object must thus offer the following method: </p>
+<p></p>
+<pre>const Poco::Timestamp&amp; getTimeout() const;
+</pre>
+<p>which returns the timespan for how long an object will be valid without being accessed. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b>AbstractStrategy&nbsp;&lt;&nbsp;TKey,&nbsp;TValue&nbsp;&gt;</p>
+<p><b>All Base Classes: </b>AbstractStrategy&nbsp;&lt;&nbsp;TKey,&nbsp;TValue&nbsp;&gt;</p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.UniqueAccessExpireStrategy.html#12223" title="Poco::UniqueAccessExpireStrategy::onAdd()">onAdd</a>, <a href="Poco.UniqueAccessExpireStrategy.html#12232" title="Poco::UniqueAccessExpireStrategy::onClear()">onClear</a>, <a href="Poco.UniqueAccessExpireStrategy.html#12229" title="Poco::UniqueAccessExpireStrategy::onGet()">onGet</a>, <a href="Poco.UniqueAccessExpireStrategy.html#12235" title="Poco::UniqueAccessExpireStrategy::onIsValid()">onIsValid</a>, <a href="Poco.UniqueAccessExpireStrategy.html#12226" title="Poco::UniqueAccessExpireStrategy::onRemove()">onRemove</a>, <a href="Poco.UniqueAccessExpireStrategy.html#12238" title="Poco::UniqueAccessExpireStrategy::onReplace()">onReplace</a></p>
+<h2>Types</h2>
+<h3><a name="12218">ConstIndexIterator</a></h3>
+<p class="decl">typedef typename TimeIndex::const_iterator <a href="Poco.UniqueAccessExpireStrategy.html#12218" title="Poco::UniqueAccessExpireStrategy::ConstIndexIterator">ConstIndexIterator</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="12217">IndexIterator</a></h3>
+<p class="decl">typedef typename TimeIndex::iterator <a href="Poco.UniqueAccessExpireStrategy.html#12217" title="Poco::UniqueAccessExpireStrategy::IndexIterator">IndexIterator</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="12220">Iterator</a></h3>
+<p class="decl">typedef typename Keys::iterator <a href="Poco.UniqueAccessExpireStrategy.html#12220" title="Poco::UniqueAccessExpireStrategy::Iterator">Iterator</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="12215">KeyExpire</a></h3>
+<p class="decl">typedef std::pair &lt; TKey, <a href="Poco.Timespan.html" title="class Poco::Timespan">Timespan</a> &gt; <a href="Poco.UniqueAccessExpireStrategy.html#12215" title="Poco::UniqueAccessExpireStrategy::KeyExpire">KeyExpire</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="12219">Keys</a></h3>
+<p class="decl">typedef std::map &lt; TKey, <a href="Poco.UniqueAccessExpireStrategy.html#12217" title="Poco::UniqueAccessExpireStrategy::IndexIterator">IndexIterator</a> &gt; <a href="Poco.UniqueAccessExpireStrategy.html#12219" title="Poco::UniqueAccessExpireStrategy::Keys">Keys</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="12216">TimeIndex</a></h3>
+<p class="decl">typedef std::multimap &lt; <a href="Poco.Timestamp.html" title="class Poco::Timestamp">Timestamp</a>, <a href="Poco.UniqueAccessExpireStrategy.html#12215" title="Poco::UniqueAccessExpireStrategy::KeyExpire">KeyExpire</a> &gt; <a href="Poco.UniqueAccessExpireStrategy.html#12216" title="Poco::UniqueAccessExpireStrategy::TimeIndex">TimeIndex</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Constructors</h2>
+<h3><a name="12221">UniqueAccessExpireStrategy</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.UniqueAccessExpireStrategy.html" title="class Poco::UniqueAccessExpireStrategy">UniqueAccessExpireStrategy</a>();</p>
+<div class="description">
+<p>Create an unique expire strategy. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="12222">~UniqueAccessExpireStrategy</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">~<a href="Poco.UniqueAccessExpireStrategy.html" title="class Poco::UniqueAccessExpireStrategy">UniqueAccessExpireStrategy</a>();</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="12223">onAdd</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void onAdd(<br />&nbsp;&nbsp;&nbsp;&nbsp;const void * param212,<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.KeyValueArgs.html" title="class Poco::KeyValueArgs">KeyValueArgs</a> &lt; TKey, TValue &gt; &amp; args<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="12232">onClear</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void onClear(<br />&nbsp;&nbsp;&nbsp;&nbsp;const void * param215,<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.EventArgs.html" title="class Poco::EventArgs">EventArgs</a> &amp; args<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="12229">onGet</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void onGet(<br />&nbsp;&nbsp;&nbsp;&nbsp;const void * param214,<br />&nbsp;&nbsp;&nbsp;&nbsp;const TKey &amp; key<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="12235">onIsValid</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void onIsValid(<br />&nbsp;&nbsp;&nbsp;&nbsp;const void * param216,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.ValidArgs.html" title="class Poco::ValidArgs">ValidArgs</a> &lt; TKey &gt; &amp; args<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="12226">onRemove</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void onRemove(<br />&nbsp;&nbsp;&nbsp;&nbsp;const void * param213,<br />&nbsp;&nbsp;&nbsp;&nbsp;const TKey &amp; key<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="12238">onReplace</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void onReplace(<br />&nbsp;&nbsp;&nbsp;&nbsp;const void * param217,<br />&nbsp;&nbsp;&nbsp;&nbsp;std::set &lt; TKey &gt; &amp; elemsToRemove<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Variables</h2>
+<h3><a name="12242">_keyIndex</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.UniqueAccessExpireStrategy.html#12216" title="Poco::UniqueAccessExpireStrategy::TimeIndex">TimeIndex</a> _keyIndex;</p>
+<div class="description">
+<p>Maps time to key value </p>
+</div>
+<h3><a name="12241">_keys</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.UniqueAccessExpireStrategy.html#12219" title="Poco::UniqueAccessExpireStrategy::Keys">Keys</a> _keys;</p>
+<div class="description">
+<p>For faster replacement of keys, the iterator points to the _keyIndex map </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

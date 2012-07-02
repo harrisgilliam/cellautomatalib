@@ -1,0 +1,73 @@
+#ifndef _CAM_init_H_
+#define _CAM_init_H_
+
+#include <CAM/CAM_objects.H>
+
+
+/*****************************************************************************/
+/****************************** DEFINES **************************************/
+/*****************************************************************************/
+#define or_opcode(c8,v)							  \
+  do {									  \
+    OPCODE(c8->cir) |= v;						  \
+    if (c8->dbug->ops & PRINT_STEPLIST) {				  \
+      SLE newsle = (SLE) (USR(c8->cir->sle) + sizeof(struct sl_element)); \
+      newsle->opcode |= v;						  \
+    }									  \
+  } while(0)
+#define CAM__cam_wait(c8)	or_opcode((c8),(1 << 12))
+#define CAM__host_alert(c8)	or_opcode((c8),(1 << 13))
+#define CAM__host_wait(c8)	or_opcode((c8),(1 << 14))
+#define CAM__host_jump(c8)	or_opcode((c8),(1 << 15))
+#define CAM__immediate_data(c8)	or_opcode((c8),(1 << 29))
+#define CAM__read(c8)	        or_opcode((c8),(1 << 30))
+#define CAM__byte_read(c8)	or_opcode((c8),(5 << 28))
+#define CAM__reset_cam(c8)	or_opcode((c8),(7 << 29))
+#define CAM_cam_wait_mask	(1 << 12)
+#define CAM_host_alert_mask	(1 << 13)
+#define CAM_host_wait_mask	(1 << 14)
+#define CAM_host_jump_mask	(1 << 15)
+#define CAM_byte_mode_mask	(1 << 28)
+#define CAM_immediate_data_mask	(1 << 29)
+#define CAM_read_mask		(1 << 30)
+#define CAM_cam_reset_mask	(1 << 31)
+#define CAM_h_total \
+ ((((unsigned int)CAM_bt858_data[13]) << 8)|((unsigned int)CAM_bt858_data[12]))
+#define CAM_zero_sector(c8)	bzero((char *)&((c8)->spc->sector), sizeof(Spcst))
+#define CAM_zero_subsector(c8)	bzero((char *)&((c8)->spc->subsector), sizeof(Spcst))
+
+
+
+/*****************************************************************************/
+/***************************** TYPEDEFS **************************************/
+/*****************************************************************************/
+
+
+
+/*****************************************************************************/
+/**************************** PROTOTYPES *************************************/
+/*****************************************************************************/
+extern "C" {
+  CAM8 CAM_init(int, char *);
+  void CAM_init_packages(void);
+  void CAM_init_low_level(CAM8);
+  void CAM_init_high_level(CAM8);
+  void CAM_init_topology(CAM8);
+  void CAM_init_speed(CAM8);
+  void CAM_new_experiment(CAM8);
+  void CAM_newx(CAM8);
+  void CAM_new_machine(CAM8);
+  void CAM_print_machine(CAM8);
+}
+
+
+/*****************************************************************************/
+/***************************** GLOBALS ***************************************/
+/*****************************************************************************/
+extern unsigned int CAM_v_total;
+extern Spec Register_Specs[790];
+extern int CAM_SBus_clock;
+extern unsigned char *CAM_bt858_data;
+
+
+#endif

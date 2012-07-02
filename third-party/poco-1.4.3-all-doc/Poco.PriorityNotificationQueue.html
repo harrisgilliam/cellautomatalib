@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::PriorityNotificationQueue</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="symbol">class PriorityNotificationQueue</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> Notifications<br />
+<b>Header:</b> Poco/PriorityNotificationQueue.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>A <a href="Poco.PriorityNotificationQueue.html" title="class Poco::PriorityNotificationQueue">PriorityNotificationQueue</a> object provides a way to implement asynchronous notifications. This is especially useful for sending notifications from one thread to another, for example from a background thread to  the main (user interface) thread.  </p>
+<p>The <a href="Poco.PriorityNotificationQueue.html" title="class Poco::PriorityNotificationQueue">PriorityNotificationQueue</a> is quite similar to the <a href="Poco.NotificationQueue.html" title="class Poco::NotificationQueue">NotificationQueue</a> class. The only difference to <a href="Poco.NotificationQueue.html" title="class Poco::NotificationQueue">NotificationQueue</a> is that each <a href="Poco.Notification.html" title="class Poco::Notification">Notification</a> is tagged with a priority value. When inserting a <a href="Poco.Notification.html" title="class Poco::Notification">Notification</a> into the queue, the <a href="Poco.Notification.html" title="class Poco::Notification">Notification</a> is inserted according to the given priority value, with  lower priority values being inserted before higher priority values. Therefore, the lower the numerical priority value, the higher the actual notification priority.  </p>
+<p>Notifications are dequeued in order of their priority. </p>
+<p>The <a href="Poco.PriorityNotificationQueue.html" title="class Poco::PriorityNotificationQueue">PriorityNotificationQueue</a> can also be used to distribute work from a controlling thread to one or more worker threads. Each worker thread repeatedly calls <a href="Poco.PriorityNotificationQueue.html#9641" title="Poco::PriorityNotificationQueue::waitDequeueNotification()">waitDequeueNotification</a>() and processes the returned notification. Special care must be taken when shutting down a queue with worker threads waiting for notifications. The recommended sequence to shut down and destroy the queue is to </p>
+<ol>
+<li>set a termination flag for every worker thread </li>
+<li>call the <a href="Poco.PriorityNotificationQueue.html#9646" title="Poco::PriorityNotificationQueue::wakeUpAll()">wakeUpAll</a>() method </li>
+<li>join each worker thread </li>
+<li>destroy the notification queue. </li>
+</ol>
+</div>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.PriorityNotificationQueue.html#9649" title="Poco::PriorityNotificationQueue::clear()">clear</a>, <a href="Poco.PriorityNotificationQueue.html#9651" title="Poco::PriorityNotificationQueue::defaultQueue()">defaultQueue</a>, <a href="Poco.PriorityNotificationQueue.html#9640" title="Poco::PriorityNotificationQueue::dequeueNotification()">dequeueNotification</a>, <a href="Poco.PriorityNotificationQueue.html#9652" title="Poco::PriorityNotificationQueue::dequeueOne()">dequeueOne</a>, <a href="Poco.PriorityNotificationQueue.html#9644" title="Poco::PriorityNotificationQueue::dispatch()">dispatch</a>, <a href="Poco.PriorityNotificationQueue.html#9647" title="Poco::PriorityNotificationQueue::empty()">empty</a>, <a href="Poco.PriorityNotificationQueue.html#9637" title="Poco::PriorityNotificationQueue::enqueueNotification()">enqueueNotification</a>, <a href="Poco.PriorityNotificationQueue.html#9650" title="Poco::PriorityNotificationQueue::hasIdleThreads()">hasIdleThreads</a>, <a href="Poco.PriorityNotificationQueue.html#9648" title="Poco::PriorityNotificationQueue::size()">size</a>, <a href="Poco.PriorityNotificationQueue.html#9641" title="Poco::PriorityNotificationQueue::waitDequeueNotification()">waitDequeueNotification</a>, <a href="Poco.PriorityNotificationQueue.html#9646" title="Poco::PriorityNotificationQueue::wakeUpAll()">wakeUpAll</a></p>
+<h2>Constructors</h2>
+<h3><a name="9635">PriorityNotificationQueue</a></h3>
+<p class="decl"><a href="Poco.PriorityNotificationQueue.html" title="class Poco::PriorityNotificationQueue">PriorityNotificationQueue</a>();</p>
+<div class="description">
+<p>Creates the <a href="Poco.PriorityNotificationQueue.html" title="class Poco::PriorityNotificationQueue">PriorityNotificationQueue</a>. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="9636">~PriorityNotificationQueue</a></h3>
+<p class="decl">~<a href="Poco.PriorityNotificationQueue.html" title="class Poco::PriorityNotificationQueue">PriorityNotificationQueue</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.PriorityNotificationQueue.html" title="class Poco::PriorityNotificationQueue">PriorityNotificationQueue</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="9649">clear</a></h3>
+<p class="decl">void clear();</p>
+<div class="description">
+<p>Removes all notifications from the queue. </p>
+</div>
+<h3><a name="9651">defaultQueue</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.PriorityNotificationQueue.html" title="class Poco::PriorityNotificationQueue">PriorityNotificationQueue</a> &amp; defaultQueue();</p>
+<div class="description">
+<p>Returns a reference to the default <a href="Poco.PriorityNotificationQueue.html" title="class Poco::PriorityNotificationQueue">PriorityNotificationQueue</a>. </p>
+</div>
+<h3><a name="9640">dequeueNotification</a></h3>
+<p class="decl"><a href="Poco.Notification.html" title="class Poco::Notification">Notification</a> * dequeueNotification();</p>
+<div class="description">
+<p>Dequeues the next pending notification. Returns 0 (null) if no notification is available. The caller gains ownership of the notification and is expected to release it when done with it. </p>
+<p>It is highly recommended that the result is immediately assigned to a <a href="Poco.Notification.html#8973" title="Poco::Notification::Ptr">Notification::Ptr</a>, to avoid potential memory management issues. </p>
+</div>
+<h3><a name="9644">dispatch</a></h3>
+<p class="decl">void dispatch(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.NotificationCenter.html" title="class Poco::NotificationCenter">NotificationCenter</a> &amp; notificationCenter<br />);</p>
+<div class="description">
+<p>Dispatches all queued notifications to the given notification center. </p>
+</div>
+<h3><a name="9647">empty</a></h3>
+<p class="decl">bool empty() const;</p>
+<div class="description">
+<p>Returns true if and only if the queue is empty. </p>
+</div>
+<h3><a name="9637">enqueueNotification</a></h3>
+<p class="decl">void enqueueNotification(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Notification.html#8973" title="Poco::Notification::Ptr">Notification::Ptr</a> pNotification,<br />&nbsp;&nbsp;&nbsp;&nbsp;int priority<br />);</p>
+<div class="description">
+<p>Enqueues the given notification by adding it to the queue according to the given priority. Lower priority values are inserted before higher priority values. The queue takes ownership of the notification, thus a call like </p>
+<pre>notificationQueue.enqueueNotification(new MyNotification, 1);
+</pre>
+<p>does not result in a memory leak. </p>
+</div>
+<h3><a name="9650">hasIdleThreads</a></h3>
+<p class="decl">bool hasIdleThreads() const;</p>
+<div class="description">
+<p>Returns true if the queue has at least one thread waiting  for a notification. </p>
+</div>
+<h3><a name="9648">size</a></h3>
+<p class="decl">int size() const;</p>
+<div class="description">
+<p>Returns the number of notifications in the queue. </p>
+</div>
+<h3><a name="9641">waitDequeueNotification</a></h3>
+<p class="decl"><a href="Poco.Notification.html" title="class Poco::Notification">Notification</a> * waitDequeueNotification();</p>
+<div class="description">
+<p>Dequeues the next pending notification. If no notification is available, waits for a notification to be enqueued.  The caller gains ownership of the notification and is expected to release it when done with it. This method returns 0 (null) if <a href="Poco.PriorityNotificationQueue.html#9646" title="Poco::PriorityNotificationQueue::wakeUpAll()">wakeUpAll</a>() has been called by another thread. </p>
+<p>It is highly recommended that the result is immediately assigned to a <a href="Poco.Notification.html#8973" title="Poco::Notification::Ptr">Notification::Ptr</a>, to avoid potential memory management issues. </p>
+</div>
+<h3><a name="9642">waitDequeueNotification</a></h3>
+<p class="decl"><a href="Poco.Notification.html" title="class Poco::Notification">Notification</a> * waitDequeueNotification(<br />&nbsp;&nbsp;&nbsp;&nbsp;long milliseconds<br />);</p>
+<div class="description">
+<p>Dequeues the next pending notification. If no notification is available, waits for a notification to be enqueued up to the specified time. Returns 0 (null) if no notification is available. The caller gains ownership of the notification and is expected to release it when done with it. </p>
+<p>It is highly recommended that the result is immediately assigned to a <a href="Poco.Notification.html#8973" title="Poco::Notification::Ptr">Notification::Ptr</a>, to avoid potential memory management issues. </p>
+</div>
+<h3><a name="9646">wakeUpAll</a></h3>
+<p class="decl">void wakeUpAll();</p>
+<div class="description">
+<p>Wakes up all threads that wait for a notification. </p>
+</div>
+<h3><a name="9652">dequeueOne</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Notification.html#8973" title="Poco::Notification::Ptr">Notification::Ptr</a> dequeueOne();</p>
+<div class="description">
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

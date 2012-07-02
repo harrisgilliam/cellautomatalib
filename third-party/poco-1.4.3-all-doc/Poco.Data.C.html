@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Data::C</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Data.html" class="namespace">Poco::Data</a></h1>
+<h1 class="template">template &lt; class T, class C = std::vector &lt; T &gt; &gt;</h1>
+<h1 class="symbol">class InternalExtraction</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Data<br />
+<b>Package:</b> DataCore<br />
+<b>Header:</b> Poco/Data/Extraction.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>Vector <a href="Poco.Data.html" title="namespace Poco::Data">Data</a> Type specialization for extraction of values from a query result set. List <a href="Poco.Data.html" title="namespace Poco::Data">Data</a> Type specialization for extraction of values from a query result set. Container <a href="Poco.Data.html" title="namespace Poco::Data">Data</a> Type specialization extension for extraction of values from a query result set. </p>
+<p>This class is intended for PocoData internal use - it is used by <a href="Poco.Data.StatementImpl.html" title="class Poco::Data::StatementImpl">StatementImpl</a>  to automaticaly create internal <a href="Poco.Data.Extraction.html" title="class Poco::Data::Extraction">Extraction</a> in cases when statement returns data and no external storage was supplied. It is later used by <a href="Poco.Data.RecordSet.html" title="class Poco::Data::RecordSet">RecordSet</a> to retrieve the fetched data after statement execution. It takes ownership of the <a href="Poco.Data.Column.html" title="class Poco::Data::Column">Column</a> pointer supplied as constructor argument. <a href="Poco.Data.Column.html" title="class Poco::Data::Column">Column</a> object, in turn owns the data vector pointer. </p>
+<p><a href="Poco.Data.C.html#2751" title="Poco::Data::C::InternalExtraction()">InternalExtraction</a> objects can not be copied or assigned. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b>Extraction&nbsp;&lt;&nbsp;C&nbsp;&gt;</p>
+<p><b>All Base Classes: </b>Extraction&nbsp;&lt;&nbsp;C&nbsp;&gt;</p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Data.C.html#2751" title="Poco::Data::C::InternalExtraction()">InternalExtraction</a>, <a href="Poco.Data.C.html#2758" title="Poco::Data::C::column()">column</a>, <a href="Poco.Data.C.html#2755" title="Poco::Data::C::reset()">reset</a>, <a href="Poco.Data.C.html#2756" title="Poco::Data::C::value()">value</a></p>
+<h2>Destructor</h2>
+<h3><a name="2754">~InternalExtraction</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">~<a href="Poco.Data.C.html#2751" title="Poco::Data::C::InternalExtraction()">InternalExtraction</a>();</p>
+<div class="description">
+<p>Destroys <a href="Poco.Data.C.html#2751" title="Poco::Data::C::InternalExtraction()">InternalExtraction</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="2751">InternalExtraction</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">explicit <a href="Poco.Data.C.html#2751" title="Poco::Data::C::InternalExtraction()">InternalExtraction</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Data.C.html" title="class Poco::Data::C">C</a> &amp; result,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Data.Column.html" title="class Poco::Data::Column">Column</a> &lt; T &gt; * pColumn<br />);</p>
+<div class="description">
+<p>Creates <a href="Poco.Data.C.html#2751" title="Poco::Data::C::InternalExtraction()">InternalExtraction</a>. </p>
+</div>
+<h3><a name="2758">column</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const <a href="Poco.Data.Column.html" title="class Poco::Data::Column">Column</a> &lt; T &gt; &amp; column() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="2755">reset</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void reset();</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="2756">value</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const T &amp; value(<br />&nbsp;&nbsp;&nbsp;&nbsp;int index<br />) const;</p>
+<div class="description">
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

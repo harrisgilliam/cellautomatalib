@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::XML::CDATASection</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.XML.html" class="namespace">Poco::XML</a></h1>
+<h1 class="symbol">class CDATASection</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> XML<br />
+<b>Package:</b> DOM<br />
+<b>Header:</b> Poco/DOM/CDATASection.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>CDATA sections are used to escape blocks of text containing characters that would otherwise be regarded as markup. The only delimiter that is recognized in a CDATA section is the &quot;]</tt>&quot; string that ends the CDATA section. CDATA sections cannot be nested. Their primary purpose is for including material such as <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> fragments, without needing to escape all the delimiters. </p>
+<p>The DOMString attribute of the <a href="Poco.XML.Text.html" title="class Poco::XML::Text">Text</a> node holds the text that is contained by the CDATA section. Note that this may contain characters that need to be escaped outside of CDATA sections and that, depending on the character encoding (&quot;charset&quot;) chosen for serialization, it may be impossible to write out some characters as part of a CDATA section. </p>
+<p>The <a href="Poco.XML.CDATASection.html" title="class Poco::XML::CDATASection">CDATASection</a> interface inherits from the <a href="Poco.XML.CharacterData.html" title="class Poco::XML::CharacterData">CharacterData</a> interface through the <a href="Poco.XML.Text.html" title="class Poco::XML::Text">Text</a> interface. Adjacent <a href="Poco.XML.CDATASection.html" title="class Poco::XML::CDATASection">CDATASection</a> nodes are not merged by use of the normalize method on the <a href="Poco.XML.Element.html" title="class Poco::XML::Element">Element</a> interface. </p>
+<p>Note: Because no markup is recognized within a <a href="Poco.XML.CDATASection.html" title="class Poco::XML::CDATASection">CDATASection</a>, character numeric references cannot be used as an escape mechanism when serializing. Therefore, action needs to be taken when serializing a <a href="Poco.XML.CDATASection.html" title="class Poco::XML::CDATASection">CDATASection</a> with a character encoding where some of the contained characters cannot be represented. Failure to do so would not produce well-formed <a href="Poco.XML.html" title="namespace Poco::XML">XML</a>. One potential solution in the serialization process is to end the CDATA section before the character, output the character using a character reference or entity reference, and open a new CDATA section for any further characters in the text node. Note, however, that some code conversion libraries at the time of writing do not return an error or exception when a character is missing from the encoding, making the task of ensuring that data is not corrupted on serialization more difficult. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.XML.Text.html" title="class Poco::XML::Text">Text</a></p>
+<p><b>All Base Classes: </b><a href="Poco.XML.AbstractNode.html" title="class Poco::XML::AbstractNode">AbstractNode</a>, <a href="Poco.XML.CharacterData.html" title="class Poco::XML::CharacterData">CharacterData</a>, <a href="Poco.XML.DOMObject.html" title="class Poco::XML::DOMObject">DOMObject</a>, <a href="Poco.XML.EventTarget.html" title="class Poco::XML::EventTarget">EventTarget</a>, <a href="Poco.XML.Node.html" title="class Poco::XML::Node">Node</a>, <a href="Poco.XML.Text.html" title="class Poco::XML::Text">Text</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.XML.CDATASection.html#19222" title="Poco::XML::CDATASection::copyNode()">copyNode</a>, <a href="Poco.XML.CDATASection.html#19213" title="Poco::XML::CDATASection::nodeName()">nodeName</a>, <a href="Poco.XML.CDATASection.html#19214" title="Poco::XML::CDATASection::nodeType()">nodeType</a>, <a href="Poco.XML.CDATASection.html#19211" title="Poco::XML::CDATASection::splitText()">splitText</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.XML.AbstractNode.html#19095" title="Poco::XML::AbstractNode::addEventListener()">addEventListener</a>, <a href="Poco.XML.AbstractNode.html#19082" title="Poco::XML::AbstractNode::appendChild()">appendChild</a>, <a href="Poco.XML.CharacterData.html#19235" title="Poco::XML::CharacterData::appendData()">appendData</a>, <a href="Poco.XML.AbstractNode.html#19072" title="Poco::XML::AbstractNode::attributes()">attributes</a>, <a href="Poco.XML.AbstractNode.html#19111" title="Poco::XML::AbstractNode::autoRelease()">autoRelease</a>, <a href="Poco.XML.AbstractNode.html#19125" title="Poco::XML::AbstractNode::bubbleEvent()">bubbleEvent</a>, <a href="Poco.XML.AbstractNode.html#19123" title="Poco::XML::AbstractNode::captureEvent()">captureEvent</a>, <a href="Poco.XML.AbstractNode.html#19067" title="Poco::XML::AbstractNode::childNodes()">childNodes</a>, <a href="Poco.XML.AbstractNode.html#19085" title="Poco::XML::AbstractNode::cloneNode()">cloneNode</a>, <a href="Poco.XML.AbstractNode.html#19118" title="Poco::XML::AbstractNode::copyNode()">copyNode</a>, <a href="Poco.XML.CharacterData.html#19227" title="Poco::XML::CharacterData::data()">data</a>, <a href="Poco.XML.CharacterData.html#19240" title="Poco::XML::CharacterData::deleteData()">deleteData</a>, <a href="Poco.XML.AbstractNode.html#19132" title="Poco::XML::AbstractNode::dispatchAttrModified()">dispatchAttrModified</a>, <a href="Poco.XML.AbstractNode.html#19137" title="Poco::XML::AbstractNode::dispatchCharacterDataModified()">dispatchCharacterDataModified</a>, <a href="Poco.XML.AbstractNode.html#19103" title="Poco::XML::AbstractNode::dispatchEvent()">dispatchEvent</a>, <a href="Poco.XML.AbstractNode.html#19128" title="Poco::XML::AbstractNode::dispatchNodeInserted()">dispatchNodeInserted</a>, <a href="Poco.XML.AbstractNode.html#19131" title="Poco::XML::AbstractNode::dispatchNodeInsertedIntoDocument()">dispatchNodeInsertedIntoDocument</a>, <a href="Poco.XML.AbstractNode.html#19129" title="Poco::XML::AbstractNode::dispatchNodeRemoved()">dispatchNodeRemoved</a>, <a href="Poco.XML.AbstractNode.html#19130" title="Poco::XML::AbstractNode::dispatchNodeRemovedFromDocument()">dispatchNodeRemovedFromDocument</a>, <a href="Poco.XML.AbstractNode.html#19127" title="Poco::XML::AbstractNode::dispatchSubtreeModified()">dispatchSubtreeModified</a>, <a href="Poco.XML.DOMObject.html#19420" title="Poco::XML::DOMObject::duplicate()">duplicate</a>, <a href="Poco.XML.AbstractNode.html#19121" title="Poco::XML::AbstractNode::events()">events</a>, <a href="Poco.XML.AbstractNode.html#19122" title="Poco::XML::AbstractNode::eventsSuspended()">eventsSuspended</a>, <a href="Poco.XML.AbstractNode.html#19068" title="Poco::XML::AbstractNode::firstChild()">firstChild</a>, <a href="Poco.XML.CharacterData.html#19228" title="Poco::XML::CharacterData::getData()">getData</a>, <a href="Poco.XML.AbstractNode.html#19106" title="Poco::XML::AbstractNode::getNodeByPath()">getNodeByPath</a>, <a href="Poco.XML.AbstractNode.html#19108" title="Poco::XML::AbstractNode::getNodeByPathNS()">getNodeByPathNS</a>, <a href="Poco.XML.AbstractNode.html#19063" title="Poco::XML::AbstractNode::getNodeValue()">getNodeValue</a>, <a href="Poco.XML.AbstractNode.html#19094" title="Poco::XML::AbstractNode::hasAttributes()">hasAttributes</a>, <a href="Poco.XML.AbstractNode.html#19084" title="Poco::XML::AbstractNode::hasChildNodes()">hasChildNodes</a>, <a href="Poco.XML.AbstractNode.html#19105" title="Poco::XML::AbstractNode::innerText()">innerText</a>, <a href="Poco.XML.AbstractNode.html#19074" title="Poco::XML::AbstractNode::insertBefore()">insertBefore</a>, <a href="Poco.XML.CharacterData.html#19237" title="Poco::XML::CharacterData::insertData()">insertData</a>, <a href="Poco.XML.AbstractNode.html#19088" title="Poco::XML::AbstractNode::isSupported()">isSupported</a>, <a href="Poco.XML.AbstractNode.html#19069" title="Poco::XML::AbstractNode::lastChild()">lastChild</a>, <a href="Poco.XML.CharacterData.html#19231" title="Poco::XML::CharacterData::length()">length</a>, <a href="Poco.XML.AbstractNode.html#19093" title="Poco::XML::AbstractNode::localName()">localName</a>, <a href="Poco.XML.AbstractNode.html#19091" title="Poco::XML::AbstractNode::namespaceURI()">namespaceURI</a>, <a href="Poco.XML.AbstractNode.html#19071" title="Poco::XML::AbstractNode::nextSibling()">nextSibling</a>, <a href="Poco.XML.AbstractNode.html#19062" title="Poco::XML::AbstractNode::nodeName()">nodeName</a>, <a href="Poco.XML.Node.html#20047" title="Poco::XML::Node::nodeType()">nodeType</a>, <a href="Poco.XML.Node.html#20043" title="Poco::XML::Node::nodeValue()">nodeValue</a>, <a href="Poco.XML.AbstractNode.html#19087" title="Poco::XML::AbstractNode::normalize()">normalize</a>, <a href="Poco.XML.AbstractNode.html#19073" title="Poco::XML::AbstractNode::ownerDocument()">ownerDocument</a>, <a href="Poco.XML.AbstractNode.html#19066" title="Poco::XML::AbstractNode::parentNode()">parentNode</a>, <a href="Poco.XML.AbstractNode.html#19092" title="Poco::XML::AbstractNode::prefix()">prefix</a>, <a href="Poco.XML.AbstractNode.html#19070" title="Poco::XML::AbstractNode::previousSibling()">previousSibling</a>, <a href="Poco.XML.DOMObject.html#19421" title="Poco::XML::DOMObject::release()">release</a>, <a href="Poco.XML.AbstractNode.html#19080" title="Poco::XML::AbstractNode::removeChild()">removeChild</a>, <a href="Poco.XML.AbstractNode.html#19099" title="Poco::XML::AbstractNode::removeEventListener()">removeEventListener</a>, <a href="Poco.XML.AbstractNode.html#19077" title="Poco::XML::AbstractNode::replaceChild()">replaceChild</a>, <a href="Poco.XML.CharacterData.html#19243" title="Poco::XML::CharacterData::replaceData()">replaceData</a>, <a href="Poco.XML.CharacterData.html#19229" title="Poco::XML::CharacterData::setData()">setData</a>, <a href="Poco.XML.AbstractNode.html#19064" title="Poco::XML::AbstractNode::setNodeValue()">setNodeValue</a>, <a href="Poco.XML.AbstractNode.html#19140" title="Poco::XML::AbstractNode::setOwnerDocument()">setOwnerDocument</a>, <a href="Poco.XML.Text.html#20198" title="Poco::XML::Text::splitText()">splitText</a>, <a href="Poco.XML.CharacterData.html#19232" title="Poco::XML::CharacterData::substringData()">substringData</a>, <a href="Poco.XML.CharacterData.html#19247" title="Poco::XML::CharacterData::trimmedData()">trimmedData</a></p>
+<h2>Constructors</h2>
+<h3><a name="19215">CDATASection</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.XML.CDATASection.html" title="class Poco::XML::CDATASection">CDATASection</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.XML.Document.html" title="class Poco::XML::Document">Document</a> * pOwnerDocument,<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.XML.html#21390" title="Poco::XML::XMLString">XMLString</a> &amp; data<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="19218">CDATASection</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.XML.CDATASection.html" title="class Poco::XML::CDATASection">CDATASection</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.XML.Document.html" title="class Poco::XML::Document">Document</a> * pOwnerDocument,<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.XML.CDATASection.html" title="class Poco::XML::CDATASection">CDATASection</a> &amp; sec<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="19221">~CDATASection</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">~<a href="Poco.XML.CDATASection.html" title="class Poco::XML::CDATASection">CDATASection</a>();</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="19213">nodeName</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const <a href="Poco.XML.html#21390" title="Poco::XML::XMLString">XMLString</a> &amp; nodeName() const;</p>
+<div class="description">
+<p></p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.XML.Text.html#20200" title="Poco::XML::Text::nodeName()">Poco::XML::Text::nodeName()</a></p></div>
+<h3><a name="19214">nodeType</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">unsigned short nodeType() const;</p>
+<div class="description">
+<p></p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.XML.Text.html#20201" title="Poco::XML::Text::nodeType()">Poco::XML::Text::nodeType()</a></p></div>
+<h3><a name="19211">splitText</a></h3>
+<p class="decl"><a href="Poco.XML.Text.html" title="class Poco::XML::Text">Text</a> * splitText(<br />&nbsp;&nbsp;&nbsp;&nbsp;unsigned long offset<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="19222">copyNode</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.XML.Node.html" title="class Poco::XML::Node">Node</a> * copyNode(<br />&nbsp;&nbsp;&nbsp;&nbsp;bool deep,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.XML.Document.html" title="class Poco::XML::Document">Document</a> * pOwnerDocument<br />) const;</p>
+<div class="description">
+<p></p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.XML.Text.html#20210" title="Poco::XML::Text::copyNode()">Poco::XML::Text::copyNode()</a></p></div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

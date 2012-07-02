@@ -1,0 +1,56 @@
+#ifndef _CAM_err_H_
+#define _CAM_err_H_
+
+/*****************************************************************************/
+/****************************** DEFINES **************************************/
+/*****************************************************************************/
+#define TRACEBACK_DEPTH		1024
+#define T_ENTER(n)		CAM_tb.name[++CAM_tb.cnt] = (n)
+#define T_LEAVE			if (CAM_tb.cnt) CAM_tb.cnt--
+#define TRACEBACK_NAME		CAM_tb.name[CAM_tb.cnt]
+#define NULLP(p, e, m) do { if (!(p)) { CAM_Debug(e, m); return; } } while(0)
+#define CAMABORT(cond, args)	if (cond) CAM_Abort args
+#define CAMWARN(cond, args)	if (cond) CAM_Warn args
+#define CAMDEBUG(cond, args)	if (cond) CAM_Debug args
+#define CAMDIE(cond, args)	if (cond) CAM_Die args
+#define PRINT_STEPLIST	0x1
+#define DRYRUN		0x2
+
+
+/*****************************************************************************/
+/***************************** TYPEDEFS **************************************/
+/*****************************************************************************/
+typedef struct trace_back {
+  int cnt;
+  const char *name[TRACEBACK_DEPTH];
+} Trace, *TRACE;
+
+
+
+/*****************************************************************************/
+/**************************** PROTOTYPES *************************************/
+/*****************************************************************************/
+extern "C" {
+  void CAM_Perror(CAMSTREAM, const char *);
+  void CAM_ErrStr(char *);
+  void CAM_Msg(CAMSTREAM, const char *, ...);
+  void CAM_Msg_(CAMSTREAM, const char *, va_list);
+  void CAM_Debug(CAMSTREAM, const char *, ...);
+  void CAM_Debug_(CAMSTREAM, const char *, va_list);
+  void CAM_Warn(CAMSTREAM, const char *, ...);
+  void CAM_Warn_(CAMSTREAM, const char *, va_list);
+  void CAM_Abort(CAMSTREAM, const char *, ...);
+  void CAM_Abort_(CAMSTREAM, const char *, va_list);
+  void CAM_Die(CAMSTREAM, const char *, ...);
+  void CAM_Die_(CAMSTREAM, const char *, va_list);
+  void CAM_CleanExit(void);
+  void CAM_PrintTraceBack(CAMSTREAM);
+}
+
+/*****************************************************************************/
+/***************************** GLOBALS ***************************************/
+/*****************************************************************************/
+extern CAMSTREAM CAMin, CAMout, CAMerr, CAMdbug;
+extern Trace CAM_tb;
+
+#endif

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Struct Poco::Util::Units::Internal::Convert</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Util.Units.Internal.html" class="namespace">Poco::Util::Units::Internal</a></h1>
+<h1 class="template">template &lt; typename T1, typename T2 &gt;</h1>
+<h1 class="symbol">struct Convert</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Util<br />
+<b>Package:</b> Units<br />
+<b>Header:</b> Poco/Util/Units.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>Converts T1 to T2. If you really want to implement your own conversion routine, specialize this template. The default implementation falls through to <a href="Poco.Util.Units.Internal.Convert2.html" title="struct Poco::Util::Units::Internal::Convert2">Convert2</a>. </p>
+</div>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Util.Units.Internal.Convert.html#18342" title="Poco::Util::Units::Internal::Convert::fn()">fn</a></p>
+<h2>Member Functions</h2>
+<h3><a name="18342">fn</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">template &lt; typename <a href="Poco.Util.Units.html#18374" title="Poco::Util::Units::V">V</a> &gt; static <a href="Poco.Util.Units.html#18374" title="Poco::Util::Units::V">V</a> fn(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Util.Units.html#18374" title="Poco::Util::Units::V">V</a> &amp; v<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Variables</h2>
+<h3><a name="18341">checkConvertible</a></h3>
+<p class="decl">static_assert &lt; <a href="Poco.Util.Units.Internal.Convertible.html" title="struct Poco::Util::Units::Internal::Convertible">Convertible</a> &lt; T1, T2 &gt;::<a href="Poco.Util.Units.Value.html" title="class Poco::Util::Units::Value">Value</a> &gt; checkConvertible;</p>
+<div class="description">
+<p>If this fails, then T1 is not <a href="Poco.Util.Units.Internal.Convertible.html" title="struct Poco::Util::Units::Internal::Convertible">Convertible</a> to T2: </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

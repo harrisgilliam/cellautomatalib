@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Data::ODBC::Utility</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Data.ODBC.html" class="namespace">Poco::Data::ODBC</a></h1>
+<h1 class="symbol">class Utility</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Data/ODBC<br />
+<b>Package:</b> ODBC<br />
+<b>Header:</b> Poco/Data/ODBC/Utility.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>Various utility functions </p>
+</div>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Data.ODBC.Utility.html#1309" title="Poco::Data::ODBC::Utility::cDataType()">cDataType</a>, <a href="Poco.Data.ODBC.Utility.html#1303" title="Poco::Data::ODBC::Utility::dataSources()">dataSources</a>, <a href="Poco.Data.ODBC.Utility.html#1301" title="Poco::Data::ODBC::Utility::drivers()">drivers</a>, <a href="Poco.Data.ODBC.Utility.html#1299" title="Poco::Data::ODBC::Utility::isError()">isError</a>, <a href="Poco.Data.ODBC.Utility.html#1305" title="Poco::Data::ODBC::Utility::mapInsert()">mapInsert</a>, <a href="Poco.Data.ODBC.Utility.html#1311" title="Poco::Data::ODBC::Utility::sqlDataType()">sqlDataType</a></p>
+<h2>Types</h2>
+<h3><a name="1297">DSNMap</a></h3>
+<p class="decl">typedef std::map &lt; std::string, std::string &gt; <a href="Poco.Data.ODBC.Utility.html#1297" title="Poco::Data::ODBC::Utility::DSNMap">DSNMap</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="1298">DriverMap</a></h3>
+<p class="decl">typedef <a href="Poco.Data.ODBC.Utility.html#1297" title="Poco::Data::ODBC::Utility::DSNMap">DSNMap</a> <a href="Poco.Data.ODBC.Utility.html#1298" title="Poco::Data::ODBC::Utility::DriverMap">DriverMap</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="1309">cDataType</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static int cDataType(<br />&nbsp;&nbsp;&nbsp;&nbsp;int sqlDataType<br />);</p>
+<div class="description">
+<p>Returns <a href="Poco.Data.C.html" title="class Poco::Data::C">C</a> data type corresponding to supplied SQL data type. </p>
+</div>
+<h3><a name="1303">dataSources</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.Data.ODBC.Utility.html#1297" title="Poco::Data::ODBC::Utility::DSNMap">DSNMap</a> &amp; dataSources(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Data.ODBC.Utility.html#1297" title="Poco::Data::ODBC::Utility::DSNMap">DSNMap</a> &amp; dsnMap<br />);</p>
+<div class="description">
+<p>Returns DSN-description map of available <a href="Poco.Data.ODBC.html" title="namespace Poco::Data::ODBC">ODBC</a> data sources. </p>
+</div>
+<h3><a name="1301">drivers</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.Data.ODBC.Utility.html#1298" title="Poco::Data::ODBC::Utility::DriverMap">DriverMap</a> &amp; drivers(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Data.ODBC.Utility.html#1298" title="Poco::Data::ODBC::Utility::DriverMap">DriverMap</a> &amp; driverMap<br />);</p>
+<div class="description">
+<p>Returns driver-attributes map of available <a href="Poco.Data.ODBC.html" title="namespace Poco::Data::ODBC">ODBC</a> drivers. </p>
+</div>
+<h3><a name="1299">isError</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static bool isError(<br />&nbsp;&nbsp;&nbsp;&nbsp;SQLRETURN rc<br />);</p>
+<div class="description">
+<p>Returns true if return code is error </p>
+</div>
+<h3><a name="1305">mapInsert</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">template &lt; typename MapType, typename KeyArgType, typename ValueArgType &gt; static typename MapType::iterator mapInsert(<br />&nbsp;&nbsp;&nbsp;&nbsp;MapType &amp; m,<br />&nbsp;&nbsp;&nbsp;&nbsp;const KeyArgType &amp; k,<br />&nbsp;&nbsp;&nbsp;&nbsp;const ValueArgType &amp; v<br />);</p>
+<div class="description">
+<p><a href="Poco.Data.ODBC.Utility.html" title="class Poco::Data::ODBC::Utility">Utility</a> map &quot;insert or replace&quot; function (from S. Meyers: Effective STL, Item 24) </p>
+</div>
+<h3><a name="1311">sqlDataType</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static int sqlDataType(<br />&nbsp;&nbsp;&nbsp;&nbsp;int cDataType<br />);</p>
+<div class="description">
+<p>Returns SQL data type corresponding to supplied <a href="Poco.Data.C.html" title="class Poco::Data::C">C</a> data type. </p>
+</div>
+<h2>Variables</h2>
+<h3><a name="1313">boolDataType</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const SQLSMALLINT boolDataType;</p>
+<div class="description">
+<p><a href="Poco.Data.ODBC.html" title="namespace Poco::Data::ODBC">ODBC</a> size for bool data type. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

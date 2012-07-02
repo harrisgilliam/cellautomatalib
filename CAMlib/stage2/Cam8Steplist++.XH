@@ -1,0 +1,115 @@
+#ifndef _CAM8STEPLIST_H_
+#define _CAM8STEPLIST_H_
+
+#include <CaLib++.H>
+#include <Cam8Instr++.H>
+
+using namespace std;
+
+#include <cstdarg>
+
+/*****************************************************************************/
+/********************************* DEFINES ***********************************/
+/*****************************************************************************/
+#define SL_HEADER_SIZE		(4 * sizeof(u_int32_t))
+
+
+/*****************************************************************************/
+/******************************** TEMPLATES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/*************************** CLASSES & TYPEDEFS ******************************/
+/*****************************************************************************/
+
+class Cam8Steplist {
+public:
+	Cam8Steplist(void);
+	virtual ~Cam8Steplist(void);
+
+	void link(CAM8INSTR);
+	void print(CaLibStream &);
+
+	INLINE_BZERO(Cam8Steplist);
+
+	inline CAM8INSTR begin();
+	inline CAM8INSTR next();
+	inline CAM8INSTR operator++();
+	inline CAM8INSTR end();
+	inline CAM8INSTR first(void);
+	inline CAM8INSTR last(void);
+	inline unsigned int _sizeof(void);
+	inline bool empty(void);
+
+protected:
+	CAM8INSTR head;
+	CAM8INSTR tail;
+	CAM8INSTR cursor;
+};
+typedef Cam8Steplist *CAM8STEPLIST;
+
+
+/*****************************************************************************/
+/********************************* INLINES ***********************************/
+/*****************************************************************************/
+
+inline CAM8INSTR Cam8Steplist::begin()
+{
+	cursor = head;
+	return cursor;
+}
+
+
+inline CAM8INSTR Cam8Steplist::next()
+{
+	if (cursor)
+		cursor = cursor->next_ptr;
+
+	return cursor;
+}
+
+
+inline CAM8INSTR Cam8Steplist::operator++()
+{
+	return next();
+}
+
+
+inline CAM8INSTR Cam8Steplist::end()
+{
+	cursor = tail;
+	return cursor;
+}
+
+
+inline CAM8INSTR Cam8Steplist::first(void)
+{
+	return head;
+}
+
+
+inline CAM8INSTR Cam8Steplist::last(void)
+{
+	return tail;
+}
+
+
+inline bool Cam8Steplist::empty(void)
+{
+	return (head == (CAM8INSTR) NULL);
+}
+
+
+
+/*****************************************************************************/
+/******************************* PROTOTYPES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/********************************* GLOBALS ***********************************/
+/*****************************************************************************/
+
+
+#endif

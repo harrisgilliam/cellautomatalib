@@ -1,0 +1,95 @@
+#ifndef _CAM_tube_H_
+#define _CAM_tube_H_
+
+
+/*****************************************************************************/
+/****************************** DEFINES **************************************/
+/*****************************************************************************/
+#define NREUSE_TUBE		0
+#define REUSE_TUBE		1
+#define UDP_TUBE		0
+#define TCP_TUBE		1
+#define MESSAGE_IOVLEN(m)	(m)->data.msg_iovlen
+#define MESSAGE_EMPTY(m)	(MESSAGE_IOVLEN(m) == 2)
+#define MESSAGE_IOV(m,i)	(m)->data.msg_iov[i]
+#define MESSAGE_BASE(m,i)	MESSAGE_IOV(m,i).iov_base
+#define MESSAGE_LEN(m,i)	MESSAGE_IOV(m,i).iov_len
+#define MESSAGE_RESET(m) \
+	{ (m)->data.msg_iovlen = 2; bzero((m)->opcode, 6); (m)->len.i = 0; }
+#define MESSAGE_ADD(m,b,l)						\
+	{ (m)->data.msg_iov[MESSAGE_IOVLEN(m)].iov_base = b;		\
+	  (m)->data.msg_iov[MESSAGE_IOVLEN(m)++].iov_len = l; }
+
+#define MSG_MAXIOVLEN	256
+
+/*****************************************************************************/
+/***************************** TYPEDEFS **************************************/
+/*****************************************************************************/
+typedef struct message_struct {
+  char opcode[6];
+  union {
+    int i;
+    char c[sizeof(int)];
+  } len;
+  struct iovec iov[MSG_MAXIOVLEN];
+  struct msghdr data;
+} Message, *MESSAGE;
+
+typedef struct socket_struct {
+  int sd;
+  socklen_t alen;
+  struct sockaddr_in sa;
+} Socket, *SOCKET;
+
+typedef struct tube_struct {
+  SOCKET s1;
+  SOCKET s2;
+  int type;
+  int port;
+  int qlen;
+  struct timeval *time;
+  char *host;
+} Tube, *TUBE;
+
+
+
+/*****************************************************************************/
+/**************************** PROTOTYPES *************************************/
+/*****************************************************************************/
+extern "C" {
+  MESSAGE CAM_create_message(void);
+  void CAM_mimic_message(MESSAGE, MESSAGE);
+  void CAM_reset_message(MESSAGE);
+  void CAM_add_message(MESSAGE, char *, int);
+  void CAM_destroy_message(MESSAGE);
+  SOCKET CAM_create_socket(void);
+  void CAM_mimic_socket(SOCKET, SOCKET);
+  void CAM_destroy_socket(SOCKET);
+  TUBE CAM_create_tube(int, int);
+  void CAM_mimic_tube(TUBE, TUBE);
+  void CAM_destroy_tube(TUBE);
+  TUBE CAM_TSplit(TUBE);
+  void CAM_TClient(TUBE, char *, int);
+  void CAM_TConnect(TUBE, ...);
+  void CAM_TServer(TUBE, int, int);
+  void CAM_TAccept(TUBE, ...);
+  void CAM_TClose(TUBE);
+  void CAM_TSetTimeout(TUBE, unsigned int, unsigned int);
+  int CAM_TSend(TUBE, char *, ...);
+  int CAM_TSendMessage(TUBE, MESSAGE);
+  int CAM_TReadOpcode(TUBE, MESSAGE);
+  int CAM_TReadLength(TUBE, MESSAGE);
+  int CAM_TReadInfo(TUBE, MESSAGE);
+  int CAM_TReadData(TUBE, MESSAGE);
+  int CAM_TReceive(TUBE, MESSAGE);
+}
+
+
+
+/*****************************************************************************/
+/***************************** GLOBALS ***************************************/
+/*****************************************************************************/
+
+
+
+#endif

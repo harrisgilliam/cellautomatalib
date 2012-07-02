@@ -1,0 +1,111 @@
+#CAM8BASE:sh = dirname `pwd`
+CAM8BASE = /storage/cam8
+
+# Program to use for installing files
+INSTALL = /usr/bin/install -c
+
+# Prefered utilities
+CC = gcc
+FLEX = flex
+
+DEBUG = -g
+PROF =
+
+INCLUDES = -I. -I$(CAM8BASE)/include
+
+FFLAGS = -Cfe -B -Pc8cpp_ 
+LFLAGS = -L.
+CFLAGS = $(DEBUG) $(PROF) $(INCLUDES)
+LDFLAGS = -L/usr/local/lib
+
+DEPEND = makedepend
+#DEPENDFLAGS = $(INCLUDES) -I/usr/local/gcc-2.7.2/lib/gcc-lib/sparc-sun-sunos4.1.4/2.7.2/include
+DEPENDFLAGS = $(INCLUDES) -I/usr/lib/gcc/i686-redhat-linux/4.4.4/include
+
+SHARED = -DXSHM
+XEXT = -lXext
+
+LIBRARY = libCAM.a
+INC_DIR = $(CAM8BASE)/include/CAM
+LIB_DIR = $(CAM8BASE)/lib
+BIN_DIR = $(CAM8BASE)/bin
+
+
+XSRC =	CAM_err.xc CAM_X.xc CAM_pipecomm.xc CAM_io.xc CAM_mem.xc CAM_proc.xc \
+	CAM_TclTk.xc CAM_tube.xc \
+	CAM_objects.xc CAM_instr.xc CAM_buffers.xc CAM_step.xc CAM_util.xc \
+	CAM_init.xc CAM_dev.xc CAM_space.xc
+
+XINC =	CAM.xh CAM_err.xh CAM_X.xh CAM_pipecomm.xh CAM_io.xh CAM_mem.xh \
+	CAM_proc.xh CAM_TclTk.xh CAM_tube.xh \
+        CAM_objects.xh CAM_instr.xh CAM_buffers.xh CAM_step.xh CAM_util.xh \
+        CAM_init.xh CAM_dev.xh CAM_space.xh \
+	CAMlib.xh
+
+XLINC =	cam_err.xh cam_mem.xh cam_step.xh cam_tube.xh cam_instr.xh \
+	cam_pipecomm.xh cam_tcltk.xh cam_util.xh cam_space.xh
+
+SRC =	$(XSRC:xc=c)
+
+INC =	$(XINC:xh=h)
+
+LINC =	$(XLINC:xh=h)
+
+OBJ =	$(SRC:c=o)
+
+###########################################################################
+
+.SUFFIXES:	.xc .xh
+
+
+.xc.c:
+	c8cpp < $< > $*.c
+
+.xh.h:
+	c8cpp < $< > $*.h
+
+.c.o:
+	$(CC) $(CFLAGS) -c $<
+
+###########################################################################
+
+all: c8cpp CAMlib.h $(LIBRARY)
+
+depend: c8cpp $(SRC) $(INC) $(LINC)
+	$(DEPEND) $(DEPENDFLAGS) $(SRC)
+
+headers: $(INC) $(LINC)
+
+sources: $(SRC)
+
+$(LIBRARY): $(OBJ)
+	ar cvr $(LIBRARY) $?
+	ranlib $(LIBRARY)
+
+###########################################################################
+
+c8cpp.lexer.c: c8cpp.flex
+	$(FLEX) $(FFLAGS) -t c8cpp.flex > c8cpp.lexer.c
+
+c8cpp.lexer.o: c8cpp.lexer.c
+
+c8cpp:	c8cpp.lexer.o
+	$(CC) -o c8cpp $(CFLAGS) c8cpp.lexer.o \
+	$(LDFLAGS) -lfl
+
+install: CAMlib.h $(LIBRARY)
+	$(INSTALL) -d -m 775 $(INC_DIR)
+	$(INSTALL) -m 664 $(INC) $(INC_DIR)
+	$(INSTALL) $(LIBRARY) $(LIB_DIR)
+	$(INSTALL) c8cpp $(BIN_DIR)
+	ranlib $(LIB_DIR)/$(LIBRARY)
+
+clean::
+	/bin/rm -f *.o *.a core *~
+	/bin/rm -f c8cpp c8cpp.lexer.c
+	/bin/rm -f $(SRC)
+	/bin/rm -f $(INC)
+
+#### Automatically generated dependicies
+# DO NOT DELETE THIS LINE -- make depend depends on it.
+

@@ -1,0 +1,53 @@
+#ifndef _CAM_pipecomm_H_
+#define _CAM_pipecomm_H_
+
+#include <CAM/CAM_mem.H>
+
+
+
+/*****************************************************************************/
+/****************************** DEFINES **************************************/
+/*****************************************************************************/
+#define CAM_PIPEALL	1    /* Everything is fine, process all messages    */
+#define CAM_PIPENONE	2    /* No messages processed			    */
+#define CAM_PIPEPAUSE	4    /* No messages processed, reply on hold	    */
+#define CAM_PIPESILENT	256  /* Don't send internal error codes to forth    */
+#define CAM_PIPEVERBOSE 512  /* Send internal error codes to forth	    */
+#define CAM_PIPEHDPLX   1024 /* Half Duplex, return codes sent by user      */
+#define CAM_PIPEFDPLX   2048 /* Full Duplex, return codes sent by ParseMesg */
+
+
+
+/*****************************************************************************/
+/***************************** TYPEDEFS **************************************/
+/*****************************************************************************/
+typedef struct cmd_template {
+  unsigned char opcode[5];
+  unsigned char * (*Do)(void *, unsigned char *, unsigned char *);
+} Cmdt, *CMDT;
+
+
+
+/*****************************************************************************/
+/**************************** PROTOTYPES *************************************/
+/*****************************************************************************/
+extern "C" {
+  int CAM_ParsePipeMesg(int, int, void *);
+  int CAM_SendPipeMesg(int, unsigned char *);
+  void CAM_SetPipeCmdTable(CMDT);
+  void CAM_SetPipeMode(int);
+  int CAM_SendPipeCommand(int, unsigned char *, unsigned char *);
+  int CAM_GetPipeResponse(int, unsigned char *, unsigned char *);
+  int CAM_TwoWayPipeCmd(const char *, int, int, unsigned char *, unsigned char *,
+			unsigned char *, unsigned char *);
+}
+
+
+
+/*****************************************************************************/
+/***************************** GLOBALS ***************************************/
+/*****************************************************************************/
+
+
+
+#endif

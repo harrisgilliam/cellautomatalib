@@ -1,0 +1,148 @@
+#ifndef _CALIB_H_
+#define _CALIB_H_
+
+
+extern "C" {
+
+#include <sys/types.h>
+
+}
+
+
+
+/*****************************************************************************/
+/********************************* DEFINES ***********************************/
+/*****************************************************************************/
+#undef TRUE
+#undef FALSE
+
+#ifndef MAX
+#define MAX(a, b)	((a) > (b) ? (a) : (b))
+#endif
+
+#ifndef MIN
+#define MIN(a, b)	((a) < (b) ? (a) : (b))
+#endif
+
+#ifndef ABS
+#define ABS(a)		((a) < 0 ? -(a) : (a))
+#endif
+
+// I don't know what this really is but this number seems plenty big to me
+#define MAXVARGS	512
+
+
+
+// Declarations
+
+#define DECL_BZERO(T)				\
+  virtual void Bzero(void)
+
+#define DECL_BCOPY(T)				\
+  virtual void Bcopy(const T *)
+
+#define DECL_BCMP(T)				\
+  virtual int Bcmp(const T *) const
+
+#define DECL_COPYCONST(T)			\
+  T (const T &);					\
+									\
+  T (const T *)
+
+#define DECL_OPEQ(T)						\
+  virtual const T & operator=(const T &);	\
+											\
+  virtual const T & operator=(const T *)
+
+
+
+// Inlines
+
+#define INLINE_BZERO(T)						\
+  inline virtual void Bzero(void)			\
+  {											\
+    memset((void *) this, 0, sizeof(T));	\
+  }
+
+#define INLINE_BCOPY(T)										\
+  inline virtual void Bcopy(const T * cr)					\
+  {															\
+    memcpy((void *) this, (const void *) cr, sizeof(T));	\
+  }
+
+#define INLINE_BCMP(T)												\
+  inline virtual int Bcmp(const T * cr) const						\
+  {																	\
+    return(memcmp((void *)this, (const void *) cr, sizeof(T)));		\
+  }
+
+#define INLINE_COPYCONST(T)					\
+  inline T (const T & cr) { Bcopy(&cr); }	\
+											\
+  inline T (const T * cr) { Bcopy(cr); }
+
+#define INLINE_OPEQ(T)								\
+  inline virtual const T & operator=(const T & cr)	\
+  {													\
+    Bcopy(&cr);										\
+    return(cr);										\
+  }													\
+													\
+  inline virtual const T & operator=(const T * cr)	\
+  {													\
+    Bcopy(cr);										\
+    return(*cr);									\
+  }
+
+
+
+// Definitions
+
+#define STD_BZERO(T)						\
+void T :: Bzero(void)						\
+{											\
+  memset((void *) this, 0, sizeof(T));		\
+}
+
+#define STD_BCOPY(T)						\
+void T :: Bcopy(const T * cr)				\
+{											\
+  memcpy((void *) this, (const void *) cr,	\
+	 sizeof(T));							\
+}
+
+#define STD_BCMP(T)									\
+int T :: Bcmp(const T * cr) const					\
+{													\
+  return(memcmp((void *)this, (const void *) cr,	\
+                sizeof(T)));						\
+}
+
+/*****************************************************************************/
+/******************************** TEMPLATES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/*************************** CLASSES & TYPEDEFS ******************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/********************************* INLINES ***********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/******************************* PROTOTYPES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/********************************* GLOBALS ***********************************/
+/*****************************************************************************/
+extern const int TRUE;
+extern const int FALSE;
+
+
+#endif

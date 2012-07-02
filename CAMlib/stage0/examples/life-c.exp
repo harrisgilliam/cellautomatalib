@@ -1,0 +1,52 @@
+new-experiment 512 by 512 space
+
+sh cp /cam8/bin/f.base /cam8/bin/f.out .
+
+: clink  ( object-file-name -- )
+   base-syms            ( object-file  base-file )
+   0 link-string c!
+   %" /bin/ld -N -A "       %s		   \ Incremental loading on base-file
+   %"  -T "              cload-base @ %x   \ Start loading at cload-base
+   %"  -o f.out -L. -L"  base-directory %s \ base dir for cam8lib.a
+   %" /lib " %s %"  -lCAM -ldld -lm -lc "	   \ object file name
+   link-string "shell
+  
+   [""] f.out cload
+;
+
+"" life-c.o clink
+
+7 7 == center
+8 8 == east
+9 9 == west
+10 10 == north
+11 11 == south
+12 12 == neast
+13 13 == nwest
+14 14 == seast
+15 15 == swest
+
+
+: init-pat
+	"" /cam8/demos/chip.map file>palette
+	"" /im/magnus/proj/bit/newchip.pat file>cam xvds
+; press I "Initialize Pattern"
+
+: propagate
+	_proplut @ _sendlut drop
+	_clearkick _run_scan
+;
+
+: init-state
+	propagate
+	_lifelut @ _sendlut drop
+;				this is when-starting
+
+: life
+	_lifekick
+	_run_scan
+;				this is update-step
+
+camfd _einit drop
+
+init-pat

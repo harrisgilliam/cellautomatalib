@@ -1,0 +1,556 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Unicode</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="symbol">class Unicode</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> Text<br />
+<b>Header:</b> Poco/Unicode.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>This class contains enumerations and static utility functions for dealing with <a href="Poco.Unicode.html" title="class Poco::Unicode">Unicode</a> characters and their properties. </p>
+<p>For more information on <a href="Poco.Unicode.html" title="class Poco::Unicode">Unicode</a>, see &lt;<a href="http://www.unicode.org" target="_blank">http://www.unicode.org</a>&gt;. </p>
+<p>The implementation is based on the <a href="Poco.Unicode.html" title="class Poco::Unicode">Unicode</a> support functions in PCRE. </p>
+</div>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Unicode.html#12168" title="Poco::Unicode::isAlpha()">isAlpha</a>, <a href="Poco.Unicode.html#12164" title="Poco::Unicode::isDigit()">isDigit</a>, <a href="Poco.Unicode.html#12170" title="Poco::Unicode::isLower()">isLower</a>, <a href="Poco.Unicode.html#12166" title="Poco::Unicode::isPunct()">isPunct</a>, <a href="Poco.Unicode.html#12162" title="Poco::Unicode::isSpace()">isSpace</a>, <a href="Poco.Unicode.html#12172" title="Poco::Unicode::isUpper()">isUpper</a>, <a href="Poco.Unicode.html#12159" title="Poco::Unicode::properties()">properties</a>, <a href="Poco.Unicode.html#12174" title="Poco::Unicode::toLower()">toLower</a>, <a href="Poco.Unicode.html#12176" title="Poco::Unicode::toUpper()">toUpper</a></p>
+<h2>Nested Classes</h2>
+<h3><a href="Poco.Unicode.CharacterProperties.html" class="class">struct CharacterProperties</a></h3>
+<p> This structure holds the character properties
+ of an <a href="Poco.Unicode.html" title="class Poco::Unicode">Unicode</a> character.&nbsp;<a href="Poco.Unicode.CharacterProperties.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h2>Enumerations</h2>
+<h3><a name="12038">CharacterCategory</a></h3>
+<div class="description">
+<p><a href="Poco.Unicode.html" title="class Poco::Unicode">Unicode</a> 5.0 character categories. </p>
+</div>
+<p class="decl"><a name="12039">UCP_OTHER</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12040">UCP_LETTER</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12041">UCP_MARK</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12042">UCP_NUMBER</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12043">UCP_PUNCTUATION</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12044">UCP_SYMBOL</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12045">UCP_SEPARATOR</a></p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="12046">CharacterType</a></h3>
+<div class="description">
+<p><a href="Poco.Unicode.html" title="class Poco::Unicode">Unicode</a> 5.0 character types. </p>
+</div>
+<p class="decl"><a name="12047">UCP_CONTROL</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12048">UCP_FORMAT</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12049">UCP_UNASSIGNED</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12050">UCP_PRIVATE_USE</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12051">UCP_SURROGATE</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12052">UCP_LOWER_CASE_LETTER</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12053">UCP_MODIFIER_LETTER</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12054">UCP_OTHER_LETTER</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12055">UCP_TITLE_CASE_LETTER</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12056">UCP_UPPER_CASE_LETTER</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12057">UCP_SPACING_MARK</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12058">UCP_ENCLOSING_MARK</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12059">UCP_NON_SPACING_MARK</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12060">UCP_DECIMAL_NUMBER</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12061">UCP_LETTER_NUMBER</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12062">UCP_OTHER_NUMBER</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12063">UCP_CONNECTOR_PUNCTUATION</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12064">UCP_DASH_PUNCTUATION</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12065">UCP_CLOSE_PUNCTUATION</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12066">UCP_FINAL_PUNCTUATION</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12067">UCP_INITIAL_PUNCTUATION</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12068">UCP_OTHER_PUNCTUATION</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12069">UCP_OPEN_PUNCTUATION</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12070">UCP_CURRENCY_SYMBOL</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12071">UCP_MODIFIER_SYMBOL</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12072">UCP_MATHEMATICAL_SYMBOL</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12073">UCP_OTHER_SYMBOL</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12074">UCP_LINE_SEPARATOR</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12075">UCP_PARAGRAPH_SEPARATOR</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12076">UCP_SPACE_SEPARATOR</a></p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="12077">Script</a></h3>
+<div class="description">
+<p><a href="Poco.Unicode.html" title="class Poco::Unicode">Unicode</a> 5.0 scripts. </p>
+</div>
+<p class="decl"><a name="12078">UCP_ARABIC</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12079">UCP_ARMENIAN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12080">UCP_BENGALI</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12081">UCP_BOPOMOFO</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12082">UCP_BRAILLE</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12083">UCP_BUGINESE</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12084">UCP_BUHID</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12085">UCP_CANADIAN_ABORIGINAL</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12086">UCP_CHEROKEE</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12087">UCP_COMMON</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12088">UCP_COPTIC</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12089">UCP_CYPRIOT</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12090">UCP_CYRILLIC</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12091">UCP_DESERET</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12092">UCP_DEVANAGARI</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12093">UCP_ETHIOPIC</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12094">UCP_GEORGIAN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12095">UCP_GLAGOLITIC</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12096">UCP_GOTHIC</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12097">UCP_GREEK</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12098">UCP_GUJARATI</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12099">UCP_GURMUKHI</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12100">UCP_HAN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12101">UCP_HANGUL</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12102">UCP_HANUNOO</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12103">UCP_HEBREW</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12104">UCP_HIRAGANA</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12105">UCP_INHERITED</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12106">UCP_KANNADA</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12107">UCP_KATAKANA</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12108">UCP_KHAROSHTHI</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12109">UCP_KHMER</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12110">UCP_LAO</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12111">UCP_LATIN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12112">UCP_LIMBU</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12113">UCP_LINEAR_B</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12114">UCP_MALAYALAM</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12115">UCP_MONGOLIAN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12116">UCP_MYANMAR</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12117">UCP_NEW_TAI_LUE</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12118">UCP_OGHAM</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12119">UCP_OLD_ITALIC</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12120">UCP_OLD_PERSIAN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12121">UCP_ORIYA</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12122">UCP_OSMANYA</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12123">UCP_RUNIC</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12124">UCP_SHAVIAN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12125">UCP_SINHALA</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12126">UCP_SYLOTI_NAGRI</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12127">UCP_SYRIAC</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12128">UCP_TAGALOG</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12129">UCP_TAGBANWA</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12130">UCP_TAI_LE</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12131">UCP_TAMIL</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12132">UCP_TELUGU</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12133">UCP_THAANA</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12134">UCP_THAI</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12135">UCP_TIBETAN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12136">UCP_TIFINAGH</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12137">UCP_UGARITIC</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12138">UCP_YI</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12139">UCP_BALINESE</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12140">UCP_CUNEIFORM</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12141">UCP_NKO</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12142">UCP_PHAGS_PA</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12143">UCP_PHOENICIAN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12144">UCP_CARIAN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12145">UCP_CHAM</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12146">UCP_KAYAH_LI</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12147">UCP_LEPCHA</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12148">UCP_LYCIAN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12149">UCP_LYDIAN</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12150">UCP_OL_CHIKI</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12151">UCP_REJANG</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12152">UCP_SAURASHTRA</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12153">UCP_SUNDANESE</a></p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="12154">UCP_VAI</a></p>
+<div class="description">
+<p></p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="12168">isAlpha</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static bool isAlpha(<br />&nbsp;&nbsp;&nbsp;&nbsp;int ch<br />);</p>
+<div class="description">
+<p>Returns true if and only if the given character is a letter.	 </p>
+</div>
+<h3><a name="12164">isDigit</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static bool isDigit(<br />&nbsp;&nbsp;&nbsp;&nbsp;int ch<br />);</p>
+<div class="description">
+<p>Returns true if and only if the given character is a numeric character. </p>
+</div>
+<h3><a name="12170">isLower</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static bool isLower(<br />&nbsp;&nbsp;&nbsp;&nbsp;int ch<br />);</p>
+<div class="description">
+<p>Returns true if and only if the given character is a lowercase character. </p>
+</div>
+<h3><a name="12166">isPunct</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static bool isPunct(<br />&nbsp;&nbsp;&nbsp;&nbsp;int ch<br />);</p>
+<div class="description">
+<p>Returns true if and only if the given character is a punctuation character. </p>
+</div>
+<h3><a name="12162">isSpace</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static bool isSpace(<br />&nbsp;&nbsp;&nbsp;&nbsp;int ch<br />);</p>
+<div class="description">
+<p>Returns true if and only if the given character is a separator. </p>
+</div>
+<h3><a name="12172">isUpper</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static bool isUpper(<br />&nbsp;&nbsp;&nbsp;&nbsp;int ch<br />);</p>
+<div class="description">
+<p>Returns true if and only if the given character is an uppercase character. </p>
+</div>
+<h3><a name="12159">properties</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static void properties(<br />&nbsp;&nbsp;&nbsp;&nbsp;int ch,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Unicode.CharacterProperties.html" title="struct Poco::Unicode::CharacterProperties">CharacterProperties</a> &amp; props<br />);</p>
+<div class="description">
+<p>Return the <a href="Poco.Unicode.html" title="class Poco::Unicode">Unicode</a> character properties for the character with the given <a href="Poco.Unicode.html" title="class Poco::Unicode">Unicode</a> value. </p>
+</div>
+<h3><a name="12174">toLower</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static int toLower(<br />&nbsp;&nbsp;&nbsp;&nbsp;int ch<br />);</p>
+<div class="description">
+<p>If the given character is an uppercase character, return its lowercase counterpart, otherwise return the character. </p>
+</div>
+<h3><a name="12176">toUpper</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static int toUpper(<br />&nbsp;&nbsp;&nbsp;&nbsp;int ch<br />);</p>
+<div class="description">
+<p>If the given character is a lowercase character, return its uppercase counterpart, otherwise return the character. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

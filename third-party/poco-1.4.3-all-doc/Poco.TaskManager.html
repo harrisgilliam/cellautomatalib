@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::TaskManager</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="symbol">class TaskManager</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> Tasks<br />
+<b>Header:</b> Poco/TaskManager.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>The <a href="Poco.TaskManager.html" title="class Poco::TaskManager">TaskManager</a> manages a collection of tasks and monitors their lifetime. </p>
+<p>A <a href="Poco.TaskManager.html" title="class Poco::TaskManager">TaskManager</a> has a built-in <a href="Poco.NotificationCenter.html" title="class Poco::NotificationCenter">NotificationCenter</a> that is used to send out notifications on task progress and task states. See the <a href="Poco.TaskNotification.html" title="class Poco::TaskNotification">TaskNotification</a> class and its subclasses for the various events that result in a notification. To keep the number of notifications small, a <a href="Poco.TaskProgressNotification.html" title="class Poco::TaskProgressNotification">TaskProgressNotification</a> will only be sent out once in 100 milliseconds. </p>
+</div>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.TaskManager.html#10790" title="Poco::TaskManager::addObserver()">addObserver</a>, <a href="Poco.TaskManager.html#10786" title="Poco::TaskManager::cancelAll()">cancelAll</a>, <a href="Poco.TaskManager.html#10789" title="Poco::TaskManager::count()">count</a>, <a href="Poco.TaskManager.html#10787" title="Poco::TaskManager::joinAll()">joinAll</a>, <a href="Poco.TaskManager.html#10795" title="Poco::TaskManager::postNotification()">postNotification</a>, <a href="Poco.TaskManager.html#10792" title="Poco::TaskManager::removeObserver()">removeObserver</a>, <a href="Poco.TaskManager.html#10784" title="Poco::TaskManager::start()">start</a>, <a href="Poco.TaskManager.html#10802" title="Poco::TaskManager::taskCancelled()">taskCancelled</a>, <a href="Poco.TaskManager.html#10806" title="Poco::TaskManager::taskFailed()">taskFailed</a>, <a href="Poco.TaskManager.html#10804" title="Poco::TaskManager::taskFinished()">taskFinished</a>, <a href="Poco.TaskManager.html#10788" title="Poco::TaskManager::taskList()">taskList</a>, <a href="Poco.TaskManager.html#10799" title="Poco::TaskManager::taskProgress()">taskProgress</a>, <a href="Poco.TaskManager.html#10797" title="Poco::TaskManager::taskStarted()">taskStarted</a></p>
+<h2>Types</h2>
+<h3><a name="10779">TaskList</a></h3>
+<p class="decl">typedef std::list &lt; <a href="Poco.TaskManager.html#10778" title="Poco::TaskManager::TaskPtr">TaskPtr</a> &gt; <a href="Poco.TaskManager.html#10779" title="Poco::TaskManager::TaskList">TaskList</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="10778">TaskPtr</a></h3>
+<p class="decl">typedef <a href="Poco.AutoPtr.html" title="class Poco::AutoPtr">AutoPtr</a> &lt; <a href="Poco.Task.html" title="class Poco::Task">Task</a> &gt; <a href="Poco.TaskManager.html#10778" title="Poco::TaskManager::TaskPtr">TaskPtr</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Constructors</h2>
+<h3><a name="10780">TaskManager</a></h3>
+<p class="decl"><a href="Poco.TaskManager.html" title="class Poco::TaskManager">TaskManager</a>();</p>
+<div class="description">
+<p>Creates the <a href="Poco.TaskManager.html" title="class Poco::TaskManager">TaskManager</a>, using the default <a href="Poco.ThreadPool.html" title="class Poco::ThreadPool">ThreadPool</a>. </p>
+</div>
+<h3><a name="10781">TaskManager</a></h3>
+<p class="decl"><a href="Poco.TaskManager.html" title="class Poco::TaskManager">TaskManager</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.ThreadPool.html" title="class Poco::ThreadPool">ThreadPool</a> &amp; pool<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.TaskManager.html" title="class Poco::TaskManager">TaskManager</a>, using the given <a href="Poco.ThreadPool.html" title="class Poco::ThreadPool">ThreadPool</a>. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="10783">~TaskManager</a></h3>
+<p class="decl">~<a href="Poco.TaskManager.html" title="class Poco::TaskManager">TaskManager</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.TaskManager.html" title="class Poco::TaskManager">TaskManager</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="10790">addObserver</a></h3>
+<p class="decl">void addObserver(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.AbstractObserver.html" title="class Poco::AbstractObserver">AbstractObserver</a> &amp; observer<br />);</p>
+<div class="description">
+<p>Registers an observer with the <a href="Poco.NotificationCenter.html" title="class Poco::NotificationCenter">NotificationCenter</a>. Usage: </p>
+<pre>Observer&lt;MyClass, MyNotification&gt; obs(*this, &amp;MyClass::handleNotification);
+notificationCenter.addObserver(obs);
+</pre>
+</div>
+<h3><a name="10786">cancelAll</a></h3>
+<p class="decl">void cancelAll();</p>
+<div class="description">
+<p>Requests cancellation of all tasks. </p>
+</div>
+<h3><a name="10789">count</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">int count() const;</p>
+<div class="description">
+<p>Returns the number of tasks in the internal task list. </p>
+</div>
+<h3><a name="10787">joinAll</a></h3>
+<p class="decl">void joinAll();</p>
+<div class="description">
+<p>Waits for the completion of all the threads in the <a href="Poco.TaskManager.html" title="class Poco::TaskManager">TaskManager</a>'s thread pool. </p>
+<p>Note: <a href="Poco.TaskManager.html#10787" title="Poco::TaskManager::joinAll()">joinAll</a>() will wait for ALL tasks in the <a href="Poco.TaskManager.html" title="class Poco::TaskManager">TaskManager</a>'s <a href="Poco.ThreadPool.html" title="class Poco::ThreadPool">ThreadPool</a> to complete. If the <a href="Poco.ThreadPool.html" title="class Poco::ThreadPool">ThreadPool</a> has threads created by other facilities, these threads must also complete before <a href="Poco.TaskManager.html#10787" title="Poco::TaskManager::joinAll()">joinAll</a>() can return. </p>
+</div>
+<h3><a name="10792">removeObserver</a></h3>
+<p class="decl">void removeObserver(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.AbstractObserver.html" title="class Poco::AbstractObserver">AbstractObserver</a> &amp; observer<br />);</p>
+<div class="description">
+<p>Unregisters an observer with the <a href="Poco.NotificationCenter.html" title="class Poco::NotificationCenter">NotificationCenter</a>. </p>
+</div>
+<h3><a name="10784">start</a></h3>
+<p class="decl">void start(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Task.html" title="class Poco::Task">Task</a> * pTask<br />);</p>
+<div class="description">
+<p>Starts the given task in a thread obtained from the thread pool. </p>
+<p>The <a href="Poco.TaskManager.html" title="class Poco::TaskManager">TaskManager</a> takes ownership of the <a href="Poco.Task.html" title="class Poco::Task">Task</a> object and deletes it when it it finished. </p>
+</div>
+<h3><a name="10788">taskList</a></h3>
+<p class="decl"><a href="Poco.TaskManager.html#10779" title="Poco::TaskManager::TaskList">TaskList</a> taskList() const;</p>
+<div class="description">
+<p>Returns a copy of the internal task list. </p>
+</div>
+<h3><a name="10795">postNotification</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void postNotification(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Notification.html" title="class Poco::Notification">Notification</a> * pNf<br />);</p>
+<div class="description">
+<p>Posts a notification to the task manager's  notification center. </p>
+</div>
+<h3><a name="10802">taskCancelled</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void taskCancelled(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Task.html" title="class Poco::Task">Task</a> * pTask<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="10806">taskFailed</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void taskFailed(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Task.html" title="class Poco::Task">Task</a> * pTask,<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Exception.html" title="class Poco::Exception">Exception</a> &amp; exc<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="10804">taskFinished</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void taskFinished(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Task.html" title="class Poco::Task">Task</a> * pTask<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="10799">taskProgress</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void taskProgress(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Task.html" title="class Poco::Task">Task</a> * pTask,<br />&nbsp;&nbsp;&nbsp;&nbsp;float progress<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="10797">taskStarted</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void taskStarted(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Task.html" title="class Poco::Task">Task</a> * pTask<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Variables</h2>
+<h3><a name="10794">MIN_PROGRESS_NOTIFICATION_INTERVAL</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const int <a href="Poco.TaskManager.html#10794" title="Poco::TaskManager::MIN_PROGRESS_NOTIFICATION_INTERVAL">MIN_PROGRESS_NOTIFICATION_INTERVAL</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

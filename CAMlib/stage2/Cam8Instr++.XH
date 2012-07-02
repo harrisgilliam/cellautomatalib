@@ -1,0 +1,1000 @@
+#ifndef _CAM8INSTR_H_
+#define _CAM8INSTR_H_
+
+#include <Cam8Lib++.H>
+
+
+extern "C" {
+#include <sys/types.h>
+}
+
+using namespace std;
+
+
+/*****************************************************************************/
+/********************************* DEFINES ***********************************/
+/*****************************************************************************/
+#define INLINE_BUF	(-100)
+
+#define FLD_FUNC_DECL(cls, func)								\
+inline cls * func(u_int32_t);									\
+inline cls * func(u_int32_t []);								\
+inline cls * func(regfldvals &);								\
+inline regfldvals func(void)
+
+
+
+#define FLD_FUNC_IMPL(cls, func, fld)							\
+																\
+inline cls * cls::func(u_int32_t v)								\
+{																\
+	TENTER("inline cls * cls::func(u_int32_t v)");				\
+	wr_fld(0xFFFF, true, fld, (u_int32_t *) v);					\
+	TLEAVE();													\
+	return this;												\
+}																\
+																\
+inline cls * cls::func(u_int32_t v[])							\
+{																\
+	TENTER("inline cls * cls::func(u_int32_t v[])");			\
+	wr_fld(0xFFFF, true, fld, v);								\
+	TLEAVE();													\
+	return this;												\
+}																\
+																\
+inline cls * cls::func(regfldvals & rfv)						\
+{																\
+	TENTER("inline cls * cls::func(regfldvals & rfv)");			\
+	wr_fld(0xFFFF, true, fld, rfv);								\
+	TLEAVE();													\
+	return this;												\
+}																\
+																\
+inline regfldvals cls::func(void)								\
+{																\
+	regfldvals rfv;												\
+	TENTER("inline regfldvals cls::func(void)");				\
+	rd_fld(fld, rfv);											\
+	TLEAVE();													\
+	return rfv;													\
+}
+
+
+
+
+
+/*****************************************************************************/
+/******************************** TEMPLATES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/*************************** CLASSES & TYPEDEFS ******************************/
+/*****************************************************************************/
+// This is a C++ class version of the sl_element structure.  We make
+// sure not to define any virtual methods so that its size will be
+// exactly the same as the C sl_element structure that it mimics.
+// This version declares things "as they are" which means we don't
+// declare every field member u_int.
+
+class Cam8Instr {
+public:
+	u_int32_t opcode;
+	caddr_t adr_data;
+	u_int32_t xfer_length;
+	Cam8Instr * next_ptr;
+
+	void assemble(microcode & mc, int multiple);
+
+	inline void Opcode(u_int32_t);
+	inline u_int32_t Opcode(void);
+	inline void Flags(u_int32_t);
+	inline u_int32_t Flags(void);
+	inline void AdrData(caddr_t);
+	inline caddr_t AdrData(void);
+	inline void XferLength(u_int32_t);
+	inline u_int32_t XferLength(void);
+	inline void NextPtr(Cam8Instr *);
+	inline Cam8Instr * NextPtr(void);
+
+	inline bool ReadMode(void);
+	inline void ReadMode(bool);
+	inline bool ImmedMode(void);
+	inline void ImmedMode(bool);
+	inline bool ByteMode(void);
+	inline void ByteMode(bool);
+	inline bool HostAlert(void);
+	inline void HostAlert(bool);
+	inline bool HostWait(void);
+	inline void HostWait(bool);
+	inline bool HostJump(void);
+	inline void HostJump(bool);
+	inline bool CamWait(void);
+	inline void CamWait(bool);
+	inline bool CamReset(void);
+	inline void CamReset(bool);
+
+	inline void operator()(u_int32_t);
+	inline void operator()(u_int32_t, ...);
+	inline void operator()(regfldvals &);
+	inline regfldvals operator()(void);
+
+	inline void wr_reg(u_int32_t layer_mask, bool single_arg, u_int32_t * v);
+	inline void wr_reg(u_int32_t layer_mask, bool single_arg, regfldvals & rfv);
+	inline void wr_fld(u_int32_t layer_mask, bool single_arg, int fldn, u_int32_t * v);
+	inline void wr_fld(u_int32_t layer_mask, bool single_arg, int fldn, regfldvals & rfv);
+	inline void rd_reg(u_int32_t * v);
+	inline void rd_reg(regfldvals & rfv);
+	inline void rd_fld(u_int32_t fldn, u_int32_t * v);
+	inline void rd_fld(u_int32_t fldn, regfldvals & rfv);
+	inline void reg_store(u_int32_t layer_mask, bool single_arg, ...);
+	inline void vreg_store(u_int32_t layer_mask, bool single_arg, va_list args);
+	inline void reg_store_bitmask(u_int32_t layer_mask, u_int32_t val);
+	inline void fld_store(u_int32_t layer_mask, u_int32_t fld, bool single_arg, ...);
+	inline void vfld_store(u_int32_t layer_mask, u_int32_t fld, bool single_arg, va_list args);
+	inline void fld_store_bitmask(u_int32_t layer_mask, u_int32_t fld, u_int32_t val);
+};
+typedef Cam8Instr *CAM8INSTR;
+
+
+class SelectInstr : public Cam8Instr {
+};
+typedef SelectInstr *SELECTINSTR;
+
+
+class RunInstr : public Cam8Instr {
+public:
+	FLD_FUNC_DECL(RunInstr, ssm);
+	FLD_FUNC_DECL(RunInstr, rt);
+	FLD_FUNC_DECL(RunInstr, ect);
+	FLD_FUNC_DECL(RunInstr, rpk);
+	FLD_FUNC_DECL(RunInstr, alt);
+};
+typedef RunInstr *RUNINSTR;
+
+
+class KickInstr : public Cam8Instr {
+public:
+	FLD_FUNC_DECL(KickInstr, ka);
+	FLD_FUNC_DECL(KickInstr, xks);
+	FLD_FUNC_DECL(KickInstr, yks);
+	FLD_FUNC_DECL(KickInstr, zks);
+	FLD_FUNC_DECL(KickInstr, xkmf);
+	FLD_FUNC_DECL(KickInstr, ykmf);
+	FLD_FUNC_DECL(KickInstr, zkmf);
+};
+typedef KickInstr *KICKINSTR;
+
+
+class SaBitInstr : public Cam8Instr {
+};
+typedef SaBitInstr *SABITINSTR;
+
+
+class LutSrcInstr : public Cam8Instr {
+public:
+	FLD_FUNC_DECL(LutSrcInstr, las);
+	FLD_FUNC_DECL(LutSrcInstr, lam);
+};
+typedef LutSrcInstr *LUTSRCINSTR;
+
+
+class FlySrcInstr : public Cam8Instr {
+public:
+	FLD_FUNC_DECL(FlySrcInstr, fos);
+	FLD_FUNC_DECL(FlySrcInstr, fom);
+};
+typedef FlySrcInstr *FLYSRCINSTR;
+
+
+class SiteSrcInstr : public Cam8Instr {
+public:
+	FLD_FUNC_DECL(SiteSrcInstr, sds);
+	FLD_FUNC_DECL(SiteSrcInstr, sdm);
+};
+typedef SiteSrcInstr *SITESRCINSTR;
+
+
+class EventSrcInstr : public Cam8Instr {
+public:
+	FLD_FUNC_DECL(EventSrcInstr, ecs);
+	FLD_FUNC_DECL(EventSrcInstr, ecm);
+};
+typedef EventSrcInstr *EVENTSRCINSTR;
+
+
+class DisplayInstr : public Cam8Instr {
+public:
+	FLD_FUNC_DECL(DisplayInstr, dds);
+	FLD_FUNC_DECL(DisplayInstr, ddm);
+};
+typedef DisplayInstr *DISPLAYINSTR;
+
+
+class ShowScanInstr : public Cam8Instr {
+};
+typedef ShowScanInstr *SHOWSCANINSTR;
+
+
+class EventInstr : public Cam8Instr {
+};
+typedef EventInstr *EVENTINSTR;
+
+
+class LutIndexInstr : public Cam8Instr {
+};
+typedef LutIndexInstr *LUTINDEXINSTR;
+
+
+class LutPermInstr : public Cam8Instr {
+};
+typedef LutPermInstr *LUTPERMINSTR;
+
+
+class LutIoInstr : public Cam8Instr {
+};
+typedef LutIoInstr *LUTIOINSTR;
+
+
+class ScanIndexInstr : public Cam8Instr {
+};
+typedef ScanIndexInstr *SCANINDEXINSTR;
+
+
+class ScanPermInstr : public Cam8Instr {
+public:
+	FLD_FUNC_DECL(ScanPermInstr, ssa0);
+	FLD_FUNC_DECL(ScanPermInstr, ssa1);
+	FLD_FUNC_DECL(ScanPermInstr, ssa2);
+	FLD_FUNC_DECL(ScanPermInstr, ssa3);
+	FLD_FUNC_DECL(ScanPermInstr, ssa4);
+	FLD_FUNC_DECL(ScanPermInstr, ssa5);
+	FLD_FUNC_DECL(ScanPermInstr, ssa6);
+	FLD_FUNC_DECL(ScanPermInstr, ssa7);
+	FLD_FUNC_DECL(ScanPermInstr, ssa8);
+	FLD_FUNC_DECL(ScanPermInstr, ssa9);
+	FLD_FUNC_DECL(ScanPermInstr, ssa10);
+	FLD_FUNC_DECL(ScanPermInstr, ssa11);
+	FLD_FUNC_DECL(ScanPermInstr, ssa12);
+	FLD_FUNC_DECL(ScanPermInstr, ssa13);
+	FLD_FUNC_DECL(ScanPermInstr, ssa14);
+	FLD_FUNC_DECL(ScanPermInstr, ssa15);
+	FLD_FUNC_DECL(ScanPermInstr, ssa16);
+	FLD_FUNC_DECL(ScanPermInstr, ssa17);
+	FLD_FUNC_DECL(ScanPermInstr, ssa18);
+	FLD_FUNC_DECL(ScanPermInstr, ssa19);
+	FLD_FUNC_DECL(ScanPermInstr, ssa20);
+	FLD_FUNC_DECL(ScanPermInstr, ssa21);
+	FLD_FUNC_DECL(ScanPermInstr, ssa22);
+	FLD_FUNC_DECL(ScanPermInstr, ssa23);
+
+	inline ScanPermInstr * ssan(u_int32_t, u_int32_t);
+	inline ScanPermInstr * ssan(u_int32_t, u_int32_t []);
+	inline ScanPermInstr * ssan(u_int32_t, regfldvals &);
+	inline regfldvals ssan(u_int32_t);
+};
+typedef ScanPermInstr *SCANPERMINSTR;
+
+
+class ScanIoInstr : public Cam8Instr {
+};
+typedef ScanIoInstr *SCANIOINSTR;
+
+
+class ScanFormatInstr : public Cam8Instr {
+public:
+	FLD_FUNC_DECL(ScanFormatInstr, sm);
+	FLD_FUNC_DECL(ScanFormatInstr, esc);
+	FLD_FUNC_DECL(ScanFormatInstr, esw);
+	FLD_FUNC_DECL(ScanFormatInstr, est);
+	FLD_FUNC_DECL(ScanFormatInstr, sbrc);
+	FLD_FUNC_DECL(ScanFormatInstr, rcl);
+	FLD_FUNC_DECL(ScanFormatInstr, ecl);
+	FLD_FUNC_DECL(ScanFormatInstr, stm);
+};
+typedef ScanFormatInstr *SCANFORMATINSTR;
+
+
+class OffsetInstr : public Cam8Instr {
+};
+typedef OffsetInstr *OFFSETINSTR;
+
+
+class DimensionInstr : public Cam8Instr {
+public:
+	FLD_FUNC_DECL(DimensionInstr, dcm);
+	FLD_FUNC_DECL(DimensionInstr, xdcp);
+	FLD_FUNC_DECL(DimensionInstr, ydcp);
+	FLD_FUNC_DECL(DimensionInstr, zdcp);
+};
+typedef DimensionInstr *DIMENSIONINSTR;
+
+
+class EnvironmentInstr : public Cam8Instr {
+public:
+	FLD_FUNC_DECL(EnvironmentInstr, lpl);
+	FLD_FUNC_DECL(EnvironmentInstr, fpl);
+	FLD_FUNC_DECL(EnvironmentInstr, dcs);
+	FLD_FUNC_DECL(EnvironmentInstr, tbd);
+	FLD_FUNC_DECL(EnvironmentInstr, tms);
+	FLD_FUNC_DECL(EnvironmentInstr, nbf);
+	FLD_FUNC_DECL(EnvironmentInstr, sre);
+	FLD_FUNC_DECL(EnvironmentInstr, als);
+};
+typedef EnvironmentInstr *ENVIRONMENTINSTR;
+
+
+class MultiInstr : public Cam8Instr {
+public:
+	FLD_FUNC_DECL(MultiInstr, mafs);
+	FLD_FUNC_DECL(MultiInstr, mbfs);
+};
+typedef MultiInstr *MULTIINSTR;
+
+
+class ConnectInstr : public Cam8Instr {
+public:
+	FLD_FUNC_DECL(ConnectInstr, xmpc);
+	FLD_FUNC_DECL(ConnectInstr, xppc);
+	FLD_FUNC_DECL(ConnectInstr, ympc);
+	FLD_FUNC_DECL(ConnectInstr, yppc);
+	FLD_FUNC_DECL(ConnectInstr, zmpc);
+	FLD_FUNC_DECL(ConnectInstr, zppc);
+};
+typedef ConnectInstr *CONNECTINSTR;
+
+
+class ModuleIdInstr : public Cam8Instr {
+};
+typedef ModuleIdInstr *MODULEIDINSTR;
+
+
+class GroupIdInstr : public Cam8Instr {
+};
+typedef GroupIdInstr *GROUPIDINSTR;
+
+
+class IntEnableInstr : public Cam8Instr {
+public:
+	FLD_FUNC_DECL(IntEnableInstr, bpie);
+	FLD_FUNC_DECL(IntEnableInstr, bcie);
+	FLD_FUNC_DECL(IntEnableInstr, gcie);
+	FLD_FUNC_DECL(IntEnableInstr, maie);
+	FLD_FUNC_DECL(IntEnableInstr, mbie);
+	FLD_FUNC_DECL(IntEnableInstr, ssie);
+	FLD_FUNC_DECL(IntEnableInstr, xhie);
+	FLD_FUNC_DECL(IntEnableInstr, rlie);
+	FLD_FUNC_DECL(IntEnableInstr, urie);
+	FLD_FUNC_DECL(IntEnableInstr, isie);
+};
+typedef IntEnableInstr *INTENABLEINSTR;
+
+
+class IntFlagsInstr : public Cam8Instr {
+public:
+	FLD_FUNC_DECL(IntFlagsInstr, bpif);
+	FLD_FUNC_DECL(IntFlagsInstr, bcif);
+	FLD_FUNC_DECL(IntFlagsInstr, gcif);
+	FLD_FUNC_DECL(IntFlagsInstr, maif);
+	FLD_FUNC_DECL(IntFlagsInstr, mbif);
+	FLD_FUNC_DECL(IntFlagsInstr, ssif);
+	FLD_FUNC_DECL(IntFlagsInstr, xhif);
+	FLD_FUNC_DECL(IntFlagsInstr, rlif);
+	FLD_FUNC_DECL(IntFlagsInstr, urif);
+	FLD_FUNC_DECL(IntFlagsInstr, isif);
+};
+typedef IntFlagsInstr *INTFLAGSINSTR;
+
+
+class VerifyInstr : public Cam8Instr {
+public:
+	FLD_FUNC_DECL(VerifyInstr, vwe);
+	FLD_FUNC_DECL(VerifyInstr, vwie);
+	FLD_FUNC_DECL(VerifyInstr, vwif);
+};
+typedef VerifyInstr *VERIFYINSTR;
+
+
+class DramCountInstr : public Cam8Instr {
+public:
+	FLD_FUNC_DECL(DramCountInstr, ldoc);
+	FLD_FUNC_DECL(DramCountInstr, hdoc);
+};
+typedef DramCountInstr *DRAMCOUNTINSTR;
+
+
+
+
+/*****************************************************************************/
+/********************************* INLINES ***********************************/
+/*****************************************************************************/
+
+inline void Cam8Instr::Opcode(u_int32_t o)
+{
+	opcode = (opcode & ~OPCODE_MASK) | (RFINDEX(o) & OPCODE_MASK);
+}
+
+inline u_int32_t Cam8Instr::Opcode(void)
+{
+	return opcode & OPCODE_MASK;
+}
+
+inline void Cam8Instr::Flags(u_int32_t f)
+{
+	opcode = (opcode & ~FLAGS_MASK) | f;
+}
+
+inline u_int32_t Cam8Instr::Flags(void)
+{
+	return opcode & FLAGS_MASK;
+}
+
+inline void Cam8Instr::AdrData(caddr_t a)
+{
+	adr_data = a;
+}
+
+inline caddr_t Cam8Instr::AdrData(void)
+{
+	return adr_data;
+}
+
+inline void Cam8Instr::XferLength(u_int32_t x)
+{
+	xfer_length = x;
+}
+
+inline u_int32_t Cam8Instr::XferLength(void)
+{
+	return xfer_length;
+}
+
+inline void Cam8Instr::NextPtr(Cam8Instr * n)
+{
+	next_ptr = n;
+}
+
+inline Cam8Instr * Cam8Instr::NextPtr(void)
+{
+	return next_ptr;
+}
+
+
+inline void Cam8Instr::ReadMode(bool f)
+{
+	if (f)
+		opcode |=  RD_FLAG;
+	else
+		opcode &= (~ RD_FLAG);
+}
+
+inline bool Cam8Instr::ReadMode(void)
+{
+	return (opcode & RD_FLAG);
+}
+
+inline void Cam8Instr::ImmedMode(bool f)
+{
+	if (f)
+		opcode |=  IMM_FLAG;
+	else
+		opcode &= (~ IMM_FLAG);
+}
+
+inline bool Cam8Instr::ImmedMode(void)
+{
+	return (opcode & IMM_FLAG);
+}
+
+inline void Cam8Instr::ByteMode(bool f)
+{
+	if (f)
+		opcode |=  FLG8_FLAG;
+	else
+		opcode &= (~ FLG8_FLAG);
+}
+
+inline bool Cam8Instr::ByteMode(void)
+{
+	return (opcode & FLG8_FLAG);
+}
+
+inline void Cam8Instr::HostAlert(bool f)
+{
+	if (f)
+		opcode |= IN_FLAG;
+	else
+		opcode &= (~ IN_FLAG);
+}
+
+inline bool Cam8Instr::HostAlert(void)
+{
+	return (opcode & IN_FLAG);
+}
+
+
+inline void Cam8Instr::HostWait(bool f)
+{
+	if (f)
+		opcode |= HW_FLAG;
+	else
+		opcode &= (~ HW_FLAG);
+}
+
+inline bool Cam8Instr::HostWait(void)
+{
+	return (opcode & HW_FLAG);
+}
+
+
+inline void Cam8Instr::HostJump(bool f)
+{
+	if (f)
+		opcode |= HJ_FLAG;
+	else
+		opcode &= (~ HJ_FLAG);
+}
+
+inline bool Cam8Instr::HostJump(void)
+{
+	return (opcode & HJ_FLAG);
+}
+
+
+inline void Cam8Instr::CamWait(bool f)
+{
+	if (f)
+		opcode |= CW_FLAG;
+	else
+		opcode &= (~ CW_FLAG);
+}
+
+inline bool Cam8Instr::CamWait(void)
+{
+	return (opcode & CW_FLAG);
+}
+
+
+inline void Cam8Instr::CamReset(bool f)
+{
+	if (f)
+		opcode |= RS_FLAG;
+	else
+		opcode &= (~ RS_FLAG);
+}
+
+inline bool Cam8Instr::CamReset(void)
+{
+	return (opcode & RS_FLAG);
+}
+
+
+
+
+
+
+inline void Cam8Instr::operator()(u_int32_t v)
+{
+	TENTER("void Cam8Instr::operator()(u_int32_t)");
+
+	wr_reg(0xFFFF, true, (u_int32_t *) v);
+
+	TLEAVE();
+}
+
+inline void Cam8Instr::operator()(u_int32_t v, ...)
+{
+	va_list args;
+	register int i;
+	u_int32_t vals[16];
+
+	TENTER("void Cam8Instr::operator()(u_int32_t v, ...)");
+
+	vals[0] = v;
+
+	va_start(args, v);
+
+	for (i = 1; i < 16; i++)
+		vals[i] = va_arg(args, u_int32_t);
+
+	va_end(args);
+
+	wr_reg(0xFFFF, true, vals);
+
+	TLEAVE();
+}
+
+inline void Cam8Instr::operator()(regfldvals & rfv)
+{
+	TENTER("inline void Cam8Instr::operator()(regfldvals & rfv)");
+
+	wr_reg(0xFFFF, true, rfv);
+
+	TLEAVE();
+}
+
+inline regfldvals Cam8Instr::operator()(void)
+{
+	regfldvals rfv;
+
+	TENTER("inline regfldvals Cam8Instr::operator()(void)");
+
+	rd_reg(rfv);
+
+	TLEAVE();
+
+	return rfv;
+}
+
+
+inline void Cam8Instr::wr_reg(u_int32_t layer_mask, bool singarg, u_int32_t * v)
+{
+	TENTER("inline void Cam8Instr::wr_reg(u_int32_t layer_mask, bool singarg, u_int32_t * v)");
+
+	if (singarg)
+		PackConstantPlanes((u_int16_t *) AdrData(), Opcode(), layer_mask, (u_int32_t) v);
+	else
+		PackAllPlanes((u_int16_t *) AdrData(), Opcode(), v);
+
+	TLEAVE();
+}
+
+
+inline void Cam8Instr::wr_reg(u_int32_t layer_mask, bool singarg, regfldvals & rfv)
+{
+	TENTER("inline void Cam8Instr::wr_reg(u_int32_t layer_mask, bool singarg, regfldvals & rfv)");
+
+	wr_reg(layer_mask, singarg, rfv.v);
+
+	TLEAVE();
+}
+
+
+inline void Cam8Instr::wr_fld(u_int32_t layer_mask, bool singarg, int fldn, u_int32_t * v)
+{
+	TENTER("inline void Cam8Instr::wr_fld(u_int32_t layer_mask, bool singarg, int fldn, u_int32_t * v)");
+
+	if (singarg)
+		PackConstantPlanes((u_int16_t *) AdrData(), fldn, layer_mask, (u_int32_t) v);
+	else
+		PackAllPlanes((u_int16_t *) AdrData(), fldn, v);
+
+	TLEAVE();
+}
+
+
+inline void Cam8Instr::wr_fld(u_int32_t layer_mask, bool singarg, int fldn, regfldvals & rfv)
+{
+	TENTER("inline void Cam8Instr::wr_fld(u_int32_t layer_mask, bool singarg, int fldn, regfldvals & rfv)");
+
+	wr_fld(layer_mask, singarg, fldn, rfv.v);
+
+	TLEAVE();
+}
+
+
+inline void Cam8Instr::rd_reg(u_int32_t * v)
+{
+	TENTER("inline void Cam8Instr::rd_reg(u_int32_t * v)");
+
+	UnpackAllPlanes((u_int16_t *) AdrData(), Opcode(), false, v);
+
+	TLEAVE();
+}
+
+
+inline void Cam8Instr::rd_reg(regfldvals & rfv)
+{
+	TENTER("inline void Cam8Instr::rd_reg(regfldvals & rfv)");
+
+	UnpackAllPlanes((u_int16_t *) AdrData(), Opcode(), false, rfv);
+
+	TLEAVE();
+}
+
+
+inline void Cam8Instr::rd_fld(u_int32_t fldn, u_int32_t * v)
+{
+	TENTER("inline void Cam8Instr::rd_fld(u_int32_t fldn, u_int32_t * v)");
+
+	UnpackAllPlanes((u_int16_t *) AdrData(), fldn, false, v);
+
+	TLEAVE();
+}
+
+
+inline void Cam8Instr::rd_fld(u_int32_t fldn, regfldvals & rfv)
+{
+	TENTER("inline void Cam8Instr::rd_fld(u_int32_t fldn, regfldvals & rfv)");
+
+	UnpackAllPlanes((u_int16_t *) AdrData(), fldn, false, rfv);
+
+	TLEAVE();
+}
+
+
+inline void Cam8Instr::reg_store(u_int32_t layer_mask, bool singarg, ...)
+{
+	va_list args;
+
+	TENTER("inline void Cam8Instr::reg_store(u_int32_t layer_mask, bool singarg, ...)");
+
+	va_start(args, singarg);
+	vreg_store(layer_mask, singarg, args);
+	va_end(args);
+
+	TLEAVE();
+}
+
+
+inline void Cam8Instr::vreg_store(u_int32_t layer_mask, bool singarg, va_list args)
+{
+	static u_int32_t vals[16];
+	register int i;
+
+	TENTER("inline void Cam8Instr::vreg_store(u_int32_t layer_mask, bool singarg, va_list args)");
+
+	if (!singarg) {
+		for (i = 0; i < 16; i++)
+			vals[i] = va_arg(args, u_int32_t);
+
+		wr_reg(0xFFFF, false, vals);
+	}
+
+	else {
+		vals[0] = va_arg(args, u_int32_t);
+		wr_reg(layer_mask, true, (u_int32_t *) vals[0]);
+	}
+
+	TLEAVE();
+}
+
+
+inline void Cam8Instr::reg_store_bitmask(u_int32_t layer_mask, u_int32_t val)
+{
+	u_int32_t vals[16];
+
+	TENTER("inline void Cam8Instr::reg_store_bitmask(u_int32_t layer_mask, u_int32_t val)");
+
+	for(int i = 0; i < 16; i++) {
+		vals[i] = val & 0x1;
+		val >>= 1;
+	}
+
+	wr_reg(0xFFFF, false, vals);
+
+	TLEAVE();
+}
+
+
+inline void Cam8Instr::fld_store(u_int32_t layer_mask, u_int32_t fld, bool singarg, ...)
+{
+	va_list args;
+
+	TENTER("inline void Cam8Instr::fld_store(u_int32_t layer_mask, u_int32_t fld, bool singarg, ...)");
+
+	va_start(args, singarg);
+	vfld_store(layer_mask, fld, singarg, args);
+	va_end(args);
+
+	TLEAVE();
+}
+
+
+inline void Cam8Instr::vfld_store(u_int32_t layer_mask, u_int32_t fld, bool singarg, va_list args)
+{
+	u_int32_t vals[16];
+	register int i;
+
+	TENTER("inline void Cam8Instr::vfld_store(u_int32_t layer_mask, u_int32_t fld, bool singarg, va_list args)");
+
+	if (!singarg) {
+		for (i = 0; i < 16; i++)
+			vals[i] = va_arg(args, u_int32_t);
+
+		wr_fld(0xFFFF, false, fld, vals);
+	}
+
+	else {
+		vals[0] = va_arg(args, u_int32_t);
+		wr_fld(layer_mask, true, fld, (u_int32_t *) vals[0]);
+	}
+
+	TLEAVE();
+}
+
+
+inline void Cam8Instr::fld_store_bitmask(u_int32_t layer_mask, u_int32_t fld, u_int32_t val)
+{
+	u_int32_t vals[16];
+
+	TENTER("inline void Cam8Instr::fld_store_bitmask(u_int32_t layer_mask, u_int32_t fld, u_int32_t val)");
+
+	for(int i = 0; i < 16; i++) {
+		vals[i] = val & 0x1;
+		val >>= 1;
+	}
+
+	wr_fld(0xFFFF, false, RFINDEX(fld), vals);
+
+	TLEAVE();
+}
+
+
+
+
+FLD_FUNC_IMPL(RunInstr, ssm, FLD_SSM)
+FLD_FUNC_IMPL(RunInstr, rt, FLD_RT)
+FLD_FUNC_IMPL(RunInstr, ect, FLD_ECT)
+FLD_FUNC_IMPL(RunInstr, rpk, FLD_RPK)
+FLD_FUNC_IMPL(RunInstr, alt, FLD_ALT)
+
+FLD_FUNC_IMPL(KickInstr, ka, FLD_KA)
+FLD_FUNC_IMPL(KickInstr, xks, FLD_XKS)
+FLD_FUNC_IMPL(KickInstr, yks, FLD_YKS)
+FLD_FUNC_IMPL(KickInstr, zks, FLD_ZKS)
+FLD_FUNC_IMPL(KickInstr, xkmf, FLD_XKMF)
+FLD_FUNC_IMPL(KickInstr, ykmf, FLD_YKMF)
+FLD_FUNC_IMPL(KickInstr, zkmf, FLD_ZKMF)
+
+FLD_FUNC_IMPL(LutSrcInstr, las, FLD_LAS)
+FLD_FUNC_IMPL(LutSrcInstr, lam, FLD_LAM)
+
+FLD_FUNC_IMPL(FlySrcInstr, fos, FLD_FOS)
+FLD_FUNC_IMPL(FlySrcInstr, fom, FLD_FOM)
+
+FLD_FUNC_IMPL(SiteSrcInstr, sds, FLD_SDS)
+FLD_FUNC_IMPL(SiteSrcInstr, sdm, FLD_SDM)
+
+FLD_FUNC_IMPL(EventSrcInstr, ecs, FLD_ECS)
+FLD_FUNC_IMPL(EventSrcInstr, ecm, FLD_ECM)
+
+FLD_FUNC_IMPL(DisplayInstr, dds, FLD_DDS)
+FLD_FUNC_IMPL(DisplayInstr, ddm, FLD_DDM)
+
+FLD_FUNC_IMPL(ScanPermInstr, ssa0, FLD_SSA0)
+FLD_FUNC_IMPL(ScanPermInstr, ssa1, FLD_SSA1)
+FLD_FUNC_IMPL(ScanPermInstr, ssa2, FLD_SSA2)
+FLD_FUNC_IMPL(ScanPermInstr, ssa3, FLD_SSA3)
+FLD_FUNC_IMPL(ScanPermInstr, ssa4, FLD_SSA4)
+FLD_FUNC_IMPL(ScanPermInstr, ssa5, FLD_SSA5)
+FLD_FUNC_IMPL(ScanPermInstr, ssa6, FLD_SSA6)
+FLD_FUNC_IMPL(ScanPermInstr, ssa7, FLD_SSA7)
+FLD_FUNC_IMPL(ScanPermInstr, ssa8, FLD_SSA8)
+FLD_FUNC_IMPL(ScanPermInstr, ssa9, FLD_SSA9)
+FLD_FUNC_IMPL(ScanPermInstr, ssa10, FLD_SSA10)
+FLD_FUNC_IMPL(ScanPermInstr, ssa11, FLD_SSA11)
+FLD_FUNC_IMPL(ScanPermInstr, ssa12, FLD_SSA12)
+FLD_FUNC_IMPL(ScanPermInstr, ssa13, FLD_SSA13)
+FLD_FUNC_IMPL(ScanPermInstr, ssa14, FLD_SSA14)
+FLD_FUNC_IMPL(ScanPermInstr, ssa15, FLD_SSA15)
+FLD_FUNC_IMPL(ScanPermInstr, ssa16, FLD_SSA16)
+FLD_FUNC_IMPL(ScanPermInstr, ssa17, FLD_SSA17)
+FLD_FUNC_IMPL(ScanPermInstr, ssa18, FLD_SSA18)
+FLD_FUNC_IMPL(ScanPermInstr, ssa19, FLD_SSA19)
+FLD_FUNC_IMPL(ScanPermInstr, ssa20, FLD_SSA20)
+FLD_FUNC_IMPL(ScanPermInstr, ssa21, FLD_SSA21)
+FLD_FUNC_IMPL(ScanPermInstr, ssa22, FLD_SSA22)
+FLD_FUNC_IMPL(ScanPermInstr, ssa23, FLD_SSA23)
+
+inline ScanPermInstr * ScanPermInstr::ssan(u_int32_t n, u_int32_t v)
+{
+	TENTER("inline ScanPermInstr * ssan(u_int32_t n, u_int32_t v)");
+
+	wr_fld(0xFFFF, true, FLD_SSA(n), (u_int32_t *) v);
+
+	TLEAVE();
+
+	return this;
+}
+
+inline ScanPermInstr * ScanPermInstr::ssan(u_int32_t n, u_int32_t vals[])
+{
+	TENTER("inline ScanPermInstr * ssan(u_int32_t n, u_int32_t vals[])");
+
+	wr_fld(0xFFFF, true, FLD_SSA(n), vals);
+
+	TLEAVE();
+
+	return this;
+}
+
+inline ScanPermInstr * ScanPermInstr::ssan(u_int32_t n, regfldvals & rfv)
+{
+	TENTER("inline ScanPermInstr * ssan(u_int32_t n, regfldvals & rfv)");
+
+	wr_fld(0xFFFF, true, FLD_SSA(n), rfv);
+
+	TLEAVE();
+
+	return this;
+}
+
+inline regfldvals ScanPermInstr::ssan(u_int32_t n)
+{
+	regfldvals rfv;
+
+	TENTER("inline regfldvals ssan(u_int32_t n)");
+
+	rd_fld(FLD_SSA(n), rfv);
+
+	TLEAVE();
+
+	return rfv;
+}
+
+
+FLD_FUNC_IMPL(ScanFormatInstr, sm, FLD_SM)
+FLD_FUNC_IMPL(ScanFormatInstr, esc, FLD_ESC)
+FLD_FUNC_IMPL(ScanFormatInstr, esw, FLD_ESW)
+FLD_FUNC_IMPL(ScanFormatInstr, est, FLD_EST)
+FLD_FUNC_IMPL(ScanFormatInstr, sbrc, FLD_SBRC)
+FLD_FUNC_IMPL(ScanFormatInstr, rcl, FLD_RCL)
+FLD_FUNC_IMPL(ScanFormatInstr, ecl, FLD_ECL)
+FLD_FUNC_IMPL(ScanFormatInstr, stm, FLD_STM)
+
+FLD_FUNC_IMPL(DimensionInstr, dcm, FLD_DCM)
+FLD_FUNC_IMPL(DimensionInstr, xdcp, FLD_XDCP)
+FLD_FUNC_IMPL(DimensionInstr, ydcp, FLD_YDCP)
+FLD_FUNC_IMPL(DimensionInstr, zdcp, FLD_ZDCP)
+
+FLD_FUNC_IMPL(EnvironmentInstr, lpl, FLD_LPL)
+FLD_FUNC_IMPL(EnvironmentInstr, fpl, FLD_FPL)
+FLD_FUNC_IMPL(EnvironmentInstr, dcs, FLD_DCS)
+FLD_FUNC_IMPL(EnvironmentInstr, tbd, FLD_TBD)
+FLD_FUNC_IMPL(EnvironmentInstr, tms, FLD_TMS)
+FLD_FUNC_IMPL(EnvironmentInstr, nbf, FLD_NBF)
+FLD_FUNC_IMPL(EnvironmentInstr, sre, FLD_SRE)
+FLD_FUNC_IMPL(EnvironmentInstr, als, FLD_ALS)
+
+FLD_FUNC_IMPL(MultiInstr, mafs, FLD_MAFS)
+FLD_FUNC_IMPL(MultiInstr, mbfs, FLD_MBFS)
+
+FLD_FUNC_IMPL(ConnectInstr, xmpc, FLD_XMPC)
+FLD_FUNC_IMPL(ConnectInstr, xppc, FLD_XPPC)
+FLD_FUNC_IMPL(ConnectInstr, ympc, FLD_YMPC)
+FLD_FUNC_IMPL(ConnectInstr, yppc, FLD_YPPC)
+FLD_FUNC_IMPL(ConnectInstr, zmpc, FLD_ZMPC)
+FLD_FUNC_IMPL(ConnectInstr, zppc, FLD_ZPPC)
+
+FLD_FUNC_IMPL(IntEnableInstr, bpie, FLD_BPIE)
+FLD_FUNC_IMPL(IntEnableInstr, bcie, FLD_BCIE)
+FLD_FUNC_IMPL(IntEnableInstr, gcie, FLD_GCIE)
+FLD_FUNC_IMPL(IntEnableInstr, maie, FLD_MAIE)
+FLD_FUNC_IMPL(IntEnableInstr, mbie, FLD_MBIE)
+FLD_FUNC_IMPL(IntEnableInstr, ssie, FLD_SSIE)
+FLD_FUNC_IMPL(IntEnableInstr, xhie, FLD_XHIE)
+FLD_FUNC_IMPL(IntEnableInstr, rlie, FLD_RLIE)
+FLD_FUNC_IMPL(IntEnableInstr, urie, FLD_URIE)
+FLD_FUNC_IMPL(IntEnableInstr, isie, FLD_ISIE)
+
+FLD_FUNC_IMPL(IntFlagsInstr, bpif, FLD_BPIF)
+FLD_FUNC_IMPL(IntFlagsInstr, bcif, FLD_BCIF)
+FLD_FUNC_IMPL(IntFlagsInstr, gcif, FLD_GCIF)
+FLD_FUNC_IMPL(IntFlagsInstr, maif, FLD_MAIF)
+FLD_FUNC_IMPL(IntFlagsInstr, mbif, FLD_MBIF)
+FLD_FUNC_IMPL(IntFlagsInstr, ssif, FLD_SSIF)
+FLD_FUNC_IMPL(IntFlagsInstr, xhif, FLD_XHIF)
+FLD_FUNC_IMPL(IntFlagsInstr, rlif, FLD_RLIF)
+FLD_FUNC_IMPL(IntFlagsInstr, urif, FLD_URIF)
+FLD_FUNC_IMPL(IntFlagsInstr, isif, FLD_ISIF)
+
+FLD_FUNC_IMPL(VerifyInstr, vwe, FLD_VWE)
+FLD_FUNC_IMPL(VerifyInstr, vwie, FLD_VWIE)
+FLD_FUNC_IMPL(VerifyInstr, vwif, FLD_VWIF)
+
+FLD_FUNC_IMPL(DramCountInstr, ldoc, FLD_LDOC)
+FLD_FUNC_IMPL(DramCountInstr, hdoc, FLD_HDOC)
+
+
+
+/*****************************************************************************/
+/******************************* PROTOTYPES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/********************************* GLOBALS ***********************************/
+/*****************************************************************************/
+
+#endif

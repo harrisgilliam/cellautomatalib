@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Zip::ZipLocalFileHeader</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Zip.html" class="namespace">Poco::Zip</a></h1>
+<h1 class="symbol">class ZipLocalFileHeader</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Zip<br />
+<b>Package:</b> Zip<br />
+<b>Header:</b> Poco/Zip/ZipLocalFileHeader.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>Stores a <a href="Poco.Zip.html" title="namespace Poco::Zip">Zip</a> local file header </p>
+</div>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Zip.ZipLocalFileHeader.html#22216" title="Poco::Zip::ZipLocalFileHeader::createHeader()">createHeader</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22195" title="Poco::Zip::ZipLocalFileHeader::getCRC()">getCRC</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22196" title="Poco::Zip::ZipLocalFileHeader::getCompressedSize()">getCompressedSize</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22192" title="Poco::Zip::ZipLocalFileHeader::getCompressionLevel()">getCompressionLevel</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22191" title="Poco::Zip::ZipLocalFileHeader::getCompressionMethod()">getCompressionMethod</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22190" title="Poco::Zip::ZipLocalFileHeader::getDataEndPos()">getDataEndPos</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22189" title="Poco::Zip::ZipLocalFileHeader::getDataStartPos()">getDataStartPos</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22188" title="Poco::Zip::ZipLocalFileHeader::getEndPos()">getEndPos</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22208" title="Poco::Zip::ZipLocalFileHeader::getExtraField()">getExtraField</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22204" title="Poco::Zip::ZipLocalFileHeader::getFileName()">getFileName</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22184" title="Poco::Zip::ZipLocalFileHeader::getHeaderSize()">getHeaderSize</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22178" title="Poco::Zip::ZipLocalFileHeader::getHostSystem()">getHostSystem</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22179" title="Poco::Zip::ZipLocalFileHeader::getMajorVersionNumber()">getMajorVersionNumber</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22180" title="Poco::Zip::ZipLocalFileHeader::getMinorVersionNumber()">getMinorVersionNumber</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22181" title="Poco::Zip::ZipLocalFileHeader::getRequiredVersion()">getRequiredVersion</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22187" title="Poco::Zip::ZipLocalFileHeader::getStartPos()">getStartPos</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22197" title="Poco::Zip::ZipLocalFileHeader::getUncompressedSize()">getUncompressedSize</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22209" title="Poco::Zip::ZipLocalFileHeader::hasData()">hasData</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22207" title="Poco::Zip::ZipLocalFileHeader::hasExtraField()">hasExtraField</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22206" title="Poco::Zip::ZipLocalFileHeader::isDirectory()">isDirectory</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22193" title="Poco::Zip::ZipLocalFileHeader::isEncrypted()">isEncrypted</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22205" title="Poco::Zip::ZipLocalFileHeader::isFile()">isFile</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22194" title="Poco::Zip::ZipLocalFileHeader::lastModifiedAt()">lastModifiedAt</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22210" title="Poco::Zip::ZipLocalFileHeader::searchCRCAndSizesAfterData()">searchCRCAndSizesAfterData</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22198" title="Poco::Zip::ZipLocalFileHeader::setCRC()">setCRC</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22200" title="Poco::Zip::ZipLocalFileHeader::setCompressedSize()">setCompressedSize</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22213" title="Poco::Zip::ZipLocalFileHeader::setFileName()">setFileName</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22211" title="Poco::Zip::ZipLocalFileHeader::setSearchCRCAndSizesAfterData()">setSearchCRCAndSizesAfterData</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22185" title="Poco::Zip::ZipLocalFileHeader::setStartPos()">setStartPos</a>, <a href="Poco.Zip.ZipLocalFileHeader.html#22202" title="Poco::Zip::ZipLocalFileHeader::setUncompressedSize()">setUncompressedSize</a></p>
+<h2>Constructors</h2>
+<h3><a name="22173">ZipLocalFileHeader</a></h3>
+<p class="decl"><a href="Poco.Zip.ZipLocalFileHeader.html" title="class Poco::Zip::ZipLocalFileHeader">ZipLocalFileHeader</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::istream &amp; inp,<br />&nbsp;&nbsp;&nbsp;&nbsp;bool assumeHeaderRead,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Zip.ParseCallback.html" title="class Poco::Zip::ParseCallback">ParseCallback</a> &amp; callback<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.Zip.ZipLocalFileHeader.html" title="class Poco::Zip::ZipLocalFileHeader">ZipLocalFileHeader</a> by parsing the input stream. If assumeHeaderRead is true we assume that the first 4 bytes were already read outside. If skipOverDataBlock is true we position the stream after the data block (either at the next FileHeader or the Directory Entry) </p>
+</div>
+<h3><a name="22168">ZipLocalFileHeader</a></h3>
+<p class="decl"><a href="Poco.Zip.ZipLocalFileHeader.html" title="class Poco::Zip::ZipLocalFileHeader">ZipLocalFileHeader</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Path.html" title="class Poco::Path">Poco::Path</a> &amp; fileName,<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.DateTime.html" title="class Poco::DateTime">Poco::DateTime</a> &amp; lastModifiedAt,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Zip.ZipCommon.html#21931" title="enum  Poco::Zip::ZipCommon::CompressionMethod">ZipCommon::CompressionMethod</a> cm,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Zip.ZipCommon.html#21944" title="enum  Poco::Zip::ZipCommon::CompressionLevel">ZipCommon::CompressionLevel</a> cl<br />);</p>
+<div class="description">
+<p>Creates a zip file header from an absoluteFile. fileName is the name of the file in the zip, outputIsSeekable determines if we write CRC and file sizes to the LocalFileHeader or after data compression into a <a href="Poco.Zip.ZipDataInfo.html" title="class Poco::Zip::ZipDataInfo">ZipDataInfo</a> </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="22177">~ZipLocalFileHeader</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual ~<a href="Poco.Zip.ZipLocalFileHeader.html" title="class Poco::Zip::ZipLocalFileHeader">ZipLocalFileHeader</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Zip.ZipLocalFileHeader.html" title="class Poco::Zip::ZipLocalFileHeader">ZipLocalFileHeader</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="22216">createHeader</a></h3>
+<p class="decl">std::string createHeader() const;</p>
+<div class="description">
+<p>Creates a header </p>
+</div>
+<h3><a name="22195">getCRC</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.html#11583" title="Poco::UInt32">Poco::UInt32</a> getCRC() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22196">getCompressedSize</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.html#11583" title="Poco::UInt32">Poco::UInt32</a> getCompressedSize() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22192">getCompressionLevel</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Zip.ZipCommon.html#21944" title="enum  Poco::Zip::ZipCommon::CompressionLevel">ZipCommon::CompressionLevel</a> getCompressionLevel() const;</p>
+<div class="description">
+<p>Returns the compression level used. Only valid when the compression method is CM_DEFLATE </p>
+</div>
+<h3><a name="22191">getCompressionMethod</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Zip.ZipCommon.html#21931" title="enum  Poco::Zip::ZipCommon::CompressionMethod">ZipCommon::CompressionMethod</a> getCompressionMethod() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22190">getDataEndPos</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">std::streamoff getDataEndPos() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22189">getDataStartPos</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">std::streamoff getDataStartPos() const;</p>
+<div class="description">
+<p>Returns the streamoffset for the very first byte of data. Will be equal to DataEndPos if no data present </p>
+</div>
+<h3><a name="22188">getEndPos</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">std::streamoff getEndPos() const;</p>
+<div class="description">
+<p>Points past the last byte of the file entry (ie. either the first byte of the next header, or the directory) </p>
+</div>
+<h3><a name="22208">getExtraField</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const std::string &amp; getExtraField() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22204">getFileName</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const std::string &amp; getFileName() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22184">getHeaderSize</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.html#11583" title="Poco::UInt32">Poco::UInt32</a> getHeaderSize() const;</p>
+<div class="description">
+<p>Returns the total size of the header including filename + extra field size </p>
+</div>
+<h3><a name="22178">getHostSystem</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Zip.ZipCommon.html#21949" title="enum  Poco::Zip::ZipCommon::HostSystem">ZipCommon::HostSystem</a> getHostSystem() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22179">getMajorVersionNumber</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">int getMajorVersionNumber() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22180">getMinorVersionNumber</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">int getMinorVersionNumber() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22181">getRequiredVersion</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void getRequiredVersion(<br />&nbsp;&nbsp;&nbsp;&nbsp;int &amp; major,<br />&nbsp;&nbsp;&nbsp;&nbsp;int &amp; minor<br />);</p>
+<div class="description">
+<p>The minimum version required to extract the data </p>
+</div>
+<h3><a name="22187">getStartPos</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">std::streamoff getStartPos() const;</p>
+<div class="description">
+<p>Returns the position of the first byte of the header in the file stream </p>
+</div>
+<h3><a name="22197">getUncompressedSize</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.html#11583" title="Poco::UInt32">Poco::UInt32</a> getUncompressedSize() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22209">hasData</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool hasData() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22207">hasExtraField</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool hasExtraField() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22206">isDirectory</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool isDirectory() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22193">isEncrypted</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool isEncrypted() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22205">isFile</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool isFile() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22194">lastModifiedAt</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const <a href="Poco.DateTime.html" title="class Poco::DateTime">Poco::DateTime</a> &amp; lastModifiedAt() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22210">searchCRCAndSizesAfterData</a></h3>
+<p class="decl">bool searchCRCAndSizesAfterData() const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22198">setCRC</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void setCRC(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.html#11583" title="Poco::UInt32">Poco::UInt32</a> val<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22200">setCompressedSize</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void setCompressedSize(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.html#11583" title="Poco::UInt32">Poco::UInt32</a> val<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22213">setFileName</a></h3>
+<p class="decl">void setFileName(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; fileName,<br />&nbsp;&nbsp;&nbsp;&nbsp;bool isDirectory<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22211">setSearchCRCAndSizesAfterData</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void setSearchCRCAndSizesAfterData(<br />&nbsp;&nbsp;&nbsp;&nbsp;bool val<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="22185">setStartPos</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void setStartPos(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::streamoff start<br />);</p>
+<div class="description">
+<p>Sets the start position to start and the end position to start+compressedSize </p>
+</div>
+<h3><a name="22202">setUncompressedSize</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void setUncompressedSize(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.html#11583" title="Poco::UInt32">Poco::UInt32</a> val<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Variables</h2>
+<h3><a name="22167">HEADER</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const char <a href="Poco.Zip.ZipLocalFileHeader.html#22167" title="Poco::Zip::ZipLocalFileHeader::HEADER">HEADER</a>[<a href="Poco.Zip.ZipCommon.html#21930" title="Poco::Zip::ZipCommon::HEADER_SIZE">ZipCommon::HEADER_SIZE</a>];</p>
+<div class="description">
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

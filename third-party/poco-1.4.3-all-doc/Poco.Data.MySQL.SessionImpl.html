@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Data::MySQL::SessionImpl</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Data.MySQL.html" class="namespace">Poco::Data::MySQL</a></h1>
+<h1 class="symbol">class SessionImpl</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Data/MySQL<br />
+<b>Package:</b> MySQL<br />
+<b>Header:</b> Poco/Data/MySQL/SessionImpl.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>Implements <a href="Poco.Data.MySQL.SessionImpl.html" title="class Poco::Data::MySQL::SessionImpl">SessionImpl</a> interface </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b>Poco::Data::AbstractSessionImpl&nbsp;&lt;&nbsp;SessionImpl&nbsp;&gt;</p>
+<p><b>All Base Classes: </b>Poco::Data::AbstractSessionImpl&nbsp;&lt;&nbsp;SessionImpl&nbsp;&gt;</p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Data.MySQL.SessionImpl.html#665" title="Poco::Data::MySQL::SessionImpl::begin()">begin</a>, <a href="Poco.Data.MySQL.SessionImpl.html#668" title="Poco::Data::MySQL::SessionImpl::close()">close</a>, <a href="Poco.Data.MySQL.SessionImpl.html#666" title="Poco::Data::MySQL::SessionImpl::commit()">commit</a>, <a href="Poco.Data.MySQL.SessionImpl.html#664" title="Poco::Data::MySQL::SessionImpl::createStatementImpl()">createStatementImpl</a>, <a href="Poco.Data.MySQL.SessionImpl.html#674" title="Poco::Data::MySQL::SessionImpl::getInsertId()">getInsertId</a>, <a href="Poco.Data.MySQL.SessionImpl.html#669" title="Poco::Data::MySQL::SessionImpl::isConnected()">isConnected</a>, <a href="Poco.Data.MySQL.SessionImpl.html#670" title="Poco::Data::MySQL::SessionImpl::isTransaction()">isTransaction</a>, <a href="Poco.Data.MySQL.SessionImpl.html#667" title="Poco::Data::MySQL::SessionImpl::rollback()">rollback</a>, <a href="Poco.Data.MySQL.SessionImpl.html#671" title="Poco::Data::MySQL::SessionImpl::setInsertId()">setInsertId</a></p>
+<h2>Constructors</h2>
+<h3><a name="661">SessionImpl</a></h3>
+<p class="decl"><a href="Poco.Data.MySQL.SessionImpl.html" title="class Poco::Data::MySQL::SessionImpl">SessionImpl</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; connectionString<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.Data.MySQL.SessionImpl.html" title="class Poco::Data::MySQL::SessionImpl">SessionImpl</a>. Opens a connection to the database </p>
+<p>Connection string format: </p>
+<pre>&lt;str&gt; == &lt;assignment&gt; | &lt;assignment&gt; ';' &lt;str&gt;
+&lt;assignment&gt; == &lt;name&gt; '=' &lt;value&gt;
+&lt;name&gt; == 'host' | 'port' | 'user' | 'password' | 'db' } 'compress' | 'auto-reconnect'
+&lt;value&gt; == [~;]*
+</pre>
+<p>for compress and auto-reconnect correct values are true/false for port - numeric in decimal notation </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="663">~SessionImpl</a></h3>
+<p class="decl">~<a href="Poco.Data.MySQL.SessionImpl.html" title="class Poco::Data::MySQL::SessionImpl">SessionImpl</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Data.MySQL.SessionImpl.html" title="class Poco::Data::MySQL::SessionImpl">SessionImpl</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="665">begin</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual void begin();</p>
+<div class="description">
+<p>Starts a transaction </p>
+</div>
+<h3><a name="668">close</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual void close();</p>
+<div class="description">
+<p>Closes the connection </p>
+</div>
+<h3><a name="666">commit</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual void commit();</p>
+<div class="description">
+<p>Commits and ends a transaction		 </p>
+</div>
+<h3><a name="664">createStatementImpl</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual <a href="Poco.Data.StatementImpl.html" title="class Poco::Data::StatementImpl">Poco::Data::StatementImpl</a> * createStatementImpl();</p>
+<div class="description">
+<p>Returns an <a href="Poco.Data.MySQL.html" title="namespace Poco::Data::MySQL">MySQL</a> <a href="Poco.Data.StatementImpl.html" title="class Poco::Data::StatementImpl">StatementImpl</a> </p>
+</div>
+<h3><a name="674">getInsertId</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Any.html" title="class Poco::Any">Poco::Any</a> getInsertId(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; param13<br />);</p>
+<div class="description">
+<p>Get insert id </p>
+</div>
+<h3><a name="669">isConnected</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual bool isConnected();</p>
+<div class="description">
+<p>Returns true if and only if session is connected. </p>
+</div>
+<h3><a name="670">isTransaction</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual bool isTransaction();</p>
+<div class="description">
+<p>Returns true if and only if a transaction is in progress. </p>
+</div>
+<h3><a name="667">rollback</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual void rollback();</p>
+<div class="description">
+<p>Aborts a transaction </p>
+</div>
+<h3><a name="671">setInsertId</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void setInsertId(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; param11,<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.Any.html" title="class Poco::Any">Poco::Any</a> &amp; param12<br />);</p>
+<div class="description">
+<p>Try to set insert id - do nothing. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

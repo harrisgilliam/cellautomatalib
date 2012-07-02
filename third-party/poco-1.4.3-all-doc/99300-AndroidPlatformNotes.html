@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>POCO C++ Libraries Android Platform Notes</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="category">Introduction</h1>
+<h1 class="title">POCO C++ Libraries Android Platform Notes</h1>
+</div>
+<div class="body">
+<h2>Contents</h2>
+<div class="toc"><ul>
+<li class="level1"><a href="#0">Introduction</a></li>
+<li class="level1"><a href="#1">Requirements</a></li>
+<li class="level2"><a href="#2">Standalone Toolchain</a></li>
+<li class="level2"><a href="#3">Compiling the POCO C++ Libraries</a></li>
+<li class="level1"><a href="#4">Restrictions</a></li>
+<li class="level2"><a href="#5">Poco::NamedEvent and Poco::NamedMutex</a></li>
+<li class="level2"><a href="#6">Poco::SharedMemory</a></li>
+<li class="level2"><a href="#7">Poco::FPEnvironment</a></li>
+<li class="level2"><a href="#8">Poco::RWLock</a></li>
+<li class="level1"><a href="#9">Build Notes</a></li>
+<li class="level2"><a href="#10">Using POCO's GNU Make-based Build System</a></li>
+<li class="level2"><a href="#11">Using Android's Build System</a></li>
+</ul></div>
+<div class="description">
+<p></p><h2><a name="0">Introduction</a></h2><p>
+</p>
+<p>Starting with release 1.4.2 the POCO C++ Libraries can be used on  Android, using the NDK r6. The gmake-based build system (also used for Mac OS X, Linux, etc.) is used to build the libraries. A standalone &quot;customized&quot; toolchain for Android (see below) is required. </p>
+<p></p>
+<p></p><h2><a name="1">Requirements</a></h2><p>
+</p>
+<p></p><h3><a name="2">Standalone Toolchain</a></h3><p>
+</p>
+<p>Please refer to the Android NDK Dev Guide document &quot;Standalone Toolchain&quot;, section 3, (<i>docs/STANDALONE-TOOLCHAIN.html</i>) for instructions how to create a customized toolchain. </p>
+<p>Typically, you'll run a command like: </p>
+<p></p>
+<pre>$NDK/build/tools/make-standalone-toolchain.sh --platform=android-8 --install-dir=$HOME/my-android-toolchain
+</pre>
+<p> </p>
+<p>Then, add the directory containing the toolchain executables to your <tt>$PATH</tt>: </p>
+<p></p>
+<pre>export PATH=$PATH:$HOME/my-android-toolchain/bin
+</pre>
+<p> </p>
+<p></p>
+<p></p><h3><a name="3">Compiling the POCO C++ Libraries</a></h3><p>
+</p>
+<p>When compiling the POCO C++ Libraries for a Android target, as well as when including POCO C++ Libraries headers in a project for a Android target, the preprocessor macro <tt>POCO_ANDROID</tt> must be defined. This is because the Android NDK GCC compiler does not provide a predefined macro that allows for reliable detection of an Android target.  </p>
+<p></p>
+<p></p><h2><a name="4">Restrictions</a></h2><p>
+</p>
+<p>For the most part, the Linux and Android ports of the POCO C++ Libraries are very similar. However, there are a few restrictions due to the Binoic C library used by Android. </p>
+<p></p><h3><a name="5">Poco::NamedEvent and Poco::NamedMutex</a></h3><p>
+</p>
+<p>These classes are not supported on Android. While <a href="Poco.NamedEvent.html" title="class Poco::NamedEvent">Poco::NamedEvent</a> and  <a href="Poco.NamedMutex.html" title="class Poco::NamedMutex">Poco::NamedMutex</a> objects can be created, any attempt to call a method of these classes will result in a <a href="Poco.NotImplementedException.html" title="class Poco::NotImplementedException">Poco::NotImplementedException</a> being thrown. </p>
+<p></p><h3><a name="6">Poco::SharedMemory</a></h3><p>
+</p>
+<p>Shared memory is not supported on Android.   </p>
+<p></p><h3><a name="7">Poco::FPEnvironment</a></h3><p>
+</p>
+<p>The <a href="Poco.FPEnvironment.html" title="class Poco::FPEnvironment">Poco::FPEnvironment</a> class is not available on Android and cannot be used.     </p>
+<p></p><h3><a name="8">Poco::RWLock</a></h3><p>
+</p>
+<p>On Android, <a href="Poco.RWLock.html" title="class Poco::RWLock">Poco::RWLock</a> is an ordinary mutex. </p>
+<p></p>
+<p></p><h2><a name="9">Build Notes</a></h2><p>
+</p>
+<p></p><h3><a name="10">Using POCO's GNU Make-based Build System</a></h3><p>
+</p>
+<p>The <i>Android</i> build configuration (located in <i>$POCO_BASE/build/config/Android</i>)  is used to cross-build for Android from a Linux or Mac OS X host. </p>
+<p>To build the POCO C++ Libraries (static) on a Linux or Mac OS X host: </p>
+<p></p>
+<pre>./configure --config=Android --no-samples --no-tests
+./make -s -j4
+</pre>
+<p> </p>
+<p>The default configuration builds for the <i>armeabi</i> platform ABI. To build for <i>armeabi-v7a</i>, set the <tt>ANDROID_ABI</tt> make variable to <tt>armeabi-v7a</tt>: </p>
+<p></p>
+<pre>./make -s -j4 ANDROID_ABI=armeabi-v7a
+</pre>
+<p> </p>
+<p>The build configuration also supports setting the <tt>ANDROID_ABI</tt> to <tt>x86</tt>, but the NDK r6 standalone toolchain for x86 generated by <i>make-standalone-toolchain.sh</i> lacks the C++ STL headers, so this does not work. </p>
+<p>Depending on your specific requirements (e.g., no ARM architecture, etc.), it may be necessary to modify the Android build configuration, or create a new one based on it. </p>
+<p>See the <a href="99150-GMakeBuildNotes.html">GNU Make Build System</a> document for more information. </p>
+<p></p>
+<p></p><h3><a name="11">Using Android's Build System</a></h3><p>
+</p>
+<p>Alternatively to POCO's build system, Android's build system can be used to build the POCO C++ Libraries. A sample makefile for the Foundation library is shown below. </p>
+<p></p>
+<pre>#
+# Android.mk
+#
+# POCO Foundation
+#
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE     := PocoFoundation
+LOCAL_PATH       := $(call my-dir)/src
+LOCAL_CFLAGS     := -DPOCO_ANDROID -DPOCO_NO_FPENVIRONMENT -DPOCO_NO_WSTRING -DPOCO_NO_SHAREDMEMORY
+LOCAL_CPPFLAGS   := -frtti -fexceptions
+LOCAL_C_INCLUDES := $(call my-dir)/include
+
+LOCAL_SRC_FILES := \
+    AbstractObserver.cpp \
+    ActiveDispatcher.cpp \
+    adler32.c \
+    ArchiveStrategy.cpp \
+    Ascii.cpp \
+    ASCIIEncoding.cpp \
+    AsyncChannel.cpp \
+    AtomicCounter.cpp \
+    Base64Decoder.cpp \
+    Base64Encoder.cpp \
+    BinaryReader.cpp \
+    BinaryWriter.cpp \
+    Bugcheck.cpp \
+    ByteOrder.cpp \
+    Channel.cpp \
+    Checksum.cpp \
+    compress.c \
+    Condition.cpp \
+    Configurable.cpp \
+    ConsoleChannel.cpp \
+    CountingStream.cpp \
+    crc32.c \
+    DateTime.cpp \
+    DateTimeFormat.cpp \
+    DateTimeFormatter.cpp \
+    DateTimeParser.cpp \
+    Debugger.cpp \
+    deflate.c \
+    DeflatingStream.cpp \
+    DigestEngine.cpp \
+    DigestStream.cpp \
+    DirectoryIterator.cpp \
+    DynamicAny.cpp \
+    DynamicAnyHolder.cpp \
+    Environment.cpp \
+    ErrorHandler.cpp \
+    Event.cpp \
+    EventArgs.cpp \
+    Exception.cpp \
+    File.cpp \
+    FileChannel.cpp \
+    FileStream.cpp \
+    FileStreamFactory.cpp \
+    Format.cpp \
+    Formatter.cpp \
+    FormattingChannel.cpp \
+    FPEnvironment.cpp \
+    Glob.cpp \
+    gzio.c \
+    Hash.cpp \
+    HashStatistic.cpp \
+    HexBinaryDecoder.cpp \
+    HexBinaryEncoder.cpp \
+    infback.c \
+    inffast.c \
+    inflate.c \
+    InflatingStream.cpp \
+    inftrees.c \
+    Latin1Encoding.cpp \
+    Latin9Encoding.cpp \
+    LineEndingConverter.cpp \
+    LocalDateTime.cpp \
+    LogFile.cpp \
+    Logger.cpp \
+    LoggingFactory.cpp \
+    LoggingRegistry.cpp \
+    LogStream.cpp \
+    Manifest.cpp \
+    MD2Engine.cpp \
+    MD4Engine.cpp \
+    MD5Engine.cpp \
+    MemoryPool.cpp \
+    MemoryStream.cpp \
+    Message.cpp \
+    Mutex.cpp \
+    NestedDiagnosticContext.cpp \
+    Notification.cpp \
+    NotificationCenter.cpp \
+    NotificationQueue.cpp \
+    NullChannel.cpp \
+    NullStream.cpp \
+    NumberFormatter.cpp \
+    NumberParser.cpp \
+    Path.cpp \
+    PatternFormatter.cpp \
+    pcre_chartables.c \
+    pcre_compile.c \
+    pcre_exec.c \
+    pcre_fullinfo.c \
+    pcre_globals.c \
+    pcre_maketables.c \
+    pcre_newline.c \
+    pcre_ord2utf8.c \
+    pcre_study.c \
+    pcre_tables.c \
+    pcre_try_flipped.c \
+    pcre_ucd.c \
+    pcre_valid_utf8.c \
+    pcre_xclass.c \
+    Pipe.cpp \
+    PipeImpl.cpp \
+    PipeStream.cpp \
+    PriorityNotificationQueue.cpp \
+    Process.cpp \
+    PurgeStrategy.cpp \
+    Random.cpp \
+    RandomStream.cpp \
+    RefCountedObject.cpp \
+    RegularExpression.cpp \
+    RotateStrategy.cpp \
+    Runnable.cpp \
+    RWLock.cpp \
+    Semaphore.cpp \
+    SHA1Engine.cpp \
+    SharedLibrary.cpp \
+    SharedMemory.cpp \
+    SignalHandler.cpp \
+    SimpleFileChannel.cpp \
+    SplitterChannel.cpp \
+    Stopwatch.cpp \
+    StreamChannel.cpp \
+    StreamConverter.cpp \
+    StreamCopier.cpp \
+    StreamTokenizer.cpp \
+    String.cpp \
+    StringTokenizer.cpp \
+    SynchronizedObject.cpp \
+    SyslogChannel.cpp \
+    Task.cpp \
+    TaskManager.cpp \
+    TaskNotification.cpp \
+    TeeStream.cpp \
+    TemporaryFile.cpp \
+    TextBufferIterator.cpp \
+    TextConverter.cpp \
+    TextEncoding.cpp \
+    TextIterator.cpp \
+    Thread.cpp \
+    ThreadLocal.cpp \
+    ThreadPool.cpp \
+    ThreadTarget.cpp \
+    TimedNotificationQueue.cpp \
+    Timer.cpp \
+    Timespan.cpp \
+    Timestamp.cpp \
+    Timezone.cpp \
+    Token.cpp \
+    trees.c \
+    UnicodeConverter.cpp \
+    Unicode.cpp \
+    URI.cpp \
+    URIStreamFactory.cpp \
+    URIStreamOpener.cpp \
+    UTF8Encoding.cpp \
+    UTF8String.cpp \
+    UTF16Encoding.cpp \
+    UUID.cpp \
+    UUIDGenerator.cpp \
+    Void.cpp \
+    Windows1252Encoding.cpp \
+    zutil.c
+
+include $(BUILD_STATIC_LIBRARY)
+</pre>
+<p> </p>
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Namespace Poco::XML</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="symbol">namespace XML</h1>
+</div>
+<div class="body">
+<h2>Overview</h2>
+<p><b>Classes:</b> 
+<a href="Poco.XML.AbstractContainerNode.html" title="class Poco::XML::AbstractContainerNode">AbstractContainerNode</a>, <a href="Poco.XML.AbstractNode.html" title="class Poco::XML::AbstractNode">AbstractNode</a>, <a href="Poco.XML.Attr.html" title="class Poco::XML::Attr">Attr</a>, <a href="Poco.XML.AttrMap.html" title="class Poco::XML::AttrMap">AttrMap</a>, <a href="Poco.XML.Attributes.html" title="class Poco::XML::Attributes">Attributes</a>, <a href="Poco.XML.AttributesImpl.html" title="class Poco::XML::AttributesImpl">AttributesImpl</a>, <a href="Poco.XML.CDATASection.html" title="class Poco::XML::CDATASection">CDATASection</a>, <a href="Poco.XML.CharacterData.html" title="class Poco::XML::CharacterData">CharacterData</a>, <a href="Poco.XML.ChildNodesList.html" title="class Poco::XML::ChildNodesList">ChildNodesList</a>, <a href="Poco.XML.Comment.html" title="class Poco::XML::Comment">Comment</a>, <a href="Poco.XML.ContentHandler.html" title="class Poco::XML::ContentHandler">ContentHandler</a>, <a href="Poco.XML.DOMBuilder.html" title="class Poco::XML::DOMBuilder">DOMBuilder</a>, <a href="Poco.XML.DOMException.html" title="class Poco::XML::DOMException">DOMException</a>, <a href="Poco.XML.DOMImplementation.html" title="class Poco::XML::DOMImplementation">DOMImplementation</a>, <a href="Poco.XML.DOMObject.html" title="class Poco::XML::DOMObject">DOMObject</a>, <a href="Poco.XML.DOMParser.html" title="class Poco::XML::DOMParser">DOMParser</a>, <a href="Poco.XML.DOMSerializer.html" title="class Poco::XML::DOMSerializer">DOMSerializer</a>, <a href="Poco.XML.DOMWriter.html" title="class Poco::XML::DOMWriter">DOMWriter</a>, <a href="Poco.XML.DTDHandler.html" title="class Poco::XML::DTDHandler">DTDHandler</a>, <a href="Poco.XML.DTDMap.html" title="class Poco::XML::DTDMap">DTDMap</a>, <a href="Poco.XML.DeclHandler.html" title="class Poco::XML::DeclHandler">DeclHandler</a>, <a href="Poco.XML.DefaultHandler.html" title="class Poco::XML::DefaultHandler">DefaultHandler</a>, <a href="Poco.XML.Document.html" title="class Poco::XML::Document">Document</a>, <a href="Poco.XML.DocumentEvent.html" title="class Poco::XML::DocumentEvent">DocumentEvent</a>, <a href="Poco.XML.DocumentFragment.html" title="class Poco::XML::DocumentFragment">DocumentFragment</a>, <a href="Poco.XML.DocumentType.html" title="class Poco::XML::DocumentType">DocumentType</a>, <a href="Poco.XML.Element.html" title="class Poco::XML::Element">Element</a>, <a href="Poco.XML.ElementsByTagNameList.html" title="class Poco::XML::ElementsByTagNameList">ElementsByTagNameList</a>, <a href="Poco.XML.ElementsByTagNameListNS.html" title="class Poco::XML::ElementsByTagNameListNS">ElementsByTagNameListNS</a>, <a href="Poco.XML.Entity.html" title="class Poco::XML::Entity">Entity</a>, <a href="Poco.XML.EntityReference.html" title="class Poco::XML::EntityReference">EntityReference</a>, <a href="Poco.XML.EntityResolver.html" title="class Poco::XML::EntityResolver">EntityResolver</a>, <a href="Poco.XML.EntityResolverImpl.html" title="class Poco::XML::EntityResolverImpl">EntityResolverImpl</a>, <a href="Poco.XML.ErrorHandler.html" title="class Poco::XML::ErrorHandler">ErrorHandler</a>, <a href="Poco.XML.Event.html" title="class Poco::XML::Event">Event</a>, <a href="Poco.XML.EventDispatcher.html" title="class Poco::XML::EventDispatcher">EventDispatcher</a>, <a href="Poco.XML.EventException.html" title="class Poco::XML::EventException">EventException</a>, <a href="Poco.XML.EventListener.html" title="class Poco::XML::EventListener">EventListener</a>, <a href="Poco.XML.EventTarget.html" title="class Poco::XML::EventTarget">EventTarget</a>, <a href="Poco.XML.InputSource.html" title="class Poco::XML::InputSource">InputSource</a>, <a href="Poco.XML.LexicalHandler.html" title="class Poco::XML::LexicalHandler">LexicalHandler</a>, <a href="Poco.XML.Locator.html" title="class Poco::XML::Locator">Locator</a>, <a href="Poco.XML.LocatorImpl.html" title="class Poco::XML::LocatorImpl">LocatorImpl</a>, <a href="Poco.XML.MutationEvent.html" title="class Poco::XML::MutationEvent">MutationEvent</a>, <a href="Poco.XML.Name.html" title="class Poco::XML::Name">Name</a>, <a href="Poco.XML.NamePool.html" title="class Poco::XML::NamePool">NamePool</a>, <a href="Poco.XML.NamedNodeMap.html" title="class Poco::XML::NamedNodeMap">NamedNodeMap</a>, <a href="Poco.XML.NamespacePrefixesStrategy.html" title="class Poco::XML::NamespacePrefixesStrategy">NamespacePrefixesStrategy</a>, <a href="Poco.XML.NamespaceStrategy.html" title="class Poco::XML::NamespaceStrategy">NamespaceStrategy</a>, <a href="Poco.XML.NamespaceSupport.html" title="class Poco::XML::NamespaceSupport">NamespaceSupport</a>, <a href="Poco.XML.NoNamespacePrefixesStrategy.html" title="class Poco::XML::NoNamespacePrefixesStrategy">NoNamespacePrefixesStrategy</a>, <a href="Poco.XML.NoNamespacesStrategy.html" title="class Poco::XML::NoNamespacesStrategy">NoNamespacesStrategy</a>, <a href="Poco.XML.Node.html" title="class Poco::XML::Node">Node</a>, <a href="Poco.XML.NodeAppender.html" title="class Poco::XML::NodeAppender">NodeAppender</a>, <a href="Poco.XML.NodeFilter.html" title="class Poco::XML::NodeFilter">NodeFilter</a>, <a href="Poco.XML.NodeIterator.html" title="class Poco::XML::NodeIterator">NodeIterator</a>, <a href="Poco.XML.NodeList.html" title="class Poco::XML::NodeList">NodeList</a>, <a href="Poco.XML.Notation.html" title="class Poco::XML::Notation">Notation</a>, <a href="Poco.XML.ParserEngine.html" title="class Poco::XML::ParserEngine">ParserEngine</a>, <a href="Poco.XML.ProcessingInstruction.html" title="class Poco::XML::ProcessingInstruction">ProcessingInstruction</a>, <a href="Poco.XML.SAXException.html" title="class Poco::XML::SAXException">SAXException</a>, <a href="Poco.XML.SAXNotRecognizedException.html" title="class Poco::XML::SAXNotRecognizedException">SAXNotRecognizedException</a>, <a href="Poco.XML.SAXNotSupportedException.html" title="class Poco::XML::SAXNotSupportedException">SAXNotSupportedException</a>, <a href="Poco.XML.SAXParseException.html" title="class Poco::XML::SAXParseException">SAXParseException</a>, <a href="Poco.XML.SAXParser.html" title="class Poco::XML::SAXParser">SAXParser</a>, <a href="Poco.XML.Text.html" title="class Poco::XML::Text">Text</a>, <a href="Poco.XML.TreeWalker.html" title="class Poco::XML::TreeWalker">TreeWalker</a>, <a href="Poco.XML.WhitespaceFilter.html" title="class Poco::XML::WhitespaceFilter">WhitespaceFilter</a>, <a href="Poco.XML.XMLException.html" title="class Poco::XML::XMLException">XMLException</a>, <a href="Poco.XML.XMLFilter.html" title="class Poco::XML::XMLFilter">XMLFilter</a>, <a href="Poco.XML.XMLFilterImpl.html" title="class Poco::XML::XMLFilterImpl">XMLFilterImpl</a>, <a href="Poco.XML.XMLReader.html" title="class Poco::XML::XMLReader">XMLReader</a>, <a href="Poco.XML.XMLWriter.html" title="class Poco::XML::XMLWriter">XMLWriter</a></p>
+<p><b>Types:</b> 
+<a href="Poco.XML.html#21385" title="Poco::XML::XMLByteInputStream">XMLByteInputStream</a>, <a href="Poco.XML.html#21386" title="Poco::XML::XMLByteOutputStream">XMLByteOutputStream</a>, <a href="Poco.XML.html#21389" title="Poco::XML::XMLChar">XMLChar</a>, <a href="Poco.XML.html#21387" title="Poco::XML::XMLCharInputStream">XMLCharInputStream</a>, <a href="Poco.XML.html#21388" title="Poco::XML::XMLCharOutputStream">XMLCharOutputStream</a>, <a href="Poco.XML.html#21390" title="Poco::XML::XMLString">XMLString</a></p>
+<p><b>Functions:</b> 
+<a href="Poco.XML.html#21391" title="Poco::XML::fromXMLString()">fromXMLString</a>, <a href="Poco.XML.html#21078" title="Poco::XML::swap()">swap</a>, <a href="Poco.XML.html#21393" title="Poco::XML::toXMLString()">toXMLString</a></p>
+<h2>Classes</h2>
+<h3><a href="Poco.XML.AbstractContainerNode.html" class="class">class AbstractContainerNode</a></h3>
+<p> <a href="Poco.XML.AbstractContainerNode.html" title="class Poco::XML::AbstractContainerNode">AbstractContainerNode</a> is an implementation of <a href="Poco.XML.Node.html" title="class Poco::XML::Node">Node</a>
+ that stores and manages child nodes.&nbsp;<a href="Poco.XML.AbstractContainerNode.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.AbstractNode.html" class="class">class AbstractNode</a></h3>
+<p> <a href="Poco.XML.AbstractNode.html" title="class Poco::XML::AbstractNode">AbstractNode</a> provides a basic implementation
+ of the <a href="Poco.XML.Node.html" title="class Poco::XML::Node">Node</a> interface for all types of nodes
+ that do not contain other nodes.&nbsp;<a href="Poco.XML.AbstractNode.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.Attr.html" class="class">class Attr</a></h3>
+<p> The <a href="Poco.XML.Attr.html" title="class Poco::XML::Attr">Attr</a> interface represents an attribute in an <a href="Poco.XML.Element.html" title="class Poco::XML::Element">Element</a> object.&nbsp;<a href="Poco.XML.Attr.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.AttrMap.html" class="class">class AttrMap</a></h3>
+<p>&nbsp;<a href="Poco.XML.AttrMap.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.Attributes.html" class="class">class Attributes</a></h3>
+<p> Interface for a list of <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> attributes.&nbsp;<a href="Poco.XML.Attributes.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.AttributesImpl.html" class="class">class AttributesImpl</a></h3>
+<p> This class provides a default implementation of the SAX2 <a href="Poco.XML.Attributes.html" title="class Poco::XML::Attributes">Attributes</a> interface, 
+ with the addition of manipulators so that the list can be modified or reused.&nbsp;<a href="Poco.XML.AttributesImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.CDATASection.html" class="class">class CDATASection</a></h3>
+<p> CDATA sections are used to escape blocks of text containing characters that
+ would otherwise be regarded as markup.&nbsp;<a href="Poco.XML.CDATASection.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.CharacterData.html" class="class">class CharacterData</a></h3>
+<p> The <a href="Poco.XML.CharacterData.html" title="class Poco::XML::CharacterData">CharacterData</a> interface extends <a href="Poco.XML.Node.html" title="class Poco::XML::Node">Node</a> with a set of attributes and methods
+ for accessing character data in the DOM.&nbsp;<a href="Poco.XML.CharacterData.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.ChildNodesList.html" class="class">class ChildNodesList</a></h3>
+<p>&nbsp;<a href="Poco.XML.ChildNodesList.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.Comment.html" class="class">class Comment</a></h3>
+<p> This interface inherits from <a href="Poco.XML.CharacterData.html" title="class Poco::XML::CharacterData">CharacterData</a> and represents the content of
+ a comment, i.&nbsp;<a href="Poco.XML.Comment.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.ContentHandler.html" class="class">class ContentHandler</a></h3>
+<p> Receive notification of the logical content of a document.&nbsp;<a href="Poco.XML.ContentHandler.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.DOMBuilder.html" class="class">class DOMBuilder</a></h3>
+<p> This class builds a tree representation of an
+ <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> document, according to the W3C <a href="Poco.XML.Document.html" title="class Poco::XML::Document">Document</a> Object Model, Level 1 and 2
+ specifications.&nbsp;<a href="Poco.XML.DOMBuilder.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.DOMException.html" class="class">class DOMException</a></h3>
+<p> DOM operations only raise exceptions in &quot;exceptional&quot; circumstances, i.&nbsp;<a href="Poco.XML.DOMException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.DOMImplementation.html" class="class">class DOMImplementation</a></h3>
+<p> The <a href="Poco.XML.DOMImplementation.html" title="class Poco::XML::DOMImplementation">DOMImplementation</a> interface provides a number of methods for
+ performing operations that are independent of any particular instance
+ of the document object model.&nbsp;<a href="Poco.XML.DOMImplementation.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.DOMObject.html" class="class">class DOMObject</a></h3>
+<p> The base class for all objects in the <a href="Poco.XML.Document.html" title="class Poco::XML::Document">Document</a> Object Model.&nbsp;<a href="Poco.XML.DOMObject.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.DOMParser.html" class="class">class DOMParser</a></h3>
+<p> This is a convenience class that combines a
+ <a href="Poco.XML.DOMBuilder.html" title="class Poco::XML::DOMBuilder">DOMBuilder</a> with a <a href="Poco.XML.SAXParser.html" title="class Poco::XML::SAXParser">SAXParser</a>, with the optional
+ support of a <a href="Poco.XML.WhitespaceFilter.html" title="class Poco::XML::WhitespaceFilter">WhitespaceFilter</a>.&nbsp;<a href="Poco.XML.DOMParser.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.DOMSerializer.html" class="class">class DOMSerializer</a></h3>
+<p> The <a href="Poco.XML.DOMSerializer.html" title="class Poco::XML::DOMSerializer">DOMSerializer</a> serializes a DOM document
+ into a sequence of SAX events which are
+ reported to the registered SAX event
+ handlers.&nbsp;<a href="Poco.XML.DOMSerializer.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.DOMWriter.html" class="class">class DOMWriter</a></h3>
+<p> The <a href="Poco.XML.DOMWriter.html" title="class Poco::XML::DOMWriter">DOMWriter</a> uses a <a href="Poco.XML.DOMSerializer.html" title="class Poco::XML::DOMSerializer">DOMSerializer</a> with an
+ <a href="Poco.XML.XMLWriter.html" title="class Poco::XML::XMLWriter">XMLWriter</a> to serialize a DOM document into
+ textual <a href="Poco.XML.html" title="namespace Poco::XML">XML</a>.&nbsp;<a href="Poco.XML.DOMWriter.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.DTDHandler.html" class="class">class DTDHandler</a></h3>
+<p> If a SAX application needs information about notations and unparsed entities, 
+ then the application implements this interface and registers an instance with the 
+ SAX parser using the parser's setDTDHandler method.&nbsp;<a href="Poco.XML.DTDHandler.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.DTDMap.html" class="class">class DTDMap</a></h3>
+<p> This implementation of <a href="Poco.XML.NamedNodeMap.html" title="class Poco::XML::NamedNodeMap">NamedNodeMap</a>
+ is returned by <a href="Poco.XML.DocumentType.html#19683" title="Poco::XML::DocumentType::entities()">DocumentType::entities</a>()
+ and <a href="Poco.XML.DocumentType.html#19684" title="Poco::XML::DocumentType::notations()">DocumentType::notations</a>().&nbsp;<a href="Poco.XML.DTDMap.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.DeclHandler.html" class="class">class DeclHandler</a></h3>
+<p> This is an optional extension handler for SAX2 to provide information 
+ about DTD declarations in an <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> document.&nbsp;<a href="Poco.XML.DeclHandler.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.DefaultHandler.html" class="class">class DefaultHandler</a></h3>
+<p> Default base class for SAX2 event handlers.&nbsp;<a href="Poco.XML.DefaultHandler.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.Document.html" class="class">class Document</a></h3>
+<p> The <a href="Poco.XML.Document.html" title="class Poco::XML::Document">Document</a> interface represents the entire HTML or <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> document.&nbsp;<a href="Poco.XML.Document.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.DocumentEvent.html" class="class">class DocumentEvent</a></h3>
+<p> The <a href="Poco.XML.DocumentEvent.html" title="class Poco::XML::DocumentEvent">DocumentEvent</a> interface provides a mechanism by which the user can create
+ an <a href="Poco.XML.Event.html" title="class Poco::XML::Event">Event</a> of a type supported by the implementation.&nbsp;<a href="Poco.XML.DocumentEvent.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.DocumentFragment.html" class="class">class DocumentFragment</a></h3>
+<p> <a href="Poco.XML.DocumentFragment.html" title="class Poco::XML::DocumentFragment">DocumentFragment</a> is a &quot;lightweight&quot; or &quot;minimal&quot; <a href="Poco.XML.Document.html" title="class Poco::XML::Document">Document</a> object.&nbsp;<a href="Poco.XML.DocumentFragment.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.DocumentType.html" class="class">class DocumentType</a></h3>
+<p> Each <a href="Poco.XML.Document.html" title="class Poco::XML::Document">Document</a> has a doctype attribute whose value is either null or a <a href="Poco.XML.DocumentType.html" title="class Poco::XML::DocumentType">DocumentType</a>
+ object.&nbsp;<a href="Poco.XML.DocumentType.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.Element.html" class="class">class Element</a></h3>
+<p> The <a href="Poco.XML.Element.html" title="class Poco::XML::Element">Element</a> interface represents an element in an <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> document.&nbsp;<a href="Poco.XML.Element.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.ElementsByTagNameList.html" class="class">class ElementsByTagNameList</a></h3>
+<p>&nbsp;<a href="Poco.XML.ElementsByTagNameList.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.ElementsByTagNameListNS.html" class="class">class ElementsByTagNameListNS</a></h3>
+<p>&nbsp;<a href="Poco.XML.ElementsByTagNameListNS.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.Entity.html" class="class">class Entity</a></h3>
+<p> This interface represents an entity, either parsed or unparsed, in an <a href="Poco.XML.html" title="namespace Poco::XML">XML</a>
+ document.&nbsp;<a href="Poco.XML.Entity.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.EntityReference.html" class="class">class EntityReference</a></h3>
+<p> <a href="Poco.XML.EntityReference.html" title="class Poco::XML::EntityReference">EntityReference</a> objects may be inserted into the structure model when an
+ entity reference is in the source document, or when the user wishes to insert
+ an entity reference.&nbsp;<a href="Poco.XML.EntityReference.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.EntityResolver.html" class="class">class EntityResolver</a></h3>
+<p> If a SAX application needs to implement customized handling for external entities, 
+ it must implement this interface and register an instance with the SAX driver using 
+ the setEntityResolver method.&nbsp;<a href="Poco.XML.EntityResolver.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.EntityResolverImpl.html" class="class">class EntityResolverImpl</a></h3>
+<p> A default implementation of the <a href="Poco.XML.EntityResolver.html" title="class Poco::XML::EntityResolver">EntityResolver</a> interface.&nbsp;<a href="Poco.XML.EntityResolverImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.ErrorHandler.html" class="class">class ErrorHandler</a></h3>
+<p> If a SAX application needs to implement customized error handling, it must 
+ implement this interface and then register an instance with the <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> reader 
+ using the setErrorHandler method.&nbsp;<a href="Poco.XML.ErrorHandler.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.Event.html" class="class">class Event</a></h3>
+<p> The <a href="Poco.XML.Event.html" title="class Poco::XML::Event">Event</a> interface is used to provide contextual information about an event
+ to the handler processing the event.&nbsp;<a href="Poco.XML.Event.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.EventDispatcher.html" class="class">class EventDispatcher</a></h3>
+<p> This helper class manages event listener subscriptions
+ and event dispatching for <a href="Poco.XML.AbstractNode.html" title="class Poco::XML::AbstractNode">AbstractNode</a>.&nbsp;<a href="Poco.XML.EventDispatcher.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.EventException.html" class="class">class EventException</a></h3>
+<p> <a href="Poco.XML.Event.html" title="class Poco::XML::Event">Event</a> operations may throw an <a href="Poco.XML.EventException.html" title="class Poco::XML::EventException">EventException</a> as 
+ specified in their method descriptions.&nbsp;<a href="Poco.XML.EventException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.EventListener.html" class="class">class EventListener</a></h3>
+<p> The <a href="Poco.XML.EventListener.html" title="class Poco::XML::EventListener">EventListener</a> interface is the primary method for handling events.&nbsp;<a href="Poco.XML.EventListener.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.EventTarget.html" class="class">class EventTarget</a></h3>
+<p> The <a href="Poco.XML.EventTarget.html" title="class Poco::XML::EventTarget">EventTarget</a> interface is implemented by all Nodes in an implementation
+ which supports the DOM <a href="Poco.XML.Event.html" title="class Poco::XML::Event">Event</a> Model.&nbsp;<a href="Poco.XML.EventTarget.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.InputSource.html" class="class">class InputSource</a></h3>
+<p> This class allows a SAX application to encapsulate information about an input 
+ source in a single object, which may include a public identifier, a system 
+ identifier, a byte stream (possibly with a specified encoding), and/or a character 
+ stream.&nbsp;<a href="Poco.XML.InputSource.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.LexicalHandler.html" class="class">class LexicalHandler</a></h3>
+<p> This is an optional extension handler for SAX2 to provide lexical information 
+ about an <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> document, such as comments and CDATA section boundaries.&nbsp;<a href="Poco.XML.LexicalHandler.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.Locator.html" class="class">class Locator</a></h3>
+<p> Interface for associating a SAX event with a document location.&nbsp;<a href="Poco.XML.Locator.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.LocatorImpl.html" class="class">class LocatorImpl</a></h3>
+<p> Provide an optional convenience implementation of <a href="Poco.XML.Locator.html" title="class Poco::XML::Locator">Locator</a>.&nbsp;<a href="Poco.XML.LocatorImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.MutationEvent.html" class="class">class MutationEvent</a></h3>
+<p> The <a href="Poco.XML.MutationEvent.html" title="class Poco::XML::MutationEvent">MutationEvent</a> interface provides specific contextual 
+ information associated with Mutation events.&nbsp;<a href="Poco.XML.MutationEvent.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.Name.html" class="class">class Name</a></h3>
+<p> An <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> element or attribute name, consisting of a
+ qualified name, a namespace <a href="Poco.URI.html" title="class Poco::URI">URI</a> and a local name.&nbsp;<a href="Poco.XML.Name.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.NamePool.html" class="class">class NamePool</a></h3>
+<p> A hashtable that stores <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> names consisting of an <a href="Poco.URI.html" title="class Poco::URI">URI</a>, a
+ local name and a qualified name.&nbsp;<a href="Poco.XML.NamePool.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.NamedNodeMap.html" class="class">class NamedNodeMap</a></h3>
+<p> Objects implementing the <a href="Poco.XML.NamedNodeMap.html" title="class Poco::XML::NamedNodeMap">NamedNodeMap</a> interface are used to represent collections
+ of nodes that can be accessed by name.&nbsp;<a href="Poco.XML.NamedNodeMap.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.NamespacePrefixesStrategy.html" class="class">class NamespacePrefixesStrategy</a></h3>
+<p> The <a href="Poco.XML.NamespaceStrategy.html" title="class Poco::XML::NamespaceStrategy">NamespaceStrategy</a> implementation used if namespaces
+ processing is requested and prefixes are reported.&nbsp;<a href="Poco.XML.NamespacePrefixesStrategy.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.NamespaceStrategy.html" class="class">class NamespaceStrategy</a></h3>
+<p> This class is used by <a href="Poco.XML.ParserEngine.html" title="class Poco::XML::ParserEngine">ParserEngine</a> to handle the
+ startElement, endElement, startPrefixMapping and
+ endPrefixMapping events.&nbsp;<a href="Poco.XML.NamespaceStrategy.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.NamespaceSupport.html" class="class">class NamespaceSupport</a></h3>
+<p> Encapsulate Namespace logic for use by SAX drivers.&nbsp;<a href="Poco.XML.NamespaceSupport.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.NoNamespacePrefixesStrategy.html" class="class">class NoNamespacePrefixesStrategy</a></h3>
+<p> The <a href="Poco.XML.NamespaceStrategy.html" title="class Poco::XML::NamespaceStrategy">NamespaceStrategy</a> implementation used if namespaces
+ processing is requested, but prefixes are not reported.&nbsp;<a href="Poco.XML.NoNamespacePrefixesStrategy.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.NoNamespacesStrategy.html" class="class">class NoNamespacesStrategy</a></h3>
+<p> The <a href="Poco.XML.NamespaceStrategy.html" title="class Poco::XML::NamespaceStrategy">NamespaceStrategy</a> implementation used if no namespaces
+ processing is requested.&nbsp;<a href="Poco.XML.NoNamespacesStrategy.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.Node.html" class="class">class Node</a></h3>
+<p> The <a href="Poco.XML.Node.html" title="class Poco::XML::Node">Node</a> interface is the primary datatype for the entire <a href="Poco.XML.Document.html" title="class Poco::XML::Document">Document</a> Object
+ Model.&nbsp;<a href="Poco.XML.Node.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.NodeAppender.html" class="class">class NodeAppender</a></h3>
+<p> The <a href="Poco.XML.NodeAppender.html" title="class Poco::XML::NodeAppender">NodeAppender</a> class provides a very fast way to
+ build larger DOM documents.&nbsp;<a href="Poco.XML.NodeAppender.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.NodeFilter.html" class="class">class NodeFilter</a></h3>
+<p> Filters are objects that know how to &quot;filter out&quot; nodes.&nbsp;<a href="Poco.XML.NodeFilter.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.NodeIterator.html" class="class">class NodeIterator</a></h3>
+<p> Iterators are used to step through a set of nodes, e.&nbsp;<a href="Poco.XML.NodeIterator.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.NodeList.html" class="class">class NodeList</a></h3>
+<p> The <a href="Poco.XML.NodeList.html" title="class Poco::XML::NodeList">NodeList</a> interface provides the abstraction of an ordered
+ collection of nodes, without defining or constraining how this
+ collection is implemented.&nbsp;<a href="Poco.XML.NodeList.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.Notation.html" class="class">class Notation</a></h3>
+<p> This interface represents a notation declared in the DTD.&nbsp;<a href="Poco.XML.Notation.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.ParserEngine.html" class="class">class ParserEngine</a></h3>
+<p> This class provides an object-oriented, stream-based, 
+ low-level interface to the <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> Parser Toolkit (expat).&nbsp;<a href="Poco.XML.ParserEngine.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.ProcessingInstruction.html" class="class">class ProcessingInstruction</a></h3>
+<p> The <a href="Poco.XML.ProcessingInstruction.html" title="class Poco::XML::ProcessingInstruction">ProcessingInstruction</a> interface represents a &quot;processing instruction&quot;,
+ used in <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> as a way to keep processor-specific information in the text
+ of the document.&nbsp;<a href="Poco.XML.ProcessingInstruction.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.SAXException.html" class="class">class SAXException</a></h3>
+<p>&nbsp;<a href="Poco.XML.SAXException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.SAXNotRecognizedException.html" class="class">class SAXNotRecognizedException</a></h3>
+<p> The base class for all SAX-related exceptions like <a href="Poco.XML.SAXParseException.html" title="class Poco::XML::SAXParseException">SAXParseException</a>,
+ <a href="Poco.XML.SAXNotRecognizedException.html" title="class Poco::XML::SAXNotRecognizedException">SAXNotRecognizedException</a> or <a href="Poco.XML.SAXNotSupportedException.html" title="class Poco::XML::SAXNotSupportedException">SAXNotSupportedException</a>.&nbsp;<a href="Poco.XML.SAXNotRecognizedException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.SAXNotSupportedException.html" class="class">class SAXNotSupportedException</a></h3>
+<p> <a href="Poco.Exception.html" title="class Poco::Exception">Exception</a> class for an unrecognized identifier.&nbsp;<a href="Poco.XML.SAXNotSupportedException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.SAXParseException.html" class="class">class SAXParseException</a></h3>
+<p> <a href="Poco.Exception.html" title="class Poco::Exception">Exception</a> class for an unsupported operation.&nbsp;<a href="Poco.XML.SAXParseException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.SAXParser.html" class="class">class SAXParser</a></h3>
+<p> This class provides a SAX2 (Simple API for <a href="Poco.XML.html" title="namespace Poco::XML">XML</a>) interface to expat, 
+ the <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> parser toolkit.&nbsp;<a href="Poco.XML.SAXParser.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.Text.html" class="class">class Text</a></h3>
+<p> The <a href="Poco.XML.Text.html" title="class Poco::XML::Text">Text</a> interface inherits from <a href="Poco.XML.CharacterData.html" title="class Poco::XML::CharacterData">CharacterData</a> and represents the textual
+ content (termed character data in <a href="Poco.XML.html" title="namespace Poco::XML">XML</a>) of an <a href="Poco.XML.Element.html" title="class Poco::XML::Element">Element</a> or <a href="Poco.XML.Attr.html" title="class Poco::XML::Attr">Attr</a>.&nbsp;<a href="Poco.XML.Text.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.TreeWalker.html" class="class">class TreeWalker</a></h3>
+<p> <a href="Poco.XML.TreeWalker.html" title="class Poco::XML::TreeWalker">TreeWalker</a> objects are used to navigate a document tree or subtree using
+ the view of the document defined by their whatToShow flags and filter (if
+ any).&nbsp;<a href="Poco.XML.TreeWalker.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.WhitespaceFilter.html" class="class">class WhitespaceFilter</a></h3>
+<p> This implementation of the SAX2 <a href="Poco.XML.XMLFilter.html" title="class Poco::XML::XMLFilter">XMLFilter</a> interface
+ filters all whitespace-only character data element
+ content.&nbsp;<a href="Poco.XML.WhitespaceFilter.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.XMLException.html" class="class">class XMLException</a></h3>
+<p>&nbsp;<a href="Poco.XML.XMLException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.XMLFilter.html" class="class">class XMLFilter</a></h3>
+<p> Interface for an <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> filter.&nbsp;<a href="Poco.XML.XMLFilter.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.XMLFilterImpl.html" class="class">class XMLFilterImpl</a></h3>
+<p> Base class for deriving an <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> filter.&nbsp;<a href="Poco.XML.XMLFilterImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.XMLReader.html" class="class">class XMLReader</a></h3>
+<p> Interface for reading an <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> document using callbacks.&nbsp;<a href="Poco.XML.XMLReader.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.XML.XMLWriter.html" class="class">class XMLWriter</a></h3>
+<p> This class serializes SAX2 <a href="Poco.XML.ContentHandler.html" title="class Poco::XML::ContentHandler">ContentHandler</a>, <a href="Poco.XML.LexicalHandler.html" title="class Poco::XML::LexicalHandler">LexicalHandler</a> and
+ <a href="Poco.XML.DTDHandler.html" title="class Poco::XML::DTDHandler">DTDHandler</a> events back into a stream.&nbsp;<a href="Poco.XML.XMLWriter.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h2>Types</h2>
+<h3><a name="21385">XMLByteInputStream</a></h3>
+<p class="decl">typedef std::istream <a href="Poco.XML.html#21385" title="Poco::XML::XMLByteInputStream">XMLByteInputStream</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="21386">XMLByteOutputStream</a></h3>
+<p class="decl">typedef std::ostream <a href="Poco.XML.html#21386" title="Poco::XML::XMLByteOutputStream">XMLByteOutputStream</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="21389">XMLChar</a></h3>
+<p class="decl">typedef char <a href="Poco.XML.html#21389" title="Poco::XML::XMLChar">XMLChar</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="21387">XMLCharInputStream</a></h3>
+<p class="decl">typedef std::istream <a href="Poco.XML.html#21387" title="Poco::XML::XMLCharInputStream">XMLCharInputStream</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="21388">XMLCharOutputStream</a></h3>
+<p class="decl">typedef std::ostream <a href="Poco.XML.html#21388" title="Poco::XML::XMLCharOutputStream">XMLCharOutputStream</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="21390">XMLString</a></h3>
+<p class="decl">typedef std::string <a href="Poco.XML.html#21390" title="Poco::XML::XMLString">XMLString</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Functions</h2>
+<h3><a name="21391">fromXMLString</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">inline const std::string &amp; fromXMLString(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.XML.html#21390" title="Poco::XML::XMLString">XMLString</a> &amp; str<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="21078">swap</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">inline void swap(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.XML.Name.html" title="class Poco::XML::Name">Name</a> &amp; n1,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.XML.Name.html" title="class Poco::XML::Name">Name</a> &amp; n2<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="21393">toXMLString</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">inline const <a href="Poco.XML.html#21390" title="Poco::XML::XMLString">XMLString</a> &amp; toXMLString(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; str<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

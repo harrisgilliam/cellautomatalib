@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::FileInputStream</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="symbol">class FileInputStream</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> Streams<br />
+<b>Header:</b> Poco/FileStream.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>An input stream for reading from a file. </p>
+<p>Files are always opened in binary mode, a text mode with CR-LF translation is not supported. Thus, the file is always opened as if the std::ios::binary flag was specified. Use an <a href="Poco.InputLineEndingConverter.html" title="class Poco::InputLineEndingConverter">InputLineEndingConverter</a> if you require CR-LF translation. </p>
+<p>On Windows platforms, if POCO_WIN32_UTF8 is #define'd, UTF-8 encoded <a href="Poco.Unicode.html" title="class Poco::Unicode">Unicode</a> paths are correctly handled. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.FileIOS.html" title="class Poco::FileIOS">FileIOS</a>, std::istream</p>
+<p><b>All Base Classes: </b><a href="Poco.FileIOS.html" title="class Poco::FileIOS">FileIOS</a>, std::ios, std::istream</p>
+<h2>Member Summary</h2>
+<p><b>Inherited Functions: </b><a href="Poco.FileIOS.html#7153" title="Poco::FileIOS::close()">close</a>, <a href="Poco.FileIOS.html#7150" title="Poco::FileIOS::open()">open</a>, <a href="Poco.FileIOS.html#7154" title="Poco::FileIOS::rdbuf()">rdbuf</a></p>
+<h2>Constructors</h2>
+<h3><a name="7158">FileInputStream</a></h3>
+<p class="decl"><a href="Poco.FileInputStream.html" title="class Poco::FileInputStream">FileInputStream</a>();</p>
+<div class="description">
+<p>Creates an unopened <a href="Poco.FileInputStream.html" title="class Poco::FileInputStream">FileInputStream</a>. </p>
+</div>
+<h3><a name="7159">FileInputStream</a></h3>
+<p class="decl"><a href="Poco.FileInputStream.html" title="class Poco::FileInputStream">FileInputStream</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; path,<br />&nbsp;&nbsp;&nbsp;&nbsp;std::ios::openmode mode = std::ios::in<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.FileInputStream.html" title="class Poco::FileInputStream">FileInputStream</a> for the file given by path, using the given mode. </p>
+<p>The std::ios::in flag is always set, regardless of the actual value specified for mode. </p>
+<p>Throws a <a href="Poco.FileNotFoundException.html" title="class Poco::FileNotFoundException">FileNotFoundException</a> (or a similar exception) if the file  does not exist or is not accessible for other reasons. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="7162">~FileInputStream</a></h3>
+<p class="decl">~<a href="Poco.FileInputStream.html" title="class Poco::FileInputStream">FileInputStream</a>();</p>
+<div class="description">
+<p>Destroys the stream. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

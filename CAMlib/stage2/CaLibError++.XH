@@ -1,0 +1,210 @@
+#ifndef _CALIBERROR_H_
+#define _CALIBERROR_H_
+
+#include <iostream>
+
+#include <CaLib++.H>
+#include <CaLibStream++.H>
+
+#include <cstdio>
+#include <cstdlib>
+#include <cstdarg>
+#include <cstring>
+
+using namespace std;
+
+
+/*****************************************************************************/
+/********************************* DEFINES ***********************************/
+/*****************************************************************************/
+#define NULLP(ptr, msg)	CaLibAbort((ptr) == NULL, msg)
+
+
+/*****************************************************************************/
+/******************************** TEMPLATES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/*************************** CLASSES & TYPEDEFS ******************************/
+/*****************************************************************************/
+class CaLibError {
+public:
+  typedef char (*CALIBERRORHOOK)();
+
+  typedef enum {
+    DefAct, MsgAct, DbugAct, WarnAct, AbortAct, DieAct
+  } CaLibErrorAction;
+
+  typedef enum {
+    Enable = 0x1, Deadly = 0x2, Verbose = 0x4, Traceback = 0x8
+  } CaLibErrorFlags;
+
+  CaLibError(CaLibErrorAction, const char *, ...);
+  CaLibError(CALIBSTREAM, CaLibErrorFlags, const char *, ...);
+  CaLibError(const CaLibError &);
+  virtual ~CaLibError(void);
+
+  inline void operator()(bool, ...) const;
+  inline void operator()(bool, CALIBSTREAM, ...) const;
+  inline void operator()(bool, const char *, ...) const;
+  inline void operator()(bool, CALIBSTREAM, const char *, ...) const;
+
+  const CaLibError & operator=(const CaLibError &);
+
+  void Perror(CALIBSTREAM, char *) const;
+
+  virtual void SetAction(CaLibErrorAction);
+  virtual CaLibErrorAction GetAction(void);
+
+  virtual void SetFlags(CaLibErrorFlags);
+  virtual CaLibErrorFlags GetFlags(void);
+
+  virtual void SetStream(CALIBSTREAM);
+  virtual const CALIBSTREAM GetStream(void);
+
+  virtual void SetMessage(const char *, ...);
+  virtual const char * GetMessage(void);
+
+  virtual void SetHook(CALIBERRORHOOK);
+  virtual CALIBERRORHOOK GetHook(void);
+
+  virtual void SetAppName(const char *);
+  virtual const char * GetAppName(void);
+
+  virtual void CleanExit(void) const;
+
+
+protected:
+  inline virtual void take_action(CALIBSTREAM, const char *, va_list) const;
+
+  virtual void Default(CALIBSTREAM, const char *, va_list) const;
+  virtual void Msg(CALIBSTREAM, const char *, va_list) const;
+  virtual void Debug(CALIBSTREAM, const char *, va_list) const;
+  virtual void Warn(CALIBSTREAM, const char *, va_list) const;
+  virtual void Abort(CALIBSTREAM, const char *, va_list) const;
+  virtual void Die(CALIBSTREAM, const char *, va_list) const;
+
+
+
+private:
+  static char *appname;
+
+  CALIBSTREAM stm;
+  CALIBERRORHOOK hook;
+  CaLibErrorAction action;
+  char *msg;
+  unsigned char enable : 1;
+  unsigned char deadly : 1;
+  unsigned char verbose : 1;
+  unsigned char traceback : 1;
+};
+
+/*****************************************************************************/
+/********************************* INLINES ***********************************/
+/*****************************************************************************/
+inline void CaLibError::take_action(CALIBSTREAM s, const char *fmt, va_list args) const
+{
+  switch(action) {
+  case DefAct: {
+    Default(s, fmt, args);
+    break;
+  }
+
+  case MsgAct: {
+    Msg(s, fmt, args);
+    break;
+  }
+
+  case DbugAct: {
+    Debug(s, fmt, args);
+    break;
+  }
+
+  case WarnAct: {
+    Warn(s, fmt, args);
+    break;
+  }
+
+  case AbortAct: {
+    Abort(s, fmt, args);
+    break;
+  }
+
+  case DieAct: {
+    Die(s, fmt, args);
+    break;
+  }
+
+  default: {
+    cerr << endl << "FATAL ERROR: invalid action for CaLibError object" << endl << flush;
+    exit(-1);
+  }
+  }
+}
+
+inline void CaLibError::operator()(bool f, ...) const
+{
+  va_list args;
+
+  va_start(args, f);
+
+  if (f)
+    take_action(stm, NULL, args);
+
+  va_end(args);
+}
+
+inline void CaLibError::operator()(bool f, CALIBSTREAM s, ...) const
+{
+  va_list args;
+
+  va_start(args, s);
+
+  if (f)
+    take_action(s, NULL, args);
+
+  va_end(args);
+}
+
+inline void CaLibError::operator()(bool f, const char *fmt, ...) const
+{
+  va_list args;
+
+  va_start(args, fmt);
+
+  if (f)
+    take_action(stm, fmt, args);
+
+  va_end(args);
+}
+
+inline void CaLibError::operator()(bool f, CALIBSTREAM s, const char *fmt, ...) const
+{
+  va_list args;
+
+  va_start(args, fmt);
+
+  if (f)
+    take_action(s, fmt, args);
+
+  va_end(args);
+}
+
+/*****************************************************************************/
+/******************************* PROTOTYPES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/********************************* GLOBALS ***********************************/
+/*****************************************************************************/
+
+extern CaLibError CaLibMessage;
+extern CaLibError CaLibDebug;
+extern CaLibError CaLibWarning;
+extern CaLibError CaLibAbort;
+extern CaLibError CaLibDie;
+extern CaLibError NullP;
+
+#endif

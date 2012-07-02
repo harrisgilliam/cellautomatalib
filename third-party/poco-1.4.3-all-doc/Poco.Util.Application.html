@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Util::Application</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Util.html" class="namespace">Poco::Util</a></h1>
+<h1 class="symbol">class Application</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Util<br />
+<b>Package:</b> Application<br />
+<b>Header:</b> Poco/Util/Application.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>The <a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a> class implements the main subsystem in a process. The application class is responsible for initializing all its subsystems. </p>
+<p>Subclasses can and should override the following virtual methods: </p>
+<ul>
+<li><a href="Poco.Util.Application.html#17379" title="Poco::Util::Application::initialize()">initialize</a>() (the one-argument, protected variant) </li>
+<li><a href="Poco.Util.Application.html#17381" title="Poco::Util::Application::uninitialize()">uninitialize</a>() </li>
+<li><a href="Poco.Util.Application.html#17382" title="Poco::Util::Application::reinitialize()">reinitialize</a>() </li>
+<li><a href="Poco.Util.Application.html#17384" title="Poco::Util::Application::defineOptions()">defineOptions</a>() </li>
+<li><a href="Poco.Util.Application.html#17386" title="Poco::Util::Application::handleOption()">handleOption</a>() </li>
+<li><a href="Poco.Util.Application.html#17391" title="Poco::Util::Application::main()">main</a>() </li>
+</ul>
+<p>The application's main logic should be implemented in the <a href="Poco.Util.Application.html#17391" title="Poco::Util::Application::main()">main</a>() method. </p>
+<p>There may be at most one instance of the <a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a> class in a process. </p>
+<p>The <a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a> class maintains a <a href="Poco.Util.LayeredConfiguration.html" title="class Poco::Util::LayeredConfiguration">LayeredConfiguration</a> (available via the <a href="Poco.Util.Application.html#17371" title="Poco::Util::Application::config()">config</a>() member function) consisting of: </p>
+<ul>
+<li>a <a href="Poco.Util.MapConfiguration.html" title="class Poco::Util::MapConfiguration">MapConfiguration</a> (priority -100) storing application-specific properties, as well as properties from bound command line arguments. </li>
+<li>a <a href="Poco.Util.SystemConfiguration.html" title="class Poco::Util::SystemConfiguration">SystemConfiguration</a> (priority 100) </li>
+<li>the configurations loaded with <a href="Poco.Util.Application.html#17363" title="Poco::Util::Application::loadConfiguration()">loadConfiguration</a>(). </li>
+</ul>
+<p>The <a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a> class sets a few default properties in  its configuration. These are: </p>
+<ul>
+<li>application.path: the absolute path to application executable </li>
+<li>application.name: the file name of the application executable </li>
+<li>application.baseName: the file name (excluding extension) of the application executable </li>
+<li>application.dir: the path to the directory where the application executable resides </li>
+<li>application.configDir: the path to the directory where the last configuration file loaded with <a href="Poco.Util.Application.html#17363" title="Poco::Util::Application::loadConfiguration()">loadConfiguration</a>() was found. </li>
+</ul>
+<p>If <a href="Poco.Util.Application.html#17363" title="Poco::Util::Application::loadConfiguration()">loadConfiguration</a>() has never been called, application.configDir will be equal to application.dir. </p>
+<p>The POCO_APP_MAIN macro can be used to implement <a href="Poco.Util.Application.html#17391" title="Poco::Util::Application::main()">main</a>(argc, argv). If POCO has been built with POCO_WIN32_UTF8, POCO_APP_MAIN supports <a href="Poco.Unicode.html" title="class Poco::Unicode">Unicode</a> command line arguments. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.Util.Subsystem.html" title="class Poco::Util::Subsystem">Subsystem</a></p>
+<p><b>All Base Classes: </b><a href="Poco.RefCountedObject.html" title="class Poco::RefCountedObject">Poco::RefCountedObject</a>, <a href="Poco.Util.Subsystem.html" title="class Poco::Util::Subsystem">Subsystem</a></p>
+<p><b>Known Derived Classes: </b><a href="Poco.Util.ServerApplication.html" title="class Poco::Util::ServerApplication">ServerApplication</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Util.Application.html#17350" title="Poco::Util::Application::addSubsystem()">addSubsystem</a>, <a href="Poco.Util.Application.html#17370" title="Poco::Util::Application::commandName()">commandName</a>, <a href="Poco.Util.Application.html#17371" title="Poco::Util::Application::config()">config</a>, <a href="Poco.Util.Application.html#17384" title="Poco::Util::Application::defineOptions()">defineOptions</a>, <a href="Poco.Util.Application.html#17393" title="Poco::Util::Application::findFile()">findFile</a>, <a href="Poco.Util.Application.html#17368" title="Poco::Util::Application::getSubsystem()">getSubsystem</a>, <a href="Poco.Util.Application.html#17386" title="Poco::Util::Application::handleOption()">handleOption</a>, <a href="Poco.Util.Application.html#17352" title="Poco::Util::Application::init()">init</a>, <a href="Poco.Util.Application.html#17379" title="Poco::Util::Application::initialize()">initialize</a>, <a href="Poco.Util.Application.html#17360" title="Poco::Util::Application::initialized()">initialized</a>, <a href="Poco.Util.Application.html#17374" title="Poco::Util::Application::instance()">instance</a>, <a href="Poco.Util.Application.html#17363" title="Poco::Util::Application::loadConfiguration()">loadConfiguration</a>, <a href="Poco.Util.Application.html#17372" title="Poco::Util::Application::logger()">logger</a>, <a href="Poco.Util.Application.html#17391" title="Poco::Util::Application::main()">main</a>, <a href="Poco.Util.Application.html#17378" title="Poco::Util::Application::name()">name</a>, <a href="Poco.Util.Application.html#17373" title="Poco::Util::Application::options()">options</a>, <a href="Poco.Util.Application.html#17382" title="Poco::Util::Application::reinitialize()">reinitialize</a>, <a href="Poco.Util.Application.html#17369" title="Poco::Util::Application::run()">run</a>, <a href="Poco.Util.Application.html#17389" title="Poco::Util::Application::setLogger()">setLogger</a>, <a href="Poco.Util.Application.html#17361" title="Poco::Util::Application::setUnixOptions()">setUnixOptions</a>, <a href="Poco.Util.Application.html#17375" title="Poco::Util::Application::startTime()">startTime</a>, <a href="Poco.Util.Application.html#17377" title="Poco::Util::Application::stopOptionsProcessing()">stopOptionsProcessing</a>, <a href="Poco.Util.Application.html#17381" title="Poco::Util::Application::uninitialize()">uninitialize</a>, <a href="Poco.Util.Application.html#17376" title="Poco::Util::Application::uptime()">uptime</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.Util.Subsystem.html#18175" title="Poco::Util::Subsystem::defineOptions()">defineOptions</a>, <a href="Poco.RefCountedObject.html#9831" title="Poco::RefCountedObject::duplicate()">duplicate</a>, <a href="Poco.Util.Subsystem.html#18170" title="Poco::Util::Subsystem::initialize()">initialize</a>, <a href="Poco.Util.Subsystem.html#18169" title="Poco::Util::Subsystem::name()">name</a>, <a href="Poco.RefCountedObject.html#9833" title="Poco::RefCountedObject::referenceCount()">referenceCount</a>, <a href="Poco.Util.Subsystem.html#18173" title="Poco::Util::Subsystem::reinitialize()">reinitialize</a>, <a href="Poco.RefCountedObject.html#9832" title="Poco::RefCountedObject::release()">release</a>, <a href="Poco.Util.Subsystem.html#18172" title="Poco::Util::Subsystem::uninitialize()">uninitialize</a></p>
+<h2>Enumerations</h2>
+<h3><a name="17342">ConfigPriority</a></h3>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="17343">PRIO_APPLICATION</a> = - 100</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="17344">PRIO_DEFAULT</a> = 0</p>
+<div class="description">
+<p></p>
+</div>
+<p class="decl"><a name="17345">PRIO_SYSTEM</a> = 100</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="17325">ExitCode</a></h3>
+<div class="description">
+<p>Commonly used exit status codes. Based on the definitions in the 4.3BSD &lt;sysexits.h&gt; header file. </p>
+</div>
+<p class="decl"><a name="17326">EXIT_OK</a> = 0</p>
+<div class="description">
+<p>successful termination </p>
+</div>
+<p class="decl"><a name="17327">EXIT_USAGE</a> = 64</p>
+<div class="description">
+<p>command line usage error </p>
+</div>
+<p class="decl"><a name="17328">EXIT_DATAERR</a> = 65</p>
+<div class="description">
+<p>data format error </p>
+</div>
+<p class="decl"><a name="17329">EXIT_NOINPUT</a> = 66</p>
+<div class="description">
+<p>cannot open input </p>
+</div>
+<p class="decl"><a name="17330">EXIT_NOUSER</a> = 67</p>
+<div class="description">
+<p>addressee unknown </p>
+</div>
+<p class="decl"><a name="17331">EXIT_NOHOST</a> = 68</p>
+<div class="description">
+<p>host name unknown </p>
+</div>
+<p class="decl"><a name="17332">EXIT_UNAVAILABLE</a> = 69</p>
+<div class="description">
+<p>service unavailable </p>
+</div>
+<p class="decl"><a name="17333">EXIT_SOFTWARE</a> = 70</p>
+<div class="description">
+<p>internal software error </p>
+</div>
+<p class="decl"><a name="17334">EXIT_OSERR</a> = 71</p>
+<div class="description">
+<p>system error (e.g., can't fork) </p>
+</div>
+<p class="decl"><a name="17335">EXIT_OSFILE</a> = 72</p>
+<div class="description">
+<p>critical OS file missing </p>
+</div>
+<p class="decl"><a name="17336">EXIT_CANTCREAT</a> = 73</p>
+<div class="description">
+<p>can't create (user) output file </p>
+</div>
+<p class="decl"><a name="17337">EXIT_IOERR</a> = 74</p>
+<div class="description">
+<p>input/output error </p>
+</div>
+<p class="decl"><a name="17338">EXIT_TEMPFAIL</a> = 75</p>
+<div class="description">
+<p>temp failure; user is invited to retry </p>
+</div>
+<p class="decl"><a name="17339">EXIT_PROTOCOL</a> = 76</p>
+<div class="description">
+<p>remote error in protocol </p>
+</div>
+<p class="decl"><a name="17340">EXIT_NOPERM</a> = 77</p>
+<div class="description">
+<p>permission denied </p>
+</div>
+<p class="decl"><a name="17341">EXIT_CONFIG</a> = 78</p>
+<div class="description">
+<p>configuration error </p>
+</div>
+<h2>Constructors</h2>
+<h3><a name="17346">Application</a></h3>
+<p class="decl"><a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a>();</p>
+<div class="description">
+<p>Creates the <a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a>. </p>
+</div>
+<h3><a name="17347">Application</a></h3>
+<p class="decl"><a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;int argc,<br />&nbsp;&nbsp;&nbsp;&nbsp;char * argv[]<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a> and calls <a href="Poco.Util.Application.html#17352" title="Poco::Util::Application::init()">init</a>(argc, argv). </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="17396">~Application</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">~<a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a> and deletes all registered subsystems. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="17350">addSubsystem</a></h3>
+<p class="decl">void addSubsystem(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Util.Subsystem.html" title="class Poco::Util::Subsystem">Subsystem</a> * pSubsystem<br />);</p>
+<div class="description">
+<p>Adds a new subsystem to the application. The application immediately takes ownership of it, so that a call in the form </p>
+<pre>Application::instance().addSubsystem(new MySubsystem);
+</pre>
+<p>is okay. </p>
+</div>
+<h3><a name="17370">commandName</a></h3>
+<p class="decl">std::string commandName() const;</p>
+<div class="description">
+<p>Returns the command name used to invoke the application. </p>
+</div>
+<h3><a name="17371">config</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Util.LayeredConfiguration.html" title="class Poco::Util::LayeredConfiguration">LayeredConfiguration</a> &amp; config() const;</p>
+<div class="description">
+<p>Returns the application's configuration. </p>
+</div>
+<h3><a name="17368">getSubsystem</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">template &lt; class C &gt; C &amp; getSubsystem() const;</p>
+<div class="description">
+<p>Returns a reference to the subsystem of the class given as template argument. </p>
+<p>Throws a <a href="Poco.NotFoundException.html" title="class Poco::NotFoundException">NotFoundException</a> if such a subsystem has not been registered. </p>
+</div>
+<h3><a name="17352">init</a></h3>
+<p class="decl">void init(<br />&nbsp;&nbsp;&nbsp;&nbsp;int argc,<br />&nbsp;&nbsp;&nbsp;&nbsp;char * argv[]<br />);</p>
+<div class="description">
+<p>Processes the application's command line arguments and sets the application's properties (e.g.,  &quot;application.path&quot;, &quot;application.name&quot;, etc.). </p>
+<p>Note that as of release 1.3.7, <a href="Poco.Util.Application.html#17352" title="Poco::Util::Application::init()">init</a>() no longer calls <a href="Poco.Util.Application.html#17379" title="Poco::Util::Application::initialize()">initialize</a>(). This is now called from <a href="Poco.Util.Application.html#17369" title="Poco::Util::Application::run()">run</a>(). </p>
+</div>
+<h3><a name="17355">init</a></h3>
+<p class="decl">void init(<br />&nbsp;&nbsp;&nbsp;&nbsp;int argc,<br />&nbsp;&nbsp;&nbsp;&nbsp;wchar_t * argv[]<br />);</p>
+<div class="description">
+<p>Processes the application's command line arguments and sets the application's properties (e.g.,  &quot;application.path&quot;, &quot;application.name&quot;, etc.). </p>
+<p>Note that as of release 1.3.7, <a href="Poco.Util.Application.html#17352" title="Poco::Util::Application::init()">init</a>() no longer calls <a href="Poco.Util.Application.html#17379" title="Poco::Util::Application::initialize()">initialize</a>(). This is now called from <a href="Poco.Util.Application.html#17369" title="Poco::Util::Application::run()">run</a>(). </p>
+<p>This Windows-specific version of init is used for passing <a href="Poco.Unicode.html" title="class Poco::Unicode">Unicode</a> command line arguments from wmain(). </p>
+</div>
+<h3><a name="17358">init</a></h3>
+<p class="decl">void init(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::vector &lt; std::string &gt; &amp; args<br />);</p>
+<div class="description">
+<p>Processes the application's command line arguments and sets the application's properties (e.g.,  &quot;application.path&quot;, &quot;application.name&quot;, etc.). </p>
+<p>Note that as of release 1.3.7, <a href="Poco.Util.Application.html#17352" title="Poco::Util::Application::init()">init</a>() no longer calls <a href="Poco.Util.Application.html#17379" title="Poco::Util::Application::initialize()">initialize</a>(). This is now called from <a href="Poco.Util.Application.html#17369" title="Poco::Util::Application::run()">run</a>(). </p>
+</div>
+<h3><a name="17360">initialized</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool initialized() const;</p>
+<div class="description">
+<p>Returns true if and only if the application is in initialized state (that means, has been initialized but not yet uninitialized). </p>
+</div>
+<h3><a name="17374">instance</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static <a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a> &amp; instance();</p>
+<div class="description">
+<p>Returns a reference to the <a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a> singleton. </p>
+<p>Throws a <a href="Poco.NullPointerException.html" title="class Poco::NullPointerException">NullPointerException</a> if no <a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a> instance exists. </p>
+</div>
+<h3><a name="17363">loadConfiguration</a></h3>
+<p class="decl">int loadConfiguration(<br />&nbsp;&nbsp;&nbsp;&nbsp;int priority = PRIO_DEFAULT<br />);</p>
+<div class="description">
+<p>Loads configuration information from a default location. </p>
+<p>The configuration(s) will be added to the application's  <a href="Poco.Util.LayeredConfiguration.html" title="class Poco::Util::LayeredConfiguration">LayeredConfiguration</a> with the given priority. </p>
+<p>The configuration file(s) must be located in the same directory as the executable or a parent directory of it, and must have the  same base name as the executable, with one of the following extensions: .properties, .ini or .xml. </p>
+<p>The .properties file, if it exists, is loaded first, followed by the .ini file and the .xml file. </p>
+<p>If the application is built in debug mode (the _DEBUG preprocessor macro is defined) and the base name of the appication executable ends with a 'd', a config file without the 'd' ending its base name is  also found. </p>
+<p>Example: Given the application &quot;SampleAppd.exe&quot;, built in debug mode. Then <a href="Poco.Util.Application.html#17363" title="Poco::Util::Application::loadConfiguration()">loadConfiguration</a>() will automatically find a configuration file named &quot;SampleApp.properties&quot; if it exists and if &quot;SampleAppd.properties&quot; cannot be found. </p>
+<p>Returns the number of configuration files loaded, which may be zero. </p>
+<p>This method must not be called before <a href="Poco.Util.Application.html#17352" title="Poco::Util::Application::init()">init</a>(argc, argv) has been called. </p>
+</div>
+<h3><a name="17365">loadConfiguration</a></h3>
+<p class="decl">void loadConfiguration(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; path,<br />&nbsp;&nbsp;&nbsp;&nbsp;int priority = PRIO_DEFAULT<br />);</p>
+<div class="description">
+<p>Loads configuration information from the file specified by the given path. The file type is determined by the file extension. The following extensions are supported: </p>
+<ul>
+<li>.properties - properties file (<a href="Poco.Util.PropertyFileConfiguration.html" title="class Poco::Util::PropertyFileConfiguration">PropertyFileConfiguration</a>) </li>
+<li>.ini        - initialization file (<a href="Poco.Util.IniFileConfiguration.html" title="class Poco::Util::IniFileConfiguration">IniFileConfiguration</a>) </li>
+<li>.xml        - <a href="Poco.XML.html" title="namespace Poco::XML">XML</a> file (<a href="Poco.Util.XMLConfiguration.html" title="class Poco::Util::XMLConfiguration">XMLConfiguration</a>) </li>
+</ul>
+<p>Extensions are not case sensitive. </p>
+<p>The configuration will be added to the application's  <a href="Poco.Util.LayeredConfiguration.html" title="class Poco::Util::LayeredConfiguration">LayeredConfiguration</a> with the given priority. </p>
+</div>
+<h3><a name="17372">logger</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Logger.html" title="class Poco::Logger">Poco::Logger</a> &amp; logger() const;</p>
+<div class="description">
+<p>Returns the application's logger. </p>
+<p>Before the logging subsystem has been initialized, the application's logger is &quot;ApplicationStartup&quot;, which is connected to a <a href="Poco.ConsoleChannel.html" title="class Poco::ConsoleChannel">ConsoleChannel</a>. </p>
+<p>After the logging subsystem has been initialized, which  usually happens as the first action in <a href="Poco.Util.Application.html#17379" title="Poco::Util::Application::initialize()">Application::initialize</a>(), the application's logger is the one specified by the &quot;application.logger&quot; configuration property. If that property is not specified, the logger is &quot;<a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a>&quot;. </p>
+</div>
+<h3><a name="17378">name</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const char * name() const;</p>
+<div class="description">
+<p></p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Util.Subsystem.html#18169" title="Poco::Util::Subsystem::name()">Poco::Util::Subsystem::name()</a></p></div>
+<h3><a name="17373">options</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const <a href="Poco.Util.OptionSet.html" title="class Poco::Util::OptionSet">OptionSet</a> &amp; options() const;</p>
+<div class="description">
+<p>Returns the application's option set. </p>
+</div>
+<h3><a name="17369">run</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual int run();</p>
+<div class="description">
+<p>Runs the application by performing additional initializations and calling the <a href="Poco.Util.Application.html#17391" title="Poco::Util::Application::main()">main</a>() method. </p>
+<p>First calls <a href="Poco.Util.Application.html#17379" title="Poco::Util::Application::initialize()">initialize</a>(), then calls <a href="Poco.Util.Application.html#17391" title="Poco::Util::Application::main()">main</a>(), and finally calls <a href="Poco.Util.Application.html#17381" title="Poco::Util::Application::uninitialize()">uninitialize</a>(). The latter will be called even if <a href="Poco.Util.Application.html#17391" title="Poco::Util::Application::main()">main</a>() throws an exception. If <a href="Poco.Util.Application.html#17379" title="Poco::Util::Application::initialize()">initialize</a>() throws an exception, <a href="Poco.Util.Application.html#17391" title="Poco::Util::Application::main()">main</a>() will not be called and the exception will be propagated to the caller. </p>
+</div>
+<h3><a name="17361">setUnixOptions</a></h3>
+<p class="decl">void setUnixOptions(<br />&nbsp;&nbsp;&nbsp;&nbsp;bool flag<br />);</p>
+<div class="description">
+<p>Specify whether command line option handling is Unix-style (flag == true; default) or Windows/OpenVMS-style (flag == false). </p>
+<p>This member function should be called from the constructor of a subclass to be effective. </p>
+</div>
+<h3><a name="17375">startTime</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">const <a href="Poco.Timestamp.html" title="class Poco::Timestamp">Poco::Timestamp</a> &amp; startTime() const;</p>
+<div class="description">
+<p>Returns the application start time (UTC). </p>
+</div>
+<h3><a name="17377">stopOptionsProcessing</a></h3>
+<p class="decl">void stopOptionsProcessing();</p>
+<div class="description">
+<p>If called from an option callback, stops all further options processing. </p>
+<p>If called, the following options on the command line will not be processed, and required options will not be checked. </p>
+<p>This is useful, for example, if an option for displaying help information has been encountered and no other things besides displaying help shall be done. </p>
+</div>
+<h3><a name="17376">uptime</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.Timespan.html" title="class Poco::Timespan">Poco::Timespan</a> uptime() const;</p>
+<div class="description">
+<p>Returns the application uptime. </p>
+</div>
+<h3><a name="17384">defineOptions</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual void defineOptions(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Util.OptionSet.html" title="class Poco::Util::OptionSet">OptionSet</a> &amp; options<br />);</p>
+<div class="description">
+<p>Called before command line processing begins. If a subclass wants to support command line arguments, it must override this method. The default implementation does not define any options itself, but calls <a href="Poco.Util.Application.html#17384" title="Poco::Util::Application::defineOptions()">defineOptions</a>() on all registered subsystems. </p>
+<p>Overriding implementations should call the base class implementation. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Util.Subsystem.html#18175" title="Poco::Util::Subsystem::defineOptions()">Poco::Util::Subsystem::defineOptions()</a></p></div>
+<h3><a name="17393">findFile</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool findFile(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Path.html" title="class Poco::Path">Poco::Path</a> &amp; path<br />) const;</p>
+<div class="description">
+<p>Searches for the file in path in the application directory. </p>
+<p>If path is absolute, the method immediately returns true and leaves path unchanged. </p>
+<p>If path is relative, searches for the file in the application directory and in all subsequent parent directories. Returns true and stores the absolute path to the file in path if the file could be found. Returns false and leaves path unchanged otherwise. </p>
+</div>
+<h3><a name="17386">handleOption</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual void handleOption(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; name,<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; value<br />);</p>
+<div class="description">
+<p>Called when the option with the given name is encountered during command line arguments processing. </p>
+<p>The default implementation does option validation, bindings and callback handling. </p>
+<p>Overriding implementations must call the base class implementation. </p>
+</div>
+<h3><a name="17395">init</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void init();</p>
+<div class="description">
+<p>Common initialization code. </p>
+</div>
+<h3><a name="17379">initialize</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void initialize(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a> &amp; self<br />);</p>
+<div class="description">
+<p>Initializes the application and all registered subsystems. Subsystems are always initialized in the exact same order in which they have been registered. </p>
+<p>Overriding implementations must call the base class implementation. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Util.Subsystem.html#18170" title="Poco::Util::Subsystem::initialize()">Poco::Util::Subsystem::initialize()</a></p></div>
+<h3><a name="17391">main</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">virtual int main(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::vector &lt; std::string &gt; &amp; args<br />);</p>
+<div class="description">
+<p>The application's main logic. </p>
+<p>Unprocessed command line arguments are passed in args. Note that all original command line arguments are available via the properties application.argc and application.argv[&lt;n&gt;]. </p>
+<p>Returns an exit code which should be one of the values from the <a href="Poco.Util.Application.html#17325" title="enum  Poco::Util::Application::ExitCode">ExitCode</a> enumeration. </p>
+</div>
+<h3><a name="17382">reinitialize</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void reinitialize(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Util.Application.html" title="class Poco::Util::Application">Application</a> &amp; self<br />);</p>
+<div class="description">
+<p>Re-nitializes the application and all registered subsystems. Subsystems are always reinitialized in the exact same order in which they have been registered. </p>
+<p>Overriding implementations must call the base class implementation. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Util.Subsystem.html#18173" title="Poco::Util::Subsystem::reinitialize()">Poco::Util::Subsystem::reinitialize()</a></p></div>
+<h3><a name="17389">setLogger</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void setLogger(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Logger.html" title="class Poco::Logger">Poco::Logger</a> &amp; logger<br />);</p>
+<div class="description">
+<p>Sets the logger used by the application. </p>
+</div>
+<h3><a name="17381">uninitialize</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void uninitialize();</p>
+<div class="description">
+<p>Uninitializes the application and all registered subsystems. Subsystems are always uninitialized in reverse order in which they have been initialized.  </p>
+<p>Overriding implementations must call the base class implementation. </p>
+</div>
+<div class="description"><p><b>See also:</b> <a href="Poco.Util.Subsystem.html#18172" title="Poco::Util::Subsystem::uninitialize()">Poco::Util::Subsystem::uninitialize()</a></p></div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

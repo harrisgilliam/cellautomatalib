@@ -1,0 +1,11 @@
+# SVN dirs
+.svn
+.ignore
+# backup files
+*~
+# make log
+Make.log
+# generated C++ files
+*.C
+*.H
+

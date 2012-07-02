@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::HashFunc</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="template">template &lt; class Value, class HashFunc = Hash &lt; Value &gt; &gt;</h1>
+<h1 class="symbol">class LinearHashTable</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Foundation<br />
+<b>Package:</b> Hashing<br />
+<b>Header:</b> Poco/LinearHashTable.h</p>
+<h2>Description</h2>
+<div class="description">
+<p>This class implements a linear hash table. </p>
+<p>In a linear hash table, the available address space grows or shrinks dynamically. A linar hash table thus supports any number of insertions or deletions without lookup or insertion performance deterioration. </p>
+<p>Linear hashing was discovered by Witold Litwin in 1980 and described in the paper LINEAR HASHING: A NEW TOOL FOR FILE AND TABLE ADDRESSING. </p>
+<p>For more information on linear hashing, see &lt;<a href="http://en.wikipedia.org/wiki/Linear_hash" target="_blank">http://en.wikipedia.org/wiki/Linear_hash</a>&gt;. </p>
+<p>The <a href="Poco.HashFunc.html#7967" title="Poco::HashFunc::LinearHashTable()">LinearHashTable</a> is not thread safe. </p>
+<p>Value must support comparison for equality. </p>
+<p>Find, insert and delete operations are basically O(1) with regard to the total number of elements in the table, and O(N) with regard to the number of elements in the bucket where the element is stored. On average, every bucket stores one element; the exact number depends on the quality of the hash function. In most cases, the maximum number of elements in a bucket should not exceed 3. </p>
+</div>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.HashFunc.html#7967" title="Poco::HashFunc::LinearHashTable()">LinearHashTable</a>, <a href="Poco.HashFunc.html#7976" title="Poco::HashFunc::begin()">begin</a>, <a href="Poco.HashFunc.html#7996" title="Poco::HashFunc::bucketAddress()">bucketAddress</a>, <a href="Poco.HashFunc.html#7998" title="Poco::HashFunc::bucketAddressForHash()">bucketAddressForHash</a>, <a href="Poco.HashFunc.html#7995" title="Poco::HashFunc::buckets()">buckets</a>, <a href="Poco.HashFunc.html#8002" title="Poco::HashFunc::calcSize()">calcSize</a>, <a href="Poco.HashFunc.html#7992" title="Poco::HashFunc::clear()">clear</a>, <a href="Poco.HashFunc.html#7984" title="Poco::HashFunc::count()">count</a>, <a href="Poco.HashFunc.html#7994" title="Poco::HashFunc::empty()">empty</a>, <a href="Poco.HashFunc.html#7977" title="Poco::HashFunc::end()">end</a>, <a href="Poco.HashFunc.html#7988" title="Poco::HashFunc::erase()">erase</a>, <a href="Poco.HashFunc.html#7980" title="Poco::HashFunc::find()">find</a>, <a href="Poco.HashFunc.html#7986" title="Poco::HashFunc::insert()">insert</a>, <a href="Poco.HashFunc.html#8001" title="Poco::HashFunc::merge()">merge</a>, <a href="Poco.HashFunc.html#7972" title="Poco::HashFunc::operator =()">operator&nbsp;=</a>, <a href="Poco.HashFunc.html#7993" title="Poco::HashFunc::size()">size</a>, <a href="Poco.HashFunc.html#8000" title="Poco::HashFunc::split()">split</a>, <a href="Poco.HashFunc.html#7974" title="Poco::HashFunc::swap()">swap</a></p>
+<h2>Nested Classes</h2>
+<h3><a href="Poco.HashFunc.ConstIterator.html" class="class">class ConstIterator</a></h3>
+<p>&nbsp;<a href="Poco.HashFunc.ConstIterator.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.HashFunc.Iterator.html" class="class">class Iterator</a></h3>
+<p>&nbsp;<a href="Poco.HashFunc.Iterator.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h2>Types</h2>
+<h3><a name="7920">Bucket</a></h3>
+<p class="decl">typedef std::vector &lt; Value &gt; <a href="Poco.HashFunc.html#7920" title="Poco::HashFunc::Bucket">Bucket</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="7922">BucketIterator</a></h3>
+<p class="decl">typedef typename Bucket::iterator <a href="Poco.HashFunc.html#7922" title="Poco::HashFunc::BucketIterator">BucketIterator</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="7921">BucketVec</a></h3>
+<p class="decl">typedef std::vector &lt; <a href="Poco.HashFunc.html#7920" title="Poco::HashFunc::Bucket">Bucket</a> &gt; <a href="Poco.HashFunc.html#7921" title="Poco::HashFunc::BucketVec">BucketVec</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="7923">BucketVecIterator</a></h3>
+<p class="decl">typedef typename BucketVec::iterator <a href="Poco.HashFunc.html#7923" title="Poco::HashFunc::BucketVecIterator">BucketVecIterator</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="7918">ConstPointer</a></h3>
+<p class="decl">typedef const Value * <a href="Poco.HashFunc.html#7918" title="Poco::HashFunc::ConstPointer">ConstPointer</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="7916">ConstReference</a></h3>
+<p class="decl">typedef const Value &amp; <a href="Poco.HashFunc.html#7916" title="Poco::HashFunc::ConstReference">ConstReference</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="7919">Hash</a></h3>
+<p class="decl">typedef <a href="Poco.HashFunc.html" title="class Poco::HashFunc">HashFunc</a> <a href="Poco.HashFunc.html#7919" title="Poco::HashFunc::Hash">Hash</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="7917">Pointer</a></h3>
+<p class="decl">typedef Value * <a href="Poco.HashFunc.html#7917" title="Poco::HashFunc::Pointer">Pointer</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="7915">Reference</a></h3>
+<p class="decl">typedef Value &amp; <a href="Poco.HashFunc.html#7915" title="Poco::HashFunc::Reference">Reference</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="7914">ValueType</a></h3>
+<p class="decl">typedef Value <a href="Poco.HashFunc.html#7914" title="Poco::HashFunc::ValueType">ValueType</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="7971">~LinearHashTable</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">~<a href="Poco.HashFunc.html#7967" title="Poco::HashFunc::LinearHashTable()">LinearHashTable</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.HashFunc.html#7967" title="Poco::HashFunc::LinearHashTable()">LinearHashTable</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="7967">LinearHashTable</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.HashFunc.html#7967" title="Poco::HashFunc::LinearHashTable()">LinearHashTable</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::size_t initialReserve = 64<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.HashFunc.html#7967" title="Poco::HashFunc::LinearHashTable()">LinearHashTable</a>, using the given initialReserve. </p>
+</div>
+<h3><a name="7969">LinearHashTable</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.HashFunc.html#7967" title="Poco::HashFunc::LinearHashTable()">LinearHashTable</a>(<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.HashFunc.html#7967" title="Poco::HashFunc::LinearHashTable()">LinearHashTable</a> &amp; table<br />);</p>
+<div class="description">
+<p>Creates the <a href="Poco.HashFunc.html#7967" title="Poco::HashFunc::LinearHashTable()">LinearHashTable</a> by copying another one. </p>
+</div>
+<h3><a name="7976">begin</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.HashFunc.ConstIterator.html" title="class Poco::HashFunc::ConstIterator">ConstIterator</a> begin() const;</p>
+<div class="description">
+<p>Returns an iterator pointing to the first entry, if one exists. </p>
+</div>
+<h3><a name="7978">begin</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.HashFunc.Iterator.html" title="class Poco::HashFunc::Iterator">Iterator</a> begin();</p>
+<div class="description">
+<p>Returns an iterator pointing to the first entry, if one exists. </p>
+</div>
+<h3><a name="7995">buckets</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">std::size_t buckets() const;</p>
+<div class="description">
+<p>Returns the number of allocated buckets. </p>
+</div>
+<h3><a name="7992">clear</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void clear();</p>
+<div class="description">
+<p>Erases all elements. </p>
+</div>
+<h3><a name="7984">count</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">std::size_t count(<br />&nbsp;&nbsp;&nbsp;&nbsp;const Value &amp; value<br />) const;</p>
+<div class="description">
+<p>Returns the number of elements with the given value, with is either 1 or 0. </p>
+</div>
+<h3><a name="7994">empty</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">bool empty() const;</p>
+<div class="description">
+<p>Returns true if and only if the table is empty. </p>
+</div>
+<h3><a name="7977">end</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.HashFunc.ConstIterator.html" title="class Poco::HashFunc::ConstIterator">ConstIterator</a> end() const;</p>
+<div class="description">
+<p>Returns an iterator pointing to the end of the table. </p>
+</div>
+<h3><a name="7979">end</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.HashFunc.Iterator.html" title="class Poco::HashFunc::Iterator">Iterator</a> end();</p>
+<div class="description">
+<p>Returns an iterator pointing to the end of the table. </p>
+</div>
+<h3><a name="7988">erase</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void erase(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.HashFunc.Iterator.html" title="class Poco::HashFunc::Iterator">Iterator</a> it<br />);</p>
+<div class="description">
+<p>Erases the element pointed to by it. </p>
+</div>
+<h3><a name="7990">erase</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void erase(<br />&nbsp;&nbsp;&nbsp;&nbsp;const Value &amp; value<br />);</p>
+<div class="description">
+<p>Erases the element with the given value, if it exists. </p>
+</div>
+<h3><a name="7980">find</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.HashFunc.ConstIterator.html" title="class Poco::HashFunc::ConstIterator">ConstIterator</a> find(<br />&nbsp;&nbsp;&nbsp;&nbsp;const Value &amp; value<br />) const;</p>
+<div class="description">
+<p>Finds an entry in the table. </p>
+</div>
+<h3><a name="7982">find</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.HashFunc.Iterator.html" title="class Poco::HashFunc::Iterator">Iterator</a> find(<br />&nbsp;&nbsp;&nbsp;&nbsp;const Value &amp; value<br />);</p>
+<div class="description">
+<p>Finds an entry in the table. </p>
+</div>
+<h3><a name="7986">insert</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">std::pair &lt; <a href="Poco.HashFunc.Iterator.html" title="class Poco::HashFunc::Iterator">Iterator</a>, bool &gt; insert(<br />&nbsp;&nbsp;&nbsp;&nbsp;const Value &amp; value<br />);</p>
+<div class="description">
+<p>Inserts an element into the table. </p>
+<p>If the element already exists in the table, a pair(iterator, false) with iterator pointing to the  existing element is returned. Otherwise, the element is inserted an a  pair(iterator, true) with iterator pointing to the new element is returned. </p>
+</div>
+<h3><a name="7972">operator =</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl"><a href="Poco.HashFunc.html#7967" title="Poco::HashFunc::LinearHashTable()">LinearHashTable</a> &amp; operator = (<br />&nbsp;&nbsp;&nbsp;&nbsp;const <a href="Poco.HashFunc.html#7967" title="Poco::HashFunc::LinearHashTable()">LinearHashTable</a> &amp; table<br />);</p>
+<div class="description">
+<p>Assigns another <a href="Poco.HashFunc.html#7967" title="Poco::HashFunc::LinearHashTable()">LinearHashTable</a>. </p>
+</div>
+<h3><a name="7993">size</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">std::size_t size() const;</p>
+<div class="description">
+<p>Returns the number of elements in the table. </p>
+</div>
+<h3><a name="7974">swap</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void swap(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.HashFunc.html#7967" title="Poco::HashFunc::LinearHashTable()">LinearHashTable</a> &amp; table<br />);</p>
+<div class="description">
+<p>Swaps the <a href="Poco.HashFunc.html#7967" title="Poco::HashFunc::LinearHashTable()">LinearHashTable</a> with another one. </p>
+</div>
+<h3><a name="7996">bucketAddress</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">std::size_t bucketAddress(<br />&nbsp;&nbsp;&nbsp;&nbsp;const Value &amp; value<br />) const;</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="7998">bucketAddressForHash</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">std::size_t bucketAddressForHash(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::size_t hash<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="8002">calcSize</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static std::size_t calcSize(<br />&nbsp;&nbsp;&nbsp;&nbsp;std::size_t initialSize<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="8001">merge</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void merge();</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="8000">split</a> <img src="images/protected.gif" alt="protected" title="protected" style="vertical-align:baseline;" border="0" />  <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">void split();</p>
+<div class="description">
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

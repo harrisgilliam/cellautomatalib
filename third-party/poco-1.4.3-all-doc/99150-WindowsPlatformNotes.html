@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>POCO C++ Libraries Windows Platform Notes</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="category">Introduction</h1>
+<h1 class="title">POCO C++ Libraries Windows Platform Notes</h1>
+</div>
+<div class="body">
+<h2>Contents</h2>
+<div class="toc"><ul>
+<li class="level1"><a href="#0">Introduction</a></li>
+<li class="level1"><a href="#1">Libraries And Linking Considerations</a></li>
+<li class="level2"><a href="#2">Automatic Linking of POCO C++ Libraries</a></li>
+<li class="level2"><a href="#3">Library Naming Conventions</a></li>
+</ul></div>
+<div class="description">
+<p></p><h2><a name="0">Introduction</a></h2><p>
+</p>
+<p>The Windows versions of the POCO C++ Libraries are built with Visual Studio. Basic support for building with MinGW is there as well, but at this time is not officially supported and may or may not work. </p>
+<p>Starting with release 1.4.0 the POCO C++ Libraries support new build configurations for Visual Studio. Furthermore, Visual Studio 2010 and 64-bit (x64) builds are now supported in addition to Visual Studio 2008, 2005 and .NET 2003, as previously supported.  64-bit (x64) builds are only supported with Visual Studio 2008 and Visual Studio 2010. </p>
+<p>The following build configurations are available: </p>
+<ul>
+<li>debug_shared, release_shared: dynamic link libraries (DLL) and dynamically linked executables, with DLL C/C++ runtime libraries. </li>
+<li>debug_static_md, release_static_md: static libraries and statically linked executables with DLL C/C++ runtime libraries. </li>
+<li>debug_static_mt, release_static_mt: static libraries and statically linked executables with static runtime libraries. </li>
+</ul>
+<p></p>
+<p></p><h2><a name="1">Libraries And Linking Considerations</a></h2><p>
+</p>
+<p></p><h3><a name="2">Automatic Linking of POCO C++ Libraries</a></h3><p>
+</p>
+<p>The POCO C++ Libraries header files contain <tt>#pragma comment</tt> directives that enable automatic linking of the required POCO libraries to an application. For this to work, a few rules must be kept in mind. </p>
+<p></p>
+<ul>
+<li>The default is to link the POCO C++ Libraries dynamically (DLL). </li>
+<li>To link statically, the code using the POCO C++ Libraries must be compiled with the preprocessor symbol <tt>POCO_STATIC</tt> defined. </li>
+</ul>
+<p></p>
+<p></p><h3><a name="3">Library Naming Conventions</a></h3><p>
+</p>
+<p>The following naming conventions are used: </p>
+<p></p>
+<ul>
+<li>DLL import libraries are named PocoLIB.lib for the release build and PocoLIBd.lib for the debug build. </li>
+<li>Static libraries built using the static multithreaded C/C++ runtime libraries are named PocoLIBmt.lib (release) and PocoLIBmtd.lib (debug). </li>
+<li>Static libraries built using the DLL C/C++ runtime libraries are named PocoLIBmd.lib (release) and PocoLIBmdd.lib (debug). </li>
+</ul>
+<p>32-bit libraries are placed in the <i>lib</i> directory. 64-bit libraries are placed in the <i>lib64</i> directory. DLLs are placed in <i>bin</i> (32-bit) or <i>bin64</i> (64-bit). 64-bit DLLs are named PocoLIB64.dll for release and PocoLIB64d.dll for debug, respectively. </p>
+<p></p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+</body>
+</html>

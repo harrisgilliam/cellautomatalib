@@ -1,0 +1,51 @@
+#ifndef _CAM_mem_h_
+#define _CAM_mem_h_
+
+#include <CAM/CAM_objects.h>
+
+
+/*****************************************************************************/
+/****************************** DEFINES **************************************/
+/*****************************************************************************/
+#define HEADER_LENGTH	(16 * sizeof(unsigned long))
+#define ADJp(x)		(((char *) (x)) + HEADER_LENGTH)
+#define ADJm(x)		(((char *) (x)) - HEADER_LENGTH)
+#define USR(b)		((b != NULL) ? (b)->ptr : NULL)
+#define KER(b)		((b != NULL) ? (b)->ptr + (b)->koff : NULL)
+#define IFC(b)		((b != NULL) ? (b)->ptr + (b)->ioff : NULL)
+#define START(b)	USR(b)
+#define END(b)		((b != NULL) ? (b)->ptr + (b)->sz : NULL)
+
+
+
+/*****************************************************************************/
+/***************************** TYPEDEFS **************************************/
+/*****************************************************************************/
+
+
+
+/*****************************************************************************/
+/**************************** PROTOTYPES *************************************/
+/*****************************************************************************/
+BUFFER CAM_alloc_mem(CAM8, HEAP, int);
+BUFFER CAM_alloc_buffer(CAM8, int);
+void CAM_alloc_kmem(CAM8, int, char **, char **, char **, int *);
+void CAM_free_kmem(CAM8, char *, char *, char *, int);
+void CAM_free_all_kmem(CAM8);
+void CAM_free(CAM8, BUFFER);
+void CAM_free_mem(CAM8, BUFFER);
+void CAM_free_buffer(CAM8, BUFFER);
+void CAM_free_all_mem(CAM8, HEAP);
+char *CAM_Malloc(int);
+char *CAM_Calloc(int, int);
+char *CAM_Realloc(char *, int);
+
+
+
+/*****************************************************************************/
+/***************************** GLOBALS ***************************************/
+/*****************************************************************************/
+
+
+
+#endif

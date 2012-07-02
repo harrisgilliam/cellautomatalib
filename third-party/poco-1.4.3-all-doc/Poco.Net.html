@@ -1,0 +1,568 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Namespace Poco::Net</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.html" class="namespace">Poco</a></h1>
+<h1 class="symbol">namespace Net</h1>
+</div>
+<div class="body">
+<h2>Overview</h2>
+<p><b>Classes:</b> 
+<a href="Poco.Net.AbstractHTTPRequestHandler.html" title="class Poco::Net::AbstractHTTPRequestHandler">AbstractHTTPRequestHandler</a>, <a href="Poco.Net.AcceptCertificateHandler.html" title="class Poco::Net::AcceptCertificateHandler">AcceptCertificateHandler</a>, <a href="Poco.Net.CertificateHandlerFactory.html" title="class Poco::Net::CertificateHandlerFactory">CertificateHandlerFactory</a>, <a href="Poco.Net.CertificateHandlerFactoryImpl.html" title="class Poco::Net::CertificateHandlerFactoryImpl">CertificateHandlerFactoryImpl</a>, <a href="Poco.Net.CertificateHandlerFactoryMgr.html" title="class Poco::Net::CertificateHandlerFactoryMgr">CertificateHandlerFactoryMgr</a>, <a href="Poco.Net.CertificateHandlerFactoryRegistrar.html" title="class Poco::Net::CertificateHandlerFactoryRegistrar">CertificateHandlerFactoryRegistrar</a>, <a href="Poco.Net.CertificateValidationException.html" title="class Poco::Net::CertificateValidationException">CertificateValidationException</a>, <a href="Poco.Net.ConnectionAbortedException.html" title="class Poco::Net::ConnectionAbortedException">ConnectionAbortedException</a>, <a href="Poco.Net.ConnectionRefusedException.html" title="class Poco::Net::ConnectionRefusedException">ConnectionRefusedException</a>, <a href="Poco.Net.ConnectionResetException.html" title="class Poco::Net::ConnectionResetException">ConnectionResetException</a>, <a href="Poco.Net.ConsoleCertificateHandler.html" title="class Poco::Net::ConsoleCertificateHandler">ConsoleCertificateHandler</a>, <a href="Poco.Net.Context.html" title="class Poco::Net::Context">Context</a>, <a href="Poco.Net.DNS.html" title="class Poco::Net::DNS">DNS</a>, <a href="Poco.Net.DNSException.html" title="class Poco::Net::DNSException">DNSException</a>, <a href="Poco.Net.DatagramSocket.html" title="class Poco::Net::DatagramSocket">DatagramSocket</a>, <a href="Poco.Net.DatagramSocketImpl.html" title="class Poco::Net::DatagramSocketImpl">DatagramSocketImpl</a>, <a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a>, <a href="Poco.Net.ErrorNotification.html" title="class Poco::Net::ErrorNotification">ErrorNotification</a>, <a href="Poco.Net.FTPClientSession.html" title="class Poco::Net::FTPClientSession">FTPClientSession</a>, <a href="Poco.Net.FTPException.html" title="class Poco::Net::FTPException">FTPException</a>, <a href="Poco.Net.FTPPasswordProvider.html" title="class Poco::Net::FTPPasswordProvider">FTPPasswordProvider</a>, <a href="Poco.Net.FTPStreamFactory.html" title="class Poco::Net::FTPStreamFactory">FTPStreamFactory</a>, <a href="Poco.Net.FilePartSource.html" title="class Poco::Net::FilePartSource">FilePartSource</a>, <a href="Poco.Net.HTMLForm.html" title="class Poco::Net::HTMLForm">HTMLForm</a>, <a href="Poco.Net.HTMLFormException.html" title="class Poco::Net::HTMLFormException">HTMLFormException</a>, <a href="Poco.Net.HTTPAuthenticationParams.html" title="class Poco::Net::HTTPAuthenticationParams">HTTPAuthenticationParams</a>, <a href="Poco.Net.HTTPBasicCredentials.html" title="class Poco::Net::HTTPBasicCredentials">HTTPBasicCredentials</a>, <a href="Poco.Net.HTTPBufferAllocator.html" title="class Poco::Net::HTTPBufferAllocator">HTTPBufferAllocator</a>, <a href="Poco.Net.HTTPChunkedIOS.html" title="class Poco::Net::HTTPChunkedIOS">HTTPChunkedIOS</a>, <a href="Poco.Net.HTTPChunkedInputStream.html" title="class Poco::Net::HTTPChunkedInputStream">HTTPChunkedInputStream</a>, <a href="Poco.Net.HTTPChunkedOutputStream.html" title="class Poco::Net::HTTPChunkedOutputStream">HTTPChunkedOutputStream</a>, <a href="Poco.Net.HTTPChunkedStreamBuf.html" title="class Poco::Net::HTTPChunkedStreamBuf">HTTPChunkedStreamBuf</a>, <a href="Poco.Net.HTTPClientSession.html" title="class Poco::Net::HTTPClientSession">HTTPClientSession</a>, <a href="Poco.Net.HTTPCookie.html" title="class Poco::Net::HTTPCookie">HTTPCookie</a>, <a href="Poco.Net.HTTPCredentials.html" title="class Poco::Net::HTTPCredentials">HTTPCredentials</a>, <a href="Poco.Net.HTTPDigestCredentials.html" title="class Poco::Net::HTTPDigestCredentials">HTTPDigestCredentials</a>, <a href="Poco.Net.HTTPException.html" title="class Poco::Net::HTTPException">HTTPException</a>, <a href="Poco.Net.HTTPFixedLengthIOS.html" title="class Poco::Net::HTTPFixedLengthIOS">HTTPFixedLengthIOS</a>, <a href="Poco.Net.HTTPFixedLengthInputStream.html" title="class Poco::Net::HTTPFixedLengthInputStream">HTTPFixedLengthInputStream</a>, <a href="Poco.Net.HTTPFixedLengthOutputStream.html" title="class Poco::Net::HTTPFixedLengthOutputStream">HTTPFixedLengthOutputStream</a>, <a href="Poco.Net.HTTPFixedLengthStreamBuf.html" title="class Poco::Net::HTTPFixedLengthStreamBuf">HTTPFixedLengthStreamBuf</a>, <a href="Poco.Net.HTTPHeaderIOS.html" title="class Poco::Net::HTTPHeaderIOS">HTTPHeaderIOS</a>, <a href="Poco.Net.HTTPHeaderInputStream.html" title="class Poco::Net::HTTPHeaderInputStream">HTTPHeaderInputStream</a>, <a href="Poco.Net.HTTPHeaderOutputStream.html" title="class Poco::Net::HTTPHeaderOutputStream">HTTPHeaderOutputStream</a>, <a href="Poco.Net.HTTPHeaderStreamBuf.html" title="class Poco::Net::HTTPHeaderStreamBuf">HTTPHeaderStreamBuf</a>, <a href="Poco.Net.HTTPIOS.html" title="class Poco::Net::HTTPIOS">HTTPIOS</a>, <a href="Poco.Net.HTTPInputStream.html" title="class Poco::Net::HTTPInputStream">HTTPInputStream</a>, <a href="Poco.Net.HTTPMessage.html" title="class Poco::Net::HTTPMessage">HTTPMessage</a>, <a href="Poco.Net.HTTPOutputStream.html" title="class Poco::Net::HTTPOutputStream">HTTPOutputStream</a>, <a href="Poco.Net.HTTPRequest.html" title="class Poco::Net::HTTPRequest">HTTPRequest</a>, <a href="Poco.Net.HTTPRequestHandler.html" title="class Poco::Net::HTTPRequestHandler">HTTPRequestHandler</a>, <a href="Poco.Net.HTTPRequestHandlerFactory.html" title="class Poco::Net::HTTPRequestHandlerFactory">HTTPRequestHandlerFactory</a>, <a href="Poco.Net.HTTPResponse.html" title="class Poco::Net::HTTPResponse">HTTPResponse</a>, <a href="Poco.Net.HTTPResponseIOS.html" title="class Poco::Net::HTTPResponseIOS">HTTPResponseIOS</a>, <a href="Poco.Net.HTTPResponseStream.html" title="class Poco::Net::HTTPResponseStream">HTTPResponseStream</a>, <a href="Poco.Net.HTTPResponseStreamBuf.html" title="class Poco::Net::HTTPResponseStreamBuf">HTTPResponseStreamBuf</a>, <a href="Poco.Net.HTTPSClientSession.html" title="class Poco::Net::HTTPSClientSession">HTTPSClientSession</a>, <a href="Poco.Net.HTTPSSessionInstantiator.html" title="class Poco::Net::HTTPSSessionInstantiator">HTTPSSessionInstantiator</a>, <a href="Poco.Net.HTTPSStreamFactory.html" title="class Poco::Net::HTTPSStreamFactory">HTTPSStreamFactory</a>, <a href="Poco.Net.HTTPServer.html" title="class Poco::Net::HTTPServer">HTTPServer</a>, <a href="Poco.Net.HTTPServerConnection.html" title="class Poco::Net::HTTPServerConnection">HTTPServerConnection</a>, <a href="Poco.Net.HTTPServerConnectionFactory.html" title="class Poco::Net::HTTPServerConnectionFactory">HTTPServerConnectionFactory</a>, <a href="Poco.Net.HTTPServerParams.html" title="class Poco::Net::HTTPServerParams">HTTPServerParams</a>, <a href="Poco.Net.HTTPServerRequest.html" title="class Poco::Net::HTTPServerRequest">HTTPServerRequest</a>, <a href="Poco.Net.HTTPServerRequestImpl.html" title="class Poco::Net::HTTPServerRequestImpl">HTTPServerRequestImpl</a>, <a href="Poco.Net.HTTPServerResponse.html" title="class Poco::Net::HTTPServerResponse">HTTPServerResponse</a>, <a href="Poco.Net.HTTPServerResponseImpl.html" title="class Poco::Net::HTTPServerResponseImpl">HTTPServerResponseImpl</a>, <a href="Poco.Net.HTTPServerSession.html" title="class Poco::Net::HTTPServerSession">HTTPServerSession</a>, <a href="Poco.Net.HTTPSession.html" title="class Poco::Net::HTTPSession">HTTPSession</a>, <a href="Poco.Net.HTTPSessionFactory.html" title="class Poco::Net::HTTPSessionFactory">HTTPSessionFactory</a>, <a href="Poco.Net.HTTPSessionInstantiator.html" title="class Poco::Net::HTTPSessionInstantiator">HTTPSessionInstantiator</a>, <a href="Poco.Net.HTTPStreamBuf.html" title="class Poco::Net::HTTPStreamBuf">HTTPStreamBuf</a>, <a href="Poco.Net.HTTPStreamFactory.html" title="class Poco::Net::HTTPStreamFactory">HTTPStreamFactory</a>, <a href="Poco.Net.HostEntry.html" title="class Poco::Net::HostEntry">HostEntry</a>, <a href="Poco.Net.HostNotFoundException.html" title="class Poco::Net::HostNotFoundException">HostNotFoundException</a>, <a href="Poco.Net.ICMPClient.html" title="class Poco::Net::ICMPClient">ICMPClient</a>, <a href="Poco.Net.ICMPEventArgs.html" title="class Poco::Net::ICMPEventArgs">ICMPEventArgs</a>, <a href="Poco.Net.ICMPException.html" title="class Poco::Net::ICMPException">ICMPException</a>, <a href="Poco.Net.ICMPPacket.html" title="class Poco::Net::ICMPPacket">ICMPPacket</a>, <a href="Poco.Net.ICMPPacketImpl.html" title="class Poco::Net::ICMPPacketImpl">ICMPPacketImpl</a>, <a href="Poco.Net.ICMPSocket.html" title="class Poco::Net::ICMPSocket">ICMPSocket</a>, <a href="Poco.Net.ICMPSocketImpl.html" title="class Poco::Net::ICMPSocketImpl">ICMPSocketImpl</a>, <a href="Poco.Net.ICMPv4PacketImpl.html" title="class Poco::Net::ICMPv4PacketImpl">ICMPv4PacketImpl</a>, <a href="Poco.Net.IPAddress.html" title="class Poco::Net::IPAddress">IPAddress</a>, <a href="Poco.Net.IdleNotification.html" title="class Poco::Net::IdleNotification">IdleNotification</a>, <a href="Poco.Net.InterfaceNotFoundException.html" title="class Poco::Net::InterfaceNotFoundException">InterfaceNotFoundException</a>, <a href="Poco.Net.InvalidAddressException.html" title="class Poco::Net::InvalidAddressException">InvalidAddressException</a>, <a href="Poco.Net.InvalidCertificateException.html" title="class Poco::Net::InvalidCertificateException">InvalidCertificateException</a>, <a href="Poco.Net.InvalidCertificateHandler.html" title="class Poco::Net::InvalidCertificateHandler">InvalidCertificateHandler</a>, <a href="Poco.Net.InvalidSocketException.html" title="class Poco::Net::InvalidSocketException">InvalidSocketException</a>, <a href="Poco.Net.KeyConsoleHandler.html" title="class Poco::Net::KeyConsoleHandler">KeyConsoleHandler</a>, <a href="Poco.Net.KeyFileHandler.html" title="class Poco::Net::KeyFileHandler">KeyFileHandler</a>, <a href="Poco.Net.MailIOS.html" title="class Poco::Net::MailIOS">MailIOS</a>, <a href="Poco.Net.MailInputStream.html" title="class Poco::Net::MailInputStream">MailInputStream</a>, <a href="Poco.Net.MailMessage.html" title="class Poco::Net::MailMessage">MailMessage</a>, <a href="Poco.Net.MailOutputStream.html" title="class Poco::Net::MailOutputStream">MailOutputStream</a>, <a href="Poco.Net.MailRecipient.html" title="class Poco::Net::MailRecipient">MailRecipient</a>, <a href="Poco.Net.MailStreamBuf.html" title="class Poco::Net::MailStreamBuf">MailStreamBuf</a>, <a href="Poco.Net.MediaType.html" title="class Poco::Net::MediaType">MediaType</a>, <a href="Poco.Net.MessageException.html" title="class Poco::Net::MessageException">MessageException</a>, <a href="Poco.Net.MessageHeader.html" title="class Poco::Net::MessageHeader">MessageHeader</a>, <a href="Poco.Net.MulticastSocket.html" title="class Poco::Net::MulticastSocket">MulticastSocket</a>, <a href="Poco.Net.MultipartException.html" title="class Poco::Net::MultipartException">MultipartException</a>, <a href="Poco.Net.MultipartIOS.html" title="class Poco::Net::MultipartIOS">MultipartIOS</a>, <a href="Poco.Net.MultipartInputStream.html" title="class Poco::Net::MultipartInputStream">MultipartInputStream</a>, <a href="Poco.Net.MultipartReader.html" title="class Poco::Net::MultipartReader">MultipartReader</a>, <a href="Poco.Net.MultipartStreamBuf.html" title="class Poco::Net::MultipartStreamBuf">MultipartStreamBuf</a>, <a href="Poco.Net.MultipartWriter.html" title="class Poco::Net::MultipartWriter">MultipartWriter</a>, <a href="Poco.Net.NameValueCollection.html" title="class Poco::Net::NameValueCollection">NameValueCollection</a>, <a href="Poco.Net.NetException.html" title="class Poco::Net::NetException">NetException</a>, <a href="Poco.Net.NetworkInterface.html" title="class Poco::Net::NetworkInterface">NetworkInterface</a>, <a href="Poco.Net.NoAddressFoundException.html" title="class Poco::Net::NoAddressFoundException">NoAddressFoundException</a>, <a href="Poco.Net.NoMessageException.html" title="class Poco::Net::NoMessageException">NoMessageException</a>, <a href="Poco.Net.NotAuthenticatedException.html" title="class Poco::Net::NotAuthenticatedException">NotAuthenticatedException</a>, <a href="Poco.Net.NullPartHandler.html" title="class Poco::Net::NullPartHandler">NullPartHandler</a>, <a href="Poco.Net.POP3ClientSession.html" title="class Poco::Net::POP3ClientSession">POP3ClientSession</a>, <a href="Poco.Net.POP3Exception.html" title="class Poco::Net::POP3Exception">POP3Exception</a>, <a href="Poco.Net.PartHandler.html" title="class Poco::Net::PartHandler">PartHandler</a>, <a href="Poco.Net.PartSource.html" title="class Poco::Net::PartSource">PartSource</a>, <a href="Poco.Net.PrivateKeyFactory.html" title="class Poco::Net::PrivateKeyFactory">PrivateKeyFactory</a>, <a href="Poco.Net.PrivateKeyFactoryImpl.html" title="class Poco::Net::PrivateKeyFactoryImpl">PrivateKeyFactoryImpl</a>, <a href="Poco.Net.PrivateKeyFactoryMgr.html" title="class Poco::Net::PrivateKeyFactoryMgr">PrivateKeyFactoryMgr</a>, <a href="Poco.Net.PrivateKeyFactoryRegistrar.html" title="class Poco::Net::PrivateKeyFactoryRegistrar">PrivateKeyFactoryRegistrar</a>, <a href="Poco.Net.PrivateKeyPassphraseHandler.html" title="class Poco::Net::PrivateKeyPassphraseHandler">PrivateKeyPassphraseHandler</a>, <a href="Poco.Net.QuotedPrintableDecoder.html" title="class Poco::Net::QuotedPrintableDecoder">QuotedPrintableDecoder</a>, <a href="Poco.Net.QuotedPrintableDecoderBuf.html" title="class Poco::Net::QuotedPrintableDecoderBuf">QuotedPrintableDecoderBuf</a>, <a href="Poco.Net.QuotedPrintableDecoderIOS.html" title="class Poco::Net::QuotedPrintableDecoderIOS">QuotedPrintableDecoderIOS</a>, <a href="Poco.Net.QuotedPrintableEncoder.html" title="class Poco::Net::QuotedPrintableEncoder">QuotedPrintableEncoder</a>, <a href="Poco.Net.QuotedPrintableEncoderBuf.html" title="class Poco::Net::QuotedPrintableEncoderBuf">QuotedPrintableEncoderBuf</a>, <a href="Poco.Net.QuotedPrintableEncoderIOS.html" title="class Poco::Net::QuotedPrintableEncoderIOS">QuotedPrintableEncoderIOS</a>, <a href="Poco.Net.RawSocket.html" title="class Poco::Net::RawSocket">RawSocket</a>, <a href="Poco.Net.RawSocketImpl.html" title="class Poco::Net::RawSocketImpl">RawSocketImpl</a>, <a href="Poco.Net.ReadableNotification.html" title="class Poco::Net::ReadableNotification">ReadableNotification</a>, <a href="Poco.Net.RejectCertificateHandler.html" title="class Poco::Net::RejectCertificateHandler">RejectCertificateHandler</a>, <a href="Poco.Net.RemoteSyslogChannel.html" title="class Poco::Net::RemoteSyslogChannel">RemoteSyslogChannel</a>, <a href="Poco.Net.RemoteSyslogListener.html" title="class Poco::Net::RemoteSyslogListener">RemoteSyslogListener</a>, <a href="Poco.Net.SMTPClientSession.html" title="class Poco::Net::SMTPClientSession">SMTPClientSession</a>, <a href="Poco.Net.SMTPException.html" title="class Poco::Net::SMTPException">SMTPException</a>, <a href="Poco.Net.SSLConnectionUnexpectedlyClosedException.html" title="class Poco::Net::SSLConnectionUnexpectedlyClosedException">SSLConnectionUnexpectedlyClosedException</a>, <a href="Poco.Net.SSLContextException.html" title="class Poco::Net::SSLContextException">SSLContextException</a>, <a href="Poco.Net.SSLException.html" title="class Poco::Net::SSLException">SSLException</a>, <a href="Poco.Net.SSLManager.html" title="class Poco::Net::SSLManager">SSLManager</a>, <a href="Poco.Net.SecureSMTPClientSession.html" title="class Poco::Net::SecureSMTPClientSession">SecureSMTPClientSession</a>, <a href="Poco.Net.SecureServerSocket.html" title="class Poco::Net::SecureServerSocket">SecureServerSocket</a>, <a href="Poco.Net.SecureServerSocketImpl.html" title="class Poco::Net::SecureServerSocketImpl">SecureServerSocketImpl</a>, <a href="Poco.Net.SecureSocketImpl.html" title="class Poco::Net::SecureSocketImpl">SecureSocketImpl</a>, <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a>, <a href="Poco.Net.SecureStreamSocketImpl.html" title="class Poco::Net::SecureStreamSocketImpl">SecureStreamSocketImpl</a>, <a href="Poco.Net.ServerSocket.html" title="class Poco::Net::ServerSocket">ServerSocket</a>, <a href="Poco.Net.ServerSocketImpl.html" title="class Poco::Net::ServerSocketImpl">ServerSocketImpl</a>, <a href="Poco.Net.ServiceNotFoundException.html" title="class Poco::Net::ServiceNotFoundException">ServiceNotFoundException</a>, <a href="Poco.Net.Session.html" title="class Poco::Net::Session">Session</a>, <a href="Poco.Net.ShutdownNotification.html" title="class Poco::Net::ShutdownNotification">ShutdownNotification</a>, <a href="Poco.Net.Socket.html" title="class Poco::Net::Socket">Socket</a>, <a href="Poco.Net.SocketAcceptor.html" title="class Poco::Net::SocketAcceptor">SocketAcceptor</a>, <a href="Poco.Net.SocketAddress.html" title="class Poco::Net::SocketAddress">SocketAddress</a>, <a href="Poco.Net.SocketConnector.html" title="class Poco::Net::SocketConnector">SocketConnector</a>, <a href="Poco.Net.SocketIOS.html" title="class Poco::Net::SocketIOS">SocketIOS</a>, <a href="Poco.Net.SocketImpl.html" title="class Poco::Net::SocketImpl">SocketImpl</a>, <a href="Poco.Net.SocketInputStream.html" title="class Poco::Net::SocketInputStream">SocketInputStream</a>, <a href="Poco.Net.SocketNotification.html" title="class Poco::Net::SocketNotification">SocketNotification</a>, <a href="Poco.Net.SocketNotifier.html" title="class Poco::Net::SocketNotifier">SocketNotifier</a>, <a href="Poco.Net.SocketOutputStream.html" title="class Poco::Net::SocketOutputStream">SocketOutputStream</a>, <a href="Poco.Net.SocketReactor.html" title="class Poco::Net::SocketReactor">SocketReactor</a>, <a href="Poco.Net.SocketStream.html" title="class Poco::Net::SocketStream">SocketStream</a>, <a href="Poco.Net.SocketStreamBuf.html" title="class Poco::Net::SocketStreamBuf">SocketStreamBuf</a>, <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a>, <a href="Poco.Net.StreamSocketImpl.html" title="class Poco::Net::StreamSocketImpl">StreamSocketImpl</a>, <a href="Poco.Net.StringPartSource.html" title="class Poco::Net::StringPartSource">StringPartSource</a>, <a href="Poco.Net.TCPServer.html" title="class Poco::Net::TCPServer">TCPServer</a>, <a href="Poco.Net.TCPServerConnection.html" title="class Poco::Net::TCPServerConnection">TCPServerConnection</a>, <a href="Poco.Net.TCPServerConnectionFactory.html" title="class Poco::Net::TCPServerConnectionFactory">TCPServerConnectionFactory</a>, <a href="Poco.Net.TCPServerConnectionFactoryImpl.html" title="class Poco::Net::TCPServerConnectionFactoryImpl">TCPServerConnectionFactoryImpl</a>, <a href="Poco.Net.TCPServerDispatcher.html" title="class Poco::Net::TCPServerDispatcher">TCPServerDispatcher</a>, <a href="Poco.Net.TCPServerParams.html" title="class Poco::Net::TCPServerParams">TCPServerParams</a>, <a href="Poco.Net.TimeoutNotification.html" title="class Poco::Net::TimeoutNotification">TimeoutNotification</a>, <a href="Poco.Net.UnsupportedRedirectException.html" title="class Poco::Net::UnsupportedRedirectException">UnsupportedRedirectException</a>, <a href="Poco.Net.Utility.html" title="class Poco::Net::Utility">Utility</a>, <a href="Poco.Net.VerificationErrorArgs.html" title="class Poco::Net::VerificationErrorArgs">VerificationErrorArgs</a>, <a href="Poco.Net.WebSocket.html" title="class Poco::Net::WebSocket">WebSocket</a>, <a href="Poco.Net.WebSocketException.html" title="class Poco::Net::WebSocketException">WebSocketException</a>, <a href="Poco.Net.WebSocketImpl.html" title="class Poco::Net::WebSocketImpl">WebSocketImpl</a>, <a href="Poco.Net.WritableNotification.html" title="class Poco::Net::WritableNotification">WritableNotification</a>, <a href="Poco.Net.X509Certificate.html" title="class Poco::Net::X509Certificate">X509Certificate</a></p>
+<p><b>Types:</b> 
+<a href="Poco.Net.html#12784" title="Poco::Net::HTTPBasicStreamBuf">HTTPBasicStreamBuf</a></p>
+<p><b>Functions:</b> 
+<a href="Poco.Net.html#14556" title="Poco::Net::initializeNetwork()">initializeNetwork</a>, <a href="Poco.Net.html#16602" title="Poco::Net::initializeSSL()">initializeSSL</a>, <a href="Poco.Net.html#13782" title="Poco::Net::swap()">swap</a>, <a href="Poco.Net.html#14557" title="Poco::Net::uninitializeNetwork()">uninitializeNetwork</a>, <a href="Poco.Net.html#16603" title="Poco::Net::uninitializeSSL()">uninitializeSSL</a></p>
+<h2>Classes</h2>
+<h3><a href="Poco.Net.AbstractHTTPRequestHandler.html" class="class">class AbstractHTTPRequestHandler</a></h3>
+<p> The abstract base class for AbstractHTTPRequestHandlers 
+ created by <a href="Poco.Net.HTTPServer.html" title="class Poco::Net::HTTPServer">HTTPServer</a>.&nbsp;<a href="Poco.Net.AbstractHTTPRequestHandler.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.AcceptCertificateHandler.html" class="class">class AcceptCertificateHandler</a></h3>
+<p> A <a href="Poco.Net.AcceptCertificateHandler.html" title="class Poco::Net::AcceptCertificateHandler">AcceptCertificateHandler</a> is invoked whenever an error 
+ occurs verifying the certificate.&nbsp;<a href="Poco.Net.AcceptCertificateHandler.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.CertificateHandlerFactory.html" class="class">class CertificateHandlerFactory</a></h3>
+<p> A <a href="Poco.Net.CertificateHandlerFactory.html" title="class Poco::Net::CertificateHandlerFactory">CertificateHandlerFactory</a> is responsible for creating InvalidCertificateHandlers.&nbsp;<a href="Poco.Net.CertificateHandlerFactory.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.CertificateHandlerFactoryImpl.html" class="class">class CertificateHandlerFactoryImpl</a></h3>
+<p>&nbsp;<a href="Poco.Net.CertificateHandlerFactoryImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.CertificateHandlerFactoryMgr.html" class="class">class CertificateHandlerFactoryMgr</a></h3>
+<p> A <a href="Poco.Net.CertificateHandlerFactoryMgr.html" title="class Poco::Net::CertificateHandlerFactoryMgr">CertificateHandlerFactoryMgr</a> manages all existing CertificateHandlerFactories.&nbsp;<a href="Poco.Net.CertificateHandlerFactoryMgr.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.CertificateHandlerFactoryRegistrar.html" class="class">class CertificateHandlerFactoryRegistrar</a></h3>
+<p> Registrar class which automatically registers <a href="Poco.Net.CertificateHandlerFactory.html" title="class Poco::Net::CertificateHandlerFactory">CertificateHandlerFactory</a> at the <a href="Poco.Net.CertificateHandlerFactoryMgr.html" title="class Poco::Net::CertificateHandlerFactoryMgr">CertificateHandlerFactoryMgr</a>.&nbsp;<a href="Poco.Net.CertificateHandlerFactoryRegistrar.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.CertificateValidationException.html" class="class">class CertificateValidationException</a></h3>
+<p>&nbsp;<a href="Poco.Net.CertificateValidationException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ConnectionAbortedException.html" class="class">class ConnectionAbortedException</a></h3>
+<p>&nbsp;<a href="Poco.Net.ConnectionAbortedException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ConnectionRefusedException.html" class="class">class ConnectionRefusedException</a></h3>
+<p>&nbsp;<a href="Poco.Net.ConnectionRefusedException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ConnectionResetException.html" class="class">class ConnectionResetException</a></h3>
+<p>&nbsp;<a href="Poco.Net.ConnectionResetException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ConsoleCertificateHandler.html" class="class">class ConsoleCertificateHandler</a></h3>
+<p> A <a href="Poco.Net.ConsoleCertificateHandler.html" title="class Poco::Net::ConsoleCertificateHandler">ConsoleCertificateHandler</a> is invoked whenever an error occurs verifying the certificate.&nbsp;<a href="Poco.Net.ConsoleCertificateHandler.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.Context.html" class="class">class Context</a></h3>
+<p> This class encapsulates context information for
+ an SSL server or client, such as the certificate
+ verification mode and the location of certificates
+ and private key files, as well as the list of
+ supported ciphers.&nbsp;<a href="Poco.Net.Context.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.DNS.html" class="class">class DNS</a></h3>
+<p> This class provides an interface to the
+ domain name service.&nbsp;<a href="Poco.Net.DNS.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.DNSException.html" class="class">class DNSException</a></h3>
+<p>&nbsp;<a href="Poco.Net.DNSException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.DatagramSocket.html" class="class">class DatagramSocket</a></h3>
+<p> This class provides an interface to an
+ UDP stream socket.&nbsp;<a href="Poco.Net.DatagramSocket.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.DatagramSocketImpl.html" class="class">class DatagramSocketImpl</a></h3>
+<p> This class implements an UDP socket.&nbsp;<a href="Poco.Net.DatagramSocketImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.DialogSocket.html" class="class">class DialogSocket</a></h3>
+<p> <a href="Poco.Net.DialogSocket.html" title="class Poco::Net::DialogSocket">DialogSocket</a> is a subclass of <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> that
+ can be used for implementing request-response
+ based client server connections.&nbsp;<a href="Poco.Net.DialogSocket.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ErrorNotification.html" class="class">class ErrorNotification</a></h3>
+<p> This notification is sent if a socket has signalled an error.&nbsp;<a href="Poco.Net.ErrorNotification.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.FTPClientSession.html" class="class">class FTPClientSession</a></h3>
+<p> This class implements an <a href="Poco.File.html" title="class Poco::File">File</a> Transfer Protocol
+ (FTP, <a href="http://www.ietf.org/rfc/rfc959.txt" target="_blank">RFC 959</a>) client.&nbsp;<a href="Poco.Net.FTPClientSession.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.FTPException.html" class="class">class FTPException</a></h3>
+<p>&nbsp;<a href="Poco.Net.FTPException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.FTPPasswordProvider.html" class="class">class FTPPasswordProvider</a></h3>
+<p> The base class for all password providers.&nbsp;<a href="Poco.Net.FTPPasswordProvider.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.FTPStreamFactory.html" class="class">class FTPStreamFactory</a></h3>
+<p> An implementation of the <a href="Poco.URIStreamFactory.html" title="class Poco::URIStreamFactory">URIStreamFactory</a> interface
+ that handles <a href="Poco.File.html" title="class Poco::File">File</a> Transfer Protocol (ftp) URIs.&nbsp;<a href="Poco.Net.FTPStreamFactory.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.FilePartSource.html" class="class">class FilePartSource</a></h3>
+<p> An implementation of <a href="Poco.Net.PartSource.html" title="class Poco::Net::PartSource">PartSource</a> for
+ plain files.&nbsp;<a href="Poco.Net.FilePartSource.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTMLForm.html" class="class">class HTMLForm</a></h3>
+<p> <a href="Poco.Net.HTMLForm.html" title="class Poco::Net::HTMLForm">HTMLForm</a> is a helper class for working with HTML forms,
+ both on the client and on the server side.&nbsp;<a href="Poco.Net.HTMLForm.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTMLFormException.html" class="class">class HTMLFormException</a></h3>
+<p>&nbsp;<a href="Poco.Net.HTMLFormException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPAuthenticationParams.html" class="class">class HTTPAuthenticationParams</a></h3>
+<p> Collection of name-value pairs of HTTP authentication header (i.&nbsp;<a href="Poco.Net.HTTPAuthenticationParams.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPBasicCredentials.html" class="class">class HTTPBasicCredentials</a></h3>
+<p> This is a utility class for working with
+ HTTP Basic Authentication in <a href="Poco.Net.HTTPRequest.html" title="class Poco::Net::HTTPRequest">HTTPRequest</a>
+ objects.&nbsp;<a href="Poco.Net.HTTPBasicCredentials.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPBufferAllocator.html" class="class">class HTTPBufferAllocator</a></h3>
+<p> A <a href="Poco.BufferAllocator.html" title="class Poco::BufferAllocator">BufferAllocator</a> for HTTP streams.&nbsp;<a href="Poco.Net.HTTPBufferAllocator.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPChunkedIOS.html" class="class">class HTTPChunkedIOS</a></h3>
+<p> The base class for <a href="Poco.Net.HTTPInputStream.html" title="class Poco::Net::HTTPInputStream">HTTPInputStream</a>.&nbsp;<a href="Poco.Net.HTTPChunkedIOS.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPChunkedInputStream.html" class="class">class HTTPChunkedInputStream</a></h3>
+<p> This class is for internal use by <a href="Poco.Net.HTTPSession.html" title="class Poco::Net::HTTPSession">HTTPSession</a> only.&nbsp;<a href="Poco.Net.HTTPChunkedInputStream.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPChunkedOutputStream.html" class="class">class HTTPChunkedOutputStream</a></h3>
+<p> This class is for internal use by <a href="Poco.Net.HTTPSession.html" title="class Poco::Net::HTTPSession">HTTPSession</a> only.&nbsp;<a href="Poco.Net.HTTPChunkedOutputStream.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPChunkedStreamBuf.html" class="class">class HTTPChunkedStreamBuf</a></h3>
+<p> This is the streambuf class used for reading and writing
+ HTTP message bodies in chunked transfer coding.&nbsp;<a href="Poco.Net.HTTPChunkedStreamBuf.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPClientSession.html" class="class">class HTTPClientSession</a></h3>
+<p> This class implements the client-side of
+ a HTTP session.&nbsp;<a href="Poco.Net.HTTPClientSession.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPCookie.html" class="class">class HTTPCookie</a></h3>
+<p> This class represents a HTTP Cookie.&nbsp;<a href="Poco.Net.HTTPCookie.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPCredentials.html" class="class">class HTTPCredentials</a></h3>
+<p> This is a utility class for working with HTTP
+ authentication (basic or digest) in <a href="Poco.Net.HTTPRequest.html" title="class Poco::Net::HTTPRequest">HTTPRequest</a> objects.&nbsp;<a href="Poco.Net.HTTPCredentials.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPDigestCredentials.html" class="class">class HTTPDigestCredentials</a></h3>
+<p> This is a utility class for working with
+ HTTP Digest Authentication in <a href="Poco.Net.HTTPRequest.html" title="class Poco::Net::HTTPRequest">HTTPRequest</a>
+ objects.&nbsp;<a href="Poco.Net.HTTPDigestCredentials.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPException.html" class="class">class HTTPException</a></h3>
+<p>&nbsp;<a href="Poco.Net.HTTPException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPFixedLengthIOS.html" class="class">class HTTPFixedLengthIOS</a></h3>
+<p> The base class for <a href="Poco.Net.HTTPFixedLengthInputStream.html" title="class Poco::Net::HTTPFixedLengthInputStream">HTTPFixedLengthInputStream</a>.&nbsp;<a href="Poco.Net.HTTPFixedLengthIOS.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPFixedLengthInputStream.html" class="class">class HTTPFixedLengthInputStream</a></h3>
+<p> This class is for internal use by <a href="Poco.Net.HTTPSession.html" title="class Poco::Net::HTTPSession">HTTPSession</a> only.&nbsp;<a href="Poco.Net.HTTPFixedLengthInputStream.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPFixedLengthOutputStream.html" class="class">class HTTPFixedLengthOutputStream</a></h3>
+<p> This class is for internal use by <a href="Poco.Net.HTTPSession.html" title="class Poco::Net::HTTPSession">HTTPSession</a> only.&nbsp;<a href="Poco.Net.HTTPFixedLengthOutputStream.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPFixedLengthStreamBuf.html" class="class">class HTTPFixedLengthStreamBuf</a></h3>
+<p> This is the streambuf class used for reading and writing fixed-size
+ HTTP message bodies.&nbsp;<a href="Poco.Net.HTTPFixedLengthStreamBuf.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPHeaderIOS.html" class="class">class HTTPHeaderIOS</a></h3>
+<p> The base class for <a href="Poco.Net.HTTPHeaderInputStream.html" title="class Poco::Net::HTTPHeaderInputStream">HTTPHeaderInputStream</a>.&nbsp;<a href="Poco.Net.HTTPHeaderIOS.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPHeaderInputStream.html" class="class">class HTTPHeaderInputStream</a></h3>
+<p> This class is for internal use by <a href="Poco.Net.HTTPSession.html" title="class Poco::Net::HTTPSession">HTTPSession</a> only.&nbsp;<a href="Poco.Net.HTTPHeaderInputStream.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPHeaderOutputStream.html" class="class">class HTTPHeaderOutputStream</a></h3>
+<p> This class is for internal use by <a href="Poco.Net.HTTPSession.html" title="class Poco::Net::HTTPSession">HTTPSession</a> only.&nbsp;<a href="Poco.Net.HTTPHeaderOutputStream.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPHeaderStreamBuf.html" class="class">class HTTPHeaderStreamBuf</a></h3>
+<p> This is the streambuf class used for reading from a HTTP header
+ in a <a href="Poco.Net.HTTPSession.html" title="class Poco::Net::HTTPSession">HTTPSession</a>.&nbsp;<a href="Poco.Net.HTTPHeaderStreamBuf.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPIOS.html" class="class">class HTTPIOS</a></h3>
+<p> The base class for <a href="Poco.Net.HTTPInputStream.html" title="class Poco::Net::HTTPInputStream">HTTPInputStream</a>.&nbsp;<a href="Poco.Net.HTTPIOS.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPInputStream.html" class="class">class HTTPInputStream</a></h3>
+<p> This class is for internal use by <a href="Poco.Net.HTTPSession.html" title="class Poco::Net::HTTPSession">HTTPSession</a> only.&nbsp;<a href="Poco.Net.HTTPInputStream.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPMessage.html" class="class">class HTTPMessage</a></h3>
+<p> The base class for <a href="Poco.Net.HTTPRequest.html" title="class Poco::Net::HTTPRequest">HTTPRequest</a> and <a href="Poco.Net.HTTPResponse.html" title="class Poco::Net::HTTPResponse">HTTPResponse</a>.&nbsp;<a href="Poco.Net.HTTPMessage.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPOutputStream.html" class="class">class HTTPOutputStream</a></h3>
+<p> This class is for internal use by <a href="Poco.Net.HTTPSession.html" title="class Poco::Net::HTTPSession">HTTPSession</a> only.&nbsp;<a href="Poco.Net.HTTPOutputStream.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPRequest.html" class="class">class HTTPRequest</a></h3>
+<p> This class encapsulates an HTTP request
+ message.&nbsp;<a href="Poco.Net.HTTPRequest.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPRequestHandler.html" class="class">class HTTPRequestHandler</a></h3>
+<p> The abstract base class for HTTPRequestHandlers 
+ created by <a href="Poco.Net.HTTPServer.html" title="class Poco::Net::HTTPServer">HTTPServer</a>.&nbsp;<a href="Poco.Net.HTTPRequestHandler.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPRequestHandlerFactory.html" class="class">class HTTPRequestHandlerFactory</a></h3>
+<p> A factory for <a href="Poco.Net.HTTPRequestHandler.html" title="class Poco::Net::HTTPRequestHandler">HTTPRequestHandler</a> objects.&nbsp;<a href="Poco.Net.HTTPRequestHandlerFactory.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPResponse.html" class="class">class HTTPResponse</a></h3>
+<p> This class encapsulates an HTTP response
+ message.&nbsp;<a href="Poco.Net.HTTPResponse.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPResponseIOS.html" class="class">class HTTPResponseIOS</a></h3>
+<p>&nbsp;<a href="Poco.Net.HTTPResponseIOS.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPResponseStream.html" class="class">class HTTPResponseStream</a></h3>
+<p>&nbsp;<a href="Poco.Net.HTTPResponseStream.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPResponseStreamBuf.html" class="class">class HTTPResponseStreamBuf</a></h3>
+<p>&nbsp;<a href="Poco.Net.HTTPResponseStreamBuf.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPSClientSession.html" class="class">class HTTPSClientSession</a></h3>
+<p> This class implements the client-side of
+ a HTTPS session.&nbsp;<a href="Poco.Net.HTTPSClientSession.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPSSessionInstantiator.html" class="class">class HTTPSSessionInstantiator</a></h3>
+<p> The <a href="Poco.Net.HTTPSessionInstantiator.html" title="class Poco::Net::HTTPSessionInstantiator">HTTPSessionInstantiator</a> for <a href="Poco.Net.HTTPSClientSession.html" title="class Poco::Net::HTTPSClientSession">HTTPSClientSession</a>.&nbsp;<a href="Poco.Net.HTTPSSessionInstantiator.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPSStreamFactory.html" class="class">class HTTPSStreamFactory</a></h3>
+<p> An implementation of the <a href="Poco.URIStreamFactory.html" title="class Poco::URIStreamFactory">URIStreamFactory</a> interface
+ that handles secure Hyper-Text Transfer Protocol (https) URIs.&nbsp;<a href="Poco.Net.HTTPSStreamFactory.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPServer.html" class="class">class HTTPServer</a></h3>
+<p> A subclass of <a href="Poco.Net.TCPServer.html" title="class Poco::Net::TCPServer">TCPServer</a> that implements a
+ full-featured multithreaded HTTP server.&nbsp;<a href="Poco.Net.HTTPServer.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPServerConnection.html" class="class">class HTTPServerConnection</a></h3>
+<p> This subclass of <a href="Poco.Net.TCPServerConnection.html" title="class Poco::Net::TCPServerConnection">TCPServerConnection</a> handles HTTP
+ connections.&nbsp;<a href="Poco.Net.HTTPServerConnection.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPServerConnectionFactory.html" class="class">class HTTPServerConnectionFactory</a></h3>
+<p> This implementation of a <a href="Poco.Net.TCPServerConnectionFactory.html" title="class Poco::Net::TCPServerConnectionFactory">TCPServerConnectionFactory</a>
+ is used by <a href="Poco.Net.HTTPServer.html" title="class Poco::Net::HTTPServer">HTTPServer</a> to create <a href="Poco.Net.HTTPServerConnection.html" title="class Poco::Net::HTTPServerConnection">HTTPServerConnection</a> objects.&nbsp;<a href="Poco.Net.HTTPServerConnectionFactory.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPServerParams.html" class="class">class HTTPServerParams</a></h3>
+<p> This class is used to specify parameters to both the
+ <a href="Poco.Net.HTTPServer.html" title="class Poco::Net::HTTPServer">HTTPServer</a>, as well as to <a href="Poco.Net.HTTPRequestHandler.html" title="class Poco::Net::HTTPRequestHandler">HTTPRequestHandler</a> objects.&nbsp;<a href="Poco.Net.HTTPServerParams.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPServerRequest.html" class="class">class HTTPServerRequest</a></h3>
+<p> This abstract subclass of <a href="Poco.Net.HTTPRequest.html" title="class Poco::Net::HTTPRequest">HTTPRequest</a> is used for
+ representing server-side HTTP requests.&nbsp;<a href="Poco.Net.HTTPServerRequest.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPServerRequestImpl.html" class="class">class HTTPServerRequestImpl</a></h3>
+<p> This subclass of <a href="Poco.Net.HTTPServerRequest.html" title="class Poco::Net::HTTPServerRequest">HTTPServerRequest</a> is used for
+ representing server-side HTTP requests.&nbsp;<a href="Poco.Net.HTTPServerRequestImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPServerResponse.html" class="class">class HTTPServerResponse</a></h3>
+<p> This subclass of <a href="Poco.Net.HTTPResponse.html" title="class Poco::Net::HTTPResponse">HTTPResponse</a> is used for
+ representing server-side HTTP responses.&nbsp;<a href="Poco.Net.HTTPServerResponse.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPServerResponseImpl.html" class="class">class HTTPServerResponseImpl</a></h3>
+<p> This subclass of <a href="Poco.Net.HTTPServerResponse.html" title="class Poco::Net::HTTPServerResponse">HTTPServerResponse</a> is used for
+ representing server-side HTTP responses.&nbsp;<a href="Poco.Net.HTTPServerResponseImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPServerSession.html" class="class">class HTTPServerSession</a></h3>
+<p> This class handles the server side of a
+ HTTP session.&nbsp;<a href="Poco.Net.HTTPServerSession.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPSession.html" class="class">class HTTPSession</a></h3>
+<p> <a href="Poco.Net.HTTPSession.html" title="class Poco::Net::HTTPSession">HTTPSession</a> implements basic HTTP session management
+ for both HTTP clients and HTTP servers.&nbsp;<a href="Poco.Net.HTTPSession.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPSessionFactory.html" class="class">class HTTPSessionFactory</a></h3>
+<p> A factory for <a href="Poco.Net.HTTPClientSession.html" title="class Poco::Net::HTTPClientSession">HTTPClientSession</a> objects.&nbsp;<a href="Poco.Net.HTTPSessionFactory.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPSessionInstantiator.html" class="class">class HTTPSessionInstantiator</a></h3>
+<p> A factory for <a href="Poco.Net.HTTPClientSession.html" title="class Poco::Net::HTTPClientSession">HTTPClientSession</a> objects.&nbsp;<a href="Poco.Net.HTTPSessionInstantiator.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPStreamBuf.html" class="class">class HTTPStreamBuf</a></h3>
+<p> This is the streambuf class used for reading and writing
+ HTTP message bodies.&nbsp;<a href="Poco.Net.HTTPStreamBuf.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HTTPStreamFactory.html" class="class">class HTTPStreamFactory</a></h3>
+<p> An implementation of the <a href="Poco.URIStreamFactory.html" title="class Poco::URIStreamFactory">URIStreamFactory</a> interface
+ that handles Hyper-Text Transfer Protocol (http) URIs.&nbsp;<a href="Poco.Net.HTTPStreamFactory.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HostEntry.html" class="class">class HostEntry</a></h3>
+<p> This class stores information about a host
+ such as host name, alias names and a list
+ of IP addresses.&nbsp;<a href="Poco.Net.HostEntry.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.HostNotFoundException.html" class="class">class HostNotFoundException</a></h3>
+<p>&nbsp;<a href="Poco.Net.HostNotFoundException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ICMPClient.html" class="class">class ICMPClient</a></h3>
+<p> This class provides ICMP Ping functionality.&nbsp;<a href="Poco.Net.ICMPClient.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ICMPEventArgs.html" class="class">class ICMPEventArgs</a></h3>
+<p> The purpose of the <a href="Poco.Net.ICMPEventArgs.html" title="class Poco::Net::ICMPEventArgs">ICMPEventArgs</a> class is to be used as template parameter
+ to instantiate event members in <a href="Poco.Net.ICMPClient.html" title="class Poco::Net::ICMPClient">ICMPClient</a> class.&nbsp;<a href="Poco.Net.ICMPEventArgs.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ICMPException.html" class="class">class ICMPException</a></h3>
+<p>&nbsp;<a href="Poco.Net.ICMPException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ICMPPacket.html" class="class">class ICMPPacket</a></h3>
+<p> This class is the ICMP packet abstraction.&nbsp;<a href="Poco.Net.ICMPPacket.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ICMPPacketImpl.html" class="class">class ICMPPacketImpl</a></h3>
+<p> This is the abstract class for ICMP packet implementations.&nbsp;<a href="Poco.Net.ICMPPacketImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ICMPSocket.html" class="class">class ICMPSocket</a></h3>
+<p> This class provides an interface to an
+ ICMP client socket.&nbsp;<a href="Poco.Net.ICMPSocket.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ICMPSocketImpl.html" class="class">class ICMPSocketImpl</a></h3>
+<p> This class implements an ICMP socket.&nbsp;<a href="Poco.Net.ICMPSocketImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ICMPv4PacketImpl.html" class="class">class ICMPv4PacketImpl</a></h3>
+<p> This class implements the ICMPv4 packet.&nbsp;<a href="Poco.Net.ICMPv4PacketImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.IPAddress.html" class="class">class IPAddress</a></h3>
+<p> This class represents an internet (IP) host
+ address.&nbsp;<a href="Poco.Net.IPAddress.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.IdleNotification.html" class="class">class IdleNotification</a></h3>
+<p> This notification is sent when the <a href="Poco.Net.SocketReactor.html" title="class Poco::Net::SocketReactor">SocketReactor</a> does
+ not have any sockets to react to.&nbsp;<a href="Poco.Net.IdleNotification.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.InterfaceNotFoundException.html" class="class">class InterfaceNotFoundException</a></h3>
+<p>&nbsp;<a href="Poco.Net.InterfaceNotFoundException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.InvalidAddressException.html" class="class">class InvalidAddressException</a></h3>
+<p>&nbsp;<a href="Poco.Net.InvalidAddressException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.InvalidCertificateException.html" class="class">class InvalidCertificateException</a></h3>
+<p>&nbsp;<a href="Poco.Net.InvalidCertificateException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.InvalidCertificateHandler.html" class="class">class InvalidCertificateHandler</a></h3>
+<p> A <a href="Poco.Net.InvalidCertificateHandler.html" title="class Poco::Net::InvalidCertificateHandler">InvalidCertificateHandler</a> is invoked whenever an error occurs verifying the certificate.&nbsp;<a href="Poco.Net.InvalidCertificateHandler.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.InvalidSocketException.html" class="class">class InvalidSocketException</a></h3>
+<p>&nbsp;<a href="Poco.Net.InvalidSocketException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.KeyConsoleHandler.html" class="class">class KeyConsoleHandler</a></h3>
+<p> An implementation of <a href="Poco.Net.PrivateKeyPassphraseHandler.html" title="class Poco::Net::PrivateKeyPassphraseHandler">PrivateKeyPassphraseHandler</a> that
+ reads the key for a certificate from the console.&nbsp;<a href="Poco.Net.KeyConsoleHandler.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.KeyFileHandler.html" class="class">class KeyFileHandler</a></h3>
+<p> An implementation of <a href="Poco.Net.PrivateKeyPassphraseHandler.html" title="class Poco::Net::PrivateKeyPassphraseHandler">PrivateKeyPassphraseHandler</a> that 
+ reads the key for a certificate from a configuration file
+ under the path &quot;openSSL.&nbsp;<a href="Poco.Net.KeyFileHandler.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.MailIOS.html" class="class">class MailIOS</a></h3>
+<p> The base class for <a href="Poco.Net.MailInputStream.html" title="class Poco::Net::MailInputStream">MailInputStream</a> and <a href="Poco.Net.MailOutputStream.html" title="class Poco::Net::MailOutputStream">MailOutputStream</a>.&nbsp;<a href="Poco.Net.MailIOS.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.MailInputStream.html" class="class">class MailInputStream</a></h3>
+<p> This class is used for reading E-Mail messages from a
+ POP3 server.&nbsp;<a href="Poco.Net.MailInputStream.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.MailMessage.html" class="class">class MailMessage</a></h3>
+<p> This class represents an e-mail message for
+ use with the <a href="Poco.Net.SMTPClientSession.html" title="class Poco::Net::SMTPClientSession">SMTPClientSession</a> and POPClientSession
+ classes.&nbsp;<a href="Poco.Net.MailMessage.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.MailOutputStream.html" class="class">class MailOutputStream</a></h3>
+<p> This class is used for writing E-Mail messages to a
+ SMTP server.&nbsp;<a href="Poco.Net.MailOutputStream.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.MailRecipient.html" class="class">class MailRecipient</a></h3>
+<p> The recipient of an e-mail message.&nbsp;<a href="Poco.Net.MailRecipient.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.MailStreamBuf.html" class="class">class MailStreamBuf</a></h3>
+<p> The sole purpose of this stream buffer is to replace 
+ a &quot;\r\n.&nbsp;<a href="Poco.Net.MailStreamBuf.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.MediaType.html" class="class">class MediaType</a></h3>
+<p> This class represents a MIME media type, consisting of
+ a top-level type, a subtype and an optional set of
+ parameters.&nbsp;<a href="Poco.Net.MediaType.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.MessageException.html" class="class">class MessageException</a></h3>
+<p>&nbsp;<a href="Poco.Net.MessageException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.MessageHeader.html" class="class">class MessageHeader</a></h3>
+<p> A collection of name-value pairs that are used in
+ various internet protocols like HTTP and SMTP.&nbsp;<a href="Poco.Net.MessageHeader.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.MulticastSocket.html" class="class">class MulticastSocket</a></h3>
+<p> A <a href="Poco.Net.MulticastSocket.html" title="class Poco::Net::MulticastSocket">MulticastSocket</a> is a special <a href="Poco.Net.DatagramSocket.html" title="class Poco::Net::DatagramSocket">DatagramSocket</a>
+ that can be used to send packets to and receive
+ packets from multicast groups.&nbsp;<a href="Poco.Net.MulticastSocket.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.MultipartException.html" class="class">class MultipartException</a></h3>
+<p>&nbsp;<a href="Poco.Net.MultipartException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.MultipartIOS.html" class="class">class MultipartIOS</a></h3>
+<p> The base class for <a href="Poco.Net.MultipartInputStream.html" title="class Poco::Net::MultipartInputStream">MultipartInputStream</a>.&nbsp;<a href="Poco.Net.MultipartIOS.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.MultipartInputStream.html" class="class">class MultipartInputStream</a></h3>
+<p> This class is for internal use by <a href="Poco.Net.MultipartReader.html" title="class Poco::Net::MultipartReader">MultipartReader</a> only.&nbsp;<a href="Poco.Net.MultipartInputStream.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.MultipartReader.html" class="class">class MultipartReader</a></h3>
+<p> This class is used to split a MIME multipart
+ message into its single parts.&nbsp;<a href="Poco.Net.MultipartReader.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.MultipartStreamBuf.html" class="class">class MultipartStreamBuf</a></h3>
+<p> This is the streambuf class used for reading from a multipart message stream.&nbsp;<a href="Poco.Net.MultipartStreamBuf.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.MultipartWriter.html" class="class">class MultipartWriter</a></h3>
+<p> This class is used to write MIME multipart
+ messages to an output stream.&nbsp;<a href="Poco.Net.MultipartWriter.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.NameValueCollection.html" class="class">class NameValueCollection</a></h3>
+<p> A collection of name-value pairs that are used in
+ various internet protocols like HTTP and SMTP.&nbsp;<a href="Poco.Net.NameValueCollection.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.NetException.html" class="class">class NetException</a></h3>
+<p>&nbsp;<a href="Poco.Net.NetException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.NetworkInterface.html" class="class">class NetworkInterface</a></h3>
+<p> This class represents a network interface.&nbsp;<a href="Poco.Net.NetworkInterface.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.NoAddressFoundException.html" class="class">class NoAddressFoundException</a></h3>
+<p>&nbsp;<a href="Poco.Net.NoAddressFoundException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.NoMessageException.html" class="class">class NoMessageException</a></h3>
+<p>&nbsp;<a href="Poco.Net.NoMessageException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.NotAuthenticatedException.html" class="class">class NotAuthenticatedException</a></h3>
+<p>&nbsp;<a href="Poco.Net.NotAuthenticatedException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.NullPartHandler.html" class="class">class NullPartHandler</a></h3>
+<p> A very special <a href="Poco.Net.PartHandler.html" title="class Poco::Net::PartHandler">PartHandler</a> that simply discards all data.&nbsp;<a href="Poco.Net.NullPartHandler.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.POP3ClientSession.html" class="class">class POP3ClientSession</a></h3>
+<p> This class implements an Post Office Protocol
+ Version 3 (POP3, <a href="http://www.ietf.org/rfc/rfc1939.txt" target="_blank">RFC 1939</a>)
+ client for receiving e-mail messages.&nbsp;<a href="Poco.Net.POP3ClientSession.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.POP3Exception.html" class="class">class POP3Exception</a></h3>
+<p>&nbsp;<a href="Poco.Net.POP3Exception.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.PartHandler.html" class="class">class PartHandler</a></h3>
+<p> The base class for all part or attachment handlers.&nbsp;<a href="Poco.Net.PartHandler.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.PartSource.html" class="class">class PartSource</a></h3>
+<p> This abstract class is used for adding parts or attachments
+ to mail messages, as well as for uploading files as part of a HTML form.&nbsp;<a href="Poco.Net.PartSource.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.PrivateKeyFactory.html" class="class">class PrivateKeyFactory</a></h3>
+<p> A <a href="Poco.Net.PrivateKeyFactory.html" title="class Poco::Net::PrivateKeyFactory">PrivateKeyFactory</a> is responsible for creating PrivateKeyPassphraseHandlers.&nbsp;<a href="Poco.Net.PrivateKeyFactory.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.PrivateKeyFactoryImpl.html" class="class">class PrivateKeyFactoryImpl</a></h3>
+<p>&nbsp;<a href="Poco.Net.PrivateKeyFactoryImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.PrivateKeyFactoryMgr.html" class="class">class PrivateKeyFactoryMgr</a></h3>
+<p> A <a href="Poco.Net.PrivateKeyFactoryMgr.html" title="class Poco::Net::PrivateKeyFactoryMgr">PrivateKeyFactoryMgr</a> manages all existing PrivateKeyFactories.&nbsp;<a href="Poco.Net.PrivateKeyFactoryMgr.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.PrivateKeyFactoryRegistrar.html" class="class">class PrivateKeyFactoryRegistrar</a></h3>
+<p> Registrar class which automatically registers PrivateKeyFactories at the <a href="Poco.Net.PrivateKeyFactoryMgr.html" title="class Poco::Net::PrivateKeyFactoryMgr">PrivateKeyFactoryMgr</a>.&nbsp;<a href="Poco.Net.PrivateKeyFactoryRegistrar.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.PrivateKeyPassphraseHandler.html" class="class">class PrivateKeyPassphraseHandler</a></h3>
+<p> A passphrase handler is needed whenever the private key of a certificate is loaded and the certificate is protected
+ by a passphrase.&nbsp;<a href="Poco.Net.PrivateKeyPassphraseHandler.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.QuotedPrintableDecoder.html" class="class">class QuotedPrintableDecoder</a></h3>
+<p> This istream decodes all quoted-printable (see <a href="http://www.ietf.org/rfc/rfc2045.txt" target="_blank">RFC 2045</a>)
+ encoded data read from the istream connected to it.&nbsp;<a href="Poco.Net.QuotedPrintableDecoder.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.QuotedPrintableDecoderBuf.html" class="class">class QuotedPrintableDecoderBuf</a></h3>
+<p> This streambuf decodes all quoted-printable (see <a href="http://www.ietf.org/rfc/rfc2045.txt" target="_blank">RFC 2045</a>) 
+ encoded data read from the istream connected to it.&nbsp;<a href="Poco.Net.QuotedPrintableDecoderBuf.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.QuotedPrintableDecoderIOS.html" class="class">class QuotedPrintableDecoderIOS</a></h3>
+<p> The base class for <a href="Poco.Net.QuotedPrintableDecoder.html" title="class Poco::Net::QuotedPrintableDecoder">QuotedPrintableDecoder</a>.&nbsp;<a href="Poco.Net.QuotedPrintableDecoderIOS.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.QuotedPrintableEncoder.html" class="class">class QuotedPrintableEncoder</a></h3>
+<p> This ostream encodes all data
+ written to it in quoted-printable encoding
+ (see <a href="http://www.ietf.org/rfc/rfc2045.txt" target="_blank">RFC 2045</a>) and forwards it to a connected ostream.&nbsp;<a href="Poco.Net.QuotedPrintableEncoder.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.QuotedPrintableEncoderBuf.html" class="class">class QuotedPrintableEncoderBuf</a></h3>
+<p> This streambuf encodes all data written
+ to it in quoted-printable encoding (see <a href="http://www.ietf.org/rfc/rfc2045.txt" target="_blank">RFC 2045</a>)
+ and forwards it to a connected ostream.&nbsp;<a href="Poco.Net.QuotedPrintableEncoderBuf.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.QuotedPrintableEncoderIOS.html" class="class">class QuotedPrintableEncoderIOS</a></h3>
+<p> The base class for <a href="Poco.Net.QuotedPrintableEncoder.html" title="class Poco::Net::QuotedPrintableEncoder">QuotedPrintableEncoder</a>.&nbsp;<a href="Poco.Net.QuotedPrintableEncoderIOS.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.RawSocket.html" class="class">class RawSocket</a></h3>
+<p> This class provides an interface to a
+ raw IP socket.&nbsp;<a href="Poco.Net.RawSocket.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.RawSocketImpl.html" class="class">class RawSocketImpl</a></h3>
+<p> This class implements a raw socket.&nbsp;<a href="Poco.Net.RawSocketImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ReadableNotification.html" class="class">class ReadableNotification</a></h3>
+<p> This notification is sent if a socket has become readable.&nbsp;<a href="Poco.Net.ReadableNotification.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.RejectCertificateHandler.html" class="class">class RejectCertificateHandler</a></h3>
+<p> A <a href="Poco.Net.RejectCertificateHandler.html" title="class Poco::Net::RejectCertificateHandler">RejectCertificateHandler</a> is invoked whenever an error 
+ occurs verifying the certificate.&nbsp;<a href="Poco.Net.RejectCertificateHandler.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.RemoteSyslogChannel.html" class="class">class RemoteSyslogChannel</a></h3>
+<p> This <a href="Poco.Channel.html" title="class Poco::Channel">Channel</a> implements remote syslog logging over UDP according
+ to <a href="http://www.ietf.org/rfc/rfc5424.txt" target="_blank">RFC 5424</a> &quot;The Syslog Protocol&quot; 
+ and <a href="http://www.ietf.org/rfc/rfc5426.txt" target="_blank">RFC 5426</a> &quot;Transmission of syslog messages over UDP&quot;.&nbsp;<a href="Poco.Net.RemoteSyslogChannel.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.RemoteSyslogListener.html" class="class">class RemoteSyslogListener</a></h3>
+<p> <a href="Poco.Net.RemoteSyslogListener.html" title="class Poco::Net::RemoteSyslogListener">RemoteSyslogListener</a> implents listening for syslog messages
+ sent over UDP, according to <a href="http://www.ietf.org/rfc/rfc5424.txt" target="_blank">RFC 5424</a> &quot;The Syslog Protocol&quot; 
+ and <a href="http://www.ietf.org/rfc/rfc5426.txt" target="_blank">RFC 5426</a> &quot;Transmission of syslog messages over UDP&quot;.&nbsp;<a href="Poco.Net.RemoteSyslogListener.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SMTPClientSession.html" class="class">class SMTPClientSession</a></h3>
+<p> This class implements an Simple Mail
+ Transfer Procotol (SMTP, <a href="http://www.ietf.org/rfc/rfc2821.txt" target="_blank">RFC 2821</a>)
+ client for sending e-mail messages.&nbsp;<a href="Poco.Net.SMTPClientSession.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SMTPException.html" class="class">class SMTPException</a></h3>
+<p>&nbsp;<a href="Poco.Net.SMTPException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SSLConnectionUnexpectedlyClosedException.html" class="class">class SSLConnectionUnexpectedlyClosedException</a></h3>
+<p>&nbsp;<a href="Poco.Net.SSLConnectionUnexpectedlyClosedException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SSLContextException.html" class="class">class SSLContextException</a></h3>
+<p>&nbsp;<a href="Poco.Net.SSLContextException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SSLException.html" class="class">class SSLException</a></h3>
+<p>&nbsp;<a href="Poco.Net.SSLException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SSLManager.html" class="class">class SSLManager</a></h3>
+<p> <a href="Poco.Net.SSLManager.html" title="class Poco::Net::SSLManager">SSLManager</a> is a singleton for holding the default server/client 
+ <a href="Poco.Net.Context.html" title="class Poco::Net::Context">Context</a> and handling callbacks for certificate verification errors
+ and private key passphrases.&nbsp;<a href="Poco.Net.SSLManager.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SecureSMTPClientSession.html" class="class">class SecureSMTPClientSession</a></h3>
+<p> This class implements an Simple Mail
+ Transfer Procotol (SMTP, <a href="http://www.ietf.org/rfc/rfc2821.txt" target="_blank">RFC 2821</a>)
+ client for sending e-mail messages that
+ supports the STARTTLS command for secure
+ connections.&nbsp;<a href="Poco.Net.SecureSMTPClientSession.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SecureServerSocket.html" class="class">class SecureServerSocket</a></h3>
+<p> A server socket for secure SSL connections.&nbsp;<a href="Poco.Net.SecureServerSocket.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SecureServerSocketImpl.html" class="class">class SecureServerSocketImpl</a></h3>
+<p> The <a href="Poco.Net.SocketImpl.html" title="class Poco::Net::SocketImpl">SocketImpl</a> class for <a href="Poco.Net.SecureServerSocket.html" title="class Poco::Net::SecureServerSocket">SecureServerSocket</a>.&nbsp;<a href="Poco.Net.SecureServerSocketImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SecureSocketImpl.html" class="class">class SecureSocketImpl</a></h3>
+<p> The <a href="Poco.Net.SocketImpl.html" title="class Poco::Net::SocketImpl">SocketImpl</a> for <a href="Poco.Net.SecureStreamSocket.html" title="class Poco::Net::SecureStreamSocket">SecureStreamSocket</a>.&nbsp;<a href="Poco.Net.SecureSocketImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SecureStreamSocket.html" class="class">class SecureStreamSocket</a></h3>
+<p> A subclass of <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a> for secure SSL sockets.&nbsp;<a href="Poco.Net.SecureStreamSocket.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SecureStreamSocketImpl.html" class="class">class SecureStreamSocketImpl</a></h3>
+<p> This class implements a SSL stream socket.&nbsp;<a href="Poco.Net.SecureStreamSocketImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ServerSocket.html" class="class">class ServerSocket</a></h3>
+<p> This class provides an interface to a
+ TCP server socket.&nbsp;<a href="Poco.Net.ServerSocket.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ServerSocketImpl.html" class="class">class ServerSocketImpl</a></h3>
+<p> This class implements a TCP server socket.&nbsp;<a href="Poco.Net.ServerSocketImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ServiceNotFoundException.html" class="class">class ServiceNotFoundException</a></h3>
+<p>&nbsp;<a href="Poco.Net.ServiceNotFoundException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.Session.html" class="class">class Session</a></h3>
+<p> This class encapsulates a SSL session object
+ used with session caching on the client side.&nbsp;<a href="Poco.Net.Session.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.ShutdownNotification.html" class="class">class ShutdownNotification</a></h3>
+<p> This notification is sent when the <a href="Poco.Net.SocketReactor.html" title="class Poco::Net::SocketReactor">SocketReactor</a> is
+ about to shut down.&nbsp;<a href="Poco.Net.ShutdownNotification.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.Socket.html" class="class">class Socket</a></h3>
+<p> <a href="Poco.Net.Socket.html" title="class Poco::Net::Socket">Socket</a> is the common base class for
+ <a href="Poco.Net.StreamSocket.html" title="class Poco::Net::StreamSocket">StreamSocket</a>, <a href="Poco.Net.ServerSocket.html" title="class Poco::Net::ServerSocket">ServerSocket</a>, <a href="Poco.Net.DatagramSocket.html" title="class Poco::Net::DatagramSocket">DatagramSocket</a> and other
+ socket classes.&nbsp;<a href="Poco.Net.Socket.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SocketAcceptor.html" class="class">class SocketAcceptor</a></h3>
+<p> This class implements the Acceptor part of the
+ Acceptor-Connector design pattern.&nbsp;<a href="Poco.Net.SocketAcceptor.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SocketAddress.html" class="class">class SocketAddress</a></h3>
+<p> This class represents an internet (IP) endpoint/socket
+ address.&nbsp;<a href="Poco.Net.SocketAddress.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SocketConnector.html" class="class">class SocketConnector</a></h3>
+<p> This class implements the Connector part of the
+ Acceptor-Connector design pattern.&nbsp;<a href="Poco.Net.SocketConnector.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SocketIOS.html" class="class">class SocketIOS</a></h3>
+<p> The base class for <a href="Poco.Net.SocketStream.html" title="class Poco::Net::SocketStream">SocketStream</a>, <a href="Poco.Net.SocketInputStream.html" title="class Poco::Net::SocketInputStream">SocketInputStream</a> and
+ <a href="Poco.Net.SocketOutputStream.html" title="class Poco::Net::SocketOutputStream">SocketOutputStream</a>.&nbsp;<a href="Poco.Net.SocketIOS.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SocketImpl.html" class="class">class SocketImpl</a></h3>
+<p> This class encapsulates the Berkeley sockets API.&nbsp;<a href="Poco.Net.SocketImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SocketInputStream.html" class="class">class SocketInputStream</a></h3>
+<p> An input stream for reading from a socket.&nbsp;<a href="Poco.Net.SocketInputStream.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SocketNotification.html" class="class">class SocketNotification</a></h3>
+<p> The base class for all notifications generated by
+ the <a href="Poco.Net.SocketReactor.html" title="class Poco::Net::SocketReactor">SocketReactor</a>.&nbsp;<a href="Poco.Net.SocketNotification.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SocketNotifier.html" class="class">class SocketNotifier</a></h3>
+<p> This class is used internally by <a href="Poco.Net.SocketReactor.html" title="class Poco::Net::SocketReactor">SocketReactor</a>
+ to notify registered event handlers of socket events.&nbsp;<a href="Poco.Net.SocketNotifier.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SocketOutputStream.html" class="class">class SocketOutputStream</a></h3>
+<p> An output stream for writing to a socket.&nbsp;<a href="Poco.Net.SocketOutputStream.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SocketReactor.html" class="class">class SocketReactor</a></h3>
+<p> This class, which is part of the Reactor pattern,
+ implements the &quot;Initiation Dispatcher&quot;.&nbsp;<a href="Poco.Net.SocketReactor.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SocketStream.html" class="class">class SocketStream</a></h3>
+<p> An bidirectional stream for reading from and writing to a socket.&nbsp;<a href="Poco.Net.SocketStream.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.SocketStreamBuf.html" class="class">class SocketStreamBuf</a></h3>
+<p> This is the streambuf class used for reading from and writing to a socket.&nbsp;<a href="Poco.Net.SocketStreamBuf.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.StreamSocket.html" class="class">class StreamSocket</a></h3>
+<p> This class provides an interface to a
+ TCP stream socket.&nbsp;<a href="Poco.Net.StreamSocket.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.StreamSocketImpl.html" class="class">class StreamSocketImpl</a></h3>
+<p> This class implements a TCP socket.&nbsp;<a href="Poco.Net.StreamSocketImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.StringPartSource.html" class="class">class StringPartSource</a></h3>
+<p> An implementation of <a href="Poco.Net.PartSource.html" title="class Poco::Net::PartSource">PartSource</a> for strings.&nbsp;<a href="Poco.Net.StringPartSource.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.TCPServer.html" class="class">class TCPServer</a></h3>
+<p> This class implements a multithreaded TCP server.&nbsp;<a href="Poco.Net.TCPServer.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.TCPServerConnection.html" class="class">class TCPServerConnection</a></h3>
+<p> The abstract base class for TCP server connections
+ created by <a href="Poco.Net.TCPServer.html" title="class Poco::Net::TCPServer">TCPServer</a>.&nbsp;<a href="Poco.Net.TCPServerConnection.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.TCPServerConnectionFactory.html" class="class">class TCPServerConnectionFactory</a></h3>
+<p> A factory for <a href="Poco.Net.TCPServerConnection.html" title="class Poco::Net::TCPServerConnection">TCPServerConnection</a> objects.&nbsp;<a href="Poco.Net.TCPServerConnectionFactory.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.TCPServerConnectionFactoryImpl.html" class="class">class TCPServerConnectionFactoryImpl</a></h3>
+<p> This template provides a basic implementation of
+ <a href="Poco.Net.TCPServerConnectionFactory.html" title="class Poco::Net::TCPServerConnectionFactory">TCPServerConnectionFactory</a>.&nbsp;<a href="Poco.Net.TCPServerConnectionFactoryImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.TCPServerDispatcher.html" class="class">class TCPServerDispatcher</a></h3>
+<p> A helper class for <a href="Poco.Net.TCPServer.html" title="class Poco::Net::TCPServer">TCPServer</a> that dispatches
+ connections to server connection threads.&nbsp;<a href="Poco.Net.TCPServerDispatcher.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.TCPServerParams.html" class="class">class TCPServerParams</a></h3>
+<p> This class is used to specify parameters to both the
+ <a href="Poco.Net.TCPServer.html" title="class Poco::Net::TCPServer">TCPServer</a>, as well as to <a href="Poco.Net.TCPServerDispatcher.html" title="class Poco::Net::TCPServerDispatcher">TCPServerDispatcher</a> objects.&nbsp;<a href="Poco.Net.TCPServerParams.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.TimeoutNotification.html" class="class">class TimeoutNotification</a></h3>
+<p> This notification is sent if no other event has occured
+ for a specified time.&nbsp;<a href="Poco.Net.TimeoutNotification.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.UnsupportedRedirectException.html" class="class">class UnsupportedRedirectException</a></h3>
+<p>&nbsp;<a href="Poco.Net.UnsupportedRedirectException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.Utility.html" class="class">class Utility</a></h3>
+<p> This class provides various helper functions for working
+ with the OpenSSL library.&nbsp;<a href="Poco.Net.Utility.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.VerificationErrorArgs.html" class="class">class VerificationErrorArgs</a></h3>
+<p> A utility class for certificate error handling.&nbsp;<a href="Poco.Net.VerificationErrorArgs.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.WebSocket.html" class="class">class WebSocket</a></h3>
+<p> This class implements a <a href="Poco.Net.WebSocket.html" title="class Poco::Net::WebSocket">WebSocket</a> according
+ to the <a href="Poco.Net.WebSocket.html" title="class Poco::Net::WebSocket">WebSocket</a> protocol specification in <a href="http://www.ietf.org/rfc/rfc6455.txt" target="_blank">RFC 6455</a>.&nbsp;<a href="Poco.Net.WebSocket.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.WebSocketException.html" class="class">class WebSocketException</a></h3>
+<p>&nbsp;<a href="Poco.Net.WebSocketException.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.WebSocketImpl.html" class="class">class WebSocketImpl</a></h3>
+<p> This class implements a <a href="Poco.Net.WebSocket.html" title="class Poco::Net::WebSocket">WebSocket</a>, according
+ to the <a href="Poco.Net.WebSocket.html" title="class Poco::Net::WebSocket">WebSocket</a> protocol described in <a href="http://www.ietf.org/rfc/rfc6455.txt" target="_blank">RFC 6455</a>.&nbsp;<a href="Poco.Net.WebSocketImpl.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.WritableNotification.html" class="class">class WritableNotification</a></h3>
+<p> This notification is sent if a socket has become writable.&nbsp;<a href="Poco.Net.WritableNotification.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h3><a href="Poco.Net.X509Certificate.html" class="class">class X509Certificate</a></h3>
+<p> This class extends <a href="Poco.Crypto.X509Certificate.html" title="class Poco::Crypto::X509Certificate">Poco::Crypto::X509Certificate</a> with the
+ feature to validate a certificate.&nbsp;<a href="Poco.Net.X509Certificate.html"><img src="images/arrow.gif" alt="more..." style="vertical-align:baseline;" border="0" /> </a></p>
+<h2>Types</h2>
+<h3><a name="12784">HTTPBasicStreamBuf</a></h3>
+<p class="decl">typedef Poco::BasicBufferedStreamBuf &lt; char, std::char_traits &lt; char &gt;, <a href="Poco.Net.HTTPBufferAllocator.html" title="class Poco::Net::HTTPBufferAllocator">HTTPBufferAllocator</a> &gt; <a href="Poco.Net.html#12784" title="Poco::Net::HTTPBasicStreamBuf">HTTPBasicStreamBuf</a>;</p>
+<div class="description">
+<p></p>
+</div>
+<h2>Functions</h2>
+<h3><a name="14556">initializeNetwork</a></h3>
+<p class="decl">void initializeNetwork();</p>
+<div class="description">
+<p>Initialize the network subsystem. Calls WSAStartup() on Windows, does nothing on other platforms. </p>
+</div>
+<h3><a name="16602">initializeSSL</a></h3>
+<p class="decl">void initializeSSL();</p>
+<div class="description">
+<p>Initialize the NetSSL library, as well as the underlying OpenSSL libraries, by calling <a href="Poco.Crypto.OpenSSLInitializer.html#241" title="Poco::Crypto::OpenSSLInitializer::initialize()">Poco::Crypto::OpenSSLInitializer::initialize</a>(). </p>
+<p>Should be called before using any class from the NetSSL library. The NetSSL will be initialized automatically, through  <a href="Poco.Crypto.OpenSSLInitializer.html" title="class Poco::Crypto::OpenSSLInitializer">Poco::Crypto::OpenSSLInitializer</a> instances or similar mechanisms when creating <a href="Poco.Net.Context.html" title="class Poco::Net::Context">Context</a> or <a href="Poco.Net.SSLManager.html" title="class Poco::Net::SSLManager">SSLManager</a> instances. However, it is recommended to call <a href="Poco.Net.html#16602" title="Poco::Net::initializeSSL()">initializeSSL</a>() in any case at application startup. </p>
+<p>Can be called multiple times; however, for every call to <a href="Poco.Net.html#16602" title="Poco::Net::initializeSSL()">initializeSSL</a>(), a matching call to <a href="Poco.Net.html#16603" title="Poco::Net::uninitializeSSL()">uninitializeSSL</a>() must be performed. </p>
+</div>
+<h3><a name="13782">swap</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">inline void swap(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.HostEntry.html" title="class Poco::Net::HostEntry">HostEntry</a> &amp; h1,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.HostEntry.html" title="class Poco::Net::HostEntry">HostEntry</a> &amp; h2<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="14116">swap</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">inline void swap(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.IPAddress.html" title="class Poco::Net::IPAddress">IPAddress</a> &amp; addr1,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.IPAddress.html" title="class Poco::Net::IPAddress">IPAddress</a> &amp; addr2<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="14273">swap</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">inline void swap(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.MailRecipient.html" title="class Poco::Net::MailRecipient">MailRecipient</a> &amp; r1,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.MailRecipient.html" title="class Poco::Net::MailRecipient">MailRecipient</a> &amp; r2<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="14368">swap</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">inline void swap(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.MediaType.html" title="class Poco::Net::MediaType">MediaType</a> &amp; m1,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.MediaType.html" title="class Poco::Net::MediaType">MediaType</a> &amp; m2<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="14553">swap</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">inline void swap(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.NameValueCollection.html" title="class Poco::Net::NameValueCollection">NameValueCollection</a> &amp; nvc1,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.NameValueCollection.html" title="class Poco::Net::NameValueCollection">NameValueCollection</a> &amp; nvc2<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="15734">swap</a> <img src="images/inline.gif" alt="inline" title="inline" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">inline void swap(<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.SocketAddress.html" title="class Poco::Net::SocketAddress">SocketAddress</a> &amp; a1,<br />&nbsp;&nbsp;&nbsp;&nbsp;<a href="Poco.Net.SocketAddress.html" title="class Poco::Net::SocketAddress">SocketAddress</a> &amp; a2<br />);</p>
+<div class="description">
+<p></p>
+</div>
+<h3><a name="14557">uninitializeNetwork</a></h3>
+<p class="decl">void uninitializeNetwork();</p>
+<div class="description">
+<p>Uninitialize the network subsystem. Calls WSACleanup() on Windows, does nothing on other platforms. </p>
+</div>
+<h3><a name="16603">uninitializeSSL</a></h3>
+<p class="decl">void uninitializeSSL();</p>
+<div class="description">
+<p>Uninitializes the NetSSL library by calling  <a href="Poco.Crypto.OpenSSLInitializer.html#242" title="Poco::Crypto::OpenSSLInitializer::uninitialize()">Poco::Crypto::OpenSSLInitializer::uninitialize</a>() and shutting down the <a href="Poco.Net.SSLManager.html" title="class Poco::Net::SSLManager">SSLManager</a>. </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

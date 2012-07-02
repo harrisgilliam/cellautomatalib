@@ -1,0 +1,56 @@
+#ifndef _CAM_step_H_
+#define _CAM_step_H_
+
+
+#include <CAM/CAM_objects.H>
+
+
+/*****************************************************************************/
+/****************************** DEFINES **************************************/
+/*****************************************************************************/
+#define SOFT_INT(c8)	(count_ones(0x101 & (c8)->pt->last_ints) == 2)
+#define CAM_INT(c8)	(count_ones((0x101 << 1) & (c8)->pt->last_ints) == 2)
+#define SBUS_INT(c8)	(count_ones((0x101 << 2) & (c8)->pt->last_ints) == 2)
+#define TIMEOUT_INT(c8)	(count_ones((0x101 << 3) & (c8)->pt->last_ints) == 2)
+#define NEWLIST_INT(c8)	(count_ones((0x101 << 4) & (c8)->pt->last_ints) == 2)
+#define CAM_timeout(c8)		(c8)->pt->timeout_was_seen
+#define CAM_camint(c8)		(c8)->pt->camint_was_seen
+#define CAM_allow_timeout(c8) \
+ do{(c8)->pt->timeout_is_allowed = TRUE; (c8)->pt->timeout_was_seen = FALSE;}while(0);
+#define CAM_allow_camint(c8) \
+ do{(c8)->pt->camint_is_allowed = TRUE; (c8)->pt->camint_was_seen = FALSE;}while(0);
+
+
+
+/*****************************************************************************/
+/***************************** TYPEDEFS **************************************/
+/*****************************************************************************/
+
+
+
+/*****************************************************************************/
+/**************************** PROTOTYPES *************************************/
+/*****************************************************************************/
+extern "C" {
+  void CAM_link(CAM8);
+  void CAM_link_instruction(CAM8, STEPLIST, INSTR);
+  void CAM_abort_list(CAM8);
+  void CAM_reset_list(CAM8);
+  void CAM_start(CAM8);
+  void CAM_clear_exception(CAM8);
+  void CAM_schedule(CAM8);
+  void CAM_schedule_list(CAM8, STEPLIST);
+  void CAM_schedule_stop(CAM8);
+  void CAM_step(CAM8);
+  void CAM_stop(CAM8);
+  void CAM_define_step(CAM8, STEPLIST);
+  void CAM_end_step(CAM8, STEPLIST);
+}
+
+
+/*****************************************************************************/
+/***************************** GLOBALS ***************************************/
+/*****************************************************************************/
+
+
+#endif

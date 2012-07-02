@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Class Poco::Data::ODBC::Connector</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="author" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="publisher" content="Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="copyright" content="Copyright (c) 2012, Applied Informatics Software Engineering GmbH and Contributors"/>
+<meta name="language" content="en"/>
+<meta name="date" content="2012-01-15"/>
+<meta name="generator" content="PocoDoc"/>
+<link rel="stylesheet" href="css/styles.css" type="text/css"/>
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0">
+<div class="header">
+<h1 class="namespace"><a href="Poco.Data.ODBC.html" class="namespace">Poco::Data::ODBC</a></h1>
+<h1 class="symbol">class Connector</h1>
+</div>
+<div class="body">
+<p>
+<b>Library:</b> Data/ODBC<br />
+<b>Package:</b> ODBC<br />
+<b>Header:</b> Poco/Data/ODBC/Connector.h</p>
+<h2>Description</h2>
+<div class="description">
+<p><a href="Poco.Data.ODBC.Connector.html" title="class Poco::Data::ODBC::Connector">Connector</a> instantiates SqLite <a href="Poco.Data.ODBC.SessionImpl.html" title="class Poco::Data::ODBC::SessionImpl">SessionImpl</a> objects. </p>
+</div>
+<h2>Inheritance</h2>
+<p><b>Direct Base Classes: </b><a href="Poco.Data.Connector.html" title="class Poco::Data::Connector">Poco::Data::Connector</a></p>
+<p><b>All Base Classes: </b><a href="Poco.Data.Connector.html" title="class Poco::Data::Connector">Poco::Data::Connector</a></p>
+<h2>Member Summary</h2>
+<p><b>Member Functions: </b><a href="Poco.Data.ODBC.Connector.html#798" title="Poco::Data::ODBC::Connector::createSession()">createSession</a>, <a href="Poco.Data.ODBC.Connector.html#800" title="Poco::Data::ODBC::Connector::registerConnector()">registerConnector</a>, <a href="Poco.Data.ODBC.Connector.html#801" title="Poco::Data::ODBC::Connector::unregisterConnector()">unregisterConnector</a></p>
+<p><b>Inherited Functions: </b><a href="Poco.Data.Connector.html#2453" title="Poco::Data::Connector::createSession()">createSession</a></p>
+<h2>Constructors</h2>
+<h3><a name="796">Connector</a></h3>
+<p class="decl"><a href="Poco.Data.ODBC.Connector.html" title="class Poco::Data::ODBC::Connector">Connector</a>();</p>
+<div class="description">
+<p>Creates the <a href="Poco.Data.ODBC.Connector.html" title="class Poco::Data::ODBC::Connector">Connector</a>. </p>
+</div>
+<h2>Destructor</h2>
+<h3><a name="797">~Connector</a> <img src="images/virtual.gif" alt="virtual" title="virtual" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">~<a href="Poco.Data.ODBC.Connector.html" title="class Poco::Data::ODBC::Connector">Connector</a>();</p>
+<div class="description">
+<p>Destroys the <a href="Poco.Data.ODBC.Connector.html" title="class Poco::Data::ODBC::Connector">Connector</a>. </p>
+</div>
+<h2>Member Functions</h2>
+<h3><a name="798">createSession</a></h3>
+<p class="decl"><a href="Poco.AutoPtr.html" title="class Poco::AutoPtr">Poco::AutoPtr</a> &lt; <a href="Poco.Data.SessionImpl.html" title="class Poco::Data::SessionImpl">Poco::Data::SessionImpl</a> &gt; createSession(<br />&nbsp;&nbsp;&nbsp;&nbsp;const std::string &amp; connectionString<br />);</p>
+<div class="description">
+<p>Creates a <a href="Poco.Data.ODBC.html" title="namespace Poco::Data::ODBC">ODBC</a> <a href="Poco.Data.ODBC.SessionImpl.html" title="class Poco::Data::ODBC::SessionImpl">SessionImpl</a> object and initializes it with the given connectionString. </p>
+</div>
+<h3><a name="800">registerConnector</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static void registerConnector();</p>
+<div class="description">
+<p>Registers the <a href="Poco.Data.ODBC.Connector.html" title="class Poco::Data::ODBC::Connector">Connector</a> under the Keyword <a href="Poco.Data.ODBC.Connector.html#795" title="Poco::Data::ODBC::Connector::KEY">Connector::KEY</a> at the <a href="Poco.Data.SessionFactory.html" title="class Poco::Data::SessionFactory">Poco::Data::SessionFactory</a> </p>
+</div>
+<h3><a name="801">unregisterConnector</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static void unregisterConnector();</p>
+<div class="description">
+<p>Unregisters the <a href="Poco.Data.ODBC.Connector.html" title="class Poco::Data::ODBC::Connector">Connector</a> under the Keyword <a href="Poco.Data.ODBC.Connector.html#795" title="Poco::Data::ODBC::Connector::KEY">Connector::KEY</a> at the <a href="Poco.Data.SessionFactory.html" title="class Poco::Data::SessionFactory">Poco::Data::SessionFactory</a> </p>
+</div>
+<h2>Variables</h2>
+<h3><a name="795">KEY</a> <img src="images/static.gif" alt="static" title="static" style="vertical-align:baseline;" border="0" /> </h3>
+<p class="decl">static const std::string <a href="Poco.Data.ODBC.Connector.html#795" title="Poco::Data::ODBC::Connector::KEY">KEY</a>;</p>
+<div class="description">
+<p>Keyword for creating <a href="Poco.Data.ODBC.html" title="namespace Poco::Data::ODBC">ODBC</a> sessions </p>
+</div>
+<p class="footer">POCO C++ Libraries 1.4.3-all<br />
+Copyright &copy; 2012, <a href="http://pocoproject.org/" target="_blank">Applied Informatics Software Engineering GmbH and Contributors</a></p>
+
+</div>
+</body>
+</html>

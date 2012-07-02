@@ -1,0 +1,625 @@
+#ifndef _CAM8SPARCSIM_H_
+#define _CAM8SPARCSIM_H_
+
+#include <Cam8Sim++.H>
+#include <CamLib++.H>
+#include <Cam8SimInterface++.H>
+#include <Cam8++.H>
+
+"C" {
+#include <sys/types.h>
+}
+
+/*****************************************************************************/
+/********************************* DEFINES ***********************************/
+/*****************************************************************************/
+
+/*****************************************************************************/
+/*                                                                           */
+/* macros for convenient addressing of SPARC registers			     */
+/*                                                                           */
+/*****************************************************************************/
+
+#define REG_G0	0L
+#define REG_G1	1L
+#define REG_G2	2L
+#define REG_G3	3L
+#define REG_G4	4L
+#define REG_G5	5L
+#define REG_G6	6L
+#define REG_G7	7L
+
+#define REG_O0	8L
+#define REG_O1	9L
+#define REG_O2	10L
+#define REG_O3	11L
+#define REG_O4	12L
+#define REG_O5	13L
+#define REG_O6	14L
+#define REG_O7	15L
+
+#define REG_L0	16L
+#define REG_L1	17L
+#define REG_L2	18L
+#define REG_L3	19L
+#define REG_L4	20L
+#define REG_L5	21L
+#define REG_L6	22L
+#define REG_L7	23L
+
+#define REG_I0	24L
+#define REG_I1	25L
+#define REG_I2	26L
+#define REG_I3	27L
+#define REG_I4	28L
+#define REG_I5	29L
+#define REG_I6	30L
+#define REG_I7	31L
+
+#define REG_SP	14L								 /* Stack Pointer 		     */
+
+#define REG_TP	15L								 /* The Temp register 		     */
+#define REG_DS	07L								 /* pointer to Heap base	     */
+
+#define REG_FP	30L								 /* Frame Pointer 		     */
+
+#define REG_RA	31L								 /* Return Address 		     */
+
+
+#define SCANNER_CODE_SIZE       (1024 * LONG32_SIZE)
+#define SWEEP_CODE_SIZE         (1024 * LONG32_SIZE)
+#define UPDATE_CODE_SIZE        (1024 * LONG32_SIZE)
+#define MREGS	32
+
+/*****************************************************************************/
+/*                                                                           */
+/*  defines for generating SPARC assembly.  								 */
+/*                                                                           */
+/*****************************************************************************/
+
+#define OP_LDW		0x00L
+#define OP_LDHW		0x02L
+#define OP_LDUB		0x01L
+#define OP_STW		0x04L
+#define OP_STUB		0x05L
+#define OP_STHW		0x06L
+
+#define OP_ADD		0x00L
+#define OP_ADDcc	0x10L
+#define OP_ADDX		0x08L
+#define OP_ADDXcc	0x18L
+
+#define	OP_SUB		0x04L
+#define OP_SUBcc	0x14L
+#define OP_SUBX		0x0CL
+#define OP_SUBXcc	0x1CL
+
+#define OP_AND		0x01L
+#define OP_ANDcc	0x11L
+#define OP_ANDN		0x05L
+#define OP_ANDNcc	0x15L
+#define OP_OR		0x02L
+#define OP_ORcc 	0x12L
+#define OP_ORN		0x06L
+#define OP_ORNcc	0x16L
+#define OP_XOR		0x03L
+#define OP_XORcc 	0x13L
+#define OP_XNOR		0x07L
+#define OP_XNORcc	0x17L
+
+#define OP_SLL		0x25L
+#define OP_SRL		0x26L
+#define OP_SRA		0x27L
+
+#define OP_SETHI	0x04L
+
+#define OP_JMPL		0x38L
+#define OP_SAVE		0x3CL
+#define OP_RESTORE	0x3DL
+
+
+#define IMMEDIATE	1
+#define REG_SOURCE	0
+
+#define FMT2_INST(op, opcode, k, rd) 	(((op) << 30) | \
+					 ((opcode) << 22) | \
+					 ((rd) << 25) | \
+					 ((k) & 0x3fffffL))
+#define FMT3_INST(op, opcode, rs1, i, rs2, rd) (((op) << 30) | \
+						((rd) << 25) | \
+						((opcode) << 19) | \
+		       				((rs1) << 14) | \
+						((i) << 13) | \
+						((rs2) & 0x1FFFL))
+
+
+#define SAVE_REG_IMM(rs1, k, rd)	(FMT3_INST(0x2L, OP_SAVE, (rs1), IMMEDIATE, (k), (rd)))
+#define SAVE_REG_REG(rs1, rs2, rd)	(FMT3_INST(0x2L, OP_SAVE, (rs1), REG_SOURCE, (rs2), (rd)))
+#define RESTORE				(FMT3_INST(0x2L, OP_RESTORE, REG_G0, REG_SOURCE, REG_G0, REG_G0))
+#define RET				(FMT3_INST(0x2L, OP_JMPL, REG_I7, IMMEDIATE, 8, REG_G0))
+#define RETL				(FMT3_INST(0x2L, OP_JMPL, REG_O7, IMMEDIATE, 8, REG_G0))
+#define CALL_REG(r)			(FMT3_INST(0x2L, OP_JMPL, (r), IMMEDIATE, 0, REG_O7))
+#define CALL_REG_IMM(r, k) 		(FMT3_INST(0x2L, OP_JMPL, (r), IMMEDIATE, (k), REG_O7))
+#define CALL(disp)			((0x01 << 30) | (((unsigned long) (disp)) >> 2))
+#define NOP				(FMT3_INST(0x2L, OP_OR, REG_G0, REG_SOURCE, REG_G0, REG_G0))
+
+
+#define LDW_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x3L, OP_LDW, rs1, IMMEDIATE, k, rd))
+#define LDW_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x3L, OP_LDW, rs1, REG_SOURCE, rs2, rd))
+
+#define LDHW_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x3L, OP_LDHW, rs1, IMMEDIATE, k, rd))
+#define LDHW_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x3L, OP_LDHW, rs1, REG_SOURCE, rs2, rd))
+
+#define LDUB_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x3L, OP_LDUB, rs1, IMMEDIATE, k, rd))
+#define LDUB_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x3L, OP_LDUB, rs1, REG_SOURCE, rs2, rd))
+
+#define STW_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x3L, OP_STW, rs1, IMMEDIATE, k, rd))
+#define STW_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x3L, OP_STW, rs1, REG_SOURCE, rs2, rd))
+
+#define STHW_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x3L, OP_STHW, rs1, IMMEDIATE, k, rd))
+#define STHW_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x3L, OP_STHW, rs1, REG_SOURCE, rs2, rd))
+
+#define STUB_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x3L, OP_STUB, rs1, IMMEDIATE, k, rd))
+#define STUB_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x3L, OP_STUB, rs1, REG_SOURCE, rs2, rd))
+
+
+#define ADD_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x2L, OP_ADD, rs1, IMMEDIATE, k, rd))
+#define ADD_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x2L, OP_ADD, rs1, REG_SOURCE, rs2, rd))
+
+#define ADDcc_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x2L, OP_ADDcc, rs1, IMMEDIATE, k, rd))
+#define ADDcc_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x2L, OP_ADDcc, rs1, REG_SOURCE, rs2, rd))
+
+#define ADDX_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x2L, OP_ADDX, rs1, IMMEDIATE, k, rd))
+#define ADDX_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x2L, OP_ADDX, rs1, REG_SOURCE, rs2, rd))
+
+#define ADDXcc_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x2L, OP_ADDXcc, rs1, IMMEDIATE, k, rd))
+#define ADDXcc_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x2L, OP_ADDXcc, rs1, REG_SOURCE, rs2, rd))
+
+
+#define SUB_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x2L, OP_SUB, rs1, IMMEDIATE, k, rd))
+#define SUB_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x2L, OP_SUB, rs1, REG_SOURCE, rs2, rd))
+
+#define SUBcc_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x2L, OP_SUBcc, rs1, IMMEDIATE, k, rd))
+#define SUBcc_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x2L, OP_SUBcc, rs1, REG_SOURCE, rs2, rd))
+
+#define SUBX_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x2L, OP_SUBX, rs1, IMMEDIATE, k, rd))
+#define SUBX_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x2L, OP_SUBX, rs1, REG_SOURCE, rs2, rd))
+
+#define SUBXcc_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x2L, OP_SUBXcc, rs1, IMMEDIATE, k, rd))
+#define SUBXcc_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x2L, OP_SUBXcc, rs1, REG_SOURCE, rs2, rd))
+
+
+#define AND_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x2L, OP_AND, rs1, IMMEDIATE, k, rd))
+#define AND_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x2L, OP_AND, rs1, REG_SOURCE, rs2, rd))
+
+#define OR_REG_IMM(rs1, k, rd) 		(FMT3_INST(0x2L, OP_OR, rs1, IMMEDIATE, k, rd))
+#define OR_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x2L, OP_OR, rs1, REG_SOURCE, rs2, rd))
+
+#define XOR_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x2L, OP_XOR, rs1, IMMEDIATE, k, rd))
+#define XOR_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x2L, OP_XOR, rs1, REG_SOURCE, rs2, rd))
+
+#define XNOR_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x2L, OP_XNOR, rs1, IMMEDIATE, k, rd))
+#define XNOR_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x2L, OP_XNOR, rs1, REG_SOURCE, rs2, rd))
+
+#define NOT_REG(r)			(XNOR_REG_REG(r, REG_G0, r))
+
+
+#define SLL_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x2L, OP_SLL, rs1, IMMEDIATE, k, rd))
+#define SLL_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x2L, OP_SLL, rs1, REG_SOURCE, rs2, rd))
+
+#define SRL_REG_IMM(rs1, k, rd) 	(FMT3_INST(0x2L, OP_SRL, rs1, IMMEDIATE, k, rd))
+#define SRL_REG_REG(rs1, rs2, rd) 	(FMT3_INST(0x2L, OP_SRL, rs1, REG_SOURCE, rs2, rd))
+
+
+#define HI22(k) 			((((unsigned long) (k)) >> 10) & 0x3fffffL)
+#define LOW10(k) 			(((unsigned long) (k)) & 0x3ffL)
+#define SETHI(k, rd) 			(FMT2_INST(0x0L, OP_SETHI, k, rd))
+
+
+/******************************************************************************
+ *
+ * The branch instructions.
+ *
+ *****************************************************************************/
+
+#define BRANCH_INST(annul, cond, disp)	(((annul) << 29) | ((cond) << 25) | (0x800000) | ((disp) & 0x3FFFFF))
+
+#define BRA(disp)			(BRANCH_INST(0, 0x8, disp))
+#define BRN(disp)			(BRANCH_INST(0, 0x0, disp))
+#define BRNE(disp)			(BRANCH_INST(0, 0x9, disp))
+#define BRE(disp)			(BRANCH_INST(0, 0x1, disp))
+#define BRG(disp)			(BRANCH_INST(0, 0xA, disp))
+#define BRLE(disp)			(BRANCH_INST(0, 0x2, disp))
+#define BRGE(disp)			(BRANCH_INST(0, 0xB, disp))
+#define BRL(disp)			(BRANCH_INST(0, 0x3, disp))
+#define BRGU(disp)			(BRANCH_INST(0, 0xC, disp))
+#define BRLEU(disp)			(BRANCH_INST(0, 0x4, disp))
+#define BRCC(disp)			(BRANCH_INST(0, 0xD, disp))
+#define BRCS(disp)			(BRANCH_INST(0, 0x5, disp))
+#define BRPOS(disp)			(BRANCH_INST(0, 0xE, disp))
+#define BRNEG(disp)			(BRANCH_INST(0, 0x6, disp))
+#define BRVC(disp)			(BRANCH_INST(0, 0xF, disp))
+#define BRVS(disp)			(BRANCH_INST(0, 0x7, disp))
+
+#define BRNZ(disp)			(BRANCH_INST(0, 0x9, disp))
+#define BRZ(disp)			(BRANCH_INST(0, 0x1, disp))
+
+/*****************************************************************************/
+/*                                                                           */
+/* Macros to insert target instructions etc.				     */
+/*                                                                           */
+/*****************************************************************************/
+
+#define EMIT(inst)			*pcodNext++ = (inst)
+#define CURRENT_LOC			(pcodNext)
+#define CURRENT_HANDLE			(&pcodNext)
+
+
+/*****************************************************************************/
+/*                                                                           */
+/* operand types to use when calling Emit()				     */
+/*                                                                           */
+/*****************************************************************************/
+
+#define NULL_OP		0
+#define REG_OP		1
+#define CONST_OP	2
+#define ADDR_OP		3
+#define VAR_OP		4
+#define LABEL_OP	5
+
+/*****************************************************************************/
+/*                                                                           */
+/* op codes for emit							     */
+/*                                                                           */
+/*****************************************************************************/
+
+#define PSEUDO_OP	0x8000
+#define NATIVE_OP	0x4000
+#define LD_ST_OP	0x2000
+#define BRANCH_OP	0x1000
+#define NATIVE_OP_MASK	0x3F
+
+
+#define INSTR		(PSEUDO_OP | 0xFF)
+#define ENTER_PROC	(PSEUDO_OP | 0x01)
+#define RETURN_PROC	(PSEUDO_OP | 0x02)
+#define CALL_PROC	(PSEUDO_OP | 0x03)
+#define ENTER_LEAF	(PSEUDO_OP | 0x04)
+#define RETURN_LEAF	(PSEUDO_OP | 0x05)
+#define CALL_LEAF	(PSEUDO_OP | 0x06)
+#define CALL_LEAF_IND	(PSEUDO_OP | 0x07)
+#define ENTER_BASICBLK	(PSEUDO_OP | 0x08)
+#define RETURN_BASICBLK	(PSEUDO_OP | 0x09)
+#define ADD_LABEL	(PSEUDO_OP | 0x0A)
+#define NO_OP		(PSEUDO_OP | 0x0B)
+
+
+#define LDW_MEM		(LD_ST_OP | 0x00)
+#define LDW_IND		(LD_ST_OP | 0x01)
+#define LDHW_IND	(LD_ST_OP | 0x02)
+#define LDUB_IND	(LD_ST_OP | 0x03)
+#define STW_MEM		(LD_ST_OP | 0x06)
+#define STW_IND		(LD_ST_OP | 0x07)
+#define STHW_IND	(LD_ST_OP | 0x08)
+#define STUB_IND	(LD_ST_OP | 0x09)
+
+#define ADD		(NATIVE_OP | 0x00)
+#define ADDcc		(NATIVE_OP | 0x10)
+#define ADDX		(NATIVE_OP | 0x08)
+#define ADDXcc		(NATIVE_OP | 0x18)
+
+#define	SUB		(NATIVE_OP | 0x04)
+#define SUBcc		(NATIVE_OP | 0x14)
+#define SUBX		(NATIVE_OP | 0x0C)
+#define SUBXcc		(NATIVE_OP | 0x1C)
+
+#define AND		(NATIVE_OP | 0x01)
+#define ANDcc		(NATIVE_OP | 0x11)
+#define ANDN		(NATIVE_OP | 0x05)
+#define ANDNcc		(NATIVE_OP | 0x15)
+#define OR		(NATIVE_OP | 0x02)
+#define ORcc 		(NATIVE_OP | 0x12)
+#define ORN		(NATIVE_OP | 0x06)
+#define ORNcc		(NATIVE_OP | 0x16)
+#define XOR		(NATIVE_OP | 0x03)
+#define XORcc 		(NATIVE_OP | 0x13)
+#define XNOR		(NATIVE_OP | 0x07)
+#define XNORcc		(NATIVE_OP | 0x17)
+
+#define SH_LEFT		(NATIVE_OP | 0x25)
+#define SH_RIGHT	(NATIVE_OP | 0x26)
+#define SH_RIGHT_ARITH	(NATIVE_OP | 0x27)
+
+
+#define BRANCH		(BRANCH_OP | 0x08)
+#define BR_NEVER	(BRANCH_OP | 0x00)
+#define BR_NEQ		(BRANCH_OP | 0x09)
+#define BR_EQ		(BRANCH_OP | 0x01)
+#define BR_GR		(BRANCH_OP | 0x0A)
+#define BR_LE		(BRANCH_OP | 0x02)
+#define BR_GRE		(BRANCH_OP | 0x0B)
+#define BR_L		(BRANCH_OP | 0x03)
+#define BR_GU		(BRANCH_OP | 0x0C)
+#define BR_LEU		(BRANCH_OP | 0x04)
+#define BR_CC		(BRANCH_OP | 0x0D)
+#define BR_CS		(BRANCH_OP | 0x05)
+#define BR_POS		(BRANCH_OP | 0x0E)
+#define BR_NEG		(BRANCH_OP | 0x06)
+#define BR_VC		(BRANCH_OP | 0x0F)
+#define BR_VS		(BRANCH_OP | 0x07)
+
+#define BR_NZ		(BRANCH_OP | 0x09)
+#define BR_Z		(BRANCH_OP | 0x01)
+
+
+
+#define ASCODE(c)  fprintf(DEBUGFILE, "\t0x%x: %s\n", DASMADDR, c); fflush(DEBUGFILE)
+#define ASNOTE(c)  fprintf(DEBUGFILE, "\t%s\n", c); fflush(DEBUGFILE)
+
+
+/*****************************************************************************/
+/*                                                                           */
+/* the following define offsets into the heap for all the state variables    */
+/* that are stored there.						     */
+/*                                                                           */
+/*****************************************************************************/
+
+#define ARRAY_16_SIZE		(CHIPS_PER_MOD * LONG32_SIZE)
+
+#define offHighBitMask		0						 /* 0 				     */
+#define offXHighBitMask		(offHighBitMask + LONG32_SIZE)			 /* 4 				     */
+#define offXByteLength		(offXHighBitMask + LONG32_SIZE)			 /* 8 				     */
+#define offXCtr			(offXByteLength + LONG32_SIZE)			 /* 12 				     */
+#define offSiteCtr		(offXCtr + LONG32_SIZE)				 /* 16 				     */
+#define offOffsets		(offSiteCtr + LONG32_SIZE)			 /* 20 				     */
+#define offBitOffsets		(offOffsets + ARRAY_16_SIZE)			 /* 84 				     */
+#define offDcmr			(offBitOffsets + ARRAY_16_SIZE)			 /* 148				     */
+#define offScanIndexReg		(offDcmr + LONG32_SIZE)				 /* 152				     */
+#define offLutAddr		(offScanIndexReg + LONG32_SIZE)			 /* 156				     */
+#define offBitPlaneAddr		(offLutAddr + LONG32_SIZE)			 /* 160				     */
+#define offNextWordAddr		(offBitPlaneAddr + ARRAY_16_SIZE)		 /* 224				     */
+#define offPlaneWord		(offNextWordAddr + ARRAY_16_SIZE)		 /* 288				     */
+#define offEventCount		(offPlaneWord + ARRAY_16_SIZE)			 /* 352 			     */
+#define offGlueData		(offEventCount + ARRAY_16_SIZE)			 /* 416 			     */
+#define offUnGlueData		(offGlueData + LONG32_SIZE)			 /* 420 			     */
+#define offSiteDataSrc		(offUnGlueData + LONG32_SIZE)			 /* 424				     */
+#define offTbusData		(offSiteDataSrc + LONG32_SIZE)			 /* 428 			     */
+#define offLutData		(offTbusData + LONG32_SIZE)			 /* 432 			     */
+#define offTbusAddr		(offLutData + LONG32_SIZE)			 /* 436 			     */
+#define offFrame		(offTbusAddr + LONG32_SIZE)			 /* 440				     */
+#define offSIOR			(offFrame + LONG32_SIZE)			 /* 444				     */
+#define offUpdateSiteProc	(offSIOR + LONG32_SIZE)			 	 /* 448				     */
+#define offTemp1		(offUpdateSiteProc + LONG32_SIZE)		 /* 452 			     */
+#define offTemp2		(offTemp1 + LONG32_SIZE)			 /* 456 			     */
+#define offTemp3		(offTemp2 + LONG32_SIZE)			 /* 460 			     */
+#define offTemp4		(offTemp3 + LONG32_SIZE)			 /* 464				     */
+#define offTemp5		(offTemp4 + LONG32_SIZE)			 /* 468 			     */
+#define offTemp6		(offTemp5 + LONG32_SIZE)			 /* 472 			     */
+#define offTemp7		(offTemp6 + LONG32_SIZE)			 /* 476				     */
+#define offTemp8		(offTemp7 + LONG32_SIZE)			 /* 480 			     */
+#define offTemp9		(offTemp8 + LONG32_SIZE)			 /* 484				     */
+#define offTemp10		(offTemp9 + LONG32_SIZE)			 /* 488 			     */
+
+#define LAST_TEMP		10
+
+#define HeapSize	 	(offTemp10 + LONG32_SIZE)
+
+#define SymbolTableSize		  (offTemp10/LONG32_SIZE + 1 + 1)		 /* Should Be 1 More Than Last Name  */
+										 /* because SymbolTable[0] is invalid*/
+
+/*****************************************************************************/
+/*                                                                           */
+/* The following define macros to access variables on the heap. The macros   */
+/* can be used as lvalues or rvalues.					     */
+/*                                                                           */
+/*****************************************************************************/
+
+#define HIGH_BIT_MASK		(*((long *) (pcHeap + offHighBitMask)))		 /* macro to access into heap	     */
+#define X_HIGH_BIT_MASK		(*((long *) (pcHeap + offXHighBitMask)))
+#define X_BYTE_LENGTH		(*((long *) (pcHeap + offXByteLength)))
+#define X_CTR			(*((long *) (pcHeap + offXCtr)))
+#define SITE_CTR		(*((long *) (pcHeap + offSiteCtr)))
+#define OFFSETS(x)		(*((long *) (pcHeap + offOffsets + (x) * LONG32_SIZE)))
+#define BITOFFSETS(x)		(*((long *) (pcHeap + offBitOffsets + (x) * LONG32_SIZE)))
+#define DCMR			(*((long *) (pcHeap + offDcmr)))
+#define SCAN_INDEX_REG		(*((long *) (pcHeap + offScanIndexReg)))
+#define LUT_ADDR		(*((long *) (pcHeap + offLutAddr)))
+#define BIT_PLANE_ADDR(x)	(*((long *) (pcHeap + offBitPlaneAddr + (x) * LONG32_SIZE)))
+#define NEXT_WORD_ADDR(x)	(*((long *) (pcHeap + offNextWordAddr + (x) * LONG32_SIZE)))
+#define PLANE_WORD(x)		(*((long *) (pcHeap + offPlaneWord + (x) * LONG32_SIZE)))
+#define EVENT_COUNT(x)		(*((long *) (pcHeap + offEventCount + (x) * LONG32_SIZE)))
+#define TBUS_DATA		(*((long *) (pcHeap + offTbusData)))
+#define TBUS_ADDR		(*((long *) (pcHeap + offTbusAddr)))
+#define FRAME			(*((long *) (pcHeap + offFrame)))
+#define SIOREG			(*((long *) (pcHeap + offSIOR)))
+#define UPDATE_SITE_CODE	(*((long *) (pcHeap + offUpdateSiteProc)))
+
+
+#define VOLATILE		1						 /* Priority values for nPriority    */
+#define TEMP			2						 /* field of SymbolTable. Used by    */
+#define LOOP_CTR		3						 /* register manager. 		     */
+#define GLOBAL			4
+
+
+/*****************************************************************************/
+/******************************** TEMPLATES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/*************************** CLASSES & TYPEDEFS ******************************/
+/*****************************************************************************/
+typedef u_int32_t CODE;
+typedef uint16_t CODELABEL;
+typedef CODE *CODEPTR;
+typedef CODEPTR *CODEHANDLE;
+
+
+/*****************************************************************************/
+/*                                                                           */
+/* The following define the SymbolTable - a structure used by the register   */
+/* manager to keep track of which of the heap "variables" are in registers.  */
+/*                                                                           */
+/*****************************************************************************/
+
+struct tag_SymTableEntry {
+     INT16	nPriority;							 /* For register manager 	     */
+     INT16	nHeapOffset;							 /* Offset from beginning of heap    */
+     REGISTER	regLoc; 							 /* which reg, if any, has this var  */
+};
+
+
+
+class Cam8SPARCSim : public Cam8SimModule {
+public:
+  static const char *szRegName[] = {
+    "%g0", "%g1", "%g2", "%g3", "%g4", "%g5", "%g6", "%g7",
+    "%o0", "%o1", "%o2", "%o3", "%o4", "%o5", "%sp", "%tp",
+    "%l0", "%l1", "%l2", "%l3", "%l4", "%l5", "%l6", "%l7",
+    "%i0", "%i1", "%i2", "%i3", "%i4", "%i5", "%ds", "%ra"
+  };
+  static const char *szCCName[] = {
+    "NEVER", "EQ", "LE", "L", "LEU", "CS", "NEG", "VS",
+    "ALWAYS", "NEQ", "G", "GE", "GU", "CC", "POS", "VC"
+  };
+  static char REGISTERS[32][64] = {
+    "G0", "G1", "G2", "G3", "G4", "G5", "G6", "G7",
+    "O0", "O1", "O2", "O3", "O4", "O5", "O6", "O7",
+    "L0", "L1", "L2", "L3", "L4", "L5", "L6", "L7",
+    "I0", "I1", "I2", "I3", "I4", "I5", "I6", "I7",
+  };
+
+
+  static const LONG32 iHighBitMask	= 1;						 /* Indexes Into Symboltable	     */
+  static const LONG32 iXHighBitMask	= (offXHighBitMask/LONG32_SIZE + 1);		 /* Used As "Variable Names". 	     */
+  static const LONG32 iXByteLength	= (offXByteLength/LONG32_SIZE	 + 1);
+  static const LONG32 iXCtr		= (offXCtr/LONG32_SIZE + 1);
+  static const LONG32 iSiteCtr		= (offSiteCtr/LONG32_SIZE + 1);
+  static const LONG32 iOffsets		= (offOffsets/LONG32_SIZE + 1);			 /* Each Element Of Arrays Have Own  */
+  static const LONG32 iBitOffsets	= (offBitOffsets/LONG32_SIZE + 1);		 /* Symbol Table Entry 		     */
+  static const LONG32 iDcmr		= (offDcmr/LONG32_SIZE + 1);
+  static const LONG32 iScanIndexReg	= (offScanIndexReg/LONG32_SIZE + 1);
+  static const LONG32 iLutAddr		= (offLutAddr/LONG32_SIZE + 1);
+  static const LONG32 iBitPlaneAddr	= (offBitPlaneAddr/LONG32_SIZE + 1);
+  static const LONG32 iNextWordAddr	= (offNextWordAddr/LONG32_SIZE + 1);
+  static const LONG32 iPlaneWord		= (offPlaneWord/LONG32_SIZE + 1);
+  static const LONG32 iEventCount	= (offEventCount/LONG32_SIZE + 1);
+  static const LONG32 iGlueData		= (offGlueData/LONG32_SIZE + 1);
+  static const LONG32 iUnGlueData	= (offUnGlueData/LONG32_SIZE + 1);
+  static const LONG32 iSiteDataSrc	= (offSiteDataSrc/LONG32_SIZE + 1);
+  static const LONG32 iTbusData		= (offTbusData/LONG32_SIZE + 1);
+  static const LONG32 iLutData		= (offLutData/LONG32_SIZE + 1);
+  static const LONG32 iTbusAddr		= (offTbusAddr/LONG32_SIZE + 1);
+  static const LONG32 iFrame		= (offFrame/LONG32_SIZE + 1);
+  static const LONG32 iSIOR		= (offSIOR/LONG32_SIZE + 1);
+  static const LONG32 iUpdateSiteProc	= (offUpdateSiteProc/LONG32_SIZE + 1);
+  static const LONG32 iTemp1		= (offTemp1/LONG32_SIZE + 1);
+  static const LONG32 iTemp2		= (offTemp2/LONG32_SIZE + 1);
+  static const LONG32 iTemp3		= (offTemp3/LONG32_SIZE + 1);
+  static const LONG32 iTemp4		= (offTemp4/LONG32_SIZE + 1);
+  static const LONG32 iTemp5		= (offTemp5/LONG32_SIZE + 1);
+  static const LONG32 iTemp6		= (offTemp6/LONG32_SIZE + 1);
+  static const LONG32 iTemp7		= (offTemp7/LONG32_SIZE + 1);
+  static const LONG32 iTemp8		= (offTemp8/LONG32_SIZE + 1);
+  static const LONG32 iTemp9		= (offTemp9/LONG32_SIZE + 1);
+  static const LONG32 iTemp10		= (offTemp10/LONG32_SIZE + 1);
+
+
+
+
+  char SYMBOLS[SymbolTableSize][64];
+  REGENTRY rCurrWindow[MREGS];
+  REGQUE rqueFree;
+  REGQUE rqueSpillable[4];							 /* Que of spillable registers, one  */
+  LABELREC *plblrecFirst;
+  CODE *pcodScanNoPerm;
+  CODEPTR pcodGenUpdate;
+  CODEPTR pcodScanner;
+  CODEPTR pcodSweep;
+  CODEPTR pcodUpdateSite;
+  CODEPTR pcodNext;		/* Pointer to location of next inst */
+  CODEHANDLE hcodTarget;	/* Handle to Target Code Location */
+  CODELABEL lblNext;		/* Next Label */
+  CODEBLK *pblkTOS;
+
+  struct tag_SymTableEntry		SymbolTable[];				 /* The SymbolTable 		     */
+
+
+#ifdef DEBUG
+  CODEPTR DASMADDR;
+#endif DEBUG
+#ifdef _INSTRUMENTATION_
+  struct timeval tvStart, tvEnd;
+  struct timezone tzZone;
+#endif
+
+
+
+  Cam8SPARCSim(void);
+  virtual ~Cam8SPARCSim(void);
+
+  void InitSim(void);
+  void SimScanNoPerm(CODEHANDLE hcodCurrent);
+  void SimGeneralScan(CODEHANDLE hcodCurrent);
+  void SimPrologue(CODEHANDLE hcodCurrent);
+  void SimEpilogue(CODEHANDLE hcodCurrent);
+  void SimUpdateSite();
+  void SimLoadFirstWord(unsigned short nBitOffset[]);
+  void SimGetNextWord(unsigned short nPlane);
+  void SimSaveLastWord(unsigned short nBitOffset[]);
+  void CheckNoPerm(CODEHANDLE hcodCurrent);
+  void SimUpdateCode();
+  void SimLoadPlaneWords();
+  void SimSavePlaneWords();
+  void MapFunction (short iSrcVar, short iDestVar, BYTE bMap);
+  void BuildDest(short nDest, short iDestVar, BYTE Src, BYTE Map);
+  void BuildBitDest(short nDest, short iHoldReg, BYTE Src, BYTE Map, unsigned short nPlane);
+  void BuildBitwiseDest(short nDest, short iDestVar, BYTE Src[], BYTE Map[]);
+  short PermuteScanIndex();
+  void InsertSpillable(REGISTER reg);
+  void ResetSpillQue(void);
+  void PushRegWindow(void);
+  void PopRegWindow(CODEHANDLE hcodCurrent);
+  void FreeReg(REGISTER reg);
+  void ResetFreeQue(void);
+  void AddQueElement(REGQUE *prque, REGISTER reg);
+  void ResetQue(REGQUE *prque);
+  BYTE NumFreeRegs(void);
+  BYTE NumQueElements(REGQUE rque);
+  REGISTER GetFreeReg(void);
+  REGISTER GetSpillable(void);
+  REGISTER GetQueElement(REGQUE *prque);
+  void NewBlock(CODEHANDLE);
+  void EndBlock();
+  void Emit(INT16 opcode, BYTE op1Type, LONG32 op1, BYTE op2Type, LONG32 op2,
+	    BYTE destType, LONG32 dest);
+  void PrintAsm(CODEPTR pcodSource, FILE *fOut);
+  void InitRegMgr(void);
+  /* flushes rFlush back to memory */
+  void FlushReg(REGISTER rFlush, CODEHANDLE hcodCurrent);
+  /* record all the "live" registers */
+  void SaveRegState(void);
+  /* returns all regs to state they */
+  void RestoreRegState(CODEHANDLE hcodCurrent);
+  /* allocates a register for nVar */
+  REGISTER GetReg(INT16 nVar, CODEHANDLE hcodCurrent, BOOL bLoad);
+};
+typedef Cam8SPARCSim *CAM8SPARCSIM;
+
+
+/*****************************************************************************/
+/********************************* INLINES ***********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/******************************* PROTOTYPES **********************************/
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+/********************************* GLOBALS ***********************************/
+/*****************************************************************************/
+
+#endif
