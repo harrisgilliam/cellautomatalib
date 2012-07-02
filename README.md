@@ -1,0 +1,4 @@
+cellautomatalib
+===============
+
+Cellular Automata Library
