@@ -447,8 +447,6 @@ void Cam8SimInterface::ExecuteSteplist(Cam8Steplist & sl)
 	 */
 	for (curi = sl.begin(); !bDone; curi = nexti)
 	{
-		// TODO: lock mutex
-
 		iq->CIP = (u_int32_t) curi;
 		iq->c8i = *curi;
 
@@ -464,10 +462,8 @@ void Cam8SimInterface::ExecuteSteplist(Cam8Steplist & sl)
 		/* Get the next instruction */
 		nexti = sl.next();
 
-		// TODO: unlock mutex which signals the interpreter thread that the instruction and all
-		// optimization flags have been written to shared memory and it is ok to now execute the
-		// instruction.
-
+		// Tell the box to execute this instruction
+		box->executeInstruction();
 	}
 
 	iq->ISR |= CAM_NEWLIST_INT_STATUS;

@@ -11,17 +11,19 @@
 #include <InterpSimCam8++.H>
 
 
-InterpSimCam8::InterpSimCam8(int modtype)
+InterpSimCam8::InterpSimCam8(void)
 {
 	iq = new Cam8SimInstrQueue();
-	box = new Cam8SimBox(Cam8SimBox::INTERP_MODULES, iq);
-	CAM8INTERFACE i = new Cam8SimInterface(iq, box);
-	Cam8::use_interface(i);
-	Cam8::init();
+	box = new Cam8SimBox(iq);
+	iface = new Cam8SimInterface(iq, box);
+//	use_interface(i);
+	init();
+	start();
 }
 
 InterpSimCam8::~InterpSimCam8(void)
 {
+	halt();
 	delete box;
 	delete iq;
 }
@@ -35,6 +37,6 @@ CAM8SIMINSTRQUEUE InterpSimCam8::getSimInstrQueue(void)
 
 CAM8SIMBOX InterpSimCam8::getCam8SimBox(void)
 {
-	return box;
+	return (CAM8SIMBOX) box;
 }
 

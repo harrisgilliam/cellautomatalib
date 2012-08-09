@@ -72,8 +72,8 @@ OTHERSRC = Pipecomm++.XC XCamWidget++.XC XCam++.XC Tube++.XC
 #XINC = $(CALIBINC) $(CAMINC) $(CAM8INC) $(OTHERINC)
 #XSRC = $(CALIBSRC) $(CAMSRC) $(CAM8SRC) $(OTHERSRC)
 
-XINC = $(CALIBINC) $(CAMINC) $(CAM8INC)
-XSRC = $(CALIBSRC) $(CAMSRC) $(CAM8SRC)
+XINC = $(CALIBINC) $(CAMINC) $(CAM8INC) ThreadBarrier.XH
+XSRC = $(CALIBSRC) $(CAMSRC) $(CAM8SRC) ThreadBarrier.XC
 
 
 
@@ -167,6 +167,11 @@ clean::
 
 camlib_testbed::
 	g++ -g $(INCLUDES) camlib_testbed.C -o camlib_testbed \
+		$(LDFLAGS) -lCAM++ -lPocoFoundationd
+
+
+threadbarrier_test::
+	g++ -g $(INCLUDES) threadbarrier_test.C -o threadbarrier_test \
 		$(LDFLAGS) -lCAM++ -lPocoFoundationd
 
 

@@ -6,7 +6,7 @@
 #include <Cam8Instr++.H>
 #include <Cam8SimInstrQueue++.H>
 
-#include <Poco/Runnable.h>
+#include <Poco/Task.h>
 
 #include <cstdlib>
 
@@ -79,11 +79,10 @@ extern "C" {
 typedef enum { INTERP_OK = 0 } InterpStatus;
 
 
-class Cam8SimModule: public Poco::Runnable {
+class Cam8SimModule {
 public:
 
-	virtual void run(void) = 0;
-	virtual void halt(void) = 0;
+	virtual void runTask(void) = 0;
 
 
 protected:

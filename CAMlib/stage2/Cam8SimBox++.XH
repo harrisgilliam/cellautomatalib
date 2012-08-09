@@ -7,8 +7,8 @@
 #include <Cam8SimInstrQueue++.H>
 #include <Cam8SimModule++.H>
 
-#include <Poco/Thread.h>
-#include <Poco/Runnable.h>
+#include <Poco/ThreadPool.h>
+#include <Poco/TaskManager.h>
 
 
 extern "C" {
@@ -33,24 +33,23 @@ extern "C" {
 /*****************************************************************************/
 class Cam8SimBox : public Cam8Box {
 public:
-	static const int INTERP_MODULES = 1;
-	static const int JIT_MODULES = 2;
-
-	Cam8SimBox(int modtype, CAM8SIMINSTRQUEUE iq);
+	Cam8SimBox(CAM8SIMINSTRQUEUE iq);
 	~Cam8SimBox(void);
 
 	DECL_BZERO(Cam8SimInterface);
 
-	void start(int modtype);
+	void start(void);
 	void halt(void);
+	void executeInstruction(void);
 
 	CAM8SIMMODULE * getCam8SimModules(void);
 
 protected:
 
 	CAM8SIMINSTRQUEUE iq;
-	CAM8SIMMODULE modules[NUM_MODULES];
-	Poco::Thread * threads[NUM_MODULES];
+	Poco::ThreadPool  * tp;
+	Poco::TaskManager * tm;
+	CAM8SIMMODULE modules[Cam8Box::NUM_MODULES];
 
 };
 typedef Cam8SimBox *CAM8SIMBOX;

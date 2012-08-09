@@ -1,14 +1,8 @@
-#ifndef _CAM8SIMINSTRQUEUE_H
-#define _CAM8SIMINSTRQUEUE_H
-
-#include <CaLib++.H>
-#include <ThreadBarrier.H>
+#ifndef _THREADBARRIER_H
+#define _THREADBARRIER_H
 
 #include <Poco/RWLock.h>
-
-extern "C" {
-#include <sys/types.h>
-}
+#include <Poco/Event.h>
 
 
 /*****************************************************************************/
@@ -26,33 +20,27 @@ extern "C" {
 /*****************************************************************************/
 /*************************** CLASSES & TYPEDEFS ******************************/
 /*****************************************************************************/
-struct Cam8SimInstrQueue {
-	Poco::RWLock rwlock;				// Read/write lock
-	THREADBARRIER glueBarrier;			// thread barrier for glue passing
 
-	int32_t NLP;                        /* Next List Pointer            */
-	int32_t ISR;                        /* Reset/Interrupt Register     */
-	int32_t CIP;                        /* Current Instruction Pointer  */
-	int32_t PIP;                        /* Previous Instruction Pointer */
+class ThreadBarrier {
+public:
 
-	int32_t RER;                        /* Reset/Enable Register        */
-	int32_t DSL;                        /* Display Scan Length          */
-	int32_t DBL;                        /* Display Blank Length         */
+	ThreadBarrier();
+	ThreadBarrier(int cnt);
+	virtual ~ThreadBarrier();
 
-	Cam8Instr c8i;
+	void setCount(int cnt);
+	void wait();
+	void reset();
+	int getCount(void);
 
-	bool bByteMode;						// interp time
-	bool bImmediate;					// interp time
-	bool bReadMode;						// interp time
-	bool bHostJump;						// interp time
-	bool bHostWait;						// interp time
+protected:
 
-	bool bForceGeneralScan;				// interp time
-	bool bSourceRegChange;				// interp time
-	bool bDestChange;					// interp time
+	int count;
+	int curCount;
+	Poco::RWLock cntLock;
+	Poco::Event unlockEvent;
 };
-typedef struct Cam8SimInstrQueue Cam8SimInstrQueue, *CAM8SIMINSTRQUEUE;
-
+typedef class ThreadBarrier *THREADBARRIER;
 
 
 

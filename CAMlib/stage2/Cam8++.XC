@@ -23,10 +23,14 @@ Cam8::Cam8(CAM8INTERFACE i)
 	use_interface(i);
 
 	init();
+
+	start();
 }
 
 Cam8::~Cam8(void)
 {
+	halt();
+
 	free(incomp);
 }
 
@@ -242,6 +246,19 @@ void Cam8::init(void)
 			END_ARGS);
 }
 
+
+void Cam8::start(void)
+{
+	if (box != NULL)
+		box->start();
+}
+
+
+void Cam8::halt(void)
+{
+	if (box != NULL)
+		box->halt();
+}
 
 
 void Cam8::use_interface(CAM8INTERFACE i)

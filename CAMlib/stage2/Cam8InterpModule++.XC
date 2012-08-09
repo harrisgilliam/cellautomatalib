@@ -21,34 +21,42 @@ extern "C" {
 
 
 
-Cam8InterpModule::Cam8InterpModule(CAM8SIMINSTRQUEUE iq)
+Cam8InterpModule::Cam8InterpModule(CAM8SIMINSTRQUEUE iq) : Task(l64a((int32_t) this))
 {
 	stop = false;
 	this->iq = iq;
+	InitSimulator();
+}
+
+Cam8InterpModule::Cam8InterpModule(const std::string & name, CAM8SIMINSTRQUEUE iq) : Task(name)
+{
+	stop = false;
+	this->iq = iq;
+	InitSimulator();
 }
 
 Cam8InterpModule::~Cam8InterpModule(void)
 {
+	DestroySimulator();
 }
 
 STD_BZERO(Cam8InterpModule)
 
 
-void Cam8InterpModule::run()
+void Cam8InterpModule::runTask(void)
 {
 	u_int32_t lData = 0, lLength;
 	int16_t nRegister, i;
 
-	TENTER("void Cam8InterpModule::run()");
+	TENTER("void Cam8InterpModule::runTask()");
 
-	fprintf(CAMout->file, "Interp module running\n");
+	fprintf(CAMout->file, "Interp module %s running\n", name().c_str());
 
-	while (!stop) {
-	}
+	sleep(100);
 
 	TLEAVE();
 
-	fprintf(CAMout->file, "Interp module exiting\n");
+	fprintf(CAMout->file, "Interp module %s exiting\n", name().c_str());
 	return;
 
 	// TODO block on something... possibly a RWLock or Condition var or Event... waiting
@@ -143,7 +151,7 @@ void Cam8InterpModule::run()
 				mregs.ALS[i] ^= 1;
 		}
 
-		if (mregs.bReadMode != false) {
+		if (mregs.bReadMode == true) {
 			iq->bDestChange = true;
 			mregs.bReadMode = false;
 		}
@@ -495,12 +503,6 @@ void Cam8InterpModule::run()
 }
 
 
-void Cam8InterpModule::halt(void)
-{
-	stop = true;
-	Poco::Thread::yield();
-}
-
 
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
@@ -848,12 +850,12 @@ void Cam8InterpModule::SimExecScan(void)
 
 	TENTER("SimExecScan");
 
-	/************************************************************************/
-	/* First, parse down the tree to see that we are going to update atleast*/
-	/* 32 sites and that the lowest dimension extends over 32 bits. This    */
-	/* second requirement is necessary because the optimized code can only  */
-	/* handle dimension wraparounds at word boundaries.                     */
-	/************************************************************************/
+	/**************************************************************************/
+	/* First, parse down the tree to see that we are going to update at least */
+	/* 32 sites and that the lowest dimension extends over 32 bits. This      */
+	/* second requirement is necessary because the optimized code can only    */
+	/* handle dimension wraparounds at word boundaries.                       */
+	/**************************************************************************/
 
 	if (lLogScanLength < 5)
 		bNoPerm = bNoPermLast5 = false;
@@ -884,6 +886,7 @@ void Cam8InterpModule::SimExecScan(void)
 			bNoPerm = false;
 
 		lLogScanLength--;
+
 		if (!lLogScanLength)
 			break;
 	}
@@ -952,6 +955,7 @@ void Cam8InterpModule::SimGeneralScan(void)
 
 	SITE_ADDR = 0;
 	SA_OR_MASK = SA_AND_MASK = 0;
+
 	for (i = SCAN_INDEX_LENGTH-1; i >= 0; i--) {
 
 		SITE_ADDR <<= 1;
@@ -1158,7 +1162,7 @@ void Cam8InterpModule::SimUpdateSite(void)
 	/* For Now glued and unglued data are the same */
 	if (IsSrcNeeded(SRC_GLUED_DATA)) {
 
-		if (!IsSrcNeeded(SRC_SITE_DATA)) {
+		if (! IsSrcNeeded(SRC_SITE_DATA)) {
 			GLUE_DATA = 0;
 
 			for (i = mregs.nNumPlanes-1; i >= 0; i--) {
@@ -1991,6 +1995,44 @@ void Cam8InterpModule::InitSimulator(void)
 }
 
 
+void Cam8InterpModule::DestroyHeap(void)
+{
+	int16_t i;
+
+	for (i = 0; i < CHIPS_PER_MOD; i++) {
+		mmpFree((void *) BIT_PLANE_ADDR[i]);
+	}
+
+	mmpFree(LUT0);
+	mmpFree(LUT1);
+
+#ifdef _FRAMEBUFFER_
+	mmpFree(FRAMEb);
+#endif
+}
+
+
+void Cam8InterpModule::DestroyStepList(void)
+{
+}
+
+
+
+void Cam8InterpModule::DestroySimulator(void)
+{
+	TENTER("Cam8InterpModule::DestroySimulator");
+
+	DestroyStepList();
+	DestroyHeap();
+
+	if (debug) {
+		/* Need to close the file for CAMSTREAM debug */
+	}
+
+	TLEAVE();
+}
+
+
 
 /* Unpack register of length < 32 bits or register field */
 void Cam8InterpModule::UnpackState(u_int16_t * base, u_int32_t reg_fld, bool imm)
@@ -2248,7 +2290,7 @@ void Cam8InterpModule::UpdateDCMR(void)
 /*                                                                           */
 /*****************************************************************************/
 
-u_int8_t Cam8InterpModule::IsSrcNeeded(int16_t nSrc)
+bool Cam8InterpModule::IsSrcNeeded(int16_t nSrc)
 {
 	int16_t i, j;
 	int16_t nLastDest;
@@ -2271,7 +2313,7 @@ u_int8_t Cam8InterpModule::IsSrcNeeded(int16_t nSrc)
 /*                                                                           */
 /*****************************************************************************/
 
-u_int8_t Cam8InterpModule::IsSrcSame(int16_t nDest)
+bool Cam8InterpModule::IsSrcSame(int16_t nDest)
 {
 	int16_t i;
 	u_int8_t *src, *map;
@@ -2312,16 +2354,16 @@ u_int8_t Cam8InterpModule::IsSrcSame(int16_t nDest)
 /*                                                                           */
 /*****************************************************************************/
 
-u_int8_t Cam8InterpModule::IsDestUpdated(int16_t nDest)
+bool Cam8InterpModule::IsDestUpdated(int16_t nDest)
 {
 	int16_t i, j;
 
 	for (i = mregs.nNumPlanes-1; i >= 0; i--)
 		for ( j = SRC_SITE_DATA; j <= SRC_CONST_DATA; j++)
 			if (bDestSrcMatrix[i][nDest][j])
-				return(true);
+				return true;
 
-	return(false);
+	return false;
 }
 
 

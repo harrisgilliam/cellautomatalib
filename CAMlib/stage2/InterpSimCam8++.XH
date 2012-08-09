@@ -28,7 +28,7 @@ extern "C" {
 
 typedef class InterpSimCam8 : public Cam8 {
 public:
-	InterpSimCam8(int modtype);
+	InterpSimCam8(void);
 	~InterpSimCam8(void);
 
 	DECL_BZERO(InterpSimCam8);
@@ -37,7 +37,6 @@ public:
 	CAM8SIMBOX getCam8SimBox(void);
 
 protected:
-	CAM8SIMBOX box;
 	CAM8SIMINSTRQUEUE iq;
 } InterSimCam8, *INTERPSIMCAM8;
 

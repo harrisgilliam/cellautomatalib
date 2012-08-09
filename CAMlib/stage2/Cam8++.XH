@@ -10,6 +10,7 @@
 #include <Cam++.H>
 
 #include <Cam8Lib++.H>
+#include <Cam8Box++.H>
 #include <Cam8Interface++.H>
 #include <Cam8Instr++.H>
 #include <Cam8Lut++.H>
@@ -28,40 +29,23 @@ using namespace std;
 /*****************************************************************************/
 /********************************* DEFINES ***********************************/
 /*****************************************************************************/
-#define NUM_DIM(p)				(p).num_dim
-#define TOP_DIM(p)				(p).top_dim
-#define NUM_CELLS(p)			(p).num_cells
-#define DMASK(p)				(p).dmask
-#define EXTENTS(p)				(p).extents
-#define POS(p)					(p).pos
-#define LEN(p)					(p).len
-#define NUM_MODULES_d(d)		dim_modules[d]
-#define NUM_MODULES_X			dim_modules[0]
-#define NUM_MODULES_Y			dim_modules[1]
-#define NUM_MODULES_Z			dim_modules[2]
-#define GLUE_d(d)				glue[d]
-#define GLUE_X					glue[0]
-#define GLUE_Y					glue[1]
-#define GLUE_Z					glue[2]
-#define NUM_MODULES				num_modules
-#define NUM_d(d)				dim_modules[d]
-#define NUM_X					dim_modules[0]
-#define NUM_Y					dim_modules[1]
-#define NUM_Z					dim_modules[2]
-#define NUM_LAYERS				num_layers
-#define NUM_LEVELS				num_levels
-#define MAXID					((1 << NUM_LAYERS)) - 1)
-#define DRAM_SIZE				dram_size
-#define DRAM_ROW				dram_row
-#define SWEEP_OVERHEAD			sweep_overhead
-#define MODULE_LIST				module_xyz_list
-#define COPY_SS(p1,p2)			bcopy((char*)(&(p1)), (char*)(&(p2)), sizeof(struct spc_state))
-#define CLOCKS__REFRESH(c8)		390
-#define SUBSECTORS__SECTOR		(NUM_CELLS(sector) / NUM_CELLS(subsector))
-#define CLOCKS__SWEEP(c8,v)		((1 << (v)) + SWEEP_OVERHEAD)
-#define CUT__SECTOR(c8,d)		(31 & (LEN(sector)[d] + (LEN(sector)[d] != 0 ? POS(sector)[d] - 1 : 0)))
-#define REFRESHES__SWEEP(v)		min(31, CLOCKS__SWEEP(v) / CLOCKS__REFRESH + 1)
-#define SWEEPS__REFRESH(v)		min(256, MAX(1, CLOCKS__REFRESH / CLOCKS__SWEEP(v)))
+//#define MAXID					((1 << NUM_LAYERS)) - 1)
+//#define SUBSECTORS__SECTOR		(NUM_CELLS(sector) / NUM_CELLS(subsector))
+//#define NUM_DIM(p)				(p).num_dim
+//#define TOP_DIM(p)				(p).top_dim
+//#define NUM_CELLS(p)			(p).num_cells
+//#define DMASK(p)				(p).dmask
+//#define EXTENTS(p)				(p).extents
+//#define POS(p)					(p).pos
+//#define LEN(p)					(p).len
+//#define NUM_MODULES_d(d)		dim_modules[d]
+//#define COPY_SS(p1,p2)			bcopy((char*)(&(p1)), (char*)(&(p2)), sizeof(struct spc_state))
+//#define CLOCKS__REFRESH(c8)		390
+//#define CLOCKS__SWEEP(c8,v)		((1 << (v)) + SWEEP_OVERHEAD)
+//#define CUT__SECTOR(c8,d)		(31 & (LEN(sector)[d] + (LEN(sector)[d] != 0 ? POS(sector)[d] - 1 : 0)))
+//#define REFRESHES__SWEEP(v)		min(31, CLOCKS__SWEEP(v) / CLOCKS__REFRESH + 1)
+//#define SWEEPS__REFRESH(v)		min(256, MAX(1, CLOCKS__REFRESH / CLOCKS__SWEEP(v)))
+
 
 
 #define REG_FUNC_DECL(cls, fname)			\
@@ -131,6 +115,8 @@ public:
 
 	void use_interface(CAM8INTERFACE);
 	void init(void);
+	void start(void);
+	void halt(void);
 
 	CAM8INSTR reg(Cam8Steplist & sl, int32_t r, ...);
 
@@ -181,6 +167,7 @@ public:
 
 
 protected:
+	CAM8BOX box;
 	CAM8INTERFACE iface;
 	bool single_arg;
 	u_int32_t layer_mask;
@@ -252,6 +239,8 @@ protected:
 
 	void conv_immed(void);
 
+	void define(u_int32_t r, ...);
+
 
 	inline void setup_register(u_int32_t r);
 	inline void def(u_int32_t r);
@@ -274,8 +263,6 @@ protected:
 
 private:
 	map<u_int32_t, caddr_t> reg_defaults;
-
-	void define(u_int32_t r, ...);
 };
 typedef Cam8 *CAM8;
 

@@ -5,13 +5,6 @@
 
 #include <Cam8SimModule++.H>
 #include <Cam8InterpModule++.H>
-/*
-#ifdef X86ARCH
-#include <Cam8x86Module++.H>
-#elif SPARCARCH
-#include <Cam8SPARCModule++.H>
-#endif
-*/
 #include <Cam8SimBox++.H>
 
 #include <cstdarg>
@@ -19,46 +12,50 @@
 
 
 
-Cam8SimBox::Cam8SimBox(int modtype, CAM8SIMINSTRQUEUE iq)
+Cam8SimBox::Cam8SimBox(CAM8SIMINSTRQUEUE iq)
 {
 	Bzero();
 	this->iq = iq;
-	start(modtype);
 }
 
 Cam8SimBox::~Cam8SimBox(void)
 {
-	halt();
+	int i;
+
+	tm->cancelAll();
+	tm->joinAll();
+	delete tm;
+	tm = NULL;
+
+	tp->stopAll();
+	delete tp;
+	tp = NULL;
+
+	for (i = 0; i < Cam8Box::NUM_MODULES; i++) {
+		delete modules[i];
+		modules[i]= NULL;
+	}
 }
 
 
 STD_BZERO(Cam8SimBox)
 
 
-void Cam8SimBox::start(int modtype)
+void Cam8SimBox::start(void)
 {
-	TENTER("Cam8SimBox::start(int modtype)");
+	TENTER("Cam8SimBox::start(void)");
+
+	if (tp == NULL)
+		tp = new Poco::ThreadPool(Cam8Box::NUM_MODULES, Cam8Box::NUM_MODULES, 60, 0);
+
+	if (tm == NULL)
+		tm = new Poco::TaskManager(*tp);
 
 	if (modules[0] == NULL) {
-		switch (modtype) {
+		int i;
 
-		case INTERP_MODULES: {
-			int i;
-
-			for (i = 0; i < NUM_MODULES; i++) {
-				threads[i] = new Poco::Thread;
-				modules[i] = new Cam8InterpModule(iq);
-				threads[i]->start(*modules[i]);
-				fprintf(CAMout->file, "Module thread: %d %s running\n",
-						i, threads[i]->isRunning() ? "is" : "isn't");
-			}
-
-			break;
-		}
-
-		case JIT_MODULES: {
-		}
-		}
+		for (i = 0; i < Cam8Box::NUM_MODULES; i++)
+			modules[i] = new Cam8InterpModule(iq);
 	}
 
 	TLEAVE();
@@ -67,16 +64,17 @@ void Cam8SimBox::start(int modtype)
 
 void Cam8SimBox::halt(void)
 {
+	tm->cancelAll();
+	tm->joinAll();
+}
+
+
+void Cam8SimBox::executeInstruction(void)
+{
 	int i;
 
-	for (i = 0; i < NUM_MODULES; i++) {
-		modules[i]->halt();
-		threads[i]->join();
-		delete threads[i];
-		threads[i] = NULL;
-		delete modules[i];
-		modules[i]= NULL;
-	}
+	for (i = 0; i < Cam8Box::NUM_MODULES; i++)
+		tm->start((Poco::Task *) modules[i]);
 }
 
 

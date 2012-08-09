@@ -5,9 +5,7 @@
 *~
 # make log
 Make.log
-# generated C++ files
-*.C
-*.H
+make.log
 # Compiled Object files
 *.slo
 *.lo

@@ -27,6 +27,9 @@ class Cam8Box {
 public:
 	static const int NUM_MODULES = 8;
 
+	virtual void start(void) = 0;
+	virtual void halt(void) = 0;
+	virtual void executeInstruction(void) = 0;
 };
 typedef Cam8Box *CAM8BOX;
 

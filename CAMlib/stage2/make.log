@@ -1,2 +1,0 @@
-c8cpp < Cam8Lib++.XH > /storage/cam8/stage2/include/CAM/Cam8Lib++.H
-g++ -g  -I/storage/cam8/stage2/include/CAM -c Cam8Lib++.C

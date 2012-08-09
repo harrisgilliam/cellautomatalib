@@ -8,8 +8,7 @@
 #include <Cam8SimInterface++.H>
 #include <Cam8SimModule++.H>
 
-#include <Poco/Thread.h>
-#include <Poco/Runnable.h>
+#include <Poco/Task.h>
 
 extern "C" {
 #include <sys/types.h>
@@ -196,22 +195,22 @@ typedef struct ModuleRegisters {
 } ModuleRegisters, *MODULEREGISTERS;
 
 
-class Cam8InterpModule : public Cam8SimModule {
+class Cam8InterpModule : public Cam8SimModule, public Poco::Task {
 public:
 
 	Cam8InterpModule(CAM8SIMINSTRQUEUE);
+	Cam8InterpModule(const std::string &, CAM8SIMINSTRQUEUE);
 	~Cam8InterpModule();
 
 	DECL_BZERO(Cam8InterpModule);
 
 	// executed by thread class
-	void run(void);
-	void halt(void);
+	void runTask(void);
 
 
 protected:
-	static const int lBitPlaneSize = 512 * 1024;
-	static const int lLUTSize = 65536*2;
+	static const int lBitPlaneSize = 512 * 1024;  // 4 Mbits of storage per bitplane
+	static const int lLUTSize = 65536 * 2;
 
 	bool stop;
 
@@ -303,6 +302,9 @@ private:
 	void InitHeap(void);
 	void InitStepList(void);
 	void InitSimulator(void);
+	void DestroyHeap(void);
+	void DestroyStepList(void);
+	void DestroySimulator(void);
 	void UnpackState(u_int16_t * base, u_int32_t reg_fld, bool imm);
 	void UnpackStateInto(u_int16_t * base, u_int32_t reg_fld, bool imm, caddr_t dest, int type);
 	void PackState(u_int16_t * base, u_int32_t reg_fld);
@@ -315,9 +317,9 @@ private:
 	u_int32_t DCMRHighBit(void);
 	u_int32_t DCMRLowBit(void);
 	void UpdateDCMR(void);
-	u_int8_t IsSrcNeeded(int16_t);
-	u_int8_t IsSrcSame(int16_t);
-	u_int8_t IsDestUpdated(int16_t);
+	bool IsSrcNeeded(int16_t);
+	bool IsSrcSame(int16_t);
+	bool IsDestUpdated(int16_t);
 	u_int16_t CalcNumPlanes(void);
 	void UpdateDestSrcMatrix(void);
 };
