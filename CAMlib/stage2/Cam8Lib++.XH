@@ -967,11 +967,11 @@ template <class T> inline bool operator==(const regfldvals &o, T p)
 /*****************************************************************************/
 /******************************* PROTOTYPES **********************************/
 /*****************************************************************************/
-int sixteen_round(int);
-int page_round(int);
+template <class T> T sixteen_round(T v);
+template <class T> T page_round(T sz);
 
-int count_ones(int32_t);
-int count_ones(regfldvals &);
+u_int32_t count_ones(u_int32_t);
+u_int32_t count_ones(regfldvals &);
 
 u_int32_t choose_dcp(u_int32_t v);
 u_int32_t choose_ppc(u_int32_t v);

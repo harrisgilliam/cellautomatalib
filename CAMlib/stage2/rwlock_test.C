@@ -3,11 +3,11 @@
 #include <CaLibError++.H>
 #include <CaLibTrace++.H>
 
-#include <ThreadBarrier++.H>
 #include <Poco/Task.h>
 #include <Poco/ThreadPool.h>
 #include <Poco/TaskManager.h>
 #include <Poco/Thread.h>
+#include <Poco/RWLock.h>
 
 #include <cstdlib>
 
@@ -16,14 +16,14 @@ using namespace std;
 
 
 class SimpleThread : public Poco::Task {
-	ThreadBarrier *tb;
+	Poco::RWLock *rwl;
 	int id;
 
 public:
-	inline SimpleThread(int i, ThreadBarrier * tb) : Task(l64a((int32_t) this))
+	inline SimpleThread(int i, Poco::RWLock * rwl) : Task(l64a((int32_t) this))
 	{
 		id = i;
-		this->tb = tb;
+		this->rwl = rwl;
 	}
 
 	inline void runTask(void)
@@ -31,33 +31,36 @@ public:
 //		string name = Poco::Thread::current()->name();
 		cout << "Task " << Poco::Task::name() << " running" << "\n";
 		cout << "TID = " << Poco::Thread::current()->tid() << "\n";
-		tb->wait();
-		cout << "Task " << Poco::Task::name() << " exiting" << "\n";
+		rwl->readLock();
+		rwl->unlock();
 	}
 };
 
 
 int main(int argc, char *argv[])
 {
-	ThreadBarrier tb(5);
+	Poco::RWLock rwl;
 	Poco::ThreadPool  tp;
 	Poco::TaskManager tm(tp);
 
+	rwl.unlock();
 
-	int i;
+	rwl.readLock();
 
-	cout << "Starting 4 tasks\n";
+	rwl.unlock();
 
-	for (i = 0; i < 4; i++)
-		tm.start(new SimpleThread(i, & tb));
-
-	cout << "barrier's current count is " << tb.getCount() << "\n";
-	cout << "Waiting for all tasks to hit the barrier\n";
-
-	tb.wait();
-
-	cout << "Collecting tasks\n";
-
-	tm.joinAll();
+//	int i;
+//
+//	cout << "Starting 4 tasks" << "\n";
+//
+//	for (i = 0; i < 4; i++)
+//		tm.start(new SimpleThread(i, & rwl));
+//
+//	//cout << "barrier's current count is " << rwl.getCount() << "\n";
+//	cout << "Waiting for all tasks to hit the barrier" << "\n";
+//
+//	rwl.wait();
+//
+//	tm.joinAll();
 }
 

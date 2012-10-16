@@ -37,6 +37,7 @@ protected:
 
 	int count;
 	int curCount;
+	bool needsReset;
 	Poco::RWLock cntLock;
 	Poco::Event unlockEvent;
 };

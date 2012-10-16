@@ -3401,7 +3401,7 @@ caddr_t Cam8::finish_instr(CAM8INSTR c8i)
 	caddr_t chunk;
 	u_int32_t s;
 
-	TENTER("Cam8::finish_instr(void)");
+	TENTER("Cam8::finish_instr(CAM8INSTR c8i)");
 
 	// If this is a kick instruction then we need to call finish_kick
 	// to actually write all the calculated kick data in the instruction.
@@ -3412,7 +3412,7 @@ caddr_t Cam8::finish_instr(CAM8INSTR c8i)
 
 	chunk = iface->Alloc_Instr(s);
 
-	// copy data from instruction that was passes in
+	// copy data from instruction that was passed in
 	memcpy((void *) chunk, (const void *) c8i, s);
 
 	// Fix adr_data so that it points into newly allocated chunk

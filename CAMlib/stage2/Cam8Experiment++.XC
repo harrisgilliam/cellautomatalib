@@ -639,7 +639,10 @@ void Cam8Experiment::new_machine(void)
 
 //	        w@ swap w@ xor       \ assumes unused data lines are pulled up or down
 //	        count-ones is #layers
-	c8->num_layers = count_ones((*mid1)() ^ (*mid2)());
+	regfldvals mid1vals = (*mid1)();
+	regfldvals mid2vals = (*mid2)();
+	regfldvals midxor = mid1vals ^ mid2vals;
+	c8->num_layers = count_ones( midxor );
 //
 //	: maxid (s -- n )  1 #layers << 1- ;
 //
@@ -1012,7 +1015,6 @@ void _space_(CAM8 cam8, int num_dim, unsigned int dims[])
 					    POS(cam8, space),
 					    &(DMASK(cam8, space)));
 
-  NUM_DIM(cam8, space) = num_dim;
   NUM_CELLS(cam8, space) = 0x1 << TOP_DIM(cam8, space);
   COPY_SS(cam8, space, subspace);
 

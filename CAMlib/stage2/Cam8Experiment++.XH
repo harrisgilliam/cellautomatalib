@@ -2,6 +2,7 @@
 #define _CAM8EXPERIMENT_H
 
 #include <CaLib++.H>
+#include <Cam8Lib++.H>
 
 #include <Cam8++.H>
 
@@ -139,27 +140,27 @@ inline void Cam8Experiment::allow_camint(void)
 
 inline bool Cam8Experiment::soft_int(void)
 {
-	return (count_ones(0x101L & last_ints) == 2);
+	return (count_ones((u_int32_t) (0x101L & last_ints)) == 2);
 }
 
 inline bool Cam8Experiment::cam_int(void)
 {
-	return (count_ones((0x101L << 1) & last_ints) == 2);
+	return (count_ones((u_int32_t) ((0x101L << 1) & last_ints)) == 2);
 }
 
 inline bool Cam8Experiment::sbus_int(void)
 {
-	return (count_ones((0x101L << 2) & last_ints) == 2);
+	return (count_ones((u_int32_t) ((0x101L << 2) & last_ints)) == 2);
 }
 
 inline bool Cam8Experiment::timeout_int(void)
 {
-	return (count_ones((0x101L << 3) & last_ints) == 2);
+	return (count_ones((u_int32_t) ((0x101L << 3) & last_ints)) == 2);
 }
 
 inline bool Cam8Experiment::newlist_int(void)
 {
-	return (count_ones((0x101L << 4) & last_ints) == 2);
+	return (count_ones((u_int32_t) ((0x101L << 4) & last_ints)) == 2);
 }
 
 

@@ -2,6 +2,7 @@
 #define _CAM8SIMINSTRQUEUE_H
 
 #include <CaLib++.H>
+#include <Cam8Box++.H>
 #include <ThreadBarrier.H>
 
 #include <Poco/RWLock.h>
@@ -27,29 +28,33 @@ extern "C" {
 /*************************** CLASSES & TYPEDEFS ******************************/
 /*****************************************************************************/
 struct Cam8SimInstrQueue {
-	Poco::RWLock rwlock;				// Read/write lock
-	THREADBARRIER glueBarrier;			// thread barrier for glue passing
+	Poco::RWLock rwlock;								// Read/write lock
+	ThreadBarrier glueBarrier;							// thread barrier for glue passing
 
-	int32_t NLP;                        /* Next List Pointer            */
-	int32_t ISR;                        /* Reset/Interrupt Register     */
-	int32_t CIP;                        /* Current Instruction Pointer  */
-	int32_t PIP;                        /* Previous Instruction Pointer */
+	int32_t NLP;                     				    /* Next List Pointer            */
+	int32_t ISR;                        				/* Reset/Interrupt Register     */
+	int32_t CIP;                        				/* Current Instruction Pointer  */
+	int32_t PIP;                       					/* Previous Instruction Pointer */
 
-	int32_t RER;                        /* Reset/Enable Register        */
-	int32_t DSL;                        /* Display Scan Length          */
-	int32_t DBL;                        /* Display Blank Length         */
+	int32_t RER;                        				/* Reset/Enable Register        */
+	int32_t DSL;                        				/* Display Scan Length          */
+	int32_t DBL;                        				/* Display Blank Length         */
 
 	Cam8Instr c8i;
 
-	bool bByteMode;						// interp time
-	bool bImmediate;					// interp time
-	bool bReadMode;						// interp time
-	bool bHostJump;						// interp time
-	bool bHostWait;						// interp time
+	bool bByteMode;										// interp time
+	bool bImmediate;									// interp time
+	bool bReadMode;										// interp time
+	bool bHostJump;										// interp time
+	bool bHostWait;										// interp time
 
-	bool bForceGeneralScan;				// interp time
-	bool bSourceRegChange;				// interp time
-	bool bDestChange;					// interp time
+	bool bForceGeneralScan;								// interp time
+	bool bSourceRegChange;								// interp time
+	bool bDestChange;									// interp time
+
+	inline Cam8SimInstrQueue(void) : glueBarrier(Cam8Box::NUM_MODULES)
+	{
+	}
 };
 typedef struct Cam8SimInstrQueue Cam8SimInstrQueue, *CAM8SIMINSTRQUEUE;
 

@@ -1,6 +1,6 @@
 #include <CaLibTrace++.H>
 
-#include <ThreadBarrier.H>
+#include <ThreadBarrier++.H>
 
 using namespace std;
 
@@ -8,21 +8,19 @@ using namespace std;
 
 ThreadBarrier::ThreadBarrier(void) : unlockEvent(false), cntLock()
 {
-	count = 1;
-	curCount = 1;
-	unlockEvent.reset();
-	cntLock.unlock();
+	count = 2;
+	curCount = 2;
+	needsReset = false;
 }
 
 ThreadBarrier::ThreadBarrier(int cnt) : unlockEvent(false), cntLock()
 {
 	if (cnt <= 0)
-		cnt = 1;
+		cnt = 2;
 
 	count = cnt;
 	curCount = cnt;
-	unlockEvent.reset();
-	cntLock.unlock();
+	needsReset = false;
 }
 
 ThreadBarrier::~ThreadBarrier()
@@ -36,11 +34,15 @@ void ThreadBarrier::setCount(int cnt)
 	count = cnt;
 	curCount = cnt;
 	cntLock.unlock();
+	needsReset = false;
 }
 
 
 void ThreadBarrier::wait(void)
 {
+	if (needsReset)
+		reset();
+
 	cout << "trying to get write lock\n";
 	cntLock.writeLock();
 
@@ -51,8 +53,8 @@ void ThreadBarrier::wait(void)
 		cout << "triggering unlock event\n";
 		curCount = count;
 		unlockEvent.set();
-		unlockEvent.reset();
 		cntLock.unlock();
+		needsReset = true;
 		cout << "returning\n";
 		return;
 	}
@@ -70,6 +72,7 @@ void ThreadBarrier::reset()
 	cntLock.writeLock();
 	curCount = count;
 	unlockEvent.reset();
+	needsReset = false;
 	cntLock.unlock();
 }
 

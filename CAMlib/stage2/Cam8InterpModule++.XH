@@ -8,6 +8,8 @@
 #include <Cam8SimInterface++.H>
 #include <Cam8SimModule++.H>
 
+#include <ThreadBarrier++.H>
+
 #include <Poco/Task.h>
 
 extern "C" {

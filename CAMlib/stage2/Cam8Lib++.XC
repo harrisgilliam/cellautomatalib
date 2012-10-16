@@ -58,7 +58,7 @@ u_int32_t count_ones(u_int32_t v)
 }
 
 
-u_int32_t count_ones(regfldvals rfv)
+u_int32_t count_ones(regfldvals & rfv)
 {
 	u_int32_t v, cnt = 0;
 	register int i, j;

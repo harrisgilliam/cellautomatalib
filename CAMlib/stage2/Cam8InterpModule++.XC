@@ -52,15 +52,14 @@ void Cam8InterpModule::runTask(void)
 
 	fprintf(CAMout->file, "Interp module %s running\n", name().c_str());
 
+/*
 	sleep(100);
 
 	TLEAVE();
 
 	fprintf(CAMout->file, "Interp module %s exiting\n", name().c_str());
 	return;
-
-	// TODO block on something... possibly a RWLock or Condition var or Event... waiting
-	// until the interface has written the next instruction and flags to the shared area
+*/
 
 	// TODO: what else is this supposed to do ?
 	if (iq->c8i.CamReset()) {
@@ -1159,7 +1158,10 @@ void Cam8InterpModule::SimUpdateSite(void)
 		}
 	}
 
-	/* For Now glued and unglued data are the same */
+	/* For Now glued and unglued data are the same, this section will need to
+	 * be recoded when we implement actual passing of glue data between simulated
+	 * modules.  We include the thread barrier code here as a test
+	 */
 	if (IsSrcNeeded(SRC_GLUED_DATA)) {
 
 		if (! IsSrcNeeded(SRC_SITE_DATA)) {
@@ -1175,6 +1177,9 @@ void Cam8InterpModule::SimUpdateSite(void)
 		else
 			GLUE_DATA = UNGLUE_DATA;
 	}
+
+	// Wait for all thread to hit this point
+	iq->glueBarrier.wait();
 
 	if (IsSrcNeeded(SRC_LUT)) {
 
