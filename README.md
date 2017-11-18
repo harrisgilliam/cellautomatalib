@@ -103,6 +103,8 @@ Forth/C version of the "life" CA which used the STEP program to
 initalize CAM8, do pattern file I/O and visualization while the CA
 rules were written in C.
 
+### Maturing Into a Standalone Library
+
 The next release of CAMlib included a version of the code which
 initialized the CAM8 hardware written in C.  This would allow users to
 program CAM8 completely in C.  Dan subsequently wrote the first CAM8
