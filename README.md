@@ -16,8 +16,12 @@ Originally it was distributed as the SDK for the [CAM8 Cellular
 Automata Supercomputer](http://www.ai.mit.edu/projects/im/cam8/)
 developed by the Information Mechanics group at the MIT LAb for
 Computer Science.  The design of cellautomatalib is hevily influenced
-by the code it evolved from and fact that it was bundled with actual
-hardware.
+by the code it evolved from and the fact that it was bundled with
+actual hardware.  There are a number of peculiaralities of the code
+that stem directly from the way code for CAM8 was written and the
+original Forth based programming environment.  In particular the
+concept of a linked-list of CAM8 "instructions" which are built up
+incrementally is copied verbatim in the current architecture.
 
 The CAM8 project is now defunct and I don't believe there are any
 functional CAM8 units remaining. Luckily one of the projects completed
@@ -36,20 +40,25 @@ interest in resurecting the hardware platform then I will maintain
 support for it in cellautomatalib.  Otherwise I will refactor the code
 and only maintain support for the CAM8 Simulator.
 
+In addition I plan to have later versions of the library be useful as
+a generic CA programming library and the aspects that are unique to
+CAM8 will no longer dominate the architecture and design of the code.
+
 ## The Evolution of the Cellular Automata Library
 
 The Cellular Automata Library's closest ancestor is the CAMlib library
 which was designed and written by programmers in the Information
-Mechanics Group at the MIT Laboratory for Computer Science.  The
-CAMlib library provides an Application Programming Interface (API) for
-the CAM8 Cellular Automata Supercomputer.  I won't go into the history
-and explaination of CAM8 here but the original intention was that
-users of CAMlib would be able to write programs that run on CAM8.  In
-short CAMlib was to be the foundation of new programming environments
-for CAM8.  Previously a Forth based interpretive programming
-environment was the only way to program CAM8.  There was a desire to
-enable other interpretive languages to be used as Forth was unpopular
-and relative obscure.
+Mechanics Group at the MIT Laboratory for Computer Science.  In fact
+the CAMlib library is contained in its entirety within the Cellular
+Automata Library.  The CAMlib library provided an Application
+Programming Interface (API) for the CAM8 Cellular Automata
+Supercomputer.  I won't go into the history and explaination of CAM8
+here but the original intention was that users of CAMlib would be able
+to write programs that run on CAM8.  In short CAMlib was to be the
+foundation of new programming environments for CAM8.  Previously a
+Forth based interpretive programming environment was the only way to
+program CAM8.  There was a desire to enable other interpretive
+languages to be used as Forth was unpopular and relative obscure.
 
 ### CAMlib's History (steplib to CAMlib, C to C++)
 
